@@ -1,0 +1,19 @@
+numpy
+pandas
+matplotlib
+scipy # for reading/writing wav files
+pillow
+seaborn
+scikit_learn
+
+# tooling
+jupyter
+jupytext
+ipywidgets
+jupyter-contrib-nbextensions
+
+ipythontutor
+nbautoeval
+nb-courselevels
+
+nbprune
