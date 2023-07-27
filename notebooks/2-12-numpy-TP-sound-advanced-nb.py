@@ -27,7 +27,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p22/python-numerique/main/notebooks/_static/style.html")
+HTML(url="https://raw.githubusercontent.com/ue12-p23/python-numerique/main/notebooks/_static/style.html")
 
 # %% [markdown]
 # # TP - un peu de musique

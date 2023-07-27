@@ -5,7 +5,7 @@ author: Valérie Roy & Thierry Parmentelat
 logo: media/logo-python.svg
 
 repository:
-  url: https://github.com/ue12-p22/python-numerique
+  url: https://github.com/ue12-p23/python-numerique
   branch: main
   path_to_book: notebooks
 
