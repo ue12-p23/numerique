@@ -6,6 +6,8 @@ FROM nbhosting/minimal-notebook
 # because we provide our own nbconfig/notebook.json
 # and that is where is stored the enabled/disabled extensions
 RUN true \
- && pip install -U nb-courselevels nbautoeval \
- && pip install numpy pandas matplotlib scipy pillow \
+ && pip install numpy pandas matplotlib scipy pillow seaborn scikit_learn \
+ && pip install -U --pre https://planete.inria.fr/Thierry.Parmentelat/dropbox/jupytext-1.15.0.dev2-py3-none-any.whl \
+ && pip install -U jupyterlab-courselevels \
+ && pip install -U ipythontutor nbautoeval \
  && true
