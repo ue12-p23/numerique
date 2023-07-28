@@ -365,6 +365,7 @@ df.isna()
 # <div class=note>
 #
 # pour souligner une différence avec `numpy`: comparez le comportement
+#
 # * de `array.sum()`
 # * et `df.sum()`
 #

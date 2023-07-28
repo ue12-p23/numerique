@@ -13,10 +13,19 @@
 #     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
+#   nbhosting:
+#     title: '`%matplotlib inline`'
 # ---
 
 # %% [markdown]
+# Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
+
+# %% [markdown]
 # # `%matplotlib inline`
+
+# %%
+from IPython.display import HTML
+HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
 # %% [markdown]
 # de la bonne utilisation de `plt.figure()`, `plt.show()` en fonction du driver `%matplotlib` - épisode 1 

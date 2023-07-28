@@ -667,6 +667,7 @@ pivoted.plot(legend=False, alpha=0.01);
 #
 # * une grosse majorité qui ont 2 bosses bien marquées, le matin et le soir,  
 #   on se dit que ce sont des **jours travaillés**
+#
 # * une deuxième classe, minoritaire mais bien présente, avec un trafic moindre,  
 #   et une unique bosse en milieu de journée, on se dit que ce sont les **jours de repos**
 
