@@ -108,6 +108,7 @@ import pandas as pd
 #
 # à retenir principalement, c'est que si on voulait être complètement propre,
 # on ferait pour chaque figure
+#
 #   * un appel à `plt.figure()` au début
 #   * un appel à `plt.show()` à la fin
 #   
@@ -115,8 +116,10 @@ import pandas as pd
 #
 # du coup il est fréquent qu'on élude tout ce qui est possible, 
 # et là ça devient potentiellement confusant, car
+#
 # * en mode `inline`, ce n'est pas nécessaire de créer les figures avec `plt.figure()`
 #   mais il faut utiliser `plt.show()` si on veut afficher plusieurs figures dans la même cellule
+#
 # * mais en mode `notebook` c'est un peu le contraire, 
 #   on est incité/obligé d'utiliser `plt.figure()` à chaque fois, et pas vraiment besoin de `plt.show()`
 #

@@ -57,6 +57,7 @@ import matplotlib.pyplot as plt
 
 # %% [markdown]
 # pour commencer, parlons un peu des types de base; en Python pur, on trouve dans la librairie standard [(`import datetime`)](https://docs.python.org/3/library/datetime.html) deux types de données principaux
+#
 # * `datetime` qui permet de modéliser un instant (par exemple, le 10 octobre 1954 à 10h 32' 15'' - et même plus précis encore si nécessaire)
 # * `timedelta` qui permet de modéliser une durée (par exemple 2 heures 15 minutes, ou 3 ans)
 #
@@ -133,8 +134,10 @@ f"{t1:%H==%M}"
 
 # %% [markdown]
 # ces deux types fournissent la bonne abstraction; malheureusement l'implémentation est sous-optimale pour les applications scientifiques, car notamment :
+#
 # * ils ne couvrent pas les échelles infiniment grandes (temps astronomique)  
 #   ou infiniment petites (physique des particules)
+#
 # * ils ne supportent pas la notion de valeur indéfinie, comme le `nan` pour les nombres
 #
 # du coup on trouve [dans numpy](https://numpy.org/doc/stable/reference/arrays.datetime.html)
@@ -321,6 +324,7 @@ df.loc['2020-04' : '2020-06']
 # %% [markdown]
 # l'idée ici c'est de découper le temps en une partition, chaque corbeille ayant la même durée (sauf éventuellement celles aux extrémités)
 # dans ce modèle:
+#
 # * chaque donnée de départ appartient à exactement une corbeille
 # * le nombre de corbeilles dépend, aux arrondis près, du rapport entre la durée totale et la durée de chaque corbeille
 
@@ -436,8 +440,10 @@ pd.DataFrame({
 # **les bornes**
 #
 # juste pour bien illustrer le comportement aux bornes, voici
+#
 # * le nombre de points dans la rolling: **autant de corbeilles que de points**  
 #   (on le voit déjà ci-dessus)
+#
 # * et le nombre de points par corbeille: **constant, sauf aux extrémités**
 
 # %%
@@ -459,6 +465,7 @@ pd.DataFrame({'points-per-bin-28': count_28}).plot();
 # la notion de fenêtre glissante fait du sens pour n'importe quelle donnée, même non-temporelle
 #
 # reproduisez le dessin ci-dessus, mais 
+#
 # * en ne gardant que le rolling sur 4 semaines
 # * en indiquant une **fenêtre en nombre de points**
 #

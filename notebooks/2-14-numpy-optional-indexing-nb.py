@@ -41,6 +41,7 @@ import numpy as np
 # ## contenu de ce notebook (notebook optionnel)
 #
 # on a vu jusqu'ici comment indexer un tableau (quand on écrit `valeurs[indices]`):
+#
 # * quand `indices` est un masque
 # * et quand `indices` est un entier, une slice (ou un tuple qui contient des entiers ou tuples)
 #
@@ -87,6 +88,7 @@ valeurs_d1[indices]
 # donc si on essaie de formaliser un peu, lorsque `valeurs` est de dimension 1
 #
 # `valeurs[indices]` aura un sens si 
+#
 # * `valeurs` est de dimension 1
 # * `indices` ne contient que des entiers, qui sont des indices valables dans `valeurs` 
 # * et alors le résultat est un tableau de la même forme que `indices`
@@ -177,8 +179,10 @@ r = valeurs_d2[indices_i]
 #
 # * on commence par calculer un array de forme 6 x 3 qui contient les rgb des 4 couleurs  
 #   (et pour les 2 dernières couleurs on met la couleur de fond)
+#
 # * puis on fabrique un tableau qui a la forme du patchwork, 
 #   et dans chaque case le rang de la couleur qu'on veut
+#
 # * et on obtient le résultat par simple indexation
 
 # %%
