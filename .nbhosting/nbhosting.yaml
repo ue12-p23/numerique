@@ -5,8 +5,6 @@ tracks:
     id: python-num
     sections:
       # do not mention 1-99 in this output
-      - name: rappels Python
-        notebooks: [ "notebooks/1-[12]*-nb.py"]
       - name: numpy
         notebooks: [ "notebooks/2-[0-9]*-nb.py"]
       - name: pandas
@@ -14,7 +12,9 @@ tracks:
       - name: matplotlib
         notebooks: [ "notebooks/4-[0-9]*-nb.py"]
       - name: cheatsheets
-        notebooks: [ "cheatsheets/cheatsheets-nb.md" ]
+        notebooks: [ "notebooks/5-*.md" ]
+      - name: rappels Python
+        notebooks: [ "notebooks/1-[12]*-nb.py"]
       # no longerrelevant
       # - name: petit test Python
       #   notebooks: [ "notebooks/5-[0-9]*.py"]
