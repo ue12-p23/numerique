@@ -79,49 +79,49 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## tableaux de formes différentes: broadcasting
 # <br>
-#     
+#
 # vous voulez incrémenter de 1 tous les éléments d'une matrice d'entiers de forme `(100, 100)`
 # ```python
 # tab = np.arange(0, 10000).reshape(100, 100)
 # ```
-#     
+#
 # <br>
-#     
+#
 # créer une matrice de `ones` de la même forme et les ajouter... vous convient-il ?
-#     
+#
 # ```python
 # inc = np.ones(shape=(100, 100), dtype=np.int8)
 # tab+inc
 # ```
-#     
+#
 # <br>
-#     
+#
 # c'est clairement sous-optimal: place-mémoire créée inutilement, perte de temps et de lisibilité
-#     
+#
 # <br>
-#     
+#
 # `numpy` propose une manière abrégée d'écrire ce genre d'opération grâce au `broadcasting`
-#     
-#   
+#
+#
 # ```python
 # tab+1
 # ```
-#       
+#
 # ou encore (moins joli)    
-#     
-#   
+#
+#
 # ```python
 # tab+[1]
 # ```
-#       
+#
 # <br>
-#     
+#
 # simple, élégant et non ambigu
-#     
+#
 # <br>
 #
 # mais attention : ne **fonctionne pas** du tout pareil sur les **listes `Python`**
-#     
+#
 # ```python
 # [1, 2, 3, 4, 5, 6] + [10, 20 ] # + est append
 # -> [1, 2, 3, 4, 5, 6, 10, 20]
@@ -145,16 +145,16 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### le broadcasting, c'est quoi ?
 # <br>
-#     
+#
 # c'est la manière dont `numpy` traite les tableaux de formes différentes lors d'opérations
-#     
+#
 # <br>
-#     
+#
 # le *plus petit tableau*, **quand c'est possible**, est considéré comme *élargi* à la taille du plus grand  
 # afin qu'ils aient des formes compatibles
-#     
+#
 # <br>
-#     
+#
 # cela se fait **implicitement**
 
 # %% [markdown]
@@ -164,13 +164,13 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 # ### opération entre un scalaire et un tableau par broadcasting
 #
 # <br>
-#     
+#
 # l'opération entre un scalaire est un tableau est toujours possible  
 # il est possible de considérer un scalaire comme un tableau de n'importe quelle forme
 #
 # --------------------------------
 # prenons une matrice et l'opération d'addition élément à élément
-#     
+#
 # ```python
 # mat = np.arange(15).reshape(3, 5)
 # mat
@@ -178,10 +178,10 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 #     [ 5,  6,  7,  8,  9],
 #     [10, 11, 12, 13, 14]]
 # ``` 
-#     
+#
 # <br>
 #
-#         
+#
 # ```python
 # mat + 1
 # -> [[ 1,  2,  3,  4,  5],
@@ -189,13 +189,13 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 #     [11, 12, 13, 14, 15]]
 # ``` 
 #
-#    
+#
 # ------------------
 #
 # c'est **comme si** le scalaire `1` devenait la matrice $\begin{pmatrix} 1 & 1 & 1 & 1 &1 \\ 1 & 1 & 1 & 1 &1 \\ 1 & 1 & 1 & 1 &1 \\ \end{pmatrix}$
-#     
+#
 # -----------------------
-#     
+#
 # naturellement `numpy` ne va **jamais** construire un tel objet  
 # il va juste s'arranger pour incrémenter les éléments des lignes et des colonnes de la matrice par `1`
 
@@ -212,13 +212,13 @@ mat + 1
 # ### opération entre une ligne et un tableau par broadcasting
 #
 # <br>
-#  
+#
 # la ligne et le tableau doivent obéir à des conditions de forme (plutôt évidentes)
 #
 # --------------------------------
-#     
+#
 # prenons une matrice et l'opération d'addition
-#     
+#
 # ```python
 # mat = np.arange(15).reshape(3, 5)
 # mat
@@ -227,20 +227,20 @@ mat + 1
 #     [10, 11, 12, 13, 14]]
 # ``` 
 #
-#     
+#
 # -------------------------------------------
 # pour ajouter une **ligne** à toutes les lignes d'une matrice  
 # il faut naturellement que la forme des lignes corresponde
-#     
+#
 # **non**    
 # ```python
 # mat + [10, 20, 30]
 # -> ValueError: operands could not be broadcast together with shapes (3,5) (3,) 
 # ```   
 #
-#   
+#
 # **oui**
-#     
+#
 # ```python
 # mat + [10, 20, 30, 40, 50]
 # # oui
@@ -259,8 +259,8 @@ mat + 1
 # -------------------------------
 #
 # c'est comme si on ajoutait la matrice $\begin{pmatrix} 10 & 20 & 30 & 40 & 50 \\ 10 & 20 & 30 & 40 & 50 \\ 10 & 20 & 30 & 40 & 50 \\ \end{pmatrix}$
-#     
-#     
+#
+#
 # là encore, `numpy` ne va **jamais** générer une telle matrice  
 # il va procéder par des boucles sur les lignes de la matrice
 
@@ -281,26 +281,26 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 # ### opération entre une ligne et un groupes de matrices
 #
 # <br>
-#     
+#
 # de même, on peut ajouter une ligne à tout un groupe de matrices... si la forme des lignes coincide
-#     
-#     
+#
+#
 # <br>
-#     
+#
 # ```python
 # tab = np.arange(30).reshape(2, 3, 5)
 # tab
 # -> [[[ 0  1  2  3  4]
 #      [ 5  6  7  8  9]
 #      [10 11 12 13 14]]
-#     
+#
 #     [[15 16 17 18 19]
 #      [20 21 22 23 24]
 #      [25 26 27 28 29]]]
 # ``` 
-#     
+#
 # <br>
-#     
+#
 # ```python
 # tab + [1000, 2000, 3000, 4000, 5000]    
 # tab
@@ -314,7 +314,7 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 # ```
 #
 # <br>
-#     
+#
 # de même pour les groupes de groupes de groupes de ... de matrices, etc.
 
 # %%
@@ -331,9 +331,9 @@ mat + [1000, 2000, 3000, 4000, 5000]
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une colonne et une matrice
 # <br>
-#  
+#
 # c'est pareil...
-#     
+#
 # ```python    
 # mat = np.arange(15).reshape(3, 5)
 # mat
@@ -342,9 +342,9 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #     [10, 11, 12, 13, 14]]
 # ```    
 # <br>
-#     
+#
 # il faut naturellement que la forme des colonnes corresponde
-#     
+#
 # ```python    
 # col = np.array([100, 200, 300]).reshape(3, 1)
 # col
@@ -352,11 +352,11 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #   [[100],
 #    [200],
 #    [300]]
-#     
+#
 # ```
-#     
+#
 # remarquez la forme de la colonne `col`
-#     
+#
 # <br>
 #
 # on ajoute
@@ -368,7 +368,7 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #      [205, 206, 207, 208, 209],
 #      [310, 311, 312, 313, 314]]
 # ``` 
-#     
+#
 # <br>
 # et ainsi de suite
 
@@ -384,42 +384,42 @@ mat+col
 # ### opération entre une ligne et une colonne
 #
 # <br>
-#     
+#
 # cela va faire ce à quoi vous vous attendez: une matrice !
-#     
+#
 # <br>
-#     
+#
 # **exercice**
 # 1. créer une ligne contenant par exemple 0, 1, 2, 3, 4
 # 1. créer une colonne contenant par exemple 10, 20, 30
 # 1. ajouter les deux
-#     
+#
 # <br>
-#     
+#
 # il faut faire attention à la forme de la colonne `(n, 1)`
 
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ## règles de broadcasting - avancés
 #
 # <br>
-#     
+#
 # Les dimensions des deux tableaux, sur lesquels une opération élément-par-élément est appliquée
 #
 # * sont comparées de droite à gauche (par paire)
-#     
+#
 #
 # * le broadcasting sera possible:
 #     1. si les deux dimensions sont identiques
 #     1. si l'une des 2 dimensions vaut 1  
 #      auquel cas elle est élargie à la dimension requise  
 #      et le broadcast continue
-#     
-#     
+#
+#
 # <br>
-#     
+#
 # * quand les formes ne sont pas consistantes, le broadcasting est impossible  
 # `numpy` rejette l'opération en déclenchant une erreur de type `ValueError`
-#     
+#
 # ```python
 # m1 = np.arange(6).reshape(2, 3)
 # m2 = np.arange(8).reshape(2, 4)
@@ -448,37 +448,37 @@ except ValueError as e:
 # <br>
 #
 # * une matrice `A`$=\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix}$ de forme `(2_A, 3_A)`
-#     
-#     
+#
+#
 # * un tableau `b` réduit à  un scalaire $\begin{pmatrix}b_1 \\ \end{pmatrix}$ de forme $(1_b,)$  
-#     
+#
 #
 # * calculons `A + b`
-#     
+#
 # <br>
-#     
+#
 # la forme de `A` est $(2_A, 3_A)$ la forme de `b` est ($1_b$,)
 # 1. on compare les dimensions de droite: $3_A$ et $1_b$
 # 1. $b$ est élargi à $\begin{pmatrix} b_1 & b_1 & b_1 \end{pmatrix}$ de forme $(1_b, 3_b)$
 #
 # <br>
-#     
+#
 # on ajoute maintenant un tableau de forme $(2_A, 3_A)$ à une ligne de forme $(1_b, 3_b)$  
 # $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1  \end{pmatrix}$   
-#    
+#
 # <br>
-#     
+#
 # 1. on compare les dimensions précédentes: $2_a$ et $1_b$
 # 1. `b` est élargi à la dimension $(2_b, 3_b)$
-#  
+#
 # <br>
-#     
+#
 # on ajoute maintenant un tableau de forme $(2_A, 3_A)$ à un tableau de forme  $(2_b, 3_b)$  
-#     
+#
 #   $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b & b & b \\ b & b & b \end{pmatrix} = \begin{pmatrix} a_{11} + b & a_{12} + b & a_{13} + b \\ a_{21} + b & a_{22} + b & a_{23} + b \\  \end{pmatrix}$   
 #
 # <br>
-#     
+#
 # les formes sont désormais compatibles, les deux tableaux peuvent être ajoutés
 
 # %% [markdown]
@@ -492,36 +492,36 @@ except ValueError as e:
 # on veut faire l'opération $\begin{pmatrix} a_{1} & a_{2} & a_{3} \end{pmatrix} + \begin{pmatrix} b_1 \\ b_2 \\ b_3 \\ b_4 \end{pmatrix}$
 #
 # <br>
-#     
+#
 # la forme de la matrice-ligne `a` est $(1_a, 3_a)$, la forme de la matrice-colonne `b` est $(4_b, 1_b)$
 #
 # <br>
-#     
+#
 #
 # `numpy` compare $3_a$ à $1_b$ et élargit *b* à $\begin{pmatrix} b_1 & b_1 & b_1 \\ b_2 & b_2 & b_2 \\ b_3 & b_3 & b_3 \\ b_4 & b_a & b_4 \end{pmatrix}$
 #
 # <br>
-#     
+#
 #
 # on ajoute maintenant un tableau $(1_a, 3_a)$ à une matrice $(4_b, 3_b)$
 #
 # <br>
-#     
+#
 #
 # $\begin{pmatrix} a_{1} & a_{2} & a_{3} \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1 \\ b_2 & b_2 & b_2 \\ b_3 & b_3 & b_3 \\ b_4 & b_a & b_4 \end{pmatrix}$
 #
 # <br>
-#     
-#  
-#    
+#
+#
+#
 # `numpy` compare les dimensions $1_a$ et $4_b$ et élargit $a$ à $\begin{pmatrix} a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \end{pmatrix}$
 #
 # <br>
-#     
-#    
-#  
+#
+#
+#
 # $\begin{pmatrix} a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1 \\ b_2 & b_2 & b_2 \\ b_3 & b_3 & b_3 \\ b_4 & b_a & b_4 \end{pmatrix} = \begin{pmatrix} a_{1} + b_1 & a_{2} + b_1 & a_{3} + b_1 \\ a_{1} + b_2 & a_{2} + b_2 & a_{3} + b_2 \\ a_{1} + b_3 & a_{2} + b_3 & a_{3}  + b_3\\ a_{1} + b_4 & a_{2} + b_4 & a_{3} + b_4 \end{pmatrix}$
-#  
+#
 #
 # <br>
 #
@@ -532,7 +532,7 @@ except ValueError as e:
 #
 # <br>
 # deux groupes de 3 matrices
-#     
+#
 # ```python
 # grp = np.arange(1, 37).reshape(2, 3, 2, 3)
 # grp -> [[[[ 1,  2,  3],
@@ -555,21 +555,21 @@ except ValueError as e:
 #           [34, 35, 36]]]]
 # ```
 #
-#   
+#
 # une matrice
-#     
+#
 # ```python
 # mat = np.array([[100, 200, 300], [400, 500, 600]])
 # mat -> [[100, 200, 300],
 #         [400, 500, 600]]
 # ```
-#     
+#
 # <br>
 # l'opération entre les deux tableaux
-#     
+#
 # ```python
 # grp+mat
-#     
+#
 # -> ([[[[101, 202, 303],
 #        [404, 505, 606]],
 #

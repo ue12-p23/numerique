@@ -643,7 +643,7 @@ pd.to_datetime('15 july 2021 08:00')
 # 1. créez une nouvelle `Series` déduite de la colonne `date`  
 #    et qui utilise un type plus adapté aux calculs sur les dates
 #    quel est le type de la nouvelle colonne ?
-#    
+#
 # 1. remplacez dans la dataframe globale la colonne `date` par la précédente  
 #    (le mieux est sans doute de conserver le même nom, mais ce n'est pas indispensable)
 
@@ -686,7 +686,7 @@ global_df.dtypes
 #    mais avec un multi-index qui soit pertinent dans le contexte  
 #    **variante** on peut aussi utiliser `set_index()`  
 #    pour aboutir au même résultat
-#    
+#
 # rangez votre résultat dans une variable `clean_df`   
 
 # %%
@@ -773,7 +773,7 @@ clean_df.loc[['France', 'Italy']]
 #
 # * un slice sur les colonnes  
 #   mais au fait on les veut toutes, on peut utiliser `:` 
-#   
+#
 # <br>
 #
 # l'idée serait ensuite d'écrire simplement

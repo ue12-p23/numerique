@@ -111,7 +111,7 @@ import pandas as pd
 #
 #   * un appel à `plt.figure()` au début
 #   * un appel à `plt.show()` à la fin
-#   
+#
 # toutefois c'est trop de *boilerplate*, surtout quand il s'agit simplement de plotter une fonction !
 #
 # du coup il est fréquent qu'on élude tout ce qui est possible, 
@@ -166,7 +166,7 @@ import pandas as pd
 #
 # de nombreux *réglages* ont pris leurs valeurs par défaut  
 # (taille de la figure, tailles et polices des caractères, couleurs du fond et de la courbe...)
-#  
+#
 # <br>
 #
 # par exemple
@@ -508,7 +508,7 @@ plt.legend();
 # par défaut tous les couples de points $(x_i, y_i)$ sont tracés
 #
 # <br>
-#  
+#
 # on peut n'affiche qu'une partie des points
 #
 # <br>

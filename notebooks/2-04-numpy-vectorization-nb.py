@@ -55,24 +55,24 @@ from matplotlib import pyplot as plt
 # %% [markdown] tags=["framed_cell"]
 # ## qu'est-ce que la vectorisation ?
 # <br>
-#   
-#         
+#
+#
 # **l'idée**  
 # pour appliquer une fonction à tous les éléments d'un tableau `numpy`
 #
 # * de ne **jamais** utiliser une boucle `for-python`  
 # (qui calcule une indirection à chaque accès à un élément)
 # <br>    
-#     
+#
 # * mais d'appliquer la fonction directement au tableau  
 # de manière *vectorisée*  
 # (`numpy` utilise alors un **décalage** pour passer d'un élément du tableau à un autre)
 # <br>
 #
 # * c'est plus concis, vos codes sont plus rapides et plus lisibles !
-#    
+#
 # <br>
-#     
+#
 # **OUI**
 # ```python
 # n = 10000000
@@ -80,34 +80,34 @@ from matplotlib import pyplot as plt
 #
 # y = np.sin(x) # np.sin appliquée au tableau x
 # ```   
-#     
-#  
+#
+#
 # <br>    
 # <br>
-#     
+#
 # **NON**
 # ```python
 # n = 10000000
 # x = np.linspace(0, 2*np.pi, n)
-#     
+#
 # y = []
 # for e in x:   # NON MAL FAUX
 #     y.append(np.sin(e))
 # ```
 # <br>
-#     
+#
 # la vectotrisation est **la seule manière** d'écrire du code en `numpy`  
 # pour avoir des **temps d'exécution acceptables**
-#     
+#
 # <br>
-#     
+#
 # **conclusion**   
 # sur des tableaux `numpy` utilisez **toujours** la **vectorisation**  
 # **vectorisation** = le `for` est fait dans `numpy`
 #
-#     
+#
 # <br>
-#     
+#
 # vérifiez en comparant les temps d'exécution des deux codes `%%timeit`  
 # attention c'est très long...
 
@@ -184,21 +184,21 @@ def scalar_function(x):
 # Le mécanisme général qui applique une fonction à un tableau  
 # est connu sous le terme de *Universal function*  
 # ou `ufunc`
-#     
+#
 # <br>
-#     
+#
 # (ce terme `ufunc` est utile pour des recherches sur Internet)
-#     
+#
 # <br>
 #
 # En conclusion, vous **devez** toujours utiliser les `ufunc` et plus jamais les `for-python`
-#     
+#
 # * même si ça vous paraît plus difficile
 # * même si vous utilisiez des `for-python` en prépa
 # * par souci de la **performance en temps**, vous ne pouvez plus y échapper
-#     
-#     
-#     
+#
+#
+#
 # * c'est juste une autre manière de penser le code  
 # * vos codes seront compacts et lisibles (élégants)
 
@@ -209,7 +209,7 @@ def scalar_function(x):
 # ### quelles sont les fonctions vectorisées ?
 #
 # <br>
-#     
+#
 # **les opérateurs arithmétiques classiques**  
 # et leur contre-partie `numpy` (*Ufuncs*)
 #
@@ -225,7 +225,7 @@ def scalar_function(x):
 # |   `**`   | `np.power` |
 #
 # <br>
-#     
+#
 # **les fonctions de comparaison, trigonométriques...**
 #
 # | fonction         | `numpy` fonction    |
@@ -247,14 +247,14 @@ def scalar_function(x):
 # ### savoir si une fonction est une `ufunc`
 #
 # <br>
-#     
+#
 #  demandez-le lui
 #
 # ```python
 # np.add
 # <ufunc 'add'>
 # ```
-#     
+#
 # `numpy.add` en est !
 
 # %%
@@ -270,9 +270,9 @@ np.power
 # 1. sans utiliser ni `numpy` ni `abs` de Python  
 #    écrivez la fonction qui calcule la valeur absolue d'un scalaire x  
 #    `absolute(x)`
-#    
-#    
-#    
+#
+#
+#
 # 2. testez votre fonction sur des scalaires
 #
 #
@@ -290,28 +290,28 @@ np.power
 #
 # <br>
 # <br>
-#    
+#
 # ```python    
 # ----> if x >= 0:
 # ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
 # ```
-#     
+#
 # <br>
-#     
+#
 # supposons que votre code soit:
-#     
+#
 # ```python
 # def absolute (x):
 #     if x >= 0:
 #         return x
 #     return -x
-#     
+#
 # tab = np.array([10, -30, 56.5])
 # absolute(tab)
 # ```
-#     
+#
 # <br>
-#     
+#
 # l'expression `x >= 0` appliquée à `tab` rend le tableau `array([False, True, False])`
 #
 # <br>
@@ -321,16 +321,16 @@ np.power
 #
 # * `if` est-il vrai quand tous les éléments sont vrais ? `np.all(x)`
 # * `if` est-il vrai quand au moins un élément du tableau est vrai ? `np.any(x)`
-#    
+#
 # <br>
-#     
+#
 # ... mais vous ne voulez rien de tout cela  
 #
 # * vous voulez que `numpy` applique le `if` à-chaque-élément
 # * i.e. que la fonction s'exécute de manière vectorisée
 #
 # <br>
-#     
+#
 # la **solution**
 #
 # * demander à  `numpy` de **vectoriser** la fonction avec `np.vectorize`
@@ -338,7 +338,7 @@ np.power
 # * sur lequel les fonctions seront appelées de manière vectorisée
 #
 # <br>
-#     
+#
 # ```python
 # absolute_vect = np.vectorize(absolute)
 # absolute_vect(tab)
@@ -374,14 +374,14 @@ absolute_vect([-10, -20, 30])
 # ### résultats intermédiaires lors de calculs
 #
 # <br>
-#     
+#
 # nous appliquons des opérations vectorisées les unes à la suite des autres à des tableaux...
-#     
+#
 # <br>
-#     
+#
 # des **espaces mémoire intermédiaires** sont créés pour recevoir les résultats des calculs   
 # par exemple la fonction trigonométrique $4(e^{cos(x)})^2$
-#     
+#
 # ```python
 # def trigo (x):
 #     return 4*np.exp(np.cos(x))**2
@@ -390,11 +390,11 @@ absolute_vect([-10, -20, 30])
 #
 # de combien de tableaux intermédiaires avons-nous besoin dans ce calcul ?  
 # (un par calcul unitaire)
-#     
+#
 # <br>
-#     
+#
 # on développe le code pour montrer les tableaux intermédiaires
-#     
+#
 # ```python
 # def trigo_function_developpee (x):
 #     int_1 = np.cos(x)
@@ -404,11 +404,11 @@ absolute_vect([-10, -20, 30])
 # ```
 #
 # <br>
-#     
+#
 # ici trois tableaux intermédiaires créés (`3 * x.nbytes` octets) perdus
-#     
+#
 # <br>
-#     
+#
 # le calcul vectoriel crée de nombreux tableaux intermédiaires  
 # qui peuvent coûter très **cher en mémoire**
 
@@ -420,16 +420,16 @@ absolute_vect([-10, -20, 30])
 #
 # <br>
 # <br>
-#     
+#
 # ```python
 # def trigo (x):
 #     return 4*np.exp(np.cos(x))**2
 # ```
-#     
+#
 # <br>
-#     
+#
 # code montrant les tableaux intermédiaires
-#     
+#
 # ```python
 # def trigo_function_developpee (x):
 #     int_1 = np.cos(x)
@@ -439,14 +439,14 @@ absolute_vect([-10, -20, 30])
 # ```
 #
 # <br>
-#      
+#
 # la **solution** ?   
 #
 # * utiliser le paramètre optionnel `out=` des opérateurs `numpy`  
 # avec `out` on spécifie le tableau où ranger le résultat
-#     
+#
 # <br>
-#     
+#
 # ```python
 # def trigo_function_developpee_out (x):
 #     result = np.cos(x)        # un pour le résultat
@@ -455,9 +455,9 @@ absolute_vect([-10, -20, 30])
 #     np.multiply(4, result, out=result)
 #     return result
 # ```
-#  
+#
 # <br>
-#     
+#
 # **mais** ce code est
 #
 # * beaucoup plus compliqué à écrire que dans sa version compacte, simple et *directe*
@@ -520,12 +520,12 @@ plt.plot(trigo_function_developpee_out(np.linspace(0, 2*np.pi, 1000)));
 # * avec un for-python
 #
 # * avec une compréhension Python
-#    
+#
 # * de manière vectorisée avec `**2`
 #
 # * de manière vectorisée avec `np.power`
 #
 # * de manière vectorisée avec `np.square`
-#    
-#    
+#
+#
 # 3. quelles sont les manières de faire les plus rapides ?

@@ -55,7 +55,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # ### pourquoi comprendre comment <code>numpy</code> travaille en mémoire ?
 #
 # <br>
-#     
+#
 # pour prendre des décisions en connaissance de cause  
 #
 # * savoir les conséquences de vos choix
@@ -63,21 +63,21 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # (conversions implicites...)
 #
 # <br>
-#     
+#
 # pour ne pas être dépourvu le jour où votre code, en se complexifiant
 #
 # * devient beaucoup trop lent
 # * prend beaucoup trop d'espace mémoire
-#     
+#
 # <br>
 #
 # pour vous familiariser avec l'informatique et comprendre
 #
 # * les mécanismes sous-jacents 
 # * les choix des concepteurs
-#     
+#
 # <br>
-#     
+#
 # pour vous faire une petite culture en informatique technique
 #
 # * ne jamais penser que c'est magique, incompréhensible, trop compliqué...
@@ -107,42 +107,42 @@ mat.nbytes
 # ### organisation en mémoire des tableaux
 #
 # <br>
-#     
+#
 # l'aide (accessible via `help(np.ndarray)`) dit 
 # > *An array object represents a multidimensional, homogeneous array of fixed-size items.*
-#     
+#
 # <br>
-#     
+#
 # donc un `numpy.ndarray` est un tableau
 # 1. **multi-dimensionnel**
 # 1. avec un type d'élément **homogène**
 # 1. et des éléments de **taille fixe**
 #
 # <br>
-#     
+#
 # **homogène**  
 #
 # * toutes les cases du tableau ont le même type
 # * donc elles occupent la même taille en mémoire
 # <br>
-#     
+#
 # **taille fixe**  
 #
 # * une fois un tableau créé, on ne peut plus modifier la taille de ses éléments  
 # i.e. le nombre d'octets sur lequel chaque élément est stocké en mémoire est fixe
-#     
-#     
-#     
+#
+#
+#
 # * si on manipule et que la taille des éléments ne suffit plus ?   
 # `numpy` convertit la valeur  
 # mais ne modifie pas la taille de ses éléments
-#     
-#     
+#
+#
 # * pour modifier la taille des éléments ?  
 # on n'a pas le choix, il faut allouer un nouveau tableau, et recopier l'ancien dedans (et c'est à éviter...) 
-#     
+#
 # <br>
-#     
+#
 # pourquoi ces **contraintes** ?  
 #
 # * pour que `numpy` soit le plus rapide possible dans ses manipulations de tableaux
@@ -154,13 +154,13 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### rapidité des manipulations mémoire
 # <br>
-#     
+#
 # deux **idées** pour assurer la rapidité de manipulation de tableaux en mémoire
-#     
-#     
+#
+#
 # * passez rapidement d'une case du tableau à une autre (**offset**) 
-#     
-#     
+#
+#
 # * avoir la valeur de l'élément directement dans la case (pas **d'indirection** mémoire)
 
 # %% [markdown]
@@ -170,7 +170,7 @@ mat.nbytes
 # ### offset
 #
 # <br>
-#     
+#
 # supposons que le tableau soit représenté en mémoire par un **bloc d'octets continu**  
 # (ici 9 cases sont **contiguës** et de même taille - homogène)
 #
@@ -179,31 +179,31 @@ mat.nbytes
 # ```
 # ...☐☐☐☐☐☐☐☐☐...
 # ```
-#     
+#
 # </div>
-#     
+#
 # <br>
-#     
-#     
+#
+#
 # passer d'une case à une autre devient un simple décalage mémoire  
 # *on va 2 cases plus loin*  
 # <br>
-#     
-#     
+#
+#
 # l'**offset** est la distance qui sépare ces deux cases
 #
 # <br>   
-#     
+#
 # un tel décalage devient impossible si un tableau était réparti un peu partout en mémoire...  
-#     
+#
 # <div class="memory">
-#     
+#
 # ```
 # ...☐.......☐..☐....☐...  
 # ☐....☐.....☐.....☐.....  
 # ......☐.....
 # ```
-#     
+#
 # </div>
 
 # %% [markdown]
@@ -212,56 +212,56 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### pas d'indirection mémoire
 # <br>
-#     
+#
 # pour un tableau, on sait maintenant
 #
 # * que la taille des éléments est homogène  
 # * que le bloc est contigu en mémoire
-#     
+#
 # <div class="memory">
-#     
+#
 # ```
 # ☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐
 # ```
 # </div>
-#     
+#
 # <br>
-#     
-#     
+#
+#
 # l'idée de n'avoir pas d'indirection est
 #
 # * quand on arrive dans une case du tableau
 # * elle contient la valeur qu'on cherche 
 # * on n'a pas besoin d'aller ailleurs en mémoire
-#     
+#
 # <br>
 #
 # Que pourrait-il y avoir d'autre dans une case que la valeur d'un élément ?
-#     
+#
 # <br>
-#     
+#
 # si toutes les cases d'un même tableau en informatique ont la même taille, comment puis-je
 #
 # * y "*mettre*"  des élément hétérogènes ? entier, réel, string... 
 # * modifier ces éléments sans réallouer le tableau ?
-#     
+#
 # <br>
-#     
+#
 # ```python
 # tab = [1, np.pi, True ]
 # tab[0] = 12345678235234501256848345678901234567890264378034
 # tab[0] = "bonjour"
 # ```
-#     
+#
 # <br>
 #
 # en `python`, dans une case d'un vecteur (`list`)
 #
 # * on ne trouve pas l'objet lui même (`1` ou `"bonjour"`)
 # * mais l'**adresse** en mémoire de l'endroit où l'objet a été alloué
-#     
+#
 # <br>
-#     
+#
 # si un tableau contient les adresses de ses éléments  
 # et pas directement la valeur des éléments  
 # il y aura une indirection à faire quand on arrive sur une case
@@ -365,16 +365,16 @@ tab
 # ### forme des tableaux numpy
 #
 # <br>
-#     
+#
 # la mémoire d'un `numpy.ndarray` est **toujours** un **segment unidimensionnel continu de cases de même taille et même type**
-#     
+#
 # <div class="memory">
-#     
+#
 # ```    
 # ☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐
 # ```
 # </div>
-#     
+#
 # <br>
 #
 # `numpy` crée sur cette base, un système d'indexation
@@ -388,14 +388,14 @@ tab
 # ### 1-dimension
 #
 # <br>
-#       
+#
 # créons un tableau de dimension 1 donc de `shape=(30,)`   
 # ```python
 # seg = np.ones(shape=(30,))
 # ```
 #
 # <br>
-#     
+#
 # un seul index suffit à le parcourir
 #
 # <div class="memory">
@@ -408,18 +408,18 @@ tab
 # ```
 #
 # </div>
-#     
+#
 # <br>
 #
 # l'index est l'offset à partir du premier élément du tableau
-#     
+#
 # <br>
 #
 # le premier élément du tableau est indiqué par `seg`  
 # avec un offset de `0`
-#     
+#
 # <br>
-#     
+#
 # voila pourquoi la plupart du temps en informatique, les **tableaux commencent à l'index 0**
 # (et pas 1, sauf pour *matlab*, *R*, *Fortran*...)
 
@@ -430,21 +430,21 @@ tab
 # ### 2-dimension
 #
 # <br>
-#       
+#
 # créons un tableau de dimension 2, par exemple de `shape=(5, 6)`   
 # ```python
 # seg = np.ones(shape=(5, 6))
 # ```
 #
 # <br>
-#     
+#
 # il faut 2 index pour le parcourir  
 #     un pour les lignes et un pour les colonnes `seg[i, j]`
 #
 # <div class="memory">
 #
 # ```
-#     
+#
 #    ☐☐☐☐☐☐
 #    ☐☐☐☐☐☐
 # i  ☐☐☐☐☐☐
@@ -467,22 +467,22 @@ tab
 # ### 3-dimension
 #
 # <br>
-#      
+#
 # créons un tableau de dimension 3, par exemple de `shape=(4, 5, 6)`   
 # ```python
 # seg = np.ones(shape=(4, 5, 6))
 # ```
 #
 # <br>
-#       
+#
 # 3 index pour le parcourir `seg[i, j, k]`  
 # table, ligne, colonne
 #
 # <div class="memory">
-#     
+#
 # ```
 #                   i   
-#     
+#
 #    ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
 #    ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
 #  j ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
@@ -493,8 +493,8 @@ tab
 # ```
 #
 # </div> 
-#     
-#     
+#
+#
 # et ainsi de suite
 
 # %% [markdown]
@@ -507,29 +507,29 @@ tab
 #
 # on peut modifier la forme d'un `numpy.ndarray` existant  
 # tant qu'on ne modifie pas son nombre d'éléments
-#     
+#
 # <br>
-#     
+#
 # deux fonctions pour *réindexer* un tableau: `ndarray.reshape` et `ndarray.resize`
-#     
+#
 # <br>
 #
 # `np.ndarray.reshape`  
 # renvoie un tableau contenant les mêmes données avec une nouvelle forme
-#     
+#
 # <br>
-#     
+#
 # `np.ndarray.resize`  
 # modifie la forme du tableau *en-place* (directement dans le tableau)  
 # et ne renvoie donc rien
-#     
+#
 # <br>
-#     
+#
 # aucune des deux fonction ne crée un nouveau segment de données  
 # elle ne recréent que l'indexation  
-#     
+#
 # <br>
-#     
+#
 # **reshape**    
 #
 # ```python
@@ -537,7 +537,7 @@ tab
 # seg = seg.reshape(5, 6) # reshape retourne le tableau ainsi modifié
 # seg = seg.reshape(2, 5, 3)
 # ```
-#     
+#
 # on peut le faire dès la création du tableau
 #
 # ```python
@@ -547,13 +547,13 @@ tab
 # <br>
 #
 # **resize**
-#     
+#
 # ```python
 # seg = np.arange(0, 30)
 # seg.resize(5, 6) # resize modifie le tabeau en place
 # seg.resize(2, 5, 3)
 # ```
-#    
+#
 # <br>
 #
 # si aucune mémoire n'est créée, c'est que les différentes indexations prises sur un tableau  
@@ -618,16 +618,16 @@ print(    tab1    )
 # ## les lignes et colonnes
 #
 # <br>
-#     
+#
 # pour les tableaux `numpy.ndarray` en dimension supérieure ou égale à 2
 #
 # * les deux dernières valeurs de leur forme  `tab.shape`   
 # sont leur nombre de ligne et leur nombre de colonne
-#     
+#
 # <br>
-#  
+#
 # **exercice**
-#     
+#
 # 1. faites un tableau de `ones` de forme `(1, 2, 3, 4, 5)`
 # 1. afficher son nombre de lignes et son nombre de colonnes
 

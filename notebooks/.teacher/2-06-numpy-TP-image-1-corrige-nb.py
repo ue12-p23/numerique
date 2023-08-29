@@ -261,7 +261,7 @@ plt.show()
 # 1. Afficher chaque canal avec `plt.imshow`  
 #     La couleur est-elle la couleur attendue ?  
 #     Si oui très bien, si non que se passe-t-il ?
-#     
+#
 #     **rappel** table des couleurs
 #
 #     * `RGB` représente directement l'encodage de la couleur du pixel   
@@ -275,7 +275,7 @@ plt.show()
 #     (lors de l'affichage, le `255` des rouges n'est pas le même `255` des verts)
 #
 #     * donner le paramètre `cmap=` à `plt.imshow`, `'Reds'`,  `'Greens'` ou  `'Blues'`
-#     
+#
 #     <br>
 # 1. Corrigez vos affichages si besoin
 # <br>

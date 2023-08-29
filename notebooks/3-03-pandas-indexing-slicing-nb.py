@@ -75,10 +75,10 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # <br>
 #
 # <div class=note>
-#     
+#
 # bien sûr `pandas` va *aussi* vous permettre d'accéder à vos sous-tableaux  
 # par indices, c'est juste moins pertinent la plupart du temps
-#     
+#
 # </div>    
 
 # %% [markdown]
@@ -253,7 +253,7 @@ mat
 #
 # * mais on a vu précédemment que sur une dataframe  
 #   `df[truc]` renvoie **une colonne**  
-#   
+#
 # donc déjà on sait qu'on ne pourra pas écrire quelque chose comme  
 # ~~`df[ligne, colonne]`~~ **NON**
 
@@ -356,7 +356,7 @@ df.iloc[-1, 2]
 # df.loc[[552, 832]]
 # -> une dataframe avec deux lignes correspondant
 #    aux deux passagers d'id 552 et 832
-#     
+#
 # df.loc[[552, 832], ['Name', 'Pclass']]
 # -> la même dataframe mais réduite à deux colonnes  
 #
@@ -713,7 +713,7 @@ print(   df_survived.shape   )
 # ici le masque est une série qui a le même index que la dataframe  
 # et une valeur booléenne, qui va indiquer si la ligne en question  
 # doit être sélectionnée ou non
-#     
+#
 # </div>    
 
 # %%
@@ -982,7 +982,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #
 # on obtient une colonne de type `pandas.Series`  
 # accédons à l'élément d'index `1` de la colonne  
-#  
+#
 # ```python
 # df = pd.read_csv('titanic.csv', index_col='PassengerId')
 # df['Survived'][1]
@@ -1102,7 +1102,7 @@ df.loc[552, 'Survived']
 # ```
 #
 # <br>
-#  
+#
 # donc, pour modifier (écrire dans) une cellule, **il ne faut PAS faire**  
 # ~~`df.loc[889]['Age'] = 28.5`~~  
 # ~~`df['Age'][889] = 28.5`~~

@@ -63,21 +63,21 @@ from matplotlib import pyplot as plt
 #
 # *accéder à des éléments ou à des sous-tableaux  
 # va nous permettre de leur appliquer des fonctions vectorisées*
-#     
-#     
+#
+#
 # <br>
-#     
+#
 # la manière d'accéder aux éléments d'un tableau `numpy`  
 # dépend de la forme du tableau (`shape`)
-#     
-#    
+#
+#
 # <br>
 #
 # la forme d'un `numpy.ndarray` est donnée par une indexation  
 # sur le segment mémoire sous-jacent continu de votre tableau
 #
 # <br>
-#     
+#
 # par exemple  
 # un `numpy.ndarray` de `12` éléments 
 #
@@ -88,7 +88,7 @@ from matplotlib import pyplot as plt
 # ```
 #
 # </div>
-#     
+#
 # peut être indexé sous différentes dimensions et formes
 #
 # * dimension 1, par exemple `(12,)`
@@ -104,7 +104,7 @@ from matplotlib import pyplot as plt
 # <br>
 #
 # vous avez besoin d'**un seul index**
-#     
+#
 # <br>
 #
 # ```python
@@ -113,7 +113,7 @@ from matplotlib import pyplot as plt
 # ```
 # <br>
 #
-#     
+#
 # Quelle est le type de `tab[0]` ?  
 # Quelle est la valeur de `tab[0]` ?    
 #
@@ -150,33 +150,33 @@ tab1[0].dtype, tab1[0]
 # l'accès à un élément du tableau dépend de la forme du tableau  
 #
 # <br>
-#     
+#
 # il y aura un indice par dimension
-#     
+#
 # <br>
-#   
+#
 # en dimension 2    
 # ```python
 # tab = np.arange(12).reshape((2, 6))
-#     
+#
 # # première ligne, deuxième colonne
 #     line, col = 0, 1
 #     tab[line, col] = 1000
-#     
+#
 # tab
 # -> array([[ 0, 1000,  2,  3,  4,  5],
 #           [ 6,    7,  8,  9, 10, 11]])
 # ```
-#     
+#
 # <br>
-#         
+#
 #
 # en dimension 3      
 # ```python
 # tab.resize((2, 3, 2))
 #
 # # deuxième matrice, troisième ligne, première colonne
-#     
+#
 # mat, line, col = 1, 2, 0
 # tab[mat, line, col] = 2000
 # tab
@@ -188,7 +188,7 @@ tab1[0].dtype, tab1[0]
 #            [   8,  9],
 #            [2000, 11]]])
 # ```
-#     
+#
 # <br>
 #
 # nombre d'éléments dans chaque dimension
@@ -196,9 +196,9 @@ tab1[0].dtype, tab1[0]
 # [tab.shape[i] for i in range(tab.ndim)]
 # -> [2, 3, 2]
 # ```
-#     
+#
 # <br>
-#     
+#
 # remarque  en dimension >= 2
 # les deux dernières dimensions sont les lignes et les colonnes
 #
@@ -252,8 +252,8 @@ np.arange(2, 62, 2).reshape((2, 5, 3))[0, 1, 2]
 #
 # 1. faites un `np.ndarray` de forme `(3, 2, 5, 4)`  
 #    avec des nombre aéatoires entiers entre 0 et 100
-#    
-#    
+#
+#
 # 2. affichez-le et
 #    vous voyez trois groupes et 2 matrices de 5 lignes et 4 colonnes
 #
@@ -282,12 +282,12 @@ np.random.randint(0, 101, size=(3, 2, 5, 4)).shape[-2:]
 # ### différence slicing `python` et `numpy`
 #
 # <br>
-#     
+#
 #
 # le **slicing** `numpy` est *syntaxiquement équivalent* à celui des listes `Python`
-#     
+#
 # <br>
-#     
+#
 # la **grande** différence est que
 #
 # * quand vous slicez un **tableau `numpy`** vous obtenez une **vue** sur le tableau initial  
@@ -295,21 +295,21 @@ np.random.randint(0, 101, size=(3, 2, 5, 4)).shape[-2:]
 #
 # * quand vous slicez une **liste `python`** vous obtenez une **copie** de la liste initiale
 #
-#    
+#
 # <br>
-#     
+#
 # le slicing `numpy` va
 #
 # * regrouper des éléments du tableau initial
 # * dans un sous-tableau `numpy.ndarray` avec l'indexation adéquate
 # * la mémoire sous-jacente reste la même
-#     
+#
 # <br>
-#     
+#
 # la seule structure informatique qui sera créée est l'indexation  
-#     
+#
 # <br>
-#     
+#
 # vous pourrez ensuite, par exemple, modifier ces éléments  
 # et donc ils seront modifiés dans le tableau initial
 
@@ -320,34 +320,34 @@ np.random.randint(0, 101, size=(3, 2, 5, 4)).shape[-2:]
 # ### rappel du slicing Python
 #
 # <br>
-#    
+#
 # **rappel du slicing Python**
-#     
-#     
+#
+#
 # * `l[from:to-excluded:step]` 
-#     
-#     
+#
+#
 # * paramètres tous optionnels  
 # par défaut: `from = 0` `to-excluded = len(l)`et `step=1`
-#     
-#     
+#
+#
 # * indices négatifs ok `-1` est le dernier élément, `-2` l'avant dernier ...
 #
 # <br>
 # la liste python des 10 premiers entiers
-#     
+#
 # ```python
 # l = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-#     
+#
 # # un élément sur 2 en partant du début de la liste (copie)
 # l[::2]
-#     
+#
 # # un élément sur 3 en partant du premier élément de la liste (copie)
 # l[1::3]
-#     
+#
 # # la liste en reverse (copie)
 # l[::-1]
-#     
+#
 # # la liste entière (copie)
 # l[::]
 # # ou
@@ -366,15 +366,15 @@ print(l[:])
 # ### slicing en dimension 1<br>
 #
 # on crée un `numpy.ndarray` de dimension 1 de taille 10
-#     
+#
 # <br>
-#     
+#
 # * on prend un élément sur 2 en partant du début de la liste  
 # * on modifie les éléments du sous-tableau obtenu  
 # * le tableau initial est modifié
-#     
-#     
-#     
+#
+#
+#
 # ```python
 # vec = np.arange(10) # [0 1 2 3 4 5 6 7 8 9]
 # print(vec[::2])     # [0 2 4 6 8]
@@ -396,40 +396,40 @@ vec
 #
 # on crée un `numpy.ndarray` en dimension 4, de forme `(2, 3, 4, 5)`  
 # on l'initialise avec les `120`  premiers entiers
-#     
+#
 # ```python
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # ```
-#     
+#
 # <br>
-#    
+#
 # on a 2 groupes de 3 matrices de 4 lignes et 5 colonnes    
-#     
+#
 # <br>
-#     
+#
 # * on accède au premier groupe de matrices 
 # ```python
 # tab[0]
 # ```
-#     
+#
 # <br>
-#     
+#
 # * on accède à la deuxième matrice du premier groupe de matrices
 # ```python
 # tab[0, 1]
 # ```
-#     
+#
 # <br>    
 #
 # * on accède à la troisième ligne de la deuxième matrice du premier groupe de matrices
-#    
+#
 # ```python
 # tab[0, 1, 2]
 # ```
 # <br>    
 #
 # * on accède à la quatrième colonne de la deuxième matrice du premier groupe de matrices
-#    
+#
 # ```python
 # tab[0, 1, :, 3] # remarquez le ':' pour indiquer toutes les lignes
 # ```
@@ -449,13 +449,13 @@ print(    tab[0, 1, :, 3]    )
 #
 # on crée un `numpy.ndarray` en dimension 4, de forme `(2, 3, 4, 5)`  
 # on l'initialise avec les `120`  premiers entiers
-#     
+#
 # ```python
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # ```
-#   
+#
 # <br>
-#     
+#
 # on peut combiner les slicing des 4 dimensions, ici  
 # `tab[from:to:step, from:to:step, from:to:step, from:to_step]`  
 # <br>
@@ -463,17 +463,17 @@ print(    tab[0, 1, :, 3]    )
 # de l'indice `from` à l'indice `to` (exclus) avec un pas `step`  
 #
 # <br>
-#     
+#
 # à savoir    
 #
 # * quand vous voulez la valeur par défaut de `from`, `to` et `step` vous ne mettez rien
 # * quand les valeurs par défaut sont en fin d'expression, elles sont optionnelles
 # * `::` devient `:`
-#     
+#
 # <br>
-#     
+#
 # **exemples**
-#     
+#
 # la première matrice de tous les groupes de matrice
 # ```python
 # tab[::, 0, ::, ::]
@@ -482,9 +482,9 @@ print(    tab[0, 1, :, 3]    )
 # la première matrice  
 # toutes les lignes  
 # toutes les colonnes
-#     
+#
 # <br>
-#     
+#
 # qui s'écrit aussi
 # ```python
 # tab[:, 0, :, :]
@@ -542,21 +542,21 @@ tab[:, 0, 1:-1, 1:-1]
 #
 #
 # <br>
-#     
+#
 # si à chaque slicing, `numpy` faisait une copie du tableau sous-jacent, les codes seraient inutilisables  
 # parce que coûteux (pénalisés) en place mémoire
-#     
-#   
+#
+#
 # <br>
-#     
+#
 # **donc lors d'un slicing**
 #
 # * un nouvel objet `np.ndarray` est bien créé,
 # * son indexation est différente de celle de l'objet `np.ndarray` initial
 # * mais ils **partagent** la mémoire (le segment unidimensionnel sous-jacent)
-#     
+#
 #     <br>
-#     
+#
 # si un utilisateur veut une copie, il la fait avec la méthode `copy`
 #
 # ```python
@@ -575,13 +575,13 @@ tab[:, 0, 1:-1, 1:-1]
 # 1. un tableau *original* (on vient de le créer éventuellement par copie)
 # 1. une vue sur un tableau (il a été créé par slicing ou indexation)  
 #   il partage son segment de mémoire avec au moins un autre tableau
-#     
+#
 # <br>
-#     
-#     
+#
+#
 # l'attribut `numpy.ndarray.base` vaut alors
-#     
-#     
+#
+#
 # 1. `None` si le tableau est un tableau original
 #
 # ```python
@@ -589,18 +589,18 @@ tab[:, 0, 1:-1, 1:-1]
 # print(tab.base)
 # -> None
 # ```
-#     
-#     
+#
+#
 # ```python
 # tab1 = np.arange(10)
 # tab2 = tab1.copy()
 # print(tab2.base)
 # -> None
 # ```
-#     
+#
 # 2. **le tableau original qui a servi à créer la vue**  
 #     quand le tableau est une vue  
-#   
+#
 #
 #
 # ```python
@@ -609,7 +609,7 @@ tab[:, 0, 1:-1, 1:-1]
 # tab2.base is tab1
 # -> True
 # ```
-#     
+#
 # ```python  
 # tab1 = np.arange(120)
 # tab2 = tab1.reshape(2, 3, 4, 5) # une vue
@@ -618,19 +618,19 @@ tab[:, 0, 1:-1, 1:-1]
 # ```      
 #
 # <br>
-#  
+#
 # faites attention, dans l'exemple
 #
 # ```python
 # tab1 = np.arange(10).reshape(2, 5)
 # ```
-#     
+#
 # `tab1.base` est l'objet `np.arange(10)`  
-#     
+#
 # <br>
 # <br>
-#     
-#     
+#
+#
 # les `numpy.ndarray` ayant le même objet `numpy.ndarray.base`
 #
 # * partagent tous leur segment sous-jacent
@@ -639,9 +639,9 @@ tab[:, 0, 1:-1, 1:-1]
 #
 # * modifier les éléments de l'un modifiera les éléments des autres  
 # (ils *pointent tous* sur le même segment de mémoire)
-#     
+#
 # <br>
-#     
+#
 # `numpy` essaie de créer le moins de mémoire possible  
 # pour stocker les éléments de ses tableaux
 
@@ -710,7 +710,7 @@ tab2.base is tab1;
 # ## modification des sous-tableaux
 #
 # <br>
-#     
+#
 # pour modifier un sous-tableau, il faut simplement faire attention 
 # 1. au type des éléments  
 # 2. et à la forme du tableau
@@ -736,7 +736,7 @@ colonnes
 # vous remarquerez que dans le tableau qui s'appelle `lignes`, la valeur dans le tableau correspond au numéro de ligne; dit autrement :
 #
 # * `lignes[i, j] == i` pour tous les `(i, j)`,
-#     
+#
 # et dans l'autre sens bien sûr 
 #
 # * `colonnes[i, j] == j`

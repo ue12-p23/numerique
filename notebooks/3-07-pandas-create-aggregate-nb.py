@@ -333,19 +333,19 @@ df.values
 # pour bien choisir, il est utile de se poser en priorité  
 # la question de savoir si les différentes sources à assembler  
 # concernent les **mêmes colonnes** ou au contraire les **mêmes lignes**  (*)
-#   
+#
 # <br>
 # illustrations:
 #
 # * on recueille les données à propos du coronavirus, qui sont disponibles par mois  
 #   chaque fichier a la même structure - disons 2 colonnes: *deaths*, *confirmed*  
 #   l'assemblage consiste donc à agréger les dataframes **en hauteur**
-#   
+#
 # * on recueille les notes des élèves d'une classe de 20 élèves  
 #   chaque prof fournit un fichier excel avec les notes de sa matière  
 #   chaque table contient 20 lignes  
 #   il faut cette fois agréger les dataframes **en largeur**
-#   
+#
 # <div class="note">
 #     (*) cette présentation est simpliste, elle sert uniquement à fixer les idées
 # </div>

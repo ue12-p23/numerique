@@ -164,7 +164,7 @@ indices_i = np.array([[0, 2],
 r = valeurs_d2[indices_i]
 
 # %%
-# 
+#
 # r.shape
 
 # %% [markdown]

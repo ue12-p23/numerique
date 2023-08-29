@@ -298,7 +298,7 @@ ax4.plot(x, y, 'y'); # jaune
 # * et aussi `ax.set_xlabel`, `ax.set_ylabel`...
 #
 # * et enfin le **magique** `plt.tight_layout()` pour ajuster automatique les paddings
-#  
+#
 # <br>
 #
 # exemple de 3 sous-figures avec titres, sous-titres et légendes  

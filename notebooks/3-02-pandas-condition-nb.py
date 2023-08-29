@@ -126,11 +126,11 @@ import numpy as np
 # ```
 #
 # <div class=note>
-#     
+#
 #   c'est **très important** de bien mettre des parenthéses car les opérateurs bitwise (`&` et
 #     autres) ont des  
 #   précédences (priorités) qui sont non intuitives, et très différentes des opérateurs logiques (`and` et autres)
-#     
+#
 # </div>
 #
 # <br>
@@ -465,9 +465,9 @@ df.isna().sum(axis=1)
 # il y a `866` valeurs manquantes dans toute la data-frame
 #
 # <div class=note>
-#     
+#
 # remarque: contrairement à ce qu'on avait vu en `numpy`, ici on ne pourrait pas faire `df.isna().sum(axis=(0, 1))`
-#     
+#
 # </div>    
 
 # %%

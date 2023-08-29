@@ -70,45 +70,45 @@ import numpy as np
 # **prenons un exemple**
 #
 # <br>
-#     
+#
 # générons aléatoirement un tableau d'entiers  
 # (ici entre `0` et `9`)
-#    
+#
 # ```python
 # tab = np.random.randint(10, size=(2, 3))
 # -> tab [[1 8 5]
 #         [7 0 2]]
 # ``` 
-#     
+#
 # <br>
-#     
+#
 # testons la parité des éléments
-#     
+#
 # ```python
 # tab%2 == 0
 # ```
 # ou encore - équivalent mais en appelant une fonction plutôt que l'opérateur `==`
-#     
+#
 # ```python
 # np.equal(tab%2, 0)
 # ```   
 # <br>
-#     
+#
 # les résultats des comparaisons élément-par-élément  
 # sont rangés dans un tableau `np.ndarray`  
 # de même taille que le tableau initial
-#    
+#
 # ```python
 # tab%2 == 0
 # -> [[False,  True,  False],
 #     [False,  True,  True]]    
 # ```
-#     
+#
 # <br>
 #
-#        
+#
 # **remarquez**
-#     
+#
 # * dans l'expression `tab%2 == 0` et `np.equal(tab % 2, 0)`
 # * le broadcast de `0` en un tableau de `0` de la même taille que `tab`
 
@@ -125,7 +125,7 @@ print(res.shape)
 # ## n'utilisez pas de for-python: utilisez les `ufunc`
 #
 # <br>
-#         
+#
 # les opérations de comparaison s'appliquent à tous les éléments d'un tableau en une seule fois  
 #
 # * il ne faut **jamais** utiliser de **for-python**
@@ -150,15 +150,15 @@ np.greater(tab, 5)
 # ## combiner les résultats
 #
 # <br>
-#     
-#     
+#
+#
 # **les résultats** peuvent être combinés
 #
 # * en un résultat **global**
 # * en des **sous-tableaux** de résultats
-#     
+#
 # <br>
-#     
+#
 # un tableau
 # ```python
 # tab = np.random.randint(10, size=(2, 3))
@@ -166,20 +166,20 @@ np.greater(tab, 5)
 #         [7 0 2]]
 # ``` 
 # <br>
-#     
+#
 # regardons si il existe au moins une valeur paire dans le tableau des résultats
-#     
+#
 # ```python
 # res = np.equal(tab%2, 0)    
 # np.any(res)
 # -> True
 # ```     
 #
-#      
+#
 # <br>
-#     
+#
 # regardons si toutes les valeurs sont paires
-#     
+#
 # ```python
 # res = np.equal(tab%2, 0)    
 # np.all(res)
@@ -187,9 +187,9 @@ np.greater(tab, 5)
 # ```     
 #
 # <br>
-#     
+#
 # comptons le nombre global de valeurs paires
-#    
+#
 # ```python
 # res = tab%2 == 0    
 # print(np.sum(res))
@@ -202,12 +202,12 @@ np.greater(tab, 5)
 # np.count_nonzero(tab%2==0)
 # -> 3
 # ```
-#     
+#
 # <br>
-#     
+#
 #
 # comptons le nombre de valeurs paires dans l'axe des lignes du tableau
-#     
+#
 # ```python
 # res = tab %2 == 0    
 # print(np.sum(res, axis=0)) # axe des lignes
@@ -236,19 +236,19 @@ np.count_nonzero(tab%2==0, axis=0)
 # ## les masques/filtres booléens
 #
 # <br>
-#     
+#
 # le tableau des résultats des tests est un **masque booléen**  
 #
 # * il a la **même forme** que le tableau initial
 # * il va servir de **filtre** sur le tableau initial
-#     
+#
 # <br>
-#     
+#
 # il va permettre de sélectionner dans le tableau initial  
 # les éléments pour lesquels le test est vrai
-#     
+#
 # <br>
-#     
+#
 # générons un `numpy.ndarray` de forme `(2, 3, 4)` d'entiers entre -10 et 10
 #
 # ```python
@@ -267,7 +267,7 @@ np.count_nonzero(tab%2==0, axis=0)
 # ```python
 # tab[np.greater(tab, 0)]
 # ``` 
-#    
+#
 # <br>
 #
 # on peut modifier tous les éléments filtrés d'un seul coup  
@@ -301,7 +301,7 @@ tab
 # ## composition des conditions
 #
 # <br>
-#     
+#
 # 4 règles
 #
 # * vous ne pouvez **pas** utiliser les opérateurs logiques Python `and`, `or`, `not`  
@@ -313,40 +313,40 @@ tab
 #   (qui sont binaires)
 #
 # * vous devez parenthéser les sous-termes de vos expressions
-#     
+#
 # <br>
-#     
+#
 # on crée un tableau d'entiers aléatoires entre 0 et 100
-#     
+#
 # ```python
 # tab = np.random.randint(100, size=(3, 4))
 # ```
 #             
 # <br>
-#     
+#
 # masque pour sélectionner les éléments entre 25 et 75 
-#     
+#
 # ```python
 # (tab >= 25) & (tab < 75)
 # ```
 #                             
 # <br>
-#     
+#
 # masque pour sélectionner les éléments non-pairs entre 25 et 75
-#     
-#     
+#
+#
 # ```python
 # (tab >= 25) & (tab < 75) & ~(tab%2==0)
 # ```
-#     
+#
 # <br>
-#     
+#
 # et donc en version `numpy`
-#     
+#
 # ```python
 # np.logical_and(tab >= 25, tab < 75)
 # ```    
-#     
+#
 # ```python
 # np.logical_and(tab >= 25, np.logical_and(tab < 75, np.logical_not(tab%2==0)))
 # ```
@@ -466,11 +466,11 @@ print(tab)
 # ### repérer les éléments par leurs indices
 #
 # <br>
-#     
+#
 # dans ce genre de situation, pour modifier les éléments sélectionnés dans le tableau d'origine, on peut repèrer les éléments par leur indice dans le tableau d'origine
 #
 # <br>
-#     
+#
 # et pour calculer ces indices, deux fonctions:
 #
 # * la fonction `numpy.nonzero`
@@ -483,51 +483,51 @@ print(tab)
 # ### la fonction `numpy.nonzero`
 #
 # <br>
-#     
+#
 # `numpy.nonzero`
 #
 # * renvoie un tuple de même dimension que le tableau d'origine
 # * dans chaque dimension, on a la liste des indices
-#     
+#
 # <br>
-#     
+#
 # exemple
-#     
+#
 # ```python
 # tab = np.array([[1, 2, 3], [4, 5, 6]])
 # np.nonzero(~(tab%2==0))
 # -> ([0, 0, 1], [0, 2, 1])
 # ```
-#     
+#
 # <br>
-#     
+#
 # la première liste contient les indices des lignes  `[0, 0, 1]`
-#     
+#
 # la seconde liste contient les indices des colonnes `[0, 2, 1]`
-#     
-#     
+#
+#
 # `tab[0, 0]` `tab[0, 2]` et `tab[1, 1]` sont les 3 éléments
-#   
+#
 # ```python
 # print(tab[0, 0], tab[0, 2], tab[1, 1])
 # -> 1, 3, 5
 # ```
-#     
+#
 # <br>   
 #
 # la **magie**: vous pouvez indicer le tableau d'origine avec ce tuple  
 # pour obtenir une vue sur le tableau d'origine
-#     
-#  
+#
+#
 # ```python
 # tab[np.nonzero(~(tab%2==0))]
 # -> 1, 3, 5
 # ```
-#    
+#
 # <br>
-#     
+#
 # et donc vous pouvez modifier les éléments du tableau original    
-#  
+#
 # ```python
 # tab[np.nonzero(~(tab%2==0))] = 1000
 # tab
@@ -547,19 +547,19 @@ print("edited tab", tab)
 # ###  la fonction `numpy.argwhere`
 #
 # <br>
-#     
+#
 # `numpy.argwhere`
 #
 # * renvoie un tableau de dimension 2
 # * autant de lignes que d'éléments filtrés
 # * chaque ligne donne l'index d'un élément  
 # dans chacune des dimensions du tableau d'origine
-#     
-#     
+#
+#
 # <br>
-#     
+#
 # exemple
-#     
+#
 # ```python
 # tab = np.array([[1, 2, 3], [4, 5, 6]])
 # np.argwhere(~(tab%2==0))
@@ -567,29 +567,29 @@ print("edited tab", tab)
 #     [0, 2],
 #     [1, 1]]
 # ```
-#     
+#
 # <br>
-#     
+#
 # la première ligne contient les indices du premier élément  `[0, 0]`
-#     
+#
 # la seconde ligne contient les indices du second élément `[0, 2]`
-#     
+#
 # la troisième ligne contient les indices du troisième élément `[1, 1]`
-#     
-#     
+#
+#
 # <br>   
 #
 # vous ne pouvez **pas**  indicer directement le tableau d'origine par ce tableau  
 # et non on ne fait pas de `for-python`
 #
-#   
+#
 # <br>
-#     
+#
 # on remarque
 #
 # * que les résultats de `numpy.nonzero` et  `numpy.argwhere` sont très proches
 # * à une transposée et un type `tuple` près
-#     
+#
 # ```python
 # cond = ~(tab%2==0)
 # np.nonzero(cond)            # ([0, 0, 1], [0, 2, 1])
@@ -615,16 +615,16 @@ tab[tuple(np.argwhere(cond).T)]
 # **avancés**
 #
 # <br>
-#     
+#
 # la fonction `numpy.putmask(tab, cond, value)` remplace dans un `numpy.ndarray`  
 # les éléments obéissant à une condition, par une valeur donnée en argument
-#     
+#
 # <br>
-#     
+#
 # la modification est effectuée dans le tableau (en place)
-#     
+#
 # <br>
-#     
+#
 # ```python
 # tab = np.arange(12).reshape(3, 4)
 # np.putmask(tab, tab%2==1, 0)

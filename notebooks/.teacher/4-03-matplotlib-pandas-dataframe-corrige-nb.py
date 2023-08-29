@@ -338,7 +338,7 @@ df_animals.plot.bar(x='lifespan', y='speed');
 # top	Iris-versicolor
 # freq	50
 # ```
-#  
+#
 # <br>
 #
 # nous avons 3 noms uniques donc 3 types différents d'iris

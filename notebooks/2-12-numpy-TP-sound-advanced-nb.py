@@ -612,7 +612,7 @@ from scipy.io import wavfile
 original = la_do # par exemple
 #
 # sauver le son 'before' dans un fichier 'sample.wav'
-# 
+#
 restored = ... # relisez le fichier 'sample.wav' dans une variable 'after'
 
 # %% cell_style="split" tags=["raises-exception"]
@@ -678,7 +678,7 @@ plt.plot(data, linewidth=0.05);
 
 # %% [markdown]
 # maintenant on veut ajouter un effet d'echo  
-#   
+#
 # il nous faut pour cela
 #
 # * créer une version du son initial, mais décalée dans le temps  
@@ -857,7 +857,7 @@ plt.plot(data2, linewidth=0.05);
 #    qui correspondent aux multiples de 3 dans le tableau de départ
 # 1. remplir dans `data3` les données de rang impair  
 #    en implémentant l'interpolation 
-#    
+#
 # **remarque**: nos data sont en `int16`, on va s'efforcer
 # de continuer à travailler dans ce format
 

@@ -204,7 +204,7 @@ print("Python est un langage 'typé'")
 # simplement pour illustration des possibilités d'appel de fonction
 # car on va voir plus loin une forme beaucoup plus pratique
 # pour faire ce genre de choses
-# 
+#
 x = 12
 print("la somme de", x, "et", 13, "vaut", x+13)
 
@@ -466,7 +466,7 @@ print(d)
 # %% cell_style="split"
 # sur une chaine len()
 # retourne le nombre de caractères
-# 
+#
 # remarquez que les guillemets ne comptent pas
 len("abc")
 

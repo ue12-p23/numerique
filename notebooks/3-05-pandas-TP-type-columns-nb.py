@@ -100,7 +100,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # 2. inspectez les types des colonnes  
 #    que pensez-vous du type `object` `str` pour cette colonne ?  
 #    en effet, la colonne `'Name'` serait mieux définie par un type catégorie `'category'`  
-#    
+#
 #    **rappels** sur la fonction `pandas.Series.astype`  
 #
 #    * elle possède un paramètre `copy` qui, par défaut, est à `True`

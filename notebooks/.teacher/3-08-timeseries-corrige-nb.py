@@ -242,7 +242,7 @@ df.Date.dtype
 # 3. comparez l'affichage de la première ligne avec celui d'avant la conversion  
 #    que remarquez-vous ?  
 #    supprimer les lignes pour lesquelles le champ `Date` est inconnu
-#    
+#
 #   il y a au moins deux façons évidentes de s'y prendre  
 #   essayez de les trouver toutes les deux pour vérifier vos résultats  
 #   le nombre de lignes doit passer de 5852 à 5828
@@ -344,7 +344,7 @@ df.head(5)
 # 5. utilisez la colonne `Date` comme index  
 #    et triez la dataframe selon cet index
 #    (ça semble être déjà le cas, mais en est-on bien sûr ?)
-#    
+#
 # question subsidiaire (pas de code):  
 # est-ce que le fait de trier va changer quelque chose à l'affichage (scatter plot) ?  
 # est-ce que ça va changer quelque chose lorsqu'on va vouloir sélectionner des plages de temps à base de slicing ?
@@ -783,6 +783,6 @@ expected, len(df_rol)
 # ps| 	picosecond | 	+/- 106 days | 		[ 1969 AD, 1970 AD]
 # fs| 	femtosecond | 	+/- 2.6 hours | 		[ 1969 AD, 1970 AD]
 # as| 	attosecond | 	+/- 9.2 seconds | 	[ 1969 AD, 1970 AD]
-#     
+#
 # </div>
 

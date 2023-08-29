@@ -71,7 +71,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 # fichier de format **`CSV`** pour ***Comma-Separated-Values***  
 # **notez bien**: le caractère séparateur n'est pas obligatoirement une `,`
-#  
+#
 # <br>
 #
 # voici le début du fichier `titanic.csv`, notez:
@@ -199,7 +199,7 @@ pd.__version__
 # quand on écrit "la méthode `df.head`", ça se lit comme:   
 # l'attribut `head` recherché à partir de l'objet `df`  
 # comme `df` est une dataframe, on trouve la méthode/fonction qui se trouve être aussi `pd.DataFrame.head`
-#     
+#
 # </div>    
 
 # %%
@@ -251,7 +251,7 @@ df.head(2)
 # max    891.00      1.00     3.00   80.00   8.00    6.00    512.32
 # ```
 # <br>
-#  
+#
 # on remarque que `pandas.DataFrame.describe`
 #
 # * a, par défaut, appliqué les calculs sur **les colonnes numériques**  
@@ -593,7 +593,7 @@ df.head(1)
 #     396                                  Johansson, Mr. Erik
 #     832                      Richards, Master. George Sibley
 #    ```
-#    
+#
 # <br>
 #
 # * toutes les colonnes de la dataframe partagent **le même index**  
@@ -627,7 +627,7 @@ df['Name'][552]
 #
 # ici nous avons un index de type entier; lorsqu'on a un index de type, par exemple, `str`, 
 # on peut alors écrire ou bien
-#     
+#
 # * `series[entier]` pour aller chercher l'indice `entier` 
 # * `series[chaine]` pour aller chercher l'index `chaine`
 #
@@ -682,7 +682,7 @@ df['Name'][552]
 # * l'index est alors un `RangeIndex` de `0` à `890` inclus
 #
 # <br>
-#  
+#
 # lisons la data-frame du titanic et choisissons la colonne `PassengerId` comme index de ligne
 #
 # ```python

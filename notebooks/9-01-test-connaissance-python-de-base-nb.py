@@ -36,11 +36,11 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # Les objectifs du cours de base sur Python
 #
 #    - être capable de lire et d'écrire du code simple
-#       
+#
 #    - mettre en oeuvre ce code simple dans un notebook
-#    
+#
 #    - ce *vernis* sur les concepts de **Python** vous permettra d'aborder les outils de base de *calcul scientifique* **numpy, pandas, matplotlib**
-#    
+#
 
 # %% [markdown]
 # Ce notebook jupyter propose une série d'exercices en **auto-évaluation** pour tester votre niveau en python.  
@@ -51,7 +51,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #       Nous vous demandons d'**étudier les notebooks** de ce cours (intitulé *rappels Python*) 
 #       qui reprennent les notions essentielles du langage.
 #       Éventuellement signalez-vous auprès des enseignants pour qu'on envisage un rattrapage spécifique.
-#       
+#
 #    1. Vous faites le niveau débutant, mais sans plus ?
 #       Votre niveau en Python est **pas terrible.**  
 #       **Lisez les notebooks** de ce cours
@@ -70,23 +70,23 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # -----------------
 #
 #    * Python est un langage **orienté objet** :  toutes ses **données sont des objets**
-#      
-#      
+#
+#
 #    * chaque objet a un **type**
-#    
-#    
+#
+#
 #    * un *module* a un type, une *fonction* a un type, un *entier* a un type...
-#    
-#    
+#
+#
 #    * le type de l'objet définit le **comportement des opérations** qu'on lui applique  
 #      e.g. le **+** des chaînes de caractères ne se comporte pas comme le **+** des entiers
-#      
+#
 #           
 #    * le langage Python a un ensemble de types prédéfinis `int`, `str`...  
 #      il vous permet aussi de définir vos propres types (c'est à ça que servent les classes)
-#    
+#
 #    ----------------   
-#    
+#
 #    * une **méthode** est une fonction qui s'appelle **à travers un objet**  
 #      `'abc'.upper()` est la méthode *upper* du type *str* appliquée à la chaine `'abc'`
 #      remarquez la différence avec l'appel d'une fonction classique comme `print('abc')`
@@ -109,7 +109,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 #    1. créer une chaîne de caractères
 #    1. imprimer la chaîne et sa longueur
-#    
+#
 # **moyens**
 #
 #    1. créer une autre chaîne de caractères
@@ -133,12 +133,12 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 #    1. créer la chaîne de caractères:  `j'adore python et numpy !`
 #    1. accéder au premier et au dernier caractère de la chaîne `j` et `!`
-#    
+#
 # **moyens**
 #
 #    1. découper la chaîne pour ne garder que `adore`
 #    1. tester si le caractère 'w' est dans la chaîne
-#    
+#
 # **avancés**
 #
 #    1. découper la chaîne pour ne garder que "aoe"
@@ -154,7 +154,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # **débutants**
 #
 #    1. faites une fonction *foo* qui prend deux paramètres dont le dernier est optionnel et vaut $0$ par défaut, et dont le corps ne fait rien
-#    
+#
 # **moyens**     
 #    1. ajouter un docstring à la fonction (un docstring est un message de help)
 #    1. faites une fonction qui affiche les termes de la suite entière suivante  
@@ -181,7 +181,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 #    1. diviser un entier par *0* que constatez-vous ?
 #    1. rattraper l'exception afin que le programme ne soit pas arrêté
-#    
+#
 # **moyens**  
 #    1. rattraper toutes les exceptions
 
@@ -197,13 +197,13 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #    1. modifier le premier élément de la liste; est-ce qu'on peut remplacer l'entier par un élément d'un autre type ?
 #    1. ajouter en fin de liste un élément - par exemple un booléen
 #    1. enlever le dernier élément de la liste
-#    
+#
 # **moyens**   
-#    
+#
 #    1. tester si un élément est dans la liste
 #    1. afficher un par un tous les éléments de la liste 
 #    1. fabriquer une liste qui contient deux fois les éléments de la liste; par exemple si votre liste contient les él´ments `1, "pi", 3.14` vous devez produire `1, "pi", 3.14, 1, "pi", 3.14`
-#    
+#
 # **avancés**
 #    1. slicer la liste de manière à n'en garder qu'un élément sur 2 à partir du début
 #    1. créer une nouvelle liste contenant la première liste
@@ -215,12 +215,12 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 
 # %% [markdown] slideshow={"slide_type": "slide"}
 # ## tuples
-#  
+#
 # **débutants**
 #    1. créer un tuple
 #    1. le modifier
 #    1. que se passe-t-il ?
-#    
+#
 # **moyens**
 #    1. pourquoi ? 
 
@@ -236,7 +236,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # **moyens**
 #    1. afficher le type d'un dictionnaire
 #    1. tester si une personne est dans le dictionnaire et si oui augmenter son age de 1 an
-#    
+#
 # **avancés**   
 #    1. Afficher la liste des clés du dictionnaire
 #    1. Afficher avec un **for** les noms et l'age de toutes les personnes du dictionnaire
@@ -303,9 +303,9 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #     L2[0][0] = 100
 #     print(L2[2][0])
 #     ```
-#     
+#
 #     quelle est la valeur affichée ? pourquoi ?
-#     
+#
 # 1. à quoi sert l'opérateur `is` ? quelle est la différence avec l'opérateur `==` ?  
 #    par exemple que va imprimer le code suivant ?
 #    ```
@@ -335,7 +335,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #    1. creer le `range` des 100 premiers entiers
 #    1. quel est le type de l'objet **range** créé ?
 #    1. itérer sur le `range` pour sommer les entiers
-#    
+#
 # **moyens**   
 #    1. à quoi sert la fonction `enumerate` ? 
 #    1. utilisez-la pour afficher les éléments du dictionnaire de personnes avec leur rang (en commençant à 0)  
@@ -345,14 +345,14 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #       rang 1 - pierre: 32 ans
 #       ...
 #       ```
-#    
+#
 # **avancé**  
 #    1. quelle est la différence entre le `range` des 100 premiers entiers et la `list` des 100 premiers entiers ?
 #    1. mettez tous les éléments du range au carré 
 #      1. par une compréhension
 #      1. et par une expression génératrice  
 #      quelle est la différence ?
-#    
+#
 
 # %%
 # votre code
@@ -363,7 +363,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # **débutants**
 #    1. implémentez une classe de personnes avec leur nom et leur age
 #    1. faites une méthode pour augmenter l'âge d'une personne
-#    
+#
 # **moyens**:
 #    1. donnez la représentation sous la forme d'une `str` des objets de la classe
 #       i.e. on veut par exemple que 
@@ -372,7 +372,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #       >>> str(person)
 #       paul: 20 ans
 #       ```
-#    
+#
 # **avancés**   
 #    1. écrivez une classe d'entiers `Integer` dont la valeur est 0 par défaut et programmez la méthode `+`  
 #       i.e. on veut par exemple que 
@@ -389,10 +389,10 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown]
 # **débutants**  
 #    1. afficher la documentation des `int`
-#    
+#
 # **moyens**  
 #    1. ajouter la documentation à une fonction et affichez là
-#    
+#
 # **avancés**  
 #    1. ajouter la documentation à une classe, à une méthode dans une classe, affichez-les
 #    1. comment s'y prend-on pour ajouter la documentation à un module ?

@@ -45,9 +45,9 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # ```python
 # Entrée [ ]: int?
 # ```
-#    
-#    
-#    
+#
+#
+#
 # Une fenêre contenant le help apparaît en bas de votre notebook
 
 # %%

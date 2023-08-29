@@ -56,29 +56,29 @@ import numpy as np
 #
 # nous avons vu des opérations `numpy` qui s'appliquent à un ou plusieurs tableaux  
 # et retournent un tableau de la même dimension
-#     
+#
 # ```python
 # tab1 = np.arange(10).reshape(2, 5)
 # np.power(tab1, 2) + tab1
 # -> array([[ 0,  2,  6, 12, 20],
 #           [30, 42, 56, 72, 90]])
 # ```
-#     
+#
 # <br>
-#     
+#
 # les fonctions d'agrégation vont permettre de combiner les valeurs d'un même tableau  
 # et de retourner des sous-tableaux
 #
 # * somme des lignes
 # * max d'une matrice
 # * ...
-#     
+#
 # <br>
-#     
+#
 # vous devrez spécifier la dimension `axis` dans laquelle vous désirez appliquer l'opération
 #
 # <br>
-#     
+#
 # exemples de fonctions d'agrégation
 #
 # | fonction | comportement|
@@ -95,7 +95,7 @@ import numpy as np
 # | `np.any`  | vrai si au moins un élément n'est pas nul |
 # | `np.where`  | une condition ternaire |
 # | .../...| .../... |
-#     
+#
 # chacune de ces fonctions est aussi une méthode des `numpy.ndarray`
 
 # %%
@@ -110,20 +110,20 @@ np.power(tab1, 2) + tab1
 # ### exemple avec des vecteurs d'entiers
 #
 # <br>
-#     
+#
 # il n'y a qu'une dimension, qu'un `axe`  
 # c'est l'axe d'indice `0`     
 # il est donc optionnel
-#     
+#
 # <br>
 #
 # il suffit d'appliquer la fonction d'agrégation désirée au tableau  
 # elle s'applique à tous les éléments
-#     
+#
 # <br>
-#     
+#
 # fonction globale de `numpy`
-#     
+#
 # ```python
 # vec = np.arange(10) # [0 1 2 3 4 5 6 7 8 9]
 # np.min(vec, axis=0) # l'axis est optionnel
@@ -133,9 +133,9 @@ np.power(tab1, 2) + tab1
 # np.std(vec) # 2.87
 # ```
 # <br>
-#     
+#
 # méthode de `numpy.ndarray`    
-#     
+#
 # ```python
 # vec = np.arange(10) # [0 1 2 3 4 5 6 7 8 9]
 # vec.min() # 0
@@ -143,7 +143,7 @@ np.power(tab1, 2) + tab1
 # vec.sum() # 45
 # vec.std()  # 2.87   
 # ```
-#   
+#
 # <br>
 #
 # le type de la valeur retournée, en général `int64` ou`float64`     
@@ -156,15 +156,15 @@ np.power(tab1, 2) + tab1
 # type(np.sum(vec))
 # -> numpy.float64
 # ```
-#     
+#
 # là non
 # ```python
 # vec = np.array([0, 1], dtype=np.int8)
 # type(np.sum(vec))
 # -> numpy.int64
 # ```
-#     
-#     
+#
+#
 # là oui
 # ```python
 # vec = np.array([0, 1], dtype=np.int8)
@@ -188,32 +188,32 @@ type(np.min(vec))
 # ### exemple avec un vecteur de booléens
 #
 # <br>
-#  
+#
 # Comment tester si tous les éléments de votre tableau sont vrais ?  
 # Comment tester si l'un au moins des éléments de votre tableau est vrai ?
 #
 # <br>
-#     
+#
 # **version pédestre** ... on fait la somme  
 # (`True` devient `1` et `False` `0`)
 #
 # * si le résultat est la longueur du tableau... ils sont tous vrais
 # * si le résultat est 0... ils sont tous faux
-#     
+#
 # <br>
-#     
+#
 # **version `numpy`** avec les fonction `np.all` et `np.any`  
 # soit fonction globale soit méthode de `numpy.ndarray`
 #
 # <br>
-#     
+#
 # pour générer des booléens, générer aléatoirement des entiers entre `0` et `2` non-compris  
 # et demander un `dtype` `bool` (le type `np.bool` existe mais il est *deprecated*)
-#     
+#
 # ```python
 # tab = np.random.randint(0, 2, size=(10), dtype=bool)
 # ```
-#     
+#
 # ```python
 # np.all(tab)
 # np.any(tab)
@@ -222,9 +222,9 @@ type(np.min(vec))
 # tab.sum() == len(tab) # all
 # tab.sum() != 0 # any
 # ```
-#     
+#
 # <br>
-#     
+#
 # `np.all`  et `np.any` s'appliquent sur des valeurs de types autres que booléen  
 # les zéros des types seront `False` et le reste `True`
 
@@ -260,7 +260,7 @@ def fake_none(tab):
 # ### exemple de tableau en dim 4
 #
 # <br>
-#     
+#
 # ```python
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # tab ->[[[[  0,   1,   2,   3,   4],
@@ -313,40 +313,40 @@ def fake_none(tab):
 # ```
 #
 # <br>
-#     
+#
 # on peut préciser un axe avec `axis=i`
 #
 # * quand on va appliquer une opération suivant un axe  
 # cette dimension va disparaître dans le résultat  
 # <br>
 # <br>
-#     
+#
 # on considère `tab` formé de 2 groupes de 3 matrices de 4 lignes et 5 colonnes  
 # donc de forme `(2, 3, 4, 5)`
 #
 # **sommons dans l'axe des groupes**
-#     
+#
 # ```python
 # tab.sum(axis=0).shape # on rend la forme obtenue
 # -> (3, 4, 5)
 # ```
 #
 # **sommons suivant l'axe des matrices**
-#     
+#
 # ```python
 # tab.sum(axis=1).shape
 # -> (2, 4, 5)
 # ```
-#     
+#
 # **sommons suivant l'axe des lignes**
-#     
+#
 # ```python
 # tab.sum(axis=2).shape
 # -> (2, 3, 5)
 # ```
-#     
+#
 # **sommons suivant l'axe des colonnes**
-#     
+#
 # ```python
 # tab.sum(axis=3).shape
 # -> (2, 3, 4)
@@ -391,24 +391,24 @@ tab.sum(axis=(1, 2))
 # on recherche l'indice (l'emplacement, pas la valeur) du plus grand élément du tableau 
 #
 # c'est la méthode `argmax` qu'il nous faut
-#     
+#
 # ```python
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # tab.argmax()
 # -> 119
 # ```
 # <br>
-#     
+#
 # **attention**  
 # il nous donne l'indice dans le tableau *aplati*
-#     
+#
 # <br>
-#     
+#
 # la fonction `numpy.unravel_index`  
 # re-calcule les coordonnées   
 # à partir de l'indice absolu et de la forme du tableau  
 #
-#     
+#
 # ```python
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # tab.argmax() # 119
