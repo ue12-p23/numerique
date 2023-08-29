@@ -15,7 +15,7 @@ tracks:
         notebooks: [ "notebooks/5-*.md" ]
       - name: rappels Python
         notebooks: [ "notebooks/1-[12]*-nb.py"]
-      # no longerrelevant
+      # no longer relevant
       # - name: petit test Python
       #   notebooks: [ "notebooks/5-[0-9]*.py"]
 
