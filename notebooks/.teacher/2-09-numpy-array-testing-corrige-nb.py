@@ -4,10 +4,12 @@
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
 #     cell_metadata_json: true
-#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,
+#
+#       -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+#
+#       -language_info.file_extension, -language_info.mimetype, -toc'
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -221,7 +223,7 @@ np.greater(tab, 5)
 # -> [0, 2, 1]
 # ```
 
-# %% {"scrolled": false}
+# %%
 # le code
 tab = np.random.randint(10, size=(2, 3))
 res = np.equal(tab%2, 0)

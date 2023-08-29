@@ -4,10 +4,12 @@
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
 #     cell_metadata_json: true
-#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,
+#
+#       -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+#
+#       -language_info.file_extension, -language_info.mimetype, -toc'
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -517,7 +519,7 @@ df[mask]
 # %%
 # votre code
 
-# %% {"scrolled": false, "tags": ["level_basic"]}
+# %% {"tags": ["level_basic"]}
 # prune-cell
 D = {}
 groups_sex_class = df.groupby(['Sex', 'Pclass'])

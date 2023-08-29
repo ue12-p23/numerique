@@ -4,10 +4,12 @@
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
 #     cell_metadata_json: true
-#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -jupytext.custom_cell_magics,
+#     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,
+#
 #       -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-#       -language_info.file_extension, -language_info.mimetype, -toc, -vscode
+#
+#       -language_info.file_extension, -language_info.mimetype, -toc'
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -86,7 +88,7 @@ from matplotlib import pyplot as plt
 # %%
 # votre code
 
-# %% {"scrolled": false}
+# %%
 # prune-cell 1.
 colors_dict = dict()
 with open('rgb-codes.txt', 'r') as f:
@@ -405,7 +407,7 @@ plt.show()
 # %%
 # votre code
 
-# %% {"scrolled": false}
+# %%
 # prune-cell 8.
 print(np.unique(gr3))
 

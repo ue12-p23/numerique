@@ -4,10 +4,12 @@
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
 #     cell_metadata_json: true
-#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,
+#
+#       -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+#
+#       -language_info.file_extension, -language_info.mimetype, -toc'
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -392,7 +394,7 @@ df_animals.plot.bar(x='lifespan', y='speed');
 IPython.display.display(   df[['Name']].describe()   )
 df['Name'].value_counts()
 
-# %% {"scrolled": false}
+# %%
 #le code
 df['Name'].dtype
 
@@ -602,7 +604,7 @@ plt.scatter(df['SepalLength'], df['SepalWidth'], c=df['Name-code'], s=df['PetalW
 # 1. afficher l'alcool en fonction de l'acide malique avec comme couleur les numéros des cultivateurs  
 # pensez à utiliser une `cmap`
 
-# %% {"scrolled": false}
+# %%
 # prune-cell
 cols = ['cultivator', 'alcohol', 'malic-acid', 'ash','total-phenols',
         'flavanoids','color-intensity', 'hue' ]

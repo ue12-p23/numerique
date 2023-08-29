@@ -4,10 +4,12 @@
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
 #     cell_metadata_json: true
-#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,
+#
+#       -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+#
+#       -language_info.file_extension, -language_info.mimetype, -toc'
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -166,7 +168,7 @@ plt.imshow(img);
 # %%
 # votre code
 
-# %% {"scrolled": false}
+# %%
 # prune-cell
 import numpy as np
 from matplotlib import pyplot as plt
@@ -219,7 +221,7 @@ plt.imshow(im[:10, :10, :]);
 # %%
 # votre code
 
-# %% {"scrolled": false}
+# %%
 # prune-cell
 import numpy as np
 from matplotlib import pyplot as plt
@@ -288,7 +290,7 @@ plt.show()
 # %%
 # votre code
 
-# %% {"scrolled": false}
+# %%
 # prune-cell
 import numpy as np
 from matplotlib import pyplot as plt
@@ -404,7 +406,7 @@ plt.show()
 # %%
 # votre code
 
-# %% {"scrolled": false}
+# %%
 # prune-cell
 import numpy as np
 from matplotlib import pyplot as plt
