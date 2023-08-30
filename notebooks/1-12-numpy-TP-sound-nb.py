@@ -52,6 +52,13 @@ import numpy as np
 
 # %%
 import matplotlib.pyplot as plt
+# %matplotlib ipympl
+
+# %% [markdown]
+# ````{admonition} à quoi ça sert ?
+# Grâce au mode de rendu dit *"ipympl"*, on a plus de possibilités d'interaction avec la figure  
+# pour zoomer (icône carrée), déplacer (les deux flêches croisées), revenir au point de vue de départ (la maison)..
+# ````
 
 # %%
 # pour jouer le son qu'on va produire
@@ -307,7 +314,7 @@ MyAudio(la_do, autoplay=True)
 # %% [markdown]
 # ça veut dire que si on sort de cet intervalle on va avoir des surprises
 
-# %%
+# %% scrolled=true
 # par exemple ici je crée un intervalle de 0 à 40.000
 # en fixant le type int16
 trash = np.array(range(40_000), dtype=np.int16)
@@ -518,8 +525,6 @@ ratios[7]
 # (uniquement des exemples d'utilisation de matplotlib)
 
 # %% cell_style="center"
-# %matplotlib inline
-
 plt.figure(figsize=(2, 6))
 
 # on veut afficher 12 points de coordonnées
@@ -660,20 +665,11 @@ MyAudio(data)
 # voici à quoi ressemble notre morceau
 
 # %%
-# %matplotlib inline
-
 plt.figure(figsize=(16, 4))
 plt.plot(data, linewidth=0.05);
 
 # %% [markdown]
-# Grâce au mode de rendu dit *"notebook"*, on a plus de possibilités d''interaction avec la figure  
-# pour zoomer (icône carrée), déplacer (les deux flêches croisées), revenir au point de vue de départ (la maison)..
-
-# %%
-# %matplotlib notebook
-
-plt.figure(figsize=(10, 4))
-plt.plot(data, linewidth=0.05);
+#
 
 # %% [markdown]
 # ## effet d'echo
@@ -824,8 +820,6 @@ MyAudio(data2)
 # naturellement le profil reste le même mais l'échelle des X est plus courte (deux fois moins d'échantillons)
 
 # %%
-# %matplotlib notebook
-
 plt.figure(figsize=(10, 4))
 plt.plot(data2, linewidth=0.05);
 
