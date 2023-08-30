@@ -9,12 +9,11 @@ scikit_learn
 # tooling
 jupyter
 jupytext
-ipywidgets
-jupyter-contrib-nbextensions
-
-ipythontutor
-nbautoeval
 jupyterlab-courselevels
+jupyterlab-myst
+ipywidgets
+ipympl
 
 # for authors only
 # nbprune
+# jupyter-book
