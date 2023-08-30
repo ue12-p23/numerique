@@ -71,7 +71,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 # calculs de temps d'exécution avec `%timeit`
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ## rappels
 #
 # ````{admonition} →
@@ -86,10 +86,11 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %%
 import numpy as np
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ## tableaux  multi-dimensionnels `numpy`
 #
 # ````{admonition} →
+#
 # créés par la méthode `numpy.array`  
 # (ici plus précisément `np.array` comme l'identifiant utilisé lors de l'import est `np` mais on reste genéral)
 #
@@ -117,7 +118,7 @@ import numpy as np
 # %% [markdown]
 # ***
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### création d'un tableau multi-dimensionnel
 #
 # ````{admonition} →
@@ -172,7 +173,7 @@ print(mat)
 
 print(type(mat))
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ###  type et taille mémoire des éléments du tableau
 #
 # ````{admonition} →
@@ -227,7 +228,7 @@ matrice = [
 mat = np.array(matrice)
 mat.dtype, mat.itemsize, mat.nbytes
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### taille, forme, dimension du tableau
 #
 # ````{admonition} →
@@ -272,7 +273,7 @@ print(mat.shape)
 print(mat.size, mat.shape[0] * mat.shape[1])
 print(mat.ndim, len(mat.shape))
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### création d'un tableau avec le type des éléments
 #
 # ````{admonition} →
@@ -398,7 +399,7 @@ print(    np.array(l, dtype=np.uint8)    )
 
 print(    np.array(l, dtype=np.int8)    )
 
-# %% [markdown] tags=[] jp-MarkdownHeadingCollapsed=true
+# %% [markdown] tags=["framed_cell"] jp-MarkdownHeadingCollapsed=true
 # ### modifier le type des éléments d'un tableau existant
 #
 # ````{admonition} →
@@ -431,7 +432,7 @@ mat1 = mat.astype(np.int8)
 print(    mat1    )
 print(    mat     )
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ## `numpy` calcule à taille constante
 #
 # ````{admonition} →
@@ -502,7 +503,7 @@ mat = np.array(l, np.int8)
 print(    mat    )
 print(    mat*100    )
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ## autres constructeurs de  `numpy.ndarray`
 #
 # ````{admonition} →
@@ -523,7 +524,7 @@ print(    mat*100    )
 # %% [markdown]
 # ***
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### tableau de zéros `numpy.zeros`
 #
 # ````{admonition} →
@@ -563,7 +564,8 @@ zorro
 zorro1 = np.zeros(shape=(4, 5), dtype=np.uint64)
 zorro1
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
+#
 # ````{admonition} exercice
 #
 # * affichez le type des éléments de `zorro`
@@ -593,7 +595,7 @@ zorro1
 print(    zorro.dtype    )
 np.zeros(shape=(2, 5, 3), dtype=np.uint8)
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### tableau non-initialisé `numpy.empty`
 #
 # ````{admonition} →
@@ -623,7 +625,7 @@ np.zeros(shape=(2, 5, 3), dtype=np.uint8)
 tab = np.empty(shape=(3, 5), dtype=np.int8)
 print(tab) # n'importe quelles valeurs entre -128 et 127
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### tableau de valeurs régulièrement espacées
 #
 # ````{admonition} →
@@ -665,7 +667,7 @@ plt.plot(X, Y);
 # %% [markdown]
 # ## tableaux de valeurs aléatoires
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### générateur de valeurs aléatoires entières
 #
 # ````{admonition} →
@@ -704,7 +706,7 @@ np.random.randint(borne_inf, borne_sup)
 # le code
 np.random.randint(10, 20, size=(2, 3, 5))
 
-# %% [markdown] tags=[]
+# %% [markdown] tags=["framed_cell"]
 # ### générateur de valeurs aléatoires réelles
 #
 # ````{admonition} →
@@ -771,7 +773,7 @@ np.random.randn(2, 3, 1)
 img = np.random.randint(0, 256, size=(10, 10, 3), dtype=np.uint8)
 plt.imshow(img);
 
-# %% [markdown] tags=["level_intermediate"]
+# %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ## comparaison des temps de création tableaux
 #
 # (avancé)
