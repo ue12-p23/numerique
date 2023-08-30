@@ -6,18 +6,18 @@ tracks:
     sections:
       # do not mention 1-99 in this output
       - name: numpy
-        notebooks: [ "notebooks/2-[0-9]*-nb.py"]
+        notebooks: [ "notebooks/1-[0-9]*-nb.py"]
       - name: pandas
-        notebooks: [ "notebooks/3-[0-9]*-nb.py"]
+        notebooks: [ "notebooks/2-[0-9]*-nb.py"]
       - name: matplotlib
-        notebooks: [ "notebooks/4-[0-9]*-nb.py"]
+        notebooks: [ "notebooks/3-[0-9]*-nb.py"]
       - name: cheatsheets
-        notebooks: [ "notebooks/5-*.md" ]
+        notebooks: [ "notebooks/4-*.md" ]
       - name: rappels Python
-        notebooks: [ "notebooks/1-[12]*-nb.py"]
+        notebooks: [ "notebooks/5-[12]*-nb.py"]
       # no longer relevant
       # - name: petit test Python
-      #   notebooks: [ "notebooks/5-[0-9]*.py"]
+      #   notebooks: [ "notebooks/9-[0-9]*.py"]
 
 builds:
   - id: handouts

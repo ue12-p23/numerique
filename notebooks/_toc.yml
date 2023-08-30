@@ -2,17 +2,17 @@ format: jb-book
 parts:
 - caption: numpy
   chapters:
-  - glob: 2-[0-9]*-nb
+  - glob: 1-[0-9]*-nb
 - caption: pandas
   chapters:
-  - glob: 3-[0-9]*-nb
+  - glob: 2-[0-9]*-nb
 - caption: matplotlib
   chapters:
-  - glob: 4-[0-9]*-nb
+  - glob: 3-[0-9]*-nb
 - caption: cheatsheets
   chapters:
-  - glob: 5-*
+  - glob: 4-*
 - caption: rappels Python
   chapters:
-  - glob: 1-[12]*-nb
+  - glob: 5-[12]*-nb
 root: 0-00-intro
