@@ -524,7 +524,7 @@ df.loc['2019':]
 #
 # note` que ce n'est pas le cas si on indique une fenêtre en nombre d'échantillons, ce qui est possible également
 #
-# ce point va être illustré plus bas    
+# ce point va être illustré plus bas
 # </div>
 
 # %% [markdown]

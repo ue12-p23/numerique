@@ -88,7 +88,7 @@ from matplotlib import pyplot as plt
 # la vectotrisation est **la seule manière** d'écrire du code en `numpy`  
 # pour avoir des **temps d'exécution acceptables**
 #
-# **conclusion**   
+# **conclusion**  
 # sur des tableaux `numpy` utilisez **toujours** la **vectorisation**  
 # **vectorisation** = le `for` est fait dans `numpy`
 #
@@ -126,7 +126,7 @@ for e in x:
 # 1. $x = r\, sin(\theta)$  
 #    $y = r\, cos(\theta)$  
 #    avec $\theta$ variant de $0$ à $2\pi$
-# 1. si votre cercle apparaît elliptique, c'est que les échelles de vos axes diffèrent   
+# 1. si votre cercle apparaît elliptique, c'est que les échelles de vos axes diffèrent  
 #    demandez à ce qu'elles soient égales avec `plt.axis('equal')`
 
 # %%
@@ -263,7 +263,7 @@ np.power
 # ### problème de la fonction `absolute`
 #
 # ````{admonition} →
-# ```python    
+# ```python
 # ----> if x >= 0:
 # ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
 # ```
@@ -282,7 +282,7 @@ np.power
 #
 # l'expression `x >= 0` appliquée à `tab` rend le tableau `array([False, True, False])`
 #
-# `if` appliqué au tableau de booléens `[False, True, False]` ne sait pas quoi faire   
+# `if` appliqué au tableau de booléens `[False, True, False]` ne sait pas quoi faire  
 # alors il propose des solutions
 #
 # * `if` est-il vrai quand tous les éléments sont vrais ? `np.all(x)`
@@ -302,7 +302,7 @@ np.power
 # ```python
 # absolute_vect = np.vectorize(absolute)
 # absolute_vect(tab)
-# -> array([10. , 30. , 56.5])    
+# -> array([10. , 30. , 56.5])
 # ```
 # ````
 
@@ -337,7 +337,7 @@ absolute_vect([-10, -20, 30])
 # ````{admonition} →
 # nous appliquons des opérations vectorisées les unes à la suite des autres à des tableaux...
 #
-# des **espaces mémoire intermédiaires** sont créés pour recevoir les résultats des calculs   
+# des **espaces mémoire intermédiaires** sont créés pour recevoir les résultats des calculs  
 # par exemple la fonction trigonométrique $4(e^{cos(x)})^2$
 #
 # ```python
@@ -386,7 +386,7 @@ absolute_vect([-10, -20, 30])
 #     return np.multiply(4, int_3)
 # ```
 #
-# la **solution** ?   
+# la **solution** ?
 #
 # * utiliser le paramètre optionnel `out=` des opérateurs `numpy`  
 # avec `out` on spécifie le tableau où ranger le résultat

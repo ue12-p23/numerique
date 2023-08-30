@@ -132,10 +132,10 @@ A
 # ```python
 # m, n = 4, 3
 # A = np.arange(12).reshape(m, n)
-# print(A)    
+# print(A)
 # print(A.ndim)   # 2
 # print(A.shape)  # (4, 3)
-# ```    
+# ```
 # les objets de forme `(1, n)` et `(m, 1)` sont des matrices
 #
 # ----------------------------------
@@ -160,7 +160,7 @@ A
 # le code
 m, n = 4, 3
 A = np.arange(12).reshape(m, n)
-print(A)    
+print(A)
 print(A.ndim)
 print(A.shape)
 
@@ -181,9 +181,9 @@ print(V.shape)
 # * ou aussi `A.dot(V)`
 #
 #
-# matrice    
+# matrice
 # ```python
-# m, m = 4, 3    
+# m, m = 4, 3
 # A = np.arange(12).reshape(m, n)
 # A -> [[ 0  1  2]
 #       [ 3  4  5]
@@ -191,7 +191,7 @@ print(V.shape)
 #       [ 9 10 11]]
 # ```
 #
-# vecteur    
+# vecteur
 # ```python
 # V = np.arange(3).reshape(n)
 # V -> [0 1 2]
@@ -206,7 +206,7 @@ print(V.shape)
 # ou encore
 # ```python
 # A.dot(V)
-# -> [ 5 14 23 32]    
+# -> [ 5 14 23 32]
 # ```
 # ````
 
@@ -229,7 +229,7 @@ print(A.dot(V))
 # * ou aussi `A.dot(B)`
 #
 #
-# matrices `A` et `B`   
+# matrices `A` et `B`
 # ```python
 # A = np.arange(12).reshape(m, n)
 # A -> [[ 0  1  2]
@@ -360,7 +360,7 @@ np.dot(V1, V2)
 #  $\displaystyle \left\|{ {V}}\right\|_{2}={\sqrt {v_{1}^{2}+\cdots +v_{n}^{2}}}$
 #
 #
-# un vecteur    
+# un vecteur
 # ```python
 # V = np.array([1, -3, 8])
 # ```
@@ -382,7 +382,7 @@ np.dot(V1, V2)
 # ```python
 # np.sqrt(np.sum(V*V))
 # -> 8.602325267042627
-# ```   
+# ```
 #
 # pour les autres normes, regardez la documentation
 #
@@ -486,7 +486,7 @@ print(I.dtype)
 #
 # ```python
 # np.linalg.det(A)
-# ->  7.999999999999998   
+# ->  7.999999999999998
 # ```
 #
 # tentative de calcul du déterminant sur une matrice non-carrée
@@ -544,7 +544,7 @@ except np.linalg.LinAlgError as e:
 #
 # ```python
 # l = np.array([9, -45, 6])
-# ```    
+# ```
 #
 # la matrice diagonale
 #
@@ -584,14 +584,14 @@ np.diag(l)
 #
 # la trace de `A`
 #
-# ```python    
+# ```python
 # np.trace(A)
 # -> 12
 # ```
 #
 # la trace de `A`
 #
-# ```python    
+# ```python
 # np.sum(np.diag(A))
 # -> 12
 # ```
@@ -620,12 +620,12 @@ print(np.sum(np.diag(A)))
 #       [1., 0., 0.]]
 # ```
 #
-# son inverse   
+# son inverse
 # ```python
 # np.linalg.inv(R)
 # -> [[0., 0., 1.],
 #     [1., 0., 0.],
-#     [0., 1., 0.]]   
+#     [0., 1., 0.]]
 # ```
 #
 # testons si cela fonctionne comme attendu $A^{-1}A = I$
@@ -637,7 +637,7 @@ print(np.sum(np.diag(A)))
 #
 #
 # cet exemple est correct mais ce n'est pas toujours le cas  
-# puisque les calculs informatiques sont approchés   
+# puisque les calculs informatiques sont approchés
 # (un exemple dans la slide suivante)
 # ````
 
@@ -664,7 +664,7 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 # A_1 = np.linalg.inv(A)
 # np.all(I == np.dot(A_1, A))
 # -> False
-# ```    
+# ```
 #
 # dans ce cas  $A^{-1}A \neq I$
 #
@@ -675,7 +675,7 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 # -> [[ 1.00000000e+00  9.47934554e-18  3.24735868e-17]
 #     [-2.69206416e-17  1.00000000e+00 -4.22197093e-18]
 #     [ 6.52983031e-18  1.58976614e-17  1.00000000e+00]]
-# ```      
+# ```
 #
 #
 # il est très proche de $I = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{bmatrix}$ mais pas exactement égal  
@@ -689,7 +689,7 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 # ```python
 # np.all(np.isclose(np.dot(A_1, A), I))
 # -> True
-# ```    
+# ```
 #
 # ça fonctionne bien comme attendu
 # ````
@@ -717,13 +717,13 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # * la liste des valeurs propres *eigen-values*
 # * et la liste des vecteurs propres *eigen-vectors*
 #
-# prenons une matrice `M`    
+# prenons une matrice `M`
 #
 # ```python
 # M = np.random.random(size=(3, 3))
 # ```
 #
-# calculons ses valeurs et vecteurs propres `M`    
+# calculons ses valeurs et vecteurs propres `M`
 #
 # ```python
 # alpha, v  = np.linalg.eig(M)

@@ -296,7 +296,7 @@ tab.dtype
 # 1. ajoutez à la liste Python `l`, la chaîne de caractères `bonjour`  
 # et créez un autre `numpy.ndarray` à partir de la nouvelle valeur de `l`
 #
-# 1. affichez les éléments    
+# 1. affichez les éléments  
 # Que constatez-vous ?
 #
 # 1. quel type `numpy` a-t-il trouvé pour stocker tous ces éléments ?
@@ -330,7 +330,7 @@ tab
 #
 # <div class="memory">
 #
-# ```    
+# ```
 # ☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐
 # ```
 # </div>
@@ -347,7 +347,7 @@ tab
 # ### 1-dimension
 #
 # ````{admonition} →
-# créons un tableau de dimension 1 donc de `shape=(30,)`   
+# créons un tableau de dimension 1 donc de `shape=(30,)`
 # ```python
 # seg = np.ones(shape=(30,))
 # ```
@@ -360,7 +360,7 @@ tab
 #  ☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐☐
 #             ↑
 #            seg[i]
-#                
+#
 # ```
 #
 # </div>
@@ -381,7 +381,7 @@ tab
 # ### 2-dimension
 #
 # ````{admonition} →
-# créons un tableau de dimension 2, par exemple de `shape=(5, 6)`   
+# créons un tableau de dimension 2, par exemple de `shape=(5, 6)`
 # ```python
 # seg = np.ones(shape=(5, 6))
 # ```
@@ -400,10 +400,10 @@ tab
 #    ☐☐☐☐☐☐
 #       ↑
 #       j
-#                
+#
 # ```
 #
-# </div>    
+# </div>
 #
 # 0 <= i <= 4
 # 0 <= j <= 5
@@ -416,7 +416,7 @@ tab
 # ### 3-dimension
 #
 # ````{admonition} →
-# créons un tableau de dimension 3, par exemple de `shape=(4, 5, 6)`   
+# créons un tableau de dimension 3, par exemple de `shape=(4, 5, 6)`
 # ```python
 # seg = np.ones(shape=(4, 5, 6))
 # ```
@@ -427,15 +427,15 @@ tab
 # <div class="memory">
 #
 # ```
-#                   i   
+#                   i
 #
 #    ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
 #    ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
 #  j ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
 #    ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
 #    ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐   ☐☐☐☐☐☐
-#       k        
-#                
+#       k
+#
 # ```
 #
 # </div>
@@ -466,7 +466,7 @@ tab
 # aucune des deux fonction ne crée un nouveau segment de données  
 # elle ne recréent que l'indexation  
 #
-# **reshape**    
+# **reshape**
 #
 # ```python
 # seg = np.arange(0, 30)
@@ -553,7 +553,7 @@ print(    tab1    )
 # ````{admonition} →
 # pour les tableaux `numpy.ndarray` en dimension supérieure ou égale à 2
 #
-# * les deux dernières valeurs de leur forme  `tab.shape`   
+# * les deux dernières valeurs de leur forme  `tab.shape`  
 # sont leur nombre de ligne et leur nombre de colonne
 #
 # **exercice**

@@ -71,7 +71,7 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # bien sûr `pandas` va *aussi* vous permettre d'accéder à vos sous-tableaux  
 # par indices, c'est juste moins pertinent la plupart du temps
 #
-# </div>    
+# </div>
 # ````
 
 # %% [markdown]
@@ -418,9 +418,9 @@ df.loc[:, ['Name', 'Pclass']]
 #
 # <div class=note>
 #
-# la logique qui est à l'oeuvre    
+# la logique qui est à l'oeuvre
 #
-# </div>    
+# </div>
 # ````
 
 # %%
@@ -680,7 +680,7 @@ print(   df_survived.shape   )
 # et une valeur booléenne, qui va indiquer si la ligne en question  
 # doit être sélectionnée ou non
 #
-# </div>    
+# </div>
 # ````
 
 # %%

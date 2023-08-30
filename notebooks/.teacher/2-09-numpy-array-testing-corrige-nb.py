@@ -78,7 +78,7 @@ import numpy as np
 #
 # ```python
 # np.equal(tab%2, 0)
-# ```   
+# ```
 #
 # les résultats des comparaisons élément-par-élément  
 # sont rangés dans un tableau `np.ndarray`  
@@ -87,7 +87,7 @@ import numpy as np
 # ```python
 # tab%2 == 0
 # -> [[False,  True,  False],
-#     [False,  True,  True]]    
+#     [False,  True,  True]]
 # ```
 #
 #
@@ -151,27 +151,27 @@ np.greater(tab, 5)
 # regardons si il existe au moins une valeur paire dans le tableau des résultats
 #
 # ```python
-# res = np.equal(tab%2, 0)    
+# res = np.equal(tab%2, 0)
 # np.any(res)
 # -> True
-# ```     
+# ```
 #
 #
 # regardons si toutes les valeurs sont paires
 #
 # ```python
-# res = np.equal(tab%2, 0)    
+# res = np.equal(tab%2, 0)
 # np.all(res)
 # -> False
-# ```     
+# ```
 #
 # comptons le nombre global de valeurs paires
 #
 # ```python
-# res = tab%2 == 0    
+# res = tab%2 == 0
 # print(np.sum(res))
 # -> 3
-# ```     
+# ```
 #
 # il existe une fonction dédiée  
 # (elle compte le nombre d'éléments non nuls)  
@@ -184,10 +184,10 @@ np.greater(tab, 5)
 # comptons le nombre de valeurs paires dans l'axe des lignes du tableau
 #
 # ```python
-# res = tab %2 == 0    
+# res = tab %2 == 0
 # print(np.sum(res, axis=0)) # axe des lignes
 # -> [0, 2, 1]
-# ```  
+# ```
 #
 # avec la fonction dédiée  
 # (elle compte sur les axes)  
@@ -284,14 +284,14 @@ tab
 # ```python
 # tab = np.random.randint(100, size=(3, 4))
 # ```
-#             
+#
 #
 # masque pour sélectionner les éléments entre 25 et 75
 #
 # ```python
 # (tab >= 25) & (tab < 75)
 # ```
-#                             
+#
 #
 # masque pour sélectionner les éléments non-pairs entre 25 et 75
 #
@@ -304,7 +304,7 @@ tab
 #
 # ```python
 # np.logical_and(tab >= 25, tab < 75)
-# ```    
+# ```
 #
 # ```python
 # np.logical_and(tab >= 25, np.logical_and(tab < 75, np.logical_not(tab%2==0)))
@@ -341,7 +341,7 @@ except Exception as exc:
 # ### affecter une sélection
 #
 # ````{admonition} →
-# avec une expression de *sélection* de cette forme `tab[mask]`   
+# avec une expression de *sélection* de cette forme `tab[mask]`  
 # on peut **aussi modifier** (ces emplacements dans) le tableau de départ  
 # en affectant directement une valeur  
 # remarquez que la sélection se trouve à gauche du signe `=`
@@ -384,7 +384,7 @@ print(tab)
 #      [4, 5, 6]])
 # print(view)
 # -> [100 100 100]
-# ```    
+# ```
 # ````
 
 # %% {"tags": ["level_intermediate"]}
@@ -414,7 +414,7 @@ print(view)
 # print(tab)
 # -> ([[1, 2, 3], # et non [1, 100, 3],...
 #      [4, 5, 6]])
-# ```    
+# ```
 # ````
 
 # %% {"tags": ["level_intermediate"]}
@@ -477,7 +477,7 @@ print(tab)
 # -> 1, 3, 5
 # ```
 #
-# et donc vous pouvez modifier les éléments du tableau original    
+# et donc vous pouvez modifier les éléments du tableau original
 #
 # ```python
 # tab[np.nonzero(~(tab%2==0))] = 1000
@@ -538,7 +538,7 @@ print("edited tab", tab)
 # np.argwhere(cond)           # [[0 0] [0 2] [1 1]]
 # np.argwhere(cond).T         # [[0 0 1] [0 2 1]]
 # tuple(np.argwhere(cond).T)  # ([0, 0, 1], [0, 2, 1])
-# tab[tuple(np.argwhere(cond).T)]    
+# tab[tuple(np.argwhere(cond).T)]
 # -> array([1, 3, 5])
 # ```
 # ````

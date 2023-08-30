@@ -95,7 +95,7 @@ import numpy as np
 # tab+1
 # ```
 #
-# ou encore (moins joli)    
+# ou encore (moins joli)
 #
 #
 # ```python
@@ -211,11 +211,11 @@ mat + 1
 # pour ajouter une **ligne** à toutes les lignes d'une matrice  
 # il faut naturellement que la forme des lignes corresponde
 #
-# **non**    
+# **non**
 # ```python
 # mat + [10, 20, 30]
 # -> ValueError: operands could not be broadcast together with shapes (3,5) (3,)
-# ```   
+# ```
 #
 #
 # **oui**
@@ -226,7 +226,7 @@ mat + 1
 #     [[10, 21, 32, 43, 54],
 #      [15, 26, 37, 48, 59],
 #      [20, 31, 42, 53, 64]]
-# ```   
+# ```
 #
 # **oui aussi**
 # ```python
@@ -252,7 +252,7 @@ try:
     mat + [10, 20, 30]
 except ValueError as e:
     print(e)
-    
+
 mat + [10, 20, 30, 40, 50]
 mat + np.arange(10, 60, 10)
 mat + np.arange(10, 60, 10).reshape(1, 5)
@@ -277,7 +277,7 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 # ```
 #
 # ```python
-# tab + [1000, 2000, 3000, 4000, 5000]    
+# tab + [1000, 2000, 3000, 4000, 5000]
 # tab
 # -> [[[1000, 2001, 3002, 4003, 5004],
 #     [1005, 2006, 3007, 4008, 5009],
@@ -295,12 +295,12 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 # le code
 mat = np.arange(30).reshape(2, 3, 5)
 print(mat)
-mat + [1000, 2000, 3000, 4000, 5000]   
+mat + [1000, 2000, 3000, 4000, 5000]
 
 # %%
 mat = np.arange(400).reshape(2, 4, 2, 5, 5)
 print(mat)
-mat + [1000, 2000, 3000, 4000, 5000]   
+mat + [1000, 2000, 3000, 4000, 5000]
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une colonne et une matrice
@@ -308,20 +308,20 @@ mat + [1000, 2000, 3000, 4000, 5000]
 # ````{admonition} →
 # c'est pareil...
 #
-# ```python    
+# ```python
 # mat = np.arange(15).reshape(3, 5)
 # mat
 # -> [[ 0,  1,  2,  3,  4],
 #     [ 5,  6,  7,  8,  9],
 #     [10, 11, 12, 13, 14]]
-# ```    
+# ```
 #
 # il faut naturellement que la forme des colonnes corresponde
 #
-# ```python    
+# ```python
 # col = np.array([100, 200, 300]).reshape(3, 1)
 # col
-# ->    
+# ->
 #   [[100],
 #    [200],
 #    [300]]
@@ -332,7 +332,7 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #
 # on ajoute
 #
-# ```python    
+# ```python
 # mat + col
 # ->
 #     [[100, 101, 102, 103, 104],
@@ -405,7 +405,7 @@ m1 = np.arange(6).reshape(2, 3)
 m2 = np.arange(8).reshape(2, 4)
 try:
     m1 * m2
-except ValueError as e:    
+except ValueError as e:
     print(f'{m1}\n+\n{m2}\n {e}')
 
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
@@ -425,14 +425,14 @@ except ValueError as e:
 # 1. $b$ est élargi à $\begin{pmatrix} b_1 & b_1 & b_1 \end{pmatrix}$ de forme $(1_b, 3_b)$
 #
 # on ajoute maintenant un tableau de forme $(2_A, 3_A)$ à une ligne de forme $(1_b, 3_b)$  
-# $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1  \end{pmatrix}$   
+# $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1  \end{pmatrix}$
 #
 # 1. on compare les dimensions précédentes: $2_a$ et $1_b$
 # 1. `b` est élargi à la dimension $(2_b, 3_b)$
 #
 # on ajoute maintenant un tableau de forme $(2_A, 3_A)$ à un tableau de forme  $(2_b, 3_b)$  
 #
-#   $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b & b & b \\ b & b & b \end{pmatrix} = \begin{pmatrix} a_{11} + b & a_{12} + b & a_{13} + b \\ a_{21} + b & a_{22} + b & a_{23} + b \\  \end{pmatrix}$   
+#   $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b & b & b \\ b & b & b \end{pmatrix} = \begin{pmatrix} a_{11} + b & a_{12} + b & a_{13} + b \\ a_{21} + b & a_{22} + b & a_{23} + b \\  \end{pmatrix}$
 #
 # les formes sont désormais compatibles, les deux tableaux peuvent être ajoutés
 # ````

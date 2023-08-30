@@ -79,8 +79,8 @@ from matplotlib import pyplot as plt
 # * dans une image en couleur, les pixels sont représentés par leurs *dosages* dans les 3 couleurs primaires: `red`, `green`, `blue`  
 # * si le pixel vaut `(r, g, b) = (255, 0, 0)`, il ne contient que de l'information rouge, il est affiché comme du rouge
 # * l'affichage à l'écran, d'une image couleur `rgb`, utilise les règles de la synthèse additive  
-# `(r, g, b) = (255, 255, 255)` donne la couleur blanche    
-# `(r, g, b) = (0, 0, 0)` donne la couleur noire    
+# `(r, g, b) = (255, 255, 255)` donne la couleur blanche  
+# `(r, g, b) = (0, 0, 0)` donne la couleur noire  
 # `(r, g, b) = (255, 255, 0)` donne la couleur jaune ...
 # <img src='media/synthese-additive.png' width=200>
 #
@@ -91,7 +91,7 @@ from matplotlib import pyplot as plt
 # **Exercices**
 #
 # 1. Créez un tableau blanc, de 91 pixels de côté, d'entiers non-signés 8 bits et affichez-le  
-#    indices:   
+#    indices:  
 #    . le tableau n'est pas forcément initialisé à ce stade  
 #    . il vous faut pouvoir stocker 3 uint8 par pixel pour ranger les 3 couleurs
 # 1. Transformez le en tableau noir (en un seul slicing) et affichez-le
@@ -236,7 +236,7 @@ for n in (2, 5, 10, 20):
     plt.imshow(im[::n, ::n, :]);
     plt.show()
 
-print("---")    
+print("---")
 # 3.
 for (l, c) in ((10, 20), (100, 200)):
     print(f"centre de taille {l} x {c}")
@@ -248,7 +248,7 @@ for (l, c) in ((10, 20), (100, 200)):
 # 4.
 print(im[-1:, -1:, :])
 plt.imshow(im[-1:, -1:, :]);
-plt.show()    
+plt.show()
 
 # %% [markdown]
 # ## canaux rgb de l'image
@@ -264,7 +264,7 @@ plt.show()
 #
 #     **rappel** table des couleurs
 #
-#     * `RGB` représente directement l'encodage de la couleur du pixel   
+#     * `RGB` représente directement l'encodage de la couleur du pixel  
 #     et non un indice dans une table
 #
 #     * donc pour afficher des pixel avec les 3 valeurs RGB pas besoin de tables de couleurs  
@@ -388,7 +388,7 @@ plt.show()
 #
 # 1. Passez ses valeurs en flottants entre 0 et 1 et affichez-la  
 #
-# 1. Transformer l'image en deux images en niveaux de gris :   
+# 1. Transformer l'image en deux images en niveaux de gris :  
 # a. en mettant pour chaque pixel la moyenne de ses valeurs R, G, B  
 # b. en utilisant la correction 'Y' (qui corrige le constrate) basée sur la formule  
 #    `G = 0.299 * R + 0.587 * V + 0.114 * B`

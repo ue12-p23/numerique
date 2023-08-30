@@ -201,7 +201,7 @@ MyAudio(sine(LA, 1.5), autoplay=True)
 def sine_linear(freq1, freq2, duration):
     freq = freq1 + (freq2-freq1)*np.linspace(0, duration, duration*RATE)/duration
     t = np.linspace(0, duration, int(RATE*duration))
-    return np.sin(2*np.pi*freq*t)    
+    return np.sin(2*np.pi*freq*t)
 
 
 # %% tags=["level_intermediate"]
@@ -323,7 +323,7 @@ def apply_crescendo(sound, increase=True):
         volume = volume[::-1]
     return sound * volume
 
-MyAudio(apply_crescendo(sine(LA, 2))) #, autoplay=True)    
+MyAudio(apply_crescendo(sine(LA, 2))) #, autoplay=True)
 
 # %% [markdown]
 # ## concaténation
@@ -496,7 +496,7 @@ Audio(filename='media/pin-pon-fa-sol.wav')
 # %% [markdown]
 # ici dans les deux cas, les deux notes utilisées (la - si, puis fa - sol)  
 # sont dans les deux cas séparées de 2 crans dans la gamme chromatique  
-# (on dit que les deux notes constituent un *intervalle* de 2 demi-tons, soit un ton)   
+# (on dit que les deux notes constituent un *intervalle* de 2 demi-tons, soit un ton)  
 # et comme c'est le **même intervalle**, notre oreille entend dans les deux cas la même "mélodie"
 
 # %% [markdown]
@@ -1157,7 +1157,7 @@ def closest(note):
     """
     on retourne le rationnel le plus proche
     avec l'erreur relative que ça représente
-    
+
     sous la forme d'un tuple
     (rationnel, erreur relative)
     """
@@ -1167,7 +1167,7 @@ def closest(note):
     # dans ces ordres de grandeur ça n'a pas bcp d'importance
     # par contre ça donne un code un peu plus intéressant
     candidates = [(rational, abs(note-rational)/note) for rational in rationals]
-    
+
     return sorted(candidates, key=lambda couple: couple[1])[0]
 
 

@@ -191,7 +191,7 @@ from matplotlib import pyplot as plt
 # votre code
 
 # %% [markdown]
-# 7. Remplacez dans l'image en niveaux de gris,   
+# 7. Remplacez dans l'image en niveaux de gris,  
 # les valeurs >= à 127 par 255 et celles inférieures par 0  
 # Affichez l'image avec une carte des couleurs des niveaux de gris  
 # vous pouvez utilisez la fonction `numpy.where`
@@ -256,7 +256,7 @@ A.shape, B.shape, C.shape
 # votre code
 
 # %% [markdown]
-# 3. Passez l'image `les-mines.jpg` en sépia   
+# 3. Passez l'image `les-mines.jpg` en sépia
 
 # %%
 # votre code
@@ -265,7 +265,7 @@ A.shape, B.shape, C.shape
 # ## Exemple de qualité de compression
 
 # %% [markdown]
-# 1. Importez la librairie `Image`de `PIL` (pillow)   
+# 1. Importez la librairie `Image`de `PIL` (pillow)  
 # (vous devez peut être installer PIL dans votre environnement)
 
 # %%

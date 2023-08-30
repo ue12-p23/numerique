@@ -176,11 +176,11 @@ pd.__version__
 #
 # <div class=note>
 #
-# quand on écrit "la méthode `df.head`", ça se lit comme:   
+# quand on écrit "la méthode `df.head`", ça se lit comme:  
 # l'attribut `head` recherché à partir de l'objet `df`  
 # comme `df` est une dataframe, on trouve la méthode/fonction qui se trouve être aussi `pd.DataFrame.head`
 #
-# </div>    
+# </div>
 # ````
 
 # %%
@@ -262,7 +262,7 @@ df.head(2)
 # top male
 # freq 577
 # Name: Sex, dtype: object
-# ```  
+# ```
 #
 # ````
 
@@ -574,7 +574,7 @@ df['Name'][552]
 # * `series[chaine]` pour aller chercher l'index `chaine`
 #
 # mais avec un index de type entier, c'est l'accès **par index** qui est privilégié
-# </div>    
+# </div>
 
 # %% [markdown] tags=["framed_cell"]
 # ### différence entre index et indice

@@ -422,7 +422,7 @@ df.isna().sum(axis=1)
 #
 # remarque: contrairement à ce qu'on avait vu en `numpy`, ici on ne pourrait pas faire `df.isna().sum(axis=(0, 1))`
 #
-# </div>    
+# </div>
 # ````
 
 # %%

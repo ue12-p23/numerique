@@ -565,7 +565,7 @@ pd.Series(D, name="taux de survie par genre dans chaque classe")
 # 499    (19.0, 55.0]
 # 261             NaN   <- age inconnu au départ
 # 395    (19.0, 55.0]
-#            ...     
+#            ...
 # 326    (19.0, 55.0]
 # 396    (19.0, 55.0]
 # 832     (0.0, 12.0]

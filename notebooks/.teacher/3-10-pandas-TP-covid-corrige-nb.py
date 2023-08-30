@@ -463,7 +463,7 @@ for country, records in by_country.items():
     country_df = pd.DataFrame(records)
     country_df['country'] = country
     country_dfs.append(country_df)
-    
+
 global_df2 = pd.concat(country_dfs)
 print('global shape', global_df2.shape)
 
@@ -652,7 +652,7 @@ global_df.dtypes
 #    **variante** on peut aussi utiliser `set_index()`  
 #    pour aboutir au même résultat
 #
-# rangez votre résultat dans une variable `clean_df`   
+# rangez votre résultat dans une variable `clean_df`
 # ````
 
 # %%

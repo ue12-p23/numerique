@@ -52,7 +52,7 @@ from matplotlib import pyplot as plt
 # voir les `exercices avancés pour les rapides`
 
 # %% [markdown] {"tags": ["framed_cell"]}
-# ## accès aux éléments d'un tableau    
+# ## accès aux éléments d'un tableau
 #
 # ````{admonition} →
 #
@@ -101,7 +101,7 @@ from matplotlib import pyplot as plt
 #
 #
 # Quelle est le type de `tab[0]` ?  
-# Quelle est la valeur de `tab[0]` ?    
+# Quelle est la valeur de `tab[0]` ?
 #
 # rappelez-vous
 #
@@ -136,7 +136,7 @@ tab1[0].dtype, tab1[0]
 #
 # il y aura un indice par dimension
 #
-# en dimension 2    
+# en dimension 2
 # ```python
 # tab = np.arange(12).reshape((2, 6))
 #
@@ -150,7 +150,7 @@ tab1[0].dtype, tab1[0]
 # ```
 #
 #
-# en dimension 3      
+# en dimension 3
 # ```python
 # tab.resize((2, 3, 2))
 #
@@ -184,7 +184,7 @@ tab1[0].dtype, tab1[0]
 # %%
 # le code
 tab = np.arange(12).reshape((2, 6))
-    
+
 # première ligne, deuxième colonne
 line, col = 0, 1
 tab[line, col] = 1000
@@ -195,7 +195,7 @@ tab
 tab.resize((2, 3, 2))
 
 # deuxième matrice, troisième ligne, première colonne
-    
+
 mat, line, col = 1, 2, 0
 tab[mat, line, col] = 2000
 tab
@@ -234,7 +234,7 @@ tab
 # 3. affichez le nombre des éléments des deux dernières dimensions
 #
 #
-# indice   
+# indice
 #
 # * utilisez `numpy.random.randint`
 # * son `help` vous dira comment passer la forme au tableau à sa création  
@@ -497,7 +497,7 @@ tab[:, 0]
 # ***
 
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
-# ## partage du segment sous-jacent ou non? - avancé    
+# ## partage du segment sous-jacent ou non? - avancé
 #
 # ````{admonition} →
 # un tableau `numpy.ndarray` peut être
@@ -542,7 +542,7 @@ tab[:, 0]
 # tab2 = tab1.reshape(2, 3, 4, 5) # une vue
 # tab2.base is tab1
 # -> True
-# ```      
+# ```
 #
 # faites attention, dans l'exemple
 #

@@ -179,7 +179,7 @@ import pandas as pd
 #
 # ```python
 # plt.plot(x, y, linestyle='dashed')
-# ```  
+# ```
 #
 # une chaîne de caractères formattée permet de donner plus facilement ces paramètres:  
 #

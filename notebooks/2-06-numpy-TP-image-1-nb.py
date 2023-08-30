@@ -73,8 +73,8 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # * dans une image en couleur, les pixels sont représentés par leurs *dosages* dans les 3 couleurs primaires: `red`, `green`, `blue`  
 # * si le pixel vaut `(r, g, b) = (255, 0, 0)`, il ne contient que de l'information rouge, il est affiché comme du rouge
 # * l'affichage à l'écran, d'une image couleur `rgb`, utilise les règles de la synthèse additive  
-# `(r, g, b) = (255, 255, 255)` donne la couleur blanche    
-# `(r, g, b) = (0, 0, 0)` donne la couleur noire    
+# `(r, g, b) = (255, 255, 255)` donne la couleur blanche  
+# `(r, g, b) = (0, 0, 0)` donne la couleur noire  
 # `(r, g, b) = (255, 255, 0)` donne la couleur jaune ...
 # <img src='media/synthese-additive.png' width=200>
 #
@@ -85,7 +85,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # **Exercices**
 #
 # 1. Créez un tableau blanc, de 91 pixels de côté, d'entiers non-signés 8 bits et affichez-le  
-#    indices:   
+#    indices:  
 #    . le tableau n'est pas forcément initialisé à ce stade  
 #    . il vous faut pouvoir stocker 3 uint8 par pixel pour ranger les 3 couleurs
 # 1. Transformez le en tableau noir (en un seul slicing) et affichez-le
@@ -157,7 +157,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 #     **rappel** table des couleurs
 #
-#     * `RGB` représente directement l'encodage de la couleur du pixel   
+#     * `RGB` représente directement l'encodage de la couleur du pixel  
 #     et non un indice dans une table
 #
 #     * donc pour afficher des pixel avec les 3 valeurs RGB pas besoin de tables de couleurs  
@@ -207,7 +207,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 # 1. Passez ses valeurs en flottants entre 0 et 1 et affichez-la  
 #
-# 1. Transformer l'image en deux images en niveaux de gris :   
+# 1. Transformer l'image en deux images en niveaux de gris :  
 # a. en mettant pour chaque pixel la moyenne de ses valeurs R, G, B  
 # b. en utilisant la correction 'Y' (qui corrige le constrate) basée sur la formule  
 #    `G = 0.299 * R + 0.587 * V + 0.114 * B`

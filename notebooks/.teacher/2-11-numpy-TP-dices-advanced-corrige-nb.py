@@ -229,7 +229,7 @@ def dice(target, nb_dice=2, nb_sides=6):
     # le cube est prêt,
     # pour chercher combien de cases ont la valeur target,
     # on peut faire par exemple
-    return np.sum(cube == target)    
+    return np.sum(cube == target)
 
 
 # %%

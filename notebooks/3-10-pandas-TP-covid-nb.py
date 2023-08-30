@@ -553,7 +553,7 @@ pd.to_datetime('15 july 2021 08:00')
 #    **variante** on peut aussi utiliser `set_index()`  
 #    pour aboutir au même résultat
 #
-# rangez votre résultat dans une variable `clean_df`   
+# rangez votre résultat dans une variable `clean_df`
 # ````
 
 # %%

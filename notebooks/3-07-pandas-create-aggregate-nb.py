@@ -335,7 +335,7 @@ df.values
 # * la fonction `pd.concat([df1, df2, ..])`  
 #   qui a vocation à accumuler des données en hauteur  
 #
-# * et à la méthode `df1.append(df2)`   
+# * et à la méthode `df1.append(df2)`  
 #   qui est une version simplifiée de `concat()`
 # ````
 

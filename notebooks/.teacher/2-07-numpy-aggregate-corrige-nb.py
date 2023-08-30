@@ -103,7 +103,7 @@ np.power(tab1, 2) + tab1
 #
 # ````{admonition} →
 # il n'y a qu'une dimension, qu'un `axe`  
-# c'est l'axe d'indice `0`     
+# c'est l'axe d'indice `0`  
 # il est donc optionnel
 #
 # il suffit d'appliquer la fonction d'agrégation désirée au tableau  
@@ -114,23 +114,23 @@ np.power(tab1, 2) + tab1
 # ```python
 # vec = np.arange(10) # [0 1 2 3 4 5 6 7 8 9]
 # np.min(vec, axis=0) # l'axis est optionnel
-# np.min(vec)         
+# np.min(vec)
 # np.max(vec) # 9
 # np.sum(vec) # 45
 # np.std(vec) # 2.87
 # ```
 #
-# méthode de `numpy.ndarray`    
+# méthode de `numpy.ndarray`
 #
 # ```python
 # vec = np.arange(10) # [0 1 2 3 4 5 6 7 8 9]
 # vec.min() # 0
 # vec.max() # 9
 # vec.sum() # 45
-# vec.std()  # 2.87   
+# vec.std()  # 2.87
 # ```
 #
-# le type de la valeur retournée, en général `int64` ou`float64`     
+# le type de la valeur retournée, en général `int64` ou`float64`  
 # peut ne pas coincider avec le type des éléments du tableau  
 #
 #
@@ -381,7 +381,7 @@ tab.sum(axis=(1, 2))
 # il nous donne l'indice dans le tableau *aplati*
 #
 # la fonction `numpy.unravel_index`  
-# re-calcule les coordonnées   
+# re-calcule les coordonnées  
 # à partir de l'indice absolu et de la forme du tableau  
 #
 #

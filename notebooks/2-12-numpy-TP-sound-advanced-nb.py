@@ -383,7 +383,7 @@ Audio(filename='media/pin-pon-fa-sol.wav')
 # %% [markdown]
 # ici dans les deux cas, les deux notes utilisées (la - si, puis fa - sol)  
 # sont dans les deux cas séparées de 2 crans dans la gamme chromatique  
-# (on dit que les deux notes constituent un *intervalle* de 2 demi-tons, soit un ton)   
+# (on dit que les deux notes constituent un *intervalle* de 2 demi-tons, soit un ton)  
 # et comme c'est le **même intervalle**, notre oreille entend dans les deux cas la même "mélodie"
 
 # %% [markdown]
@@ -938,7 +938,7 @@ def closest(note):
     """
     on retourne le rationnel le plus proche
     avec l'erreur relative que ça représente
-    
+
     sous la forme d'un tuple
     (rationnel, erreur relative)
     """
@@ -948,7 +948,7 @@ def closest(note):
     # dans ces ordres de grandeur ça n'a pas bcp d'importance
     # par contre ça donne un code un peu plus intéressant
     candidates = [(rational, abs(note-rational)/note) for rational in rationals]
-    
+
     return sorted(candidates, key=lambda couple: couple[1])[0]
 
 
