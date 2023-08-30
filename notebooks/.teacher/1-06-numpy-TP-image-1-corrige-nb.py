@@ -33,7 +33,7 @@ from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
 # %% [markdown]
-# # TP simple avec des images
+# # TP images (1/2)
 #
 # merci à Wikipedia et à stackoverflow
 #
@@ -71,12 +71,26 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # %% [markdown]
+# 2. optionnel - changez la taille par défaut des figures matplotlib
+#    par exemple choisissez d'afficher les figures dans un carré de 4x4 (en théorie ce sont des inches)
+#
+# ````{tip}
+# il y a plein de façons de le faire, google et/ou stackoverflow sont vos amis...
+# ````
+
+# %%
+# prune-cell
+
+# je prends un truc + petit
+plt.rc('figure', figsize=(2, 2))
+
+# %% [markdown]
 # ## création d'une image de couleur
 
 # %% [markdown]
 # **Rappels (rapides)**
 #
-# * dans une image en couleur, les pixels sont représentés par leurs *dosages* dans les 3 couleurs primaires: `red`, `green`, `blue`  
+# * dans une image en couleur, les pixels sont représentés par leurs *dosages* dans les 3 couleurs primaires: `red`, `green`, `blue` (RGB)  
 # * si le pixel vaut `(r, g, b) = (255, 0, 0)`, il ne contient que de l'information rouge, il est affiché comme du rouge
 # * l'affichage à l'écran, d'une image couleur `rgb`, utilise les règles de la synthèse additive  
 # `(r, g, b) = (255, 255, 255)` donne la couleur blanche  
@@ -94,10 +108,6 @@ from matplotlib import pyplot as plt
 #    indices:  
 #    . le tableau n'est pas forcément initialisé à ce stade  
 #    . il vous faut pouvoir stocker 3 uint8 par pixel pour ranger les 3 couleurs
-# 1. Transformez le en tableau noir (en un seul slicing) et affichez-le
-# 1. Transformez le en tableau jaune (en un seul slicing) et affichez-le
-# 1. Affichez les valeurs RGB du premier pixel de l'image, et du dernier
-# 1. Faites un quadrillage d'une ligne bleue, toutes les 10 lignes et colonnes et affichez-le
 
 # %%
 # votre code
@@ -112,6 +122,14 @@ img = np.empty(shape=(91, 91, 3), dtype=np.uint8) # RGB
 plt.imshow(img)
 plt.show()
 
+# %% [markdown]
+# 2. Transformez le en tableau noir (en un seul slicing) et affichez-le
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 2.
 img[:, :, :] = 0
 # ou encore
@@ -119,6 +137,14 @@ img[...] = 0
 plt.imshow(img)
 plt.show()
 
+# %% [markdown]
+# 3. Transformez le en tableau jaune (en un seul slicing) et affichez-le
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 3.
 img[:, :, 0:2] = 255
 # ou encore
@@ -126,10 +152,26 @@ img[:, :] = (255, 255, 0)
 plt.imshow(img)
 plt.show()
 
+# %% [markdown]
+# 4. Affichez les valeurs RGB du premier pixel de l'image, et du dernier
+
+# %%
+# prune-cell
 # 4.
 print(img[0, 0, :])
 print(img[-1, -1, :])
 
+# %%
+# votre code
+
+# %% [markdown]
+# 5. Faites un quadrillage d'une ligne bleue, toutes les 10 lignes et colonnes et affichez-le
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 5.
 img[::10, :, 0] = 0
 img[::10, :, 1:] = 255
@@ -143,26 +185,6 @@ plt.imshow(img);
 # %% [markdown]
 # 1. Avec la fonction `plt.imread` lisez le fichier `les-mines.jpg`  
 # ou toute autre image - *faites juste attention à la taille*
-#
-# 1. Vérifiez si l'objet est modifiable avec `im.flags.writeable`  
-# si il ne l'est pas copiez-le
-#
-# 1. Affichez l'image
-#
-# 1. Quel est le type de l'objet créé ?
-#
-# 1. Quelle est la dimension de l'image ?
-#
-# 1. Quelle est la taille de l'image en hauteur et largeur ?
-#
-# 1. Quel est le nombre d'octets utilisé par pixel ?  
-#
-# 1. Quel est le type des pixels ?  
-# (deux types pour les pixels: entiers non-signés 8 bits ou flottants sur 64 bits)
-#
-# 1. Quelles sont ses valeurs maximale et minimale des pixels ?
-#
-# 1. Affichez le rectangle de 10 x 10 pixels en haut de l'image
 
 # %%
 # votre code
@@ -177,29 +199,89 @@ file = 'les-mines.jpg'
 # 1.
 im = plt.imread(file)
 
+# %% [markdown]
+# 2. Vérifiez si l'objet est modifiable avec `im.flags.writeable`  
+# si il ne l'est pas copiez-le
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 2.
 print(im.flags.writeable)
 im = im.copy()
 print(im.flags.writeable)
 
+# %% [markdown]
+# 3. Affichez l'image
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 3.
 plt.imshow(im)
 plt.show()
 
+# %% [markdown]
+# 4. Quel est le type de l'objet créé ?
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 4.
 print(type(im))
 
-# 5. 6. 7.
+# %% [markdown]
+# 5. Quelle est la dimension de l'image ?
+# 6. Quelle est la taille de l'image en hauteur et largeur ?
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+# 5. 6.
 print(im.ndim)
 print(im.shape[0], im.shape[1])
 
+# %% [markdown]
+# 7. Quel est le nombre d'octets utilisé par pixel ?
+# 8. Quel est le type des pixels ?  
+# (deux types pour les pixels: entiers non-signés 8 bits ou flottants sur 64 bits)
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 7. 8.
 print(im.itemsize)
 print(im.dtype)
 
+# %% [markdown]
+# 9. Quelles sont ses valeurs maximale et minimale des pixels ?
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 9.
 print(im.min(), im.max())
 
+# %% [markdown]
+# 10. Affichez le rectangle de 10 x 10 pixels en haut de l'image
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 10.
 plt.imshow(im[:10, :10, :]);
 
@@ -208,17 +290,6 @@ plt.imshow(im[:10, :10, :]);
 
 # %% [markdown]
 # 1. Relire l'image
-#
-# 1. Slicer et afficher l'image en ne gardant qu'une ligne et qu'une colonne sur 2, 5, 10 et 20  
-# (ne dupliquez pas le code)
-#
-# 1. Isoler le rectangle de `l` lignes et `c` colonnes en milieu d'image  
-# affichez-le pour `(l, c) = (10, 20)`) puis `(l, c) = (100, 200)`)
-#
-# 1. Affichez le dernier pixel de l'image
-
-# %%
-# votre code
 
 # %%
 # prune-cell
@@ -230,13 +301,39 @@ file = 'les-mines.jpg'
 # 1.
 im = plt.imread(file)
 
+# %%
+# votre code
+
+# %% [markdown]
+# 2. Slicer et afficher l'image en ne gardant qu'une ligne et qu'une colonne sur 2, 5, 10 et 20  
+# (ne dupliquez pas le code)
+#
+# **[indices]**
+# * vous pouvez créer plusieurs figures depuis une seule cellule
+# * vous pouvez ensuite choisir de 'replier' ou non la zone *output* en hauteur;  
+#   c'est-à-dire d'afficher soit toute la hauteur, soit une zone de taille fixe avec une scrollbar pour naviguer  
+#   pour cela cliquez dans la marge gauche de la zone *output*
+
+# %%
+# prune-cell
 # 2.
 for n in (2, 5, 10, 20):
     print(f"un pixel sur {n}")
     plt.imshow(im[::n, ::n, :]);
     plt.show()
 
-print("---")
+# %%
+# votre code
+
+# %% [markdown]
+# 3. Isoler le rectangle de `l` lignes et `c` colonnes en milieu d'image  
+# affichez-le pour `(l, c) = (10, 20)`) puis `(l, c) = (100, 200)`)
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 3.
 for (l, c) in ((10, 20), (100, 200)):
     print(f"centre de taille {l} x {c}")
@@ -245,6 +342,14 @@ for (l, c) in ((10, 20), (100, 200)):
     plt.imshow(im[ml:ml+l, mc:mc+c, :])
     plt.show()
 
+# %% [markdown]
+# 4. Affichez le dernier pixel de l'image
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 4.
 print(im[-1:, -1:, :])
 plt.imshow(im[-1:, -1:, :]);
@@ -255,10 +360,32 @@ plt.show()
 
 # %% [markdown]
 # 1. Relire l'image
-#
-# 1. Découpez l'image en ses trois canaux Red, Green et Blue  
-#
-# 1. Afficher chaque canal avec `plt.imshow`  
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+import numpy as np
+from matplotlib import pyplot as plt
+
+# 1.
+file = 'les-mines.jpg'
+im = plt.imread(file)
+
+# %% [markdown]
+# 2. Découpez l'image en ses trois canaux Red, Green et Blue  
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+# 2.
+R, G, B = im[:, :, 0], im[:, :, 1], im[:, :, 2]
+
+# %% [markdown]
+# 3. Afficher chaque canal avec `plt.imshow`  
 #     La couleur est-elle la couleur attendue ?  
 #     Si oui très bien, si non que se passe-t-il ?
 #
@@ -275,35 +402,25 @@ plt.show()
 #     (lors de l'affichage, le `255` des rouges n'est pas le même `255` des verts)
 #
 #     * donner le paramètre `cmap=` à `plt.imshow`, `'Reds'`,  `'Greens'` ou  `'Blues'`
-#
-# 1. Corrigez vos affichages si besoin
-#
-# 1. Copiez l'image, remplacer dans la copie, un carré de taille `(200, 200)` en bas à droite  
-#    . par un carré de couleur RGB avec R à 219, G à 112 et B à 147 (vous obtenez quelle couleur)  
-#    . par un carré blanc avec des rayures horizontales rouges de 1 pixel  
-#
-# 1. enfin affichez les 20 dernières lignes et colonnes du carré à rayures
 
 # %%
 # votre code
 
 # %%
 # prune-cell
-import numpy as np
-from matplotlib import pyplot as plt
-
-# 1.
-file = 'les-mines.jpg'
-im = plt.imread(file)
-
-# 2.
-R, G, B = im[:, :, 0], im[:, :, 1], im[:, :, 2]
-
 # 3.
 print('le canal R sans colormap')
 plt.imshow(R)
 plt.show()
 
+# %% [markdown]
+# 4. Corrigez vos affichages si besoin
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 4.
 print('le canal R avec colormap')
 plt.imshow(R, cmap='Reds')
@@ -315,6 +432,16 @@ for (channel, cmap) in (R, 'Reds'), (G, 'Greens'), (B, 'Blues'):
     plt.imshow(channel, cmap)
     plt.show()
 
+# %% [markdown]
+# 5. Copiez l'image, remplacer dans la copie, un carré de taille `(200, 200)` en bas à droite  
+#    . par un carré de couleur RGB avec R à 219, G à 112 et B à 147 (vous obtenez quelle couleur)  
+#    . par un carré blanc avec des rayures horizontales rouges de 1 pixel  
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 5.1
 im1 = im.copy()
 l = 200
@@ -328,6 +455,8 @@ im1[-l:, -c:] = (230, 112, 147)
 plt.imshow(im1)
 plt.show()
 
+# %%
+# prune-cell
 # 5.2
 #im1[-l::2, -c:, :] = 255
 #im1[-l+1::2, -c:, 0] = 255
@@ -337,6 +466,14 @@ im1[-l+1::2, -c:] = 255, 0, 0
 plt.imshow(im1)
 plt.show()
 
+# %% [markdown]
+# 6. enfin affichez les 20 dernières lignes et colonnes du carré à rayures
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 6.
 plt.imshow(im1[-20:, -20:])
 plt.show()
@@ -345,17 +482,16 @@ plt.show()
 # ## transparence des images
 
 # %% [markdown]
+# ````{admonition} rappel: la transparence
 # **rappel** RGB-A
 #
 # * on peut indiquer, dans une quatrième valeur des pixels, leur transparence
 # * ce 4-ème canal s'appelle le canal alpha
 # * les valeurs vont de `0` pour transparent à `255` pour opaque
-#
+# ````
+
+# %% [markdown]
 # 1. Relire l'image initiale (sans la copier)
-#
-# 1. Créez un tableau vide de la même hauteur et largeur que l'image, du type de l'image initiale, avec un quatrième canal
-#
-# 1. Copiez-y l'image initiale, mettez le quatrième canal à `128` et affichez l'image
 
 # %%
 # votre code
@@ -369,11 +505,27 @@ from matplotlib import pyplot as plt
 file = 'les-mines.jpg'
 im = plt.imread(file)
 
+# %% [markdown]
+# 2. Créez un tableau vide de la même hauteur et largeur que l'image, du type de l'image initiale, avec un quatrième canal
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 2.
 ima = np.empty(shape=(im.shape[0], im.shape[1], 4), dtype=im.dtype)
 # ou encore pour les geeks
 # ima = np.empty(shape=(*im.shape[:2], 4), dtype=im.dtype)
 
+# %% [markdown]
+# 3. Copiez-y l'image initiale, mettez le quatrième canal à `128` et affichez l'image
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 3.
 ima[:, :, 0:3] = im
 ima[:, :, 3] = 128
@@ -385,20 +537,6 @@ plt.show()
 
 # %% [markdown]
 # 1. Relire l'image `les-mines.jpg`
-#
-# 1. Passez ses valeurs en flottants entre 0 et 1 et affichez-la  
-#
-# 1. Transformer l'image en deux images en niveaux de gris :  
-# a. en mettant pour chaque pixel la moyenne de ses valeurs R, G, B  
-# b. en utilisant la correction 'Y' (qui corrige le constrate) basée sur la formule  
-#    `G = 0.299 * R + 0.587 * V + 0.114 * B`
-#
-# 1. Passez au carré les pixels et affichez l'image
-#
-# 1. Passez en racine carré les pixels et affichez-la
-#
-# 1. Convertissez l'image de niveaux de gris en type entier non-signé 8 bits et affichez la  
-# en niveaux de gris
 
 # %%
 # votre code
@@ -412,12 +550,31 @@ from matplotlib import pyplot as plt
 file = 'les-mines.jpg'
 im = plt.imread(file)
 
+# %% [markdown]
+# 2. Passez ses valeurs en flottants entre 0 et 1 et affichez-la  
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 2.
 plt.title('q2: flottant entre 0 et 1')
 imf = im/255
 plt.imshow(imf)
 plt.show()
 
+# %% [markdown]
+# 3. Transformer l'image en deux images en niveaux de gris :  
+# a. en mettant pour chaque pixel la moyenne de ses valeurs R, G, B  
+# b. en utilisant la correction 'Y' (qui corrige le constrate) basée sur la formule  
+#    `G = 0.299 * R + 0.587 * V + 0.114 * B`
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 3.1
 plt.title("q3.1: niveaux de gris (moyenne)")
 gr = (imf[:, :, 0] + imf[:, :, 1] + imf[:, :, 2])/3
@@ -432,16 +589,41 @@ grY = 0.299*imf[:, :, 0] + 0.587*imf[:, :, 1] + 0.114*imf[:, :, 2]
 plt.imshow(grY, cmap='gray')
 plt.show()
 
+# %% [markdown]
+# 4. Passez au carré les pixels et affichez l'image
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 4.
 plt.imshow(np.power(gr, 2), cmap='gray')
 plt.title('q4: au carré')
 plt.show()
 
+# %% [markdown]
+# 5. Passez en racine carré les pixels et affichez-la
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 5.
 plt.imshow(np.sqrt(gr), cmap='gray')
 plt.title('q5: racine carrée')
 plt.show()
 
+# %% [markdown]
+# 6. Convertissez l'image de niveaux de gris en type entier non-signé 8 bits et affichez la  
+# en niveaux de gris
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 # 6.
 gr8 = (gr*255).astype(np.uint8)
 plt.imshow(gr8, cmap='gray')
@@ -450,15 +632,14 @@ plt.show()
 
 # %% {"tags": ["raises-exception"]}
 # %%timeit
+# prune-cell
 gr = (imf[:, :, 0] + imf[:, :, 1] + imf[:, :, 2])/3
 
 # %% {"tags": ["raises-exception"]}
 # %%timeit
+# prune-cell
 # pour les geeks
 gr = (imf[:, :, :].sum(axis=2))/3
-
-# %% [markdown]
-# # rappels
 
 # %% [markdown]
 # ## affichage grille de figures
@@ -506,6 +687,7 @@ gr = (imf[:, :, :].sum(axis=2))/3
 # ```
 
 # %%
+# ce qui nous donne, mis bout à bout
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -528,26 +710,19 @@ axes[0, 0].set_title('sinus bleu')
 axes[0, 2].set_xlabel('de 0 à 2 pi')
 axes[1, 1].set_ylabel('de -1 à 1')
 axes[1, 2].set_title('sinus magenta')
-plt.tight_layout()
+plt.tight_layout();
 
 # %% [markdown]
-# ## application
+# ## reprenons le TP
 
 # %% [markdown]
 # Reprenez les trois images en niveau de gris que vous aviez produites ci-dessus:  
-#   1: celle obtenue avec la moyenne des rgb  
-#   2: celle obtenue avec la correction Y  
-#   3: celle obtenue avec la racine carrée
+#   A: celle obtenue avec la moyenne des rgb  
+#   B: celle obtenue avec la correction Y  
+#   C: celle obtenue avec la racine carrée
 #
-# 1. Affichez les trois images côte à côte
+# 1. Affichez les trois images côte à côte  
 #    1 2 3
-# 1. Affichez-les en damier:  
-#    1 2 3  
-#    3 1 2  
-#    2 3 1
-
-# %%
-# votre code
 
 # %%
 # prune-cell
@@ -567,7 +742,17 @@ axes[2].imshow(grS, cmap='gray')
 axes[2].set_title('racine')
 plt.show()
 
+# %% [markdown]
+# 2. Affichez-les en damier:  
+#    1 2 3  
+#    3 1 2  
+#    2 3 1
 
+# %%
+# votre code
+
+# %%
+# prune-cell
 
 2.
 images = [gr, grY, grS]

@@ -33,7 +33,7 @@ from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
 # %% [markdown]
-# # suite du TP simple avec des images
+# # TP images (2/2)
 #
 # merci à Wikipedia et à stackoverflow
 #
@@ -127,8 +127,7 @@ for c in ['Red', 'Lime', 'Blue']:
 # votre code
 
 # %% [markdown]
-# prune-cell 3
-#
+# ````{tip}
 # en version un peu brute, on pourrait utiliser juste la racine carrée;
 # par exemple avec 5 couleurs créer un carré 3x3 - mais 3x2 c'est quand même mieux !
 #
@@ -154,6 +153,7 @@ for c in ['Red', 'Lime', 'Blue']:
 # 15 | 4x4 | 3
 # 16 | 4x4 | 4
 # 17 | 4x5 | 4
+# ````
 
 # %%
 # prune-cell 3
@@ -274,6 +274,7 @@ plt.imshow(im_all);
 
 # %%
 # prune-cell 7.
+
 plt.imsave('patchwork-all.png', im_all)
 plt.show()
 pat = plt.imread('patchwork-all.png')
@@ -430,9 +431,15 @@ print(np.unique(gr3))
 # 1. naturellement l'image doit être ensuite remise dans un format correct  
 # (uint8 ou float entre 0 et 1)
 
-# %% {"scrolled": true}
-# INDICE:
+# %% [markdown]
+# ````{tip}
+# jetez un coup d'oeil à la fonction `np.dot` 
+# qui est si on veut une généralisation du produit matriciel
+#
+# dont voici un exemple d'utilisation:
+# ````
 
+# %% {"scrolled": true}
 # exemple de produit de matrices avec `numpy.dot`
 # le help(np.dot) dit: dot(A, B)[i,j,k,m] = sum(A[i,j,:] * B[k,:,m])
 
@@ -443,14 +450,16 @@ B = np.arange(m*k*n).reshape(m, k, n)
 C = A.dot(B)
 # or C = np.dot(A, B)
 
-A.shape, B.shape, C.shape
+print(f"en partant des dimensions {A.shape} et {B.shape}")
+print(f"on obtient un résultat de dimension {C.shape}")
+print(f"et le nombre de termes dans chaque `sum()` est {A.shape[-1]} == {B.shape[-2]}")
 
 # %% [markdown]
 # **Exercice**
 
 # %% [markdown]
 # 1. Faites une fonction qui prend en argument une image RGB et rend une image RGB sépia  
-# la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-dessous)
+# la fonction `numpy.dot` peut être utilisée si besoin, voir l'exemple ci-dessus
 
 # %%
 # votre code
@@ -508,8 +517,8 @@ plt.imshow(
 #
 # dans notre cas:
 #
-# * a.dim = 3 (`a.shape = lines, cols, 3`), et
-# * b.dim = 2, (`b.shape = 3, 3`), ce qui donne
+# * a est de dimension 3, et `a.shape = lines, cols, 3`, et
+# * b est de dimension 2, avec `b.shape = 3, 3`, ce qui donne
 #
 # > `dot(image, SEPIA)[i, j, canal]
 #   = sum(image[i, j, :] * SEPIA[:, canal])`  

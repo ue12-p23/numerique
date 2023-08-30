@@ -33,7 +33,7 @@ from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
 # %% [markdown]
-# # suite du TP simple avec des images
+# # TP images (2/2)
 #
 # merci à Wikipedia et à stackoverflow
 #
@@ -111,6 +111,35 @@ from matplotlib import pyplot as plt
 
 # %%
 # votre code
+
+# %% [markdown]
+# ````{tip}
+# en version un peu brute, on pourrait utiliser juste la racine carrée;
+# par exemple avec 5 couleurs créer un carré 3x3 - mais 3x2 c'est quand même mieux !
+#
+#
+# pour calculer le rectangle qui contient n couleurs
+#
+# n | rect | `int(sqrt(n))` |
+# -|-|-|
+# 1 | 1x1 | 1
+# 2 | 1x2 | 1
+# 3 | 2x2 | 1
+# 4 | 2x2 | 2
+# 5 | 2x3 | 2
+# 6 | 2x3 | 2
+# 7 | 3x3 | 2
+# 8 | 3x3 | 2
+# 9 | 3x3 | 3
+# 10 | 3x4 | 3
+# 11 | 3x4 | 3
+# 12 | 3x4 | 3
+# 13 | 4x4 | 3
+# 14 | 4x4 | 3
+# 15 | 4x4 | 3
+# 16 | 4x4 | 4
+# 17 | 4x5 | 4
+# ````
 
 # %% [markdown]
 # 4. Tirez aléatoirement une liste de couleurs et appliquez votre fonction à ces couleurs.
@@ -223,9 +252,15 @@ from matplotlib import pyplot as plt
 # 1. naturellement l'image doit être ensuite remise dans un format correct  
 # (uint8 ou float entre 0 et 1)
 
-# %% {"scrolled": true}
-# INDICE:
+# %% [markdown]
+# ````{tip}
+# jetez un coup d'oeil à la fonction `np.dot` 
+# qui est si on veut une généralisation du produit matriciel
+#
+# dont voici un exemple d'utilisation:
+# ````
 
+# %% {"scrolled": true}
 # exemple de produit de matrices avec `numpy.dot`
 # le help(np.dot) dit: dot(A, B)[i,j,k,m] = sum(A[i,j,:] * B[k,:,m])
 
@@ -236,14 +271,16 @@ B = np.arange(m*k*n).reshape(m, k, n)
 C = A.dot(B)
 # or C = np.dot(A, B)
 
-A.shape, B.shape, C.shape
+print(f"en partant des dimensions {A.shape} et {B.shape}")
+print(f"on obtient un résultat de dimension {C.shape}")
+print(f"et le nombre de termes dans chaque `sum()` est {A.shape[-1]} == {B.shape[-2]}")
 
 # %% [markdown]
 # **Exercice**
 
 # %% [markdown]
 # 1. Faites une fonction qui prend en argument une image RGB et rend une image RGB sépia  
-# la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-dessous)
+# la fonction `numpy.dot` peut être utilisée si besoin, voir l'exemple ci-dessus
 
 # %%
 # votre code
