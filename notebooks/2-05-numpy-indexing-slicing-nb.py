@@ -45,40 +45,26 @@ from matplotlib import pyplot as plt
 #
 # ce notebook détaille les manières d'accéder à des éléments et de slicer des tableaux `numpy`
 #
-# <br>
-#
 # les slices sont des vues et non des copies
 #
-# <br>
-#
 # la notion de `numpy.ndarray.base`
-#
-# <br>
 #
 # voir les `exercices avancés pour les rapides`
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## accès aux éléments d'un tableau    
 #
-# <br>
-#
 #
 # *accéder à des éléments ou à des sous-tableaux  
 # va nous permettre de leur appliquer des fonctions vectorisées*
 #
 #
-# <br>
-#
 # la manière d'accéder aux éléments d'un tableau `numpy`  
 # dépend de la forme du tableau (`shape`)
 #
 #
-# <br>
-#
 # la forme d'un `numpy.ndarray` est donnée par une indexation  
 # sur le segment mémoire sous-jacent continu de votre tableau
-#
-# <br>
 #
 # par exemple  
 # un `numpy.ndarray` de `12` éléments
@@ -103,17 +89,12 @@ from matplotlib import pyplot as plt
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accès à un tableau de dimension 1
 #
-# <br>
-#
 # vous avez besoin d'**un seul index**
-#
-# <br>
 #
 # ```python
 # tab = np.arange(12)
 # tab[0] = np.pi
 # ```
-# <br>
 #
 #
 # Quelle est le type de `tab[0]` ?  
@@ -122,8 +103,6 @@ from matplotlib import pyplot as plt
 # rappelez-vous
 #
 # * les éléments d'un tableaux `numpy` sont typés et leur taille est fixe
-#
-# <br>
 #
 # pour mettre des réels dans un tableau  
 # il faut que le type des éléments corresponde
@@ -147,15 +126,10 @@ tab1[0].dtype, tab1[0]
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accès à un tableau de dimension > à 1
-# <br>
 #
 # l'accès à un élément du tableau dépend de la forme du tableau  
 #
-# <br>
-#
 # il y aura un indice par dimension
-#
-# <br>
 #
 # en dimension 2    
 # ```python
@@ -169,8 +143,6 @@ tab1[0].dtype, tab1[0]
 # -> array([[ 0, 1000,  2,  3,  4,  5],
 #           [ 6,    7,  8,  9, 10, 11]])
 # ```
-#
-# <br>
 #
 #
 # en dimension 3      
@@ -191,15 +163,11 @@ tab1[0].dtype, tab1[0]
 #            [2000, 11]]])
 # ```
 #
-# <br>
-#
 # nombre d'éléments dans chaque dimension
 # ```python
 # [tab.shape[i] for i in range(tab.ndim)]
 # -> [2, 3, 2]
 # ```
-#
-# <br>
 #
 # remarque  en dimension >= 2
 # les deux dernières dimensions sont les lignes et les colonnes
@@ -275,12 +243,8 @@ tab
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### différence slicing `python` et `numpy`
 #
-# <br>
-#
 #
 # le **slicing** `numpy` est *syntaxiquement équivalent* à celui des listes `Python`
-#
-# <br>
 #
 # la **grande** différence est que
 #
@@ -290,19 +254,13 @@ tab
 # * quand vous slicez une **liste `python`** vous obtenez une **copie** de la liste initiale
 #
 #
-# <br>
-#
 # le slicing `numpy` va
 #
 # * regrouper des éléments du tableau initial
 # * dans un sous-tableau `numpy.ndarray` avec l'indexation adéquate
 # * la mémoire sous-jacente reste la même
 #
-# <br>
-#
 # la seule structure informatique qui sera créée est l'indexation  
-#
-# <br>
 #
 # vous pourrez ensuite, par exemple, modifier ces éléments  
 # et donc ils seront modifiés dans le tableau initial
@@ -312,8 +270,6 @@ tab
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### rappel du slicing Python
-#
-# <br>
 #
 # **rappel du slicing Python**
 #
@@ -327,7 +283,7 @@ tab
 #
 # * indices négatifs ok `-1` est le dernier élément, `-2` l'avant dernier ...
 #
-# <br>
+#
 # la liste python des 10 premiers entiers
 #
 # ```python
@@ -357,11 +313,9 @@ print(l[::-1])
 print(l[:])
 
 # %% [markdown] {"tags": ["framed_cell"]}
-# ### slicing en dimension 1<br>
+# ### slicing en dimension 1
 #
 # on crée un `numpy.ndarray` de dimension 1 de taille 10
-#
-# <br>
 #
 # * on prend un élément sur 2 en partant du début de la liste  
 # * on modifie les éléments du sous-tableau obtenu  
@@ -386,8 +340,6 @@ vec
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### slicing en dimension > à 1 (a)
 #
-# <br>
-#
 # on crée un `numpy.ndarray` en dimension 4, de forme `(2, 3, 4, 5)`  
 # on l'initialise avec les `120`  premiers entiers
 #
@@ -395,33 +347,23 @@ vec
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # ```
 #
-# <br>
-#
-# on a 2 groupes de 3 matrices de 4 lignes et 5 colonnes    
-#
-# <br>
+# on a 2 groupes de 3 matrices de 4 lignes et 5 colonnes
 #
 # * on accède au premier groupe de matrices
 # ```python
 # tab[0]
 # ```
 #
-# <br>
-#
 # * on accède à la deuxième matrice du premier groupe de matrices
 # ```python
 # tab[0, 1]
 # ```
-#
-# <br>    
 #
 # * on accède à la troisième ligne de la deuxième matrice du premier groupe de matrices
 #
 # ```python
 # tab[0, 1, 2]
 # ```
-# <br>    
-#
 # * on accède à la quatrième colonne de la deuxième matrice du premier groupe de matrices
 #
 # ```python
@@ -439,7 +381,6 @@ print(    tab[0, 1, :, 3]    )
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### slicing en dimension > à 1 (b)
-# <br>
 #
 # on crée un `numpy.ndarray` en dimension 4, de forme `(2, 3, 4, 5)`  
 # on l'initialise avec les `120`  premiers entiers
@@ -448,23 +389,16 @@ print(    tab[0, 1, :, 3]    )
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # ```
 #
-# <br>
-#
 # on peut combiner les slicing des 4 dimensions, ici  
 # `tab[from:to:step, from:to:step, from:to:step, from:to_step]`  
-# <br>
 #
 # de l'indice `from` à l'indice `to` (exclus) avec un pas `step`  
 #
-# <br>
-#
-# à savoir    
+# à savoir
 #
 # * quand vous voulez la valeur par défaut de `from`, `to` et `step` vous ne mettez rien
 # * quand les valeurs par défaut sont en fin d'expression, elles sont optionnelles
 # * `::` devient `:`
-#
-# <br>
 #
 # **exemples**
 #
@@ -476,8 +410,6 @@ print(    tab[0, 1, :, 3]    )
 # la première matrice  
 # toutes les lignes  
 # toutes les colonnes
-#
-# <br>
 #
 # qui s'écrit aussi
 # ```python
@@ -500,7 +432,6 @@ tab[:, 0]
 # la sous-matrice du milieu (garder deux lignes et 3 colonnes, au centre) des premières matrices de tous les groupes
 #
 # $\begin{bmatrix}\begin{bmatrix} 6 & 7 & 8\\ 11 & 12 & 13 \end{bmatrix}, \begin{bmatrix} 66 & 67 & 68 \\ 71 & 72 & 73 \end{bmatrix}\end{bmatrix}$  
-# <br>
 #
 # **indices**  
 # on a 2 groupes de 3 matrices de 4 lignes et 5 colonnes
@@ -525,26 +456,18 @@ tab[:, 0]
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les sous-tableaux sont des vues, et non des copies
 #
-# <br>
-#
 # le slicing calcule une nouvelle indexation sur le segment mémoire du tableau existant
 #
-#
-# <br>
 #
 # si à chaque slicing, `numpy` faisait une copie du tableau sous-jacent, les codes seraient inutilisables  
 # parce que coûteux (pénalisés) en place mémoire
 #
-#
-# <br>
 #
 # **donc lors d'un slicing**
 #
 # * un nouvel objet `np.ndarray` est bien créé,
 # * son indexation est différente de celle de l'objet `np.ndarray` initial
 # * mais ils **partagent** la mémoire (le segment unidimensionnel sous-jacent)
-#
-#     <br>
 #
 # si un utilisateur veut une copie, il la fait avec la méthode `copy`
 #
@@ -558,14 +481,10 @@ tab[:, 0]
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ## partage du segment sous-jacent ou non? - avancé    
 #
-# <br>
-#
 # un tableau `numpy.ndarray` peut être
 # 1. un tableau *original* (on vient de le créer éventuellement par copie)
 # 1. une vue sur un tableau (il a été créé par slicing ou indexation)  
 #   il partage son segment de mémoire avec au moins un autre tableau
-#
-# <br>
 #
 #
 # l'attribut `numpy.ndarray.base` vaut alors
@@ -606,8 +525,6 @@ tab[:, 0]
 # -> True
 # ```      
 #
-# <br>
-#
 # faites attention, dans l'exemple
 #
 # ```python
@@ -615,9 +532,6 @@ tab[:, 0]
 # ```
 #
 # `tab1.base` est l'objet `np.arange(10)`  
-#
-# <br>
-# <br>
 #
 #
 # les `numpy.ndarray` ayant le même objet `numpy.ndarray.base`
@@ -628,8 +542,6 @@ tab[:, 0]
 #
 # * modifier les éléments de l'un modifiera les éléments des autres  
 # (ils *pointent tous* sur le même segment de mémoire)
-#
-# <br>
 #
 # `numpy` essaie de créer le moins de mémoire possible  
 # pour stocker les éléments de ses tableaux
@@ -667,16 +579,12 @@ tab1.base
 #
 #
 # 1. créez un nouveau tableau formé des deux matrices $[\begin{pmatrix} 2 & 4 & 6\\ 8 & 10 & 12 \end{pmatrix}, \begin{pmatrix} 14 & 16 & 18 \\ 20 & 22 & 24 \end{pmatrix}]$.  
-# <br>
 #
 # 1. affichez sa `base`
-# <br>
 #
 # 1. *slicez* le tableau pour obtenir $[\begin{pmatrix} 24 & 22 & 20 \\ 18 & 16 & 14 \\ \end{pmatrix}, \begin{pmatrix} 12 & 10 & 8 \\ 6 & 4 & 2\end{pmatrix}] $
-# <br>
 #
 # 1. affichez la `base` de la slice
-# <br>
 #
 # 1. vérifiez que les deux `base` sont le même objet
 
@@ -685,8 +593,6 @@ tab1.base
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## modification des sous-tableaux
-#
-# <br>
 #
 # pour modifier un sous-tableau, il faut simplement faire attention
 # 1. au type des éléments  

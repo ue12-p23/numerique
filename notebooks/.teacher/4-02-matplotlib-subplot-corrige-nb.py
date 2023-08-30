@@ -44,24 +44,16 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## figures et sous-figures
 #
-# <br>
-#
 # nous allons construire des figures contenant plusieurs graphiques  
 # en positionnant les graphiques sur une grille
-#
-# <br>
 #
 # une terminologie `matplotlib` un peu particulière
 #
 # * `fig` et `figure` désignent la figure globale
 # * `axis` désigne les sous-figures (et non les axes des figures)
 #
-# <br>
-#
 # `matplotlib` a aussi la notion de figure courante  
 # i.e. celle à laquelle les graphiques sont rattachés
-#
-# <br>
 #
 # on a vu qu'on peut dessiner plusieurs courbes sur la même figure dans le même repère  
 #
@@ -71,12 +63,8 @@ import numpy as np
 # plt.plot(x, np.cos(x))
 # ```
 #
-# <br>
-#
 # on a vu que `plt.show` permettait de terminer/clore la figure courante  
 # et ainsi pouvoir créer une nouvelle figure
-#
-# <br>
 #
 # ```python
 # plt.figure(figsize=(4, 2))
@@ -88,8 +76,6 @@ import numpy as np
 #
 # remarquez que `plt.figure(figsize=(4, 2))` ne s'applique qu'à la première figure  
 # la seconde est une nouvelle figure (qui prend les paramètres de taille par défaut)
-#
-# <br>
 #
 # si vous utilisez `matplotlib` dans un programme `python` et non dans un notebook  
 # vous devrez appeler `plt.show()` pour que votre figure s'affiche
@@ -111,17 +97,11 @@ plt.plot(x, np.cos(x));
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## par vecteur de sous-figures (`plt.subplots`)
 #
-# <br>
-#
 # pour créer une figure, contenant plusieurs graphiques différents  
 # il faut positionner ces **sous-figures** dans la figure courante
 #
-# <br>
-#
 # ls notion de sous-figure correspond à un repère  
 # (d'où la terminologie `axis` dans le code qui peut perturber les débutants)
-#
-# <br>
 #
 # la fonction `plt.subplots(n, m)`
 #
@@ -130,8 +110,6 @@ plt.plot(x, np.cos(x));
 # * où vous positionnez vos sous-figures
 # * remarquez le **s** dans `subplots`
 #
-# <br>
-#
 # par convention la figure courante s'appelle `fig`  
 # et le tableau `numpy` pour la grille s'appelle `axes`
 #
@@ -139,8 +117,6 @@ plt.plot(x, np.cos(x));
 # fig, axes = plt.subplots(2, 3) # une grille de 2 lignes et 3 colonnes
 # axes.shape
 # ```
-#
-# <br>
 #
 # ensuite vous positionnez des sous-figures dans la figure
 #
@@ -162,29 +138,19 @@ axes[-1, -1].plot(x, np.cos(x));
 # %% [markdown] {"cell_style": "center", "tags": ["framed_cell"]}
 # ## par tailles/positions dans une grille (`plt.subplot`)
 #
-# <br>
-#
 # la fonction `plt.subplot` rajoute une sous-figure à la figure courante
-#
-# <br>
 #
 # on indique 3 entiers `n`, `m` et `i` à la fonction `plt.subplot`
 #
 # * soit en les séparant par des ',' soit en les donnant sous la forme d'un entier des 3 digit `nmi`
 # * `n` et `m` donnent la manière de considérer la grille
 #
-# <br>
-#
 # `plt.subplot(n, m, i)` ou `plt.subplot(nmi)`
 #
 # * la sous-figure prendra la position `i`  
 #     1 est la figure en haut à gauche, 2 la suivante...
 #
-# <br>
-#
 # on ajoute dexs sous-figures à une grille `1` `2`
-#
-# <br>
 #
 # ```python
 # ax1 = plt.subplot(121) # grille 1 ligne, 2 colonnes
@@ -213,11 +179,7 @@ ax2.plot(x, np.cos(x)) # affichage de la courbe cosinus
 # %% [markdown] {"cell_style": "center", "tags": ["framed_cell"]}
 # ## sous-figure sur plusieurs lignes/colonnes
 #
-# <br>
-#
 # les sous-figures peuvent occuper plusieurs lignes et/ou plusieurs colonnes
-#
-# <br>
 #
 # l'index est remplacé par un couple `(j, k)`  
 # où `j` et `k` sont le premier et le dernier index  
@@ -239,8 +201,6 @@ ax2.plot(x, np.cos(x)) # affichage de la courbe cosinus
 #
 # <img src='./subplot1.png'>
 #
-# <br>
-#
 # ou encore
 #
 # ```python
@@ -255,8 +215,6 @@ ax2.plot(x, np.cos(x)) # affichage de la courbe cosinus
 # ```
 #
 # <img src='./subplot2.png'>
-#
-# <br>
 #
 # remarquez que ce code est assez peu lisible  
 # pour les figures composées sur une grille régulière  
@@ -280,16 +238,10 @@ ax4.plot(x, y, 'y'); # jaune
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## améliorer les figures composées
 #
-# <br>
-#
 # on peut faire un peu de cosmétique  
 # sachant que quand on commence *on ne s'arrête plus* et on perd beaucoup de temps pour améliorer *à la marge*
 #
-# <br>
-#
 # préférez au début des affichages minimalistes à peu près lisibles
-#
-# <br>
 #
 # quelques fonctions pour améliorer:
 #
@@ -300,8 +252,6 @@ ax4.plot(x, y, 'y'); # jaune
 # * et aussi `ax.set_xlabel`, `ax.set_ylabel`...
 #
 # * et enfin le **magique** `plt.tight_layout()` pour ajuster automatique les paddings
-#
-# <br>
 #
 # exemple de 3 sous-figures avec titres, sous-titres et légendes  
 # à essayer avec et sans `plt.tight_layout()`
@@ -324,8 +274,6 @@ ax4.plot(x, y, 'y'); # jaune
 #
 # # plt.tight_layout()
 # ```
-#
-# <br>
 #
 # certaines fonctionnalités sont très avancées  
 # référez-vous à la documentation  https://matplotlib.org/api/axes_api.html  

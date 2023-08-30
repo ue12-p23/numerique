@@ -48,8 +48,6 @@ import numpy as np
 # %% [markdown] tags=["framed_cell"]
 # ## les données de Johns Hopkins
 #
-# <br>
-#
 # les données sur le corona virus
 #
 # * sont publiées par le département *Center for Systems Science and Engineering* (CSSE)
@@ -65,8 +63,6 @@ official_url = "https://github.com/CSSEGISandData/COVID-19"
 # %% [markdown] tags=["framed_cell"]
 # ## autre jeu de données intéressant
 #
-# <br>
-#
 # un dépôt de *seconde main* <https://github.com/pomber/covid19>
 #
 # * consolide les données du CSSE
@@ -81,15 +77,11 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # %% [markdown] tags=["framed_cell"]
 # ## le format `json`
 #
-# <br>
-#
 # nous avons vu le `csv`
 #
 # * un format de données très simple décrivant une table
 # * les éléments séparés par un caractère (`,` ou `;`...)
 # * pouvant contenir des identificateurs, des chaînes de caractères et des nombres
-#
-# <br>
 #
 # `json` est un format de données bien plus structuré avec
 #
@@ -97,8 +89,6 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # * les `list` sont les tableaux python
 # * les `dict` sont les dictionnaires `Python`  
 #   permettant de décrire des objets `{attribut1:valeur1, attribut2:valeur2,...}`
-#
-# <br>
 #
 # par exemple, la liste des animaux avec leur vitesse et leur longévité sera, en `json`
 #
@@ -142,8 +132,6 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # %% [markdown] tags=["framed_cell"]
 # ## format `json` pour le covid
 #
-# <br>
-#
 # le fichier https://pomber.github.io/covid19/timeseries.json contient un objet `dict` dont
 #
 # * les clés sont les pays du monde
@@ -179,28 +167,20 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # %% [markdown] tags=["framed_cell"]
 # ### récupération avec `requests`
 #
-# <br>
-#
 # le module `requests` permet de *récupérer* des fichiers sur Internet  
 # utiliser cette approche permet de toujours avoir des **données récentes**  
 # **mais** demande une bonne connexion à Internet  
 # sinon allez à la slide (l'encadré) suivante qui utilise des données figées
 #
-# <br>
-#
 # `requests` n'est pas dans la librairie standard  
 # il faut donc l'installer comme d'habitude avec `pip`  
 # (on fait comment déjà ?)
-#
-# <br>
 #
 # une fois que c'est fait on peut l'importer
 #
 # ```python
 # import requests
 # ```
-#
-# <br>
 #
 # avec la fonction `requests.get` on envoie la *requête* d'une URL  
 # et on reçoit une réponse  
@@ -212,8 +192,6 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # response = requests.get(json_url)
 # ```
 #
-# <br>
-#
 # on peut vérifier que l'échange s'est bien passé
 #
 # ```python
@@ -221,16 +199,12 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # -> True
 # ```
 #
-# <br>
-#
 # la méthode `json()` sur l'objet `Response` décode le format JSON  
 # et renvoie les données prêtes pour des traitements en Python  
 #
 # ```python
 # by_country = response.json()
 # ```
-#
-# <br>
 #
 # on voit bien une structure Python de **`dict`** et de `list`  
 # correspondant au contenu du fichier `json` vu ci-dessus
@@ -243,8 +217,6 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 #       {'date': '2020-1-24', 'confirmed': 0, 'deaths': 0, 'recovered': 0},
 #     ...
 # ```
-#
-# <br>
 #
 # si votre connexion ne vous permet pas la requête  
 # voir la prochaine cellule de cours
@@ -278,12 +250,8 @@ else:
 # %% [markdown] tags=["framed_cell"]
 # ### chargement avec lib `json`
 #
-# <br>
-#
 # si l'accès Internet n'est pas possible, nous exposons une copie des données  
 # faite il y a quelque temps, dans le fichier `covid-frozen.json`
-#
-# <br>
 #
 # le module `json` de la librairie standard permet de *lire* des fichiers en format json  
 # on l'importe
@@ -291,8 +259,6 @@ else:
 # ```python
 # import json
 # ```
-#
-# <br>
 #
 # après avoir ouvert un fichier en lecture en `python`  
 # la fonction `json.load` lit le contenu dans un objet `python`
@@ -303,8 +269,6 @@ else:
 # with open(json_file) as f:
 #     by_country = json.load(f)
 # ```
-#
-# <br>
 #
 # on a une structure Python de `dict` et de `list`
 #
@@ -433,19 +397,15 @@ global_df1.head()
 # 1. prenez la clé `'France'`  
 # construisez la dataframe à partie de la valeur de cette clé  
 # (la liste des enregistrements temporels de cas de covid)
-# <br>
 #
 # 1. quelles sont les colonnes de cette dataframe ?  
 # combien y-a-t-il d'entrées (de mesures différentes)
-# <br>
 #
 # 1. vous remarquez que cette dataframe ne contient plus l'information sur le pays  
 # ajoutez à cette dataframe une colonne de nom `'country'` contenant `'France'` à chaque ligne
-# <br>
 #
 # 1. faites de même avec la clé `'Italy'`  
 # et utilisez la fonction `pandas.concat` pour concaténer les deux dataframes
-# <br>
 #
 # 1. généralisez et construisez une dataframe avec tous les pays  
 # vous devez utiliser un `for` python
@@ -515,22 +475,16 @@ global_df.loc[0]
 # %% [markdown] tags=["framed_cell"]
 # **les index ne sont pas toujours uniques**
 #
-# <br>
-#
 # ce qui s'est passé c'est que :  
 # chacune de nos dataframe par pays a été construite à partir d'un index **séquentiel**  
 # i.e. un `RangeIndex` qui commence à chaque fois à 0  
 # et lors du `concat` on a conservé ces valeurs  
 # ce qui crée une multitude de lignes indexées par 0 (un par pays)
 #
-# <br>
-#
 # c'est un trait de `pandas`  
 # contrairement aux dictionnaires Python - où une clé est forcément unique  
 # il est possible de **dupliquer plusieurs entrées dans les index**  
 # ligne ou colonne - d'une dataframe
-#
-# <br>
 #
 # même si ça n'est en général pas souhaitable  
 # c'est souvent commode de pouvoir le faire  
@@ -547,17 +501,11 @@ global_df.loc[0]
 # %% [markdown] tags=["framed_cell"]
 # ### les dates en `pandas`
 #
-# <br>
-#
 # si les valeurs des dates sont de simples `str` - chaînes de caractères  
 # vous ne pourrez pas leur appliquer de fonctionnalités spécifiques aux dates
 #
-# <br>
-#
 # la fonction `pandas.to_datetime` permet de transformer  
 # une chaîne de caratères contenant une date en un objet de type date
-#
-# <br>
 #
 # ```python
 # d = pd.to_datetime('2020-12-22')
@@ -581,28 +529,18 @@ print(d.year,  # 2020
 # %% [markdown] tags=["framed_cell"]
 # ### les formats de dates en `pandas`
 #
-# <br>
-#
 # sans indications précises, `pandas` a inféré le format de la date  
 # `'2020-1-2'` sera-il ainsi le 2 janvier  
 # et non le premier février
 #
-# <br>
-#
 # il est beaucoup plus sûr de passer à `pandas.to_datetime`  
 # le format de vos dates
-#
-# <br>
 #
 # en utilisant `'%Y'` pour l'année, `%m` pour le mois et `'%d'` pour le jour  
 # on exprime le format des dates dans une chaîne de caractères
 #
-# <br>
-#
 # `'2020-1-2'` avec le format `'%Y-%m-%d'` donnera le 2 janvier 2020  
 # `'2020-1-2'` avec le format `'%Y-%d-%m'` donnera le 1 février 2020  
-#
-# <br>
 #
 # ```python
 # pd.to_datetime('2020-1-2', format='%Y-%d-%m').day
@@ -627,8 +565,6 @@ pd.to_datetime('15 july 2021 08:00')
 
 # %% [markdown] tags=["framed_cell"]
 # ### convertissons nos dates
-#
-# <br>
 #
 # reprenons à partir de la dataframe globale
 #
@@ -750,8 +686,6 @@ clean_df.loc[['France', 'Italy']]
 # %% [markdown] tags=["framed_cell", "level_intermediate"]
 # ### un exemple de slicing (très) avancé
 #
-# <br>
-#
 # pour illustrer la puissance de pandas, et la pertinence de notre choix d'index  
 # voyons comment utiliser du **slicing** (*très très avancé*)  
 # pour extraire cette fois les données relatives à
@@ -759,12 +693,8 @@ clean_df.loc[['France', 'Italy']]
 # * deux pays au hasard - disons `France` et `Italy`
 # * à la période 1er Juillet - 15 Août 2021 inclus
 #
-# <br>
-#
 # pour ça on va tirer profit de la structure de l'index  
 # et aussi de la puissance du type `datetime64`
-#
-# <br>
 #
 # on va fabriquer :
 #
@@ -776,15 +706,11 @@ clean_df.loc[['France', 'Italy']]
 # * un slice sur les colonnes  
 #   mais au fait on les veut toutes, on peut utiliser `:`
 #
-# <br>
-#
 # l'idée serait ensuite d'écrire simplement
 #
 # ```python
 # clean_df.loc [ (countries, time_slice), :]
 # ```
-#
-# <br>
 #
 # tout ça fonctionne très bien,  
 # **sauf pour** la création de `time_slice` qui, pour de sombres raisons de syntaxe,  
@@ -820,14 +746,10 @@ clean_df.loc[
 # %% [markdown] tags=["framed_cell"]
 # ### plot d'une dataframe
 #
-# <br>
-#
 # plutôt que d'utiliser directement la mécanique de `matplotlib.pyplot`  
 # ce qui a tendance à être fastidieux  
 # il est préférable d'utiliser les méthodes comme `plot()`  
 # mais **directement** sur la dataframe
-#
-# <br>
 #
 # la logique est alors de dessiner autant de courbes que de colonnes  
 # et de plus pandas se charge de tous les labels  
@@ -849,26 +771,18 @@ df.plot();
 # %% [markdown] tags=["framed_cell"]
 # ### sur un pays
 #
-# <br>
-#
 # du coup on a souvent seulement besoin de **mettre en forme** les données pour  
 # qu'elles puissent être directement plottées par cet algorithme simple
-#
-# <br>
 #
 # imaginons que dans notre cas on veuille comparer sur un graphique  
 # l'évolution d'une ou plusieurs des 3 mesures  
 # (`deaths`, `confirmed` et `recovered`) entre plusieurs pays  
-#
-# <br>
 #
 # disons par exemple les mesures `deaths` et `confirmed`  
 # entre `France`, `Italy` et `Germany`  
 # il nous faut donc construire une dataframe qui a  
 # six colonnes - le produit cartésien des 2 mesures et 3 pays  
 # et autant de lignes que de dates - indexé par les dates  
-#
-# <br>
 #
 # mais avant de réfléchir à comment faire ça,
 # commençons par le cas simple d'un seul pays, au moins  
@@ -896,11 +810,7 @@ clean_df.loc['France', ['deaths', 'confirmed']].plot();
 # %% [markdown] tags=["framed_cell"]
 # ### plusieurs pays
 #
-# <br>
-#
 # il nous reste maintenant à traiter le cas de plusieurs pays
-#
-# <br>
 #
 # 1. extrayez les données pour les 2 mesures et les 3 pays (appelons là `df3`)
 # 1. essayez de plotter la dataframe (je vous signale le paramètre `rot=45`  
@@ -918,18 +828,12 @@ df3.plot(rot=45);
 # %% [markdown] tags=["framed_cell"]
 # ### mise en forme des données
 #
-# <br>
-#
 # quelle est la forme de `df3` ?  
 # à ce stade vous devriez avoir 2 colonnes,  
 # et en gros 3 fois plus de lignes que dans un pays
 #
-# <br>
-#
 # alors qu'on avait dit qu'on voulait 6 colonnes, et autant
 # de lignes que dans un pays (autant que de jours de mesure)
-#
-# <br>
 #
 # pour obtenir cette forme (qui bien sûr contient toujours autant de données)  
 # on veut faire un découpage qui ressemble à ceci
@@ -942,25 +846,17 @@ df3.plot(rot=45);
 # %% [markdown] tags=["framed_cell"]
 # ### `df.unstack()`
 #
-# <br>
-#
 # c'est justement le propos de la méthode `unstack()` sur la dataframe  
 # qui fonctionne en déplaçant un niveau d'index  
 # de l'index des lignes vers l'index des colonnes
-#
-# <br>
 #
 # dans notre cas précis nous avons  
 # . **en lignes** un multi-index à deux niveaux `country` et `date`  
 # . et **en colonnes** un index simple (un niveau) de 2 colonnes
 #
-# <br>
-#
 # et nous pourrions obtenir ce qu'on cherche si on pouvait  
 # en quelque sorte "faire passer" le niveau d'index `country`  
 # de la direction des lignes à celle des colonnes  
-#
-# <br>
 #
 # comme le niveau d'index `country` est le premier  
 # donc d'indice 0, on va appeller
@@ -968,8 +864,6 @@ df3.plot(rot=45);
 # ```python
 # df3.unstack(0)
 # ```
-#
-# <br>
 #
 # et vous pouvez constater que nous avons à présent  
 # . **en lignes** un seul niveau d'index - les dates  

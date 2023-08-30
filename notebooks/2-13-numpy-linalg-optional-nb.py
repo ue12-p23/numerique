@@ -41,14 +41,10 @@ import numpy as np
 # %% [markdown]
 # ## contenu de ce notebook (notebook à sauter)
 #
-# <br>
-#
 # **IMPORTANT**  
 # ce notebook est utile aux enseignements de mathématiques  
 # **sachez qu'il existe** pour vous y référer  
 # **sans l'étudier** en cours d'informatique
-#
-# <br>
 #
 # **liste des fonctions présentées** (succinctement)
 #
@@ -67,7 +63,6 @@ import numpy as np
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ##  introduction et contexte
-# <br>
 #
 # les fonctions d'algèbre linéaire `numpy.linalg` sont très efficaces, parce que
 # 1. fondées sur des algorithmes efficaces
@@ -75,26 +70,18 @@ import numpy as np
 # 1. implémentations qui tirent parti du *multithreading*  
 # (découpage d'un programme en sous-programmes s'exécutant *en même temps*)
 #
-# <br>
-#
 #
 # pour les différences entre les fonctions de `numpy` et de `scipy`  
 # lire les documentations  https://docs.scipy.org/doc/numpy/reference/routines.linalg.html
 #
-# <br>
-#
 # nous avons vu précédemment des opérations élément-par-élément comme `numpy.mult`(`*`)  
 # nous allons voir rapidement, les fonctions dédiées à l'algèbre linéaire
-#
-# <br>
 #
 # la librarie `numpy` est utilisée dans vos cours de mathématiques  
 # pour les manipulations de vecteurs et de matrices
 #
-# <br>    
-#
 # aussi nous ne regardons que quelques fonctions de base en dimension < à 3
-#                                                                        
+#
 # pour plus d'information, regardez la documentation
 #
 # https://numpy.org/doc/stable/reference/routines.linalg.html
@@ -105,20 +92,14 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## terminologie
 #
-# <br>
-#
 # on va se mettre d'accord sur les terminologies `matrice`, `vecteur` et `produit`
-#
-# <br>
 #
 # attention au type des éléments
 #
 # * les `matrices` et les `vecteurs` seront des `numpy.ndarray`
 # * les affectations peuvent entraîner des modifications de valeurs
 #
-# <br>
-#
-# ```python    
+# ```python
 # A = np.array([[2, 3, -7], [6, -4, 5]])
 # A.dtype # int64
 # A[0] = np.pi
@@ -134,8 +115,6 @@ A
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les matrices et vecteurs
-#
-# <br>
 #
 # une **matrice** de `m` lignes et `n` colonnes
 #
@@ -153,8 +132,6 @@ A
 # print(A.shape)  # (4, 3)
 # ```    
 # les objets de forme `(1, n)` et `(m, 1)` sont des matrices
-#
-# <br>
 #
 # ----------------------------------
 #
@@ -191,15 +168,11 @@ print(V.shape)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le produit d'une matrice et d'un vecteur `numpy.dot`
 #
-# <br>
-#
 # $A\cdot V$
 #
 # * `np.dot(A, V)`
 # * ou aussi `A.dot(V)`
 #
-#
-# <br>
 #
 # matrice    
 # ```python
@@ -241,15 +214,11 @@ print(A.dot(V))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le produit de deux matrices `numpy.dot`
 #
-# <br>
-#
 # $A\cdot B$
 #
 # * `np.dot(A, B)`
 # * ou aussi `A.dot(B)`
 #
-#
-# <br>
 #
 # matrices `A` et `B`   
 # ```python
@@ -296,12 +265,8 @@ A.dot(B)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ##  produit matriciel avec `@` et `numpy.matmul`
 #
-# <br>
-#
 # il existe une fonction `numpy.matmul`  
 # qui s'écrit aussi sous la forme `@`
-#
-# <br>
 #
 # ```python
 # np.matmul(A, B)
@@ -311,7 +276,6 @@ A.dot(B)
 # ```python
 # A@B
 # ```
-# <br>
 #
 # `numpy.matmul` et `np.dot`
 #
@@ -329,8 +293,6 @@ A @ B
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le produit scalaire
 #
-# <br>
-#
 # `numpy.dot` appliquée à deux vecteurs donne leur  produit scalaire
 #
 # ```python
@@ -338,15 +300,12 @@ A @ B
 # V1.shape # (3,)
 # V1 -> [ 1, -3,  8]
 # ```
-# <br>
 #
 # ```python
 # V2 = np.array([-6, 4, -7])
 # V2.shape # (3,)
 # V2 -> [-6 4 -7]
 # ```
-#
-# <br>
 #
 # ```python
 # np.dot(V1, V2)
@@ -377,7 +336,7 @@ np.dot(V1, V2)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la norme de vecteur
 #
-# <br>
+#
 #  prenons un vecteur $V =[v_1, ..., v_n]$
 #
 # la norme `np.linalg.norm(V)`  
@@ -386,14 +345,10 @@ np.dot(V1, V2)
 #  $\displaystyle \left\|{ {V}}\right\|_{2}={\sqrt {v_{1}^{2}+\cdots +v_{n}^{2}}}$
 #
 #
-# <br>
-#
 # un vecteur    
 # ```python
 # V = np.array([1, -3, 8])
 # ```
-#
-# <br>
 #
 # la fonction idoine
 # ```python
@@ -401,15 +356,11 @@ np.dot(V1, V2)
 # -> 8.602325267042627
 # ```
 #
-# <br>
-#
 # autre calcul
 # ```python
 # np.sqrt(np.dot(V, V))
 # -> 8.602325267042627
 # ```
-#
-# <br>
 #
 #
 # autre calcul
@@ -417,8 +368,6 @@ np.dot(V1, V2)
 # np.sqrt(np.sum(V*V))
 # -> 8.602325267042627
 # ```   
-#
-# <br>
 #
 # pour les autres normes, regardez la documentation
 #
@@ -434,12 +383,8 @@ np.sqrt(np.sum(V*V))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la transposée d'une matrice
 #
-# <br>
-#
 # fonction `numpy.transpose`  
 # ou `.T` pour écrire des codes plus lisibles
-#
-# <br>
 #
 # une matrice
 #
@@ -451,8 +396,6 @@ np.sqrt(np.sum(V*V))
 #       [10 11 12]]
 # ```
 #
-# <br>
-#
 # sa transposée
 #
 # ```python
@@ -461,7 +404,6 @@ np.sqrt(np.sum(V*V))
 #     [ 2,  5,  8, 11],
 #     [ 3,  6,  9, 12]])
 # ```
-# <br>
 #
 # ou encore
 #
@@ -479,16 +421,10 @@ print(A.T)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les matrices identité
 #
-# <br>
-#
 # se construisent avec la fonction `numpy.eye`  
 # (*eye* et *I* se prononcent pareil en anglais)
 #
-# <br>
-#
 # la fonction renvoie des matrices de type flottant
-#
-# <br>
 #
 # ```python
 # I = np.eye(5)
@@ -513,11 +449,8 @@ print(I.dtype)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le déterminant d'une matrice
 #
-# <br>
-#
 # la fonction `numpy.linalg.det`  
 # déclenche l'exception `np.linalg.LinAlgError` si la matrice n'est pas carrée
-# <br>
 #
 # une matrice carrée
 #
@@ -527,7 +460,6 @@ print(I.dtype)
 #       [0., 2., 0.],
 #       [0., 0., 2.]]
 # ```
-# <br>
 #
 # son déterminant
 #
@@ -535,8 +467,6 @@ print(I.dtype)
 # np.linalg.det(A)
 # ->  7.999999999999998   
 # ```
-#
-# <br>
 #
 # tentative de calcul du déterminant sur une matrice non-carrée
 # ```python
@@ -566,14 +496,11 @@ except np.linalg.LinAlgError as e:
 #
 # On peut créer une matrice diagonale à partir de la liste des éléments de sa diagonale
 #
-# <br>
-#
 # `numpy.diag`
 #
 # * sur une matrice, extrait le tableau des éléments de sa diagonale
 # * sur une liste d'éléments, construit la matrice diagonale
 #
-# <br>    
 # la matrice
 #
 # ```python
@@ -589,15 +516,12 @@ except np.linalg.LinAlgError as e:
 # -> [-11  68 -45]
 # ```
 #
-# <br>
-#
 # un vecteur  
 # possible avec une liste Python
 #
 # ```python
 # l = np.array([9, -45, 6])
 # ```    
-# <br>
 #
 # la matrice diagonale
 #
@@ -622,11 +546,7 @@ np.diag(l)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la trace d'une matrice
 #
-# <br>
-#
 # `numpy.trace` fait la somme des éléments de la diagonale de la matrice
-#
-# <br>
 #
 # la matrice `A`
 #
@@ -637,16 +557,12 @@ np.diag(l)
 #       [6, 7, 8]]
 # ```
 #
-# <br>
-#
 # la trace de `A`
 #
 # ```python    
 # np.trace(A)
 # -> 12
 # ```
-#
-# <br>
 #
 # la trace de `A`
 #
@@ -665,11 +581,9 @@ print(np.sum(np.diag(A)))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## l'inversion d'une matrice
 #
-# <br>
-#
 # `numpy.linalg.inv(A)` est le calcul de $A^{-1}$
 #
-# <br>
+#
 # une matrice
 #
 # ```python
@@ -679,8 +593,6 @@ print(np.sum(np.diag(A)))
 #       [1., 0., 0.]]
 # ```
 #
-# <br>
-#
 # son inverse   
 # ```python
 # np.linalg.inv(R)
@@ -689,8 +601,6 @@ print(np.sum(np.diag(A)))
 #     [0., 1., 0.]]   
 # ```
 #
-# <br>
-#
 # testons si cela fonctionne comme attendu $A^{-1}A = I$
 #
 # ```python
@@ -698,8 +608,6 @@ print(np.sum(np.diag(A)))
 # -> True
 # ```
 #
-#
-# <br>
 #
 # cet exemple est correct mais ce n'est pas toujours le cas  
 # puisque les calculs informatiques sont approchés   
@@ -716,8 +624,6 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## calculs approchés (avec tolérance)
 #
-# <br>
-#
 #
 # testons $A^{-1}A = I$ sur une matrice quelconque de floats  
 # générés aléatoirement
@@ -731,11 +637,7 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 # -> False
 # ```    
 #
-# <br>
-#
 # dans ce cas  $A^{-1}A \neq I$
-#
-# <br>
 #
 # regardons le produit $A^{-1}A$
 #
@@ -746,26 +648,19 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 #     [ 6.52983031e-18  1.58976614e-17  1.00000000e+00]]
 # ```      
 #
-# <br>
-#
 #
 # il est très proche de $I = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ \end{bmatrix}$ mais pas exactement égal  
 #
 # en effet si en mathématiques on écrit $A^{-1}A = I$, en informatique c'est plutôt $A^{-1}A \approx I$  
 # (*égal* à une tolérance près)  
 #
-# <br>
-#
 # d'ou l'intérêt de la fonction de comparaison `numpy.isclose`  
 # qui effectue une comparaison de deux tableaux à une tolérance près
-#
-# <br>
 #
 # ```python
 # np.all(np.isclose(np.dot(A_1, A), I))
 # -> True
 # ```    
-# <br>
 #
 # ça fonctionne bien comme attendu
 
@@ -780,8 +675,6 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les valeurs propres d'une matrice (*eigen values*)
 #
-# <br>
-#
 # on va calculer les $v$ tels que:
 #    - $f(v) = \lambda v$
 #    - $M \cdot v = \lambda v$
@@ -793,15 +686,11 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # * la liste des valeurs propres *eigen-values*
 # * et la liste des vecteurs propres *eigen-vectors*
 #
-# <br>
-#
 # prenons une matrice `M`    
 #
 # ```python
 # M = np.random.random(size=(3, 3))
 # ```
-#
-# <br>
 #
 # calculons ses valeurs et vecteurs propres `M`    
 #
@@ -814,8 +703,6 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # * les 3 valeurs propres sont dans un vecteur
 # * les 3 vecteurs propres forment les colonnes d'une matrice
 #
-# <br>
-#
 # prenons le premier vecteur propre et sa valeur propre
 #
 # ```python
@@ -823,17 +710,11 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # alpha0 = alpha[0] # première valeur propre
 # ```
 #
-# <br>
-#
 # vérifions si $M \cdot v_0 = \lambda_0 v_0$  
 # i.e. si `np.dot(M, v0) ==  alpha0*v0))`
 #
-# <br>
-#
 # naturellement les calculs sont approchés  
 # il faut utiliser l'égalité à une tolérance près
-#
-# <br>
 #
 # ```python
 # np.all(np.isclose(np.dot(M, v0),  alpha0*v0))
@@ -841,8 +722,6 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # ```
 #
 # c'est bien ça
-#
-# <br>
 #
 # exercice:  
 #     parcourez les vecteurs propres et les valeurs propres  
@@ -866,27 +745,20 @@ np.all(np.isclose(np.dot(M, v0),  alpha0*v0))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## résolution d'un système linéaire
 #
-# <br>
-#
 # on va calculer avec la fonction `numpy.linalg.solve`  
 # les racines du système linéaire $A \cdot x = b$
-#
-# <br>
 #
 # prenons une matrice
 #
 # ```python
 # A = np.random.random(size=(3, 3))
 # ```
-# <br>
 #
 # prenons un vecteur
 #
 # ```python
 # b = np.array([1, 2, 3])
 # ```
-#
-# <br>
 #
 # calculons la racine de l'équation $A \cdot x = b$
 #
@@ -895,8 +767,6 @@ np.all(np.isclose(np.dot(M, v0),  alpha0*v0))
 # x = np.linalg.solve(A, b)
 # ```
 #
-# <br>
-#
 # vérifions si $A \cdot x \approx b$
 #
 #
@@ -904,8 +774,6 @@ np.all(np.isclose(np.dot(M, v0),  alpha0*v0))
 # np.all(np.isclose(np.dot(A, x), b))
 # -> True
 # ```
-#
-# <br>
 #
 # une erreur `numpy.linalg.LinAlgError` sera levée
 #

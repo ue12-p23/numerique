@@ -56,11 +56,10 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 
 # %% [markdown]
 # 1. Importez la librairie `numpy`
-# <br>
 #
 # 1. Importez la librairie `matplotlib.pyplot`  
 # ou toute autre librairie d'affichage que vous aimez et/ou savez utiliser `seaborn`...
-# <br>
+#
 
 # %%
 # votre code
@@ -149,9 +148,8 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 
 # %% [markdown]
 # 1. Relire l'image
-# <br>
+#
 # 1. Découpez l'image en ses trois canaux Red, Green et Blue  
-# <br>
 #
 # 1. Afficher chaque canal avec `plt.imshow`  
 #     La couleur est-elle la couleur attendue ?  
@@ -171,13 +169,12 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 #     * donner le paramètre `cmap=` à `plt.imshow`, `'Reds'`,  `'Greens'` ou  `'Blues'`
 #
-#     <br>
 # 1. Corrigez vos affichages si besoin
-# <br>
+#
 # 1. Copiez l'image, remplacer dans la copie, un carré de taille `(200, 200)` en bas à droite  
 #    . par un carré de couleur RGB avec R à 219, G à 112 et B à 147 (vous obtenez quelle couleur)  
 #    . par un carré blanc avec des rayures horizontales rouges de 1 pixel  
-# <br>
+#
 # 1. enfin affichez les 20 dernières lignes et colonnes du carré à rayures
 
 # %%

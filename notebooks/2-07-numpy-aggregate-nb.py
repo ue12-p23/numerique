@@ -42,19 +42,13 @@ import numpy as np
 # %% [markdown]
 # ## contenu de ce notebook (sauter si déjà acquis)
 #
-# <br>
-#
 # ce notebook détaille les fonctions `numpy` qui combinent les éléments d'un tableau  
 # comme `numpy.sum`, `numpy.var`...
-#
-# <br>
 #
 # comment on utilise leur paramètre `axis`
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## introduction
-#
-# <br>
 #
 # nous avons vu des opérations `numpy` qui s'appliquent à un ou plusieurs tableaux  
 # et retournent un tableau de la même dimension
@@ -66,8 +60,6 @@ import numpy as np
 #           [30, 42, 56, 72, 90]])
 # ```
 #
-# <br>
-#
 # les fonctions d'agrégation vont permettre de combiner les valeurs d'un même tableau  
 # et de retourner des sous-tableaux
 #
@@ -75,11 +67,7 @@ import numpy as np
 # * max d'une matrice
 # * ...
 #
-# <br>
-#
 # vous devrez spécifier la dimension `axis` dans laquelle vous désirez appliquer l'opération
-#
-# <br>
 #
 # exemples de fonctions d'agrégation
 #
@@ -111,18 +99,12 @@ np.power(tab1, 2) + tab1
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple avec des vecteurs d'entiers
 #
-# <br>
-#
 # il n'y a qu'une dimension, qu'un `axe`  
 # c'est l'axe d'indice `0`     
 # il est donc optionnel
 #
-# <br>
-#
 # il suffit d'appliquer la fonction d'agrégation désirée au tableau  
 # elle s'applique à tous les éléments
-#
-# <br>
 #
 # fonction globale de `numpy`
 #
@@ -134,7 +116,6 @@ np.power(tab1, 2) + tab1
 # np.sum(vec) # 45
 # np.std(vec) # 2.87
 # ```
-# <br>
 #
 # méthode de `numpy.ndarray`    
 #
@@ -145,8 +126,6 @@ np.power(tab1, 2) + tab1
 # vec.sum() # 45
 # vec.std()  # 2.87   
 # ```
-#
-# <br>
 #
 # le type de la valeur retournée, en général `int64` ou`float64`     
 # peut ne pas coincider avec le type des éléments du tableau  
@@ -189,12 +168,8 @@ type(np.min(vec))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple avec un vecteur de booléens
 #
-# <br>
-#
 # Comment tester si tous les éléments de votre tableau sont vrais ?  
 # Comment tester si l'un au moins des éléments de votre tableau est vrai ?
-#
-# <br>
 #
 # **version pédestre** ... on fait la somme  
 # (`True` devient `1` et `False` `0`)
@@ -202,12 +177,8 @@ type(np.min(vec))
 # * si le résultat est la longueur du tableau... ils sont tous vrais
 # * si le résultat est 0... ils sont tous faux
 #
-# <br>
-#
 # **version `numpy`** avec les fonction `np.all` et `np.any`  
 # soit fonction globale soit méthode de `numpy.ndarray`
-#
-# <br>
 #
 # pour générer des booléens, générer aléatoirement des entiers entre `0` et `2` non-compris  
 # et demander un `dtype` `bool` (le type `np.bool` existe mais il est *deprecated*)
@@ -225,8 +196,6 @@ type(np.min(vec))
 # tab.sum() != 0 # any
 # ```
 #
-# <br>
-#
 # `np.all`  et `np.any` s'appliquent sur des valeurs de types autres que booléen  
 # les zéros des types seront `False` et le reste `True`
 
@@ -243,7 +212,6 @@ print(np.all(np.random.randint(1, 2, size=(10), dtype=bool))) # tous des 1
 # **exercice : programmer la version "pédestre"**
 #
 # 1. créez une fonction manuelle (sans utiliser `np.all`  et `np.any`) qui prend un tableau numpy de booléens en paramètre et détermine si tous les éléments du tableau sont vrais.
-# <br>
 #
 # 2. créez une fonction manuelle (sans utiliser `np.all`  et `np.any`) qui prend un tableau numpy de booléens en paramètre et détermine si tous les éléments du tableau sont faux.
 
@@ -260,8 +228,6 @@ def fake_none(tab):
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple de tableau en dim 4
-#
-# <br>
 #
 # ```python
 # tab = np.arange(120).reshape(2, 3, 4, 5)
@@ -303,8 +269,6 @@ def fake_none(tab):
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### somme en dimension 4
 #
-# <br>
-#
 # par défaut `numpy` appliquera l'opération sur tous les éléments du tableau  
 # et renverra une unique valeur
 #
@@ -314,14 +278,10 @@ def fake_none(tab):
 # -> 7140
 # ```
 #
-# <br>
-#
 # on peut préciser un axe avec `axis=i`
 #
 # * quand on va appliquer une opération suivant un axe  
 # cette dimension va disparaître dans le résultat  
-# <br>
-# <br>
 #
 # on considère `tab` formé de 2 groupes de 3 matrices de 4 lignes et 5 colonnes  
 # donc de forme `(2, 3, 4, 5)`
@@ -388,8 +348,6 @@ tab.sum(axis=(1, 2))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### min et max globaux en dimension 4
 #
-# <br>
-#
 # on recherche l'indice (l'emplacement, pas la valeur) du plus grand élément du tableau
 #
 # c'est la méthode `argmax` qu'il nous faut
@@ -399,12 +357,9 @@ tab.sum(axis=(1, 2))
 # tab.argmax()
 # -> 119
 # ```
-# <br>
 #
 # **attention**  
 # il nous donne l'indice dans le tableau *aplati*
-#
-# <br>
 #
 # la fonction `numpy.unravel_index`  
 # re-calcule les coordonnées   

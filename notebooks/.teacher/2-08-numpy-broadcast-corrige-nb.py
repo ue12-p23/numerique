@@ -41,11 +41,7 @@ import numpy as np
 # %% [markdown]
 # ## contenu de ce notebook (sauter si déjà acquis)
 #
-# <br>
-#
 # comment `numpy` traite intelligemment les tableaux de formes différentes lors des opérations
-#
-# <br>
 #
 # les règles de broadcasting
 
@@ -57,20 +53,16 @@ import numpy as np
 #
 # 1. créez un premier tableau des 120 premiers entiers  
 # avec la forme de 2 groupes et 3 matrices de 4 lignes, et nombre de colonnes adéquat
-# <br>
 #
 # 1. créez un second tableau de 120 flottants équidistants entre 0 et 1  
 # donnez lui la même forme que le premier tableau
-# <br>
 #
 # 1. utilisez `np.round` pour arrondir les flottants à 2 décimales  
 # sans création d'un nouveau tableau (pensez à `out=`)
-# <br>
 #
 # 1. utilisez `np.add` pour ajouter les deux tableaux  
 #   a. en créant un troisième tableau pour ranger le résultat  
 #   b. en rangeant le résultat dans le premier tableau (avec le paramètre `out`) ?
-# <br>
 #
 # 1. renversez le premier tableau  
 #   selon tous les axes
@@ -106,14 +98,11 @@ tab2[::-1, ::-1, ::-1, ::-1]
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## tableaux de formes différentes: broadcasting
-# <br>
 #
 # vous voulez incrémenter de 1 tous les éléments d'une matrice d'entiers de forme `(100, 100)`
 # ```python
 # tab = np.arange(0, 10000).reshape(100, 100)
 # ```
-#
-# <br>
 #
 # créer une matrice de `ones` de la même forme et les ajouter... vous convient-il ?
 #
@@ -122,11 +111,7 @@ tab2[::-1, ::-1, ::-1, ::-1]
 # tab+inc
 # ```
 #
-# <br>
-#
 # c'est clairement sous-optimal: place-mémoire créée inutilement, perte de temps et de lisibilité
-#
-# <br>
 #
 # `numpy` propose une manière abrégée d'écrire ce genre d'opération grâce au `broadcasting`
 #
@@ -142,11 +127,7 @@ tab2[::-1, ::-1, ::-1, ::-1]
 # tab+[1]
 # ```
 #
-# <br>
-#
 # simple, élégant et non ambigu
-#
-# <br>
 #
 # mais attention : ne **fonctionne pas** du tout pareil sur les **listes `Python`**
 #
@@ -172,16 +153,11 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### le broadcasting, c'est quoi ?
-# <br>
 #
 # c'est la manière dont `numpy` traite les tableaux de formes différentes lors d'opérations
 #
-# <br>
-#
 # le *plus petit tableau*, **quand c'est possible**, est considéré comme *élargi* à la taille du plus grand  
 # afin qu'ils aient des formes compatibles
-#
-# <br>
 #
 # cela se fait **implicitement**
 
@@ -190,8 +166,6 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre un scalaire et un tableau par broadcasting
-#
-# <br>
 #
 # l'opération entre un scalaire est un tableau est toujours possible  
 # il est possible de considérer un scalaire comme un tableau de n'importe quelle forme
@@ -206,8 +180,6 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 #     [ 5,  6,  7,  8,  9],
 #     [10, 11, 12, 13, 14]]
 # ```
-#
-# <br>
 #
 #
 # ```python
@@ -238,8 +210,6 @@ mat + 1
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une ligne et un tableau par broadcasting
-#
-# <br>
 #
 # la ligne et le tableau doivent obéir à des conditions de forme (plutôt évidentes)
 #
@@ -308,12 +278,8 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une ligne et un groupes de matrices
 #
-# <br>
-#
 # de même, on peut ajouter une ligne à tout un groupe de matrices... si la forme des lignes coincide
 #
-#
-# <br>
 #
 # ```python
 # tab = np.arange(30).reshape(2, 3, 5)
@@ -327,8 +293,6 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 #      [25 26 27 28 29]]]
 # ```
 #
-# <br>
-#
 # ```python
 # tab + [1000, 2000, 3000, 4000, 5000]    
 # tab
@@ -340,8 +304,6 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 #     [1020, 2021, 3022, 4023, 5024],
 #     [1025, 2026, 3027, 4028, 5029]]]
 # ```
-#
-# <br>
 #
 # de même pour les groupes de groupes de groupes de ... de matrices, etc.
 
@@ -358,7 +320,6 @@ mat + [1000, 2000, 3000, 4000, 5000]
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une colonne et une matrice
-# <br>
 #
 # c'est pareil...
 #
@@ -369,7 +330,6 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #     [ 5,  6,  7,  8,  9],
 #     [10, 11, 12, 13, 14]]
 # ```    
-# <br>
 #
 # il faut naturellement que la forme des colonnes corresponde
 #
@@ -385,8 +345,6 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #
 # remarquez la forme de la colonne `col`
 #
-# <br>
-#
 # on ajoute
 #
 # ```python    
@@ -397,7 +355,7 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #      [310, 311, 312, 313, 314]]
 # ```
 #
-# <br>
+#
 # et ainsi de suite
 
 # %%
@@ -411,18 +369,12 @@ mat+col
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une ligne et une colonne
 #
-# <br>
-#
 # cela va faire ce à quoi vous vous attendez: une matrice !
-#
-# <br>
 #
 # **exercice**
 # 1. créer une ligne contenant par exemple 0, 1, 2, 3, 4
 # 1. créer une colonne contenant par exemple 10, 20, 30
 # 1. ajouter les deux
-#
-# <br>
 #
 # il faut faire attention à la forme de la colonne `(n, 1)`
 
@@ -436,8 +388,6 @@ line + col
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ## règles de broadcasting - avancés
 #
-# <br>
-#
 # Les dimensions des deux tableaux, sur lesquels une opération élément-par-élément est appliquée
 #
 # * sont comparées de droite à gauche (par paire)
@@ -449,8 +399,6 @@ line + col
 #      auquel cas elle est élargie à la dimension requise  
 #      et le broadcast continue
 #
-#
-# <br>
 #
 # * quand les formes ne sont pas consistantes, le broadcasting est impossible  
 # `numpy` rejette l'opération en déclenchant une erreur de type `ValueError`
@@ -480,8 +428,6 @@ except ValueError as e:
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ### exemple de broadcasting - avancés
 #
-# <br>
-#
 # * une matrice `A`$=\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix}$ de forme `(2_A, 3_A)`
 #
 #
@@ -490,29 +436,19 @@ except ValueError as e:
 #
 # * calculons `A + b`
 #
-# <br>
-#
 # la forme de `A` est $(2_A, 3_A)$ la forme de `b` est ($1_b$,)
 # 1. on compare les dimensions de droite: $3_A$ et $1_b$
 # 1. $b$ est élargi à $\begin{pmatrix} b_1 & b_1 & b_1 \end{pmatrix}$ de forme $(1_b, 3_b)$
 #
-# <br>
-#
 # on ajoute maintenant un tableau de forme $(2_A, 3_A)$ à une ligne de forme $(1_b, 3_b)$  
 # $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1  \end{pmatrix}$   
-#
-# <br>
 #
 # 1. on compare les dimensions précédentes: $2_a$ et $1_b$
 # 1. `b` est élargi à la dimension $(2_b, 3_b)$
 #
-# <br>
-#
 # on ajoute maintenant un tableau de forme $(2_A, 3_A)$ à un tableau de forme  $(2_b, 3_b)$  
 #
 #   $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b & b & b \\ b & b & b \end{pmatrix} = \begin{pmatrix} a_{11} + b & a_{12} + b & a_{13} + b \\ a_{21} + b & a_{22} + b & a_{23} + b \\  \end{pmatrix}$   
-#
-# <br>
 #
 # les formes sont désormais compatibles, les deux tableaux peuvent être ajoutés
 
@@ -522,50 +458,34 @@ except ValueError as e:
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ### exemple de broadcasting - ajout ligne et colonne
 #
-# <br>
-#
 # on veut faire l'opération $\begin{pmatrix} a_{1} & a_{2} & a_{3} \end{pmatrix} + \begin{pmatrix} b_1 \\ b_2 \\ b_3 \\ b_4 \end{pmatrix}$
 #
-# <br>
-#
 # la forme de la matrice-ligne `a` est $(1_a, 3_a)$, la forme de la matrice-colonne `b` est $(4_b, 1_b)$
-#
-# <br>
 #
 #
 # `numpy` compare $3_a$ à $1_b$ et élargit *b* à $\begin{pmatrix} b_1 & b_1 & b_1 \\ b_2 & b_2 & b_2 \\ b_3 & b_3 & b_3 \\ b_4 & b_a & b_4 \end{pmatrix}$
 #
-# <br>
-#
 #
 # on ajoute maintenant un tableau $(1_a, 3_a)$ à une matrice $(4_b, 3_b)$
-#
-# <br>
 #
 #
 # $\begin{pmatrix} a_{1} & a_{2} & a_{3} \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1 \\ b_2 & b_2 & b_2 \\ b_3 & b_3 & b_3 \\ b_4 & b_a & b_4 \end{pmatrix}$
 #
-# <br>
-#
 #
 #
 # `numpy` compare les dimensions $1_a$ et $4_b$ et élargit $a$ à $\begin{pmatrix} a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \end{pmatrix}$
-#
-# <br>
 #
 #
 #
 # $\begin{pmatrix} a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \\ a_{1} & a_{2} & a_{3} \end{pmatrix} + \begin{pmatrix} b_1 & b_1 & b_1 \\ b_2 & b_2 & b_2 \\ b_3 & b_3 & b_3 \\ b_4 & b_a & b_4 \end{pmatrix} = \begin{pmatrix} a_{1} + b_1 & a_{2} + b_1 & a_{3} + b_1 \\ a_{1} + b_2 & a_{2} + b_2 & a_{3} + b_2 \\ a_{1} + b_3 & a_{2} + b_3 & a_{3}  + b_3\\ a_{1} + b_4 & a_{2} + b_4 & a_{3} + b_4 \end{pmatrix}$
 #
 #
-# <br>
-#
 # les formes sont désormais compatibles, les deux tableaux ont pu être ajoutés
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple de broadcasting en dimension > 2
 #
-# <br>
+#
 # deux groupes de 3 matrices
 #
 # ```python
@@ -599,7 +519,7 @@ except ValueError as e:
 #         [400, 500, 600]]
 # ```
 #
-# <br>
+#
 # l'opération entre les deux tableaux
 #
 # ```python

@@ -41,21 +41,13 @@ import numpy as np
 # %% [markdown]
 # ## contenu de ce notebook (sauter si déjà acquis)
 #
-# <br>
-#
 # tests sur les tableaux multi-dimensionnels `numpy` par fonctions vectorisées `ufunc`
 #
-# <br>
-#
 # masques/filtres booléens
-#
-# <br>
 #
 # composition des conditions  
 # opérateurs logiques *bit-à-bit* `&` `|`  `~`  
 # équivalent `numpy` `np.logical_and` `np.logical_or` `np.logical_not`  
-#
-# <br>
 #
 # obtenir une vue sur les éléments du tableau initial  
 # `numpy.argwhere`, `numpy.nonzero` et `numpy.putmask`
@@ -63,15 +55,9 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## tests sur tableaux multi-dimensionnels
 #
-# <br>
-#
 # l'idée est de tester en une opération **tous les éléments** d'un tableau
 #
-# <br>
-#
 # **prenons un exemple**
-#
-# <br>
 #
 # générons aléatoirement un tableau d'entiers  
 # (ici entre `0` et `9`)
@@ -81,8 +67,6 @@ import numpy as np
 # -> tab [[1 8 5]
 #         [7 0 2]]
 # ```
-#
-# <br>
 #
 # testons la parité des éléments
 #
@@ -94,7 +78,6 @@ import numpy as np
 # ```python
 # np.equal(tab%2, 0)
 # ```   
-# <br>
 #
 # les résultats des comparaisons élément-par-élément  
 # sont rangés dans un tableau `np.ndarray`  
@@ -105,8 +88,6 @@ import numpy as np
 # -> [[False,  True,  False],
 #     [False,  True,  True]]    
 # ```
-#
-# <br>
 #
 #
 # **remarquez**
@@ -125,8 +106,6 @@ print(res.shape)
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## n'utilisez pas de for-python: utilisez les `ufunc`
-#
-# <br>
 #
 # les opérations de comparaison s'appliquent à tous les éléments d'un tableau en une seule fois  
 #
@@ -151,15 +130,11 @@ np.greater(tab, 5)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## combiner les résultats
 #
-# <br>
-#
 #
 # **les résultats** peuvent être combinés
 #
 # * en un résultat **global**
 # * en des **sous-tableaux** de résultats
-#
-# <br>
 #
 # un tableau
 # ```python
@@ -167,7 +142,6 @@ np.greater(tab, 5)
 # -> tab [[1 8 5]
 #         [7 0 2]]
 # ```
-# <br>
 #
 # regardons si il existe au moins une valeur paire dans le tableau des résultats
 #
@@ -178,8 +152,6 @@ np.greater(tab, 5)
 # ```     
 #
 #
-# <br>
-#
 # regardons si toutes les valeurs sont paires
 #
 # ```python
@@ -187,8 +159,6 @@ np.greater(tab, 5)
 # np.all(res)
 # -> False
 # ```     
-#
-# <br>
 #
 # comptons le nombre global de valeurs paires
 #
@@ -204,8 +174,6 @@ np.greater(tab, 5)
 # np.count_nonzero(tab%2==0)
 # -> 3
 # ```
-#
-# <br>
 #
 #
 # comptons le nombre de valeurs paires dans l'axe des lignes du tableau
@@ -237,27 +205,19 @@ np.count_nonzero(tab%2==0, axis=0)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les masques/filtres booléens
 #
-# <br>
-#
 # le tableau des résultats des tests est un **masque booléen**  
 #
 # * il a la **même forme** que le tableau initial
 # * il va servir de **filtre** sur le tableau initial
 #
-# <br>
-#
 # il va permettre de sélectionner dans le tableau initial  
 # les éléments pour lesquels le test est vrai
-#
-# <br>
 #
 # générons un `numpy.ndarray` de forme `(2, 3, 4)` d'entiers entre -10 et 10
 #
 # ```python
 # tab = np.random.randint(-10, 10, size=(2, 3, 4))
 # ```
-#
-# <br>
 #
 #
 # * filtrons les entiers strictement positifs
@@ -270,8 +230,6 @@ np.count_nonzero(tab%2==0, axis=0)
 # tab[np.greater(tab, 0)]
 # ```
 #
-# <br>
-#
 # on peut modifier tous les éléments filtrés d'un seul coup  
 # lors de l'application du filtre
 #
@@ -279,8 +237,6 @@ np.count_nonzero(tab%2==0, axis=0)
 # tab[tab > 0] = 0
 # tab # n'a plus que des éléments négatifs ou nuls
 # ```
-#
-# <br>
 #
 # on peut aussi construire les indices des éléments sélectionnés  
 # pour les repérer dans le tableau original
@@ -302,8 +258,6 @@ tab
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## composition des conditions
 #
-# <br>
-#
 # 4 règles
 #
 # * vous ne pouvez **pas** utiliser les opérateurs logiques Python `and`, `or`, `not`  
@@ -316,15 +270,12 @@ tab
 #
 # * vous devez parenthéser les sous-termes de vos expressions
 #
-# <br>
-#
 # on crée un tableau d'entiers aléatoires entre 0 et 100
 #
 # ```python
 # tab = np.random.randint(100, size=(3, 4))
 # ```
 #             
-# <br>
 #
 # masque pour sélectionner les éléments entre 25 et 75
 #
@@ -332,7 +283,6 @@ tab
 # (tab >= 25) & (tab < 75)
 # ```
 #                             
-# <br>
 #
 # masque pour sélectionner les éléments non-pairs entre 25 et 75
 #
@@ -340,8 +290,6 @@ tab
 # ```python
 # (tab >= 25) & (tab < 75) & ~(tab%2==0)
 # ```
-#
-# <br>
 #
 # et donc en version `numpy`
 #
@@ -382,8 +330,6 @@ except Exception as exc:
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### affecter une sélection
 #
-# <br>
-#
 # avec une expression de *sélection* de cette forme `tab[mask]`   
 # on peut **aussi modifier** (ces emplacements dans) le tableau de départ  
 # en affectant directement une valeur  
@@ -405,8 +351,6 @@ print(tab)
 
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ### c'est fragile (1)
-#
-# <br>
 #
 # par contre il faut être un peu prudent; certaines formes, pourtant voisines en apparence, ne vont pas fonctionner
 #
@@ -467,11 +411,7 @@ print(tab)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ### repérer les éléments par leurs indices
 #
-# <br>
-#
 # dans ce genre de situation, pour modifier les éléments sélectionnés dans le tableau d'origine, on peut repèrer les éléments par leur indice dans le tableau d'origine
-#
-# <br>
 #
 # et pour calculer ces indices, deux fonctions:
 #
@@ -484,14 +424,10 @@ print(tab)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ### la fonction `numpy.nonzero`
 #
-# <br>
-#
 # `numpy.nonzero`
 #
 # * renvoie un tuple de même dimension que le tableau d'origine
 # * dans chaque dimension, on a la liste des indices
-#
-# <br>
 #
 # exemple
 #
@@ -500,8 +436,6 @@ print(tab)
 # np.nonzero(~(tab%2==0))
 # -> ([0, 0, 1], [0, 2, 1])
 # ```
-#
-# <br>
 #
 # la première liste contient les indices des lignes  `[0, 0, 1]`
 #
@@ -515,8 +449,6 @@ print(tab)
 # -> 1, 3, 5
 # ```
 #
-# <br>   
-#
 # la **magie**: vous pouvez indicer le tableau d'origine avec ce tuple  
 # pour obtenir une vue sur le tableau d'origine
 #
@@ -525,8 +457,6 @@ print(tab)
 # tab[np.nonzero(~(tab%2==0))]
 # -> 1, 3, 5
 # ```
-#
-# <br>
 #
 # et donc vous pouvez modifier les éléments du tableau original    
 #
@@ -548,8 +478,6 @@ print("edited tab", tab)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ###  la fonction `numpy.argwhere`
 #
-# <br>
-#
 # `numpy.argwhere`
 #
 # * renvoie un tableau de dimension 2
@@ -557,8 +485,6 @@ print("edited tab", tab)
 # * chaque ligne donne l'index d'un élément  
 # dans chacune des dimensions du tableau d'origine
 #
-#
-# <br>
 #
 # exemple
 #
@@ -570,22 +496,15 @@ print("edited tab", tab)
 #     [1, 1]]
 # ```
 #
-# <br>
-#
 # la première ligne contient les indices du premier élément  `[0, 0]`
 #
 # la seconde ligne contient les indices du second élément `[0, 2]`
 #
 # la troisième ligne contient les indices du troisième élément `[1, 1]`
 #
-#
-# <br>   
-#
 # vous ne pouvez **pas**  indicer directement le tableau d'origine par ce tableau  
 # et non on ne fait pas de `for-python`
 #
-#
-# <br>
 #
 # on remarque
 #
@@ -616,16 +535,10 @@ tab[tuple(np.argwhere(cond).T)]
 #
 # **avancés**
 #
-# <br>
-#
 # la fonction `numpy.putmask(tab, cond, value)` remplace dans un `numpy.ndarray`  
 # les éléments obéissant à une condition, par une valeur donnée en argument
 #
-# <br>
-#
 # la modification est effectuée dans le tableau (en place)
-#
-# <br>
 #
 # ```python
 # tab = np.arange(12).reshape(3, 4)

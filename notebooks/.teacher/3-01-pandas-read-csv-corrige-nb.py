@@ -36,15 +36,12 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 
 # %% [markdown] tags=["framed_cell"]
 # ## introduction sur les tables de données
-# <br>
 #
 # nous avons vu quelques fonctions de `numpy`, pour manipuler les `numpy.ndarray` qui sont des tableaux
 #
 # * multidimensionnels
 # * homogènes
 # * d'éléments de taille fixe
-#
-# <br>
 #
 # il existe d'autres **tables de données**, très fréquentes en data-science où on a:
 #
@@ -61,20 +58,14 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown] tags=["framed_cell"]
 # ### format CSV
 #
-# <br>
-#
 # format de fichier, le plus simple, pour stocker ces tables ?
 #
 # * une observation par ligne
 # * dans chaque ligne, les informations séparées par un caractère choisi au préalable  
 # (qui sera le même pour tout le fichier)
 #
-# <br>
-#
 # fichier de format **`CSV`** pour ***Comma-Separated-Values***  
 # **notez bien**: le caractère séparateur n'est pas obligatoirement une `,`
-#
-# <br>
 #
 # voici le début du fichier `titanic.csv`, notez:
 #
@@ -99,8 +90,6 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown] tags=["framed_cell"]
 # ### la librairie de data-science
 #
-# <br>
-#
 # pour lire, mettre en forme et manipuler des données de data-science  
 # on utilise **la librairie `pandas`** (2008)
 #
@@ -108,24 +97,14 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # import pandas as pd
 # ```
 #
-# <br>
-#
 # `numpy` ne propose pas directement ces fonctions  
-#
-# <br>
 #
 # `pandas` expose un type évolué de table de données: les **`pandas.DataFrame`**
 #
-# <br>
-#
 # `pandas` possède un type pour gérer une ligne et une colonne le **`pandas.Series`**
-#
-# <br>
 #
 # `pandas` comme `numpy` favorisent l'efficacité  
 # (parfois au détriment de la lisibilité)
-#
-# <br>
 #
 # `pandas` repose entièrement sur `numpy` (aujourd'hui en tous cas)  
 # i.e. les données manipulées par `pandas` sont implémentées comme des tableaux `numpy.ndarray`  
@@ -137,15 +116,12 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown] tags=["framed_cell"]
 # ### on importe `pandas`
 #
-# <br>
-#
 # on importe la librairie `pandas`  
 # avec son raccourci conventionnel
 #
 # ```python
 # import pandas as pd
 # ```
-# <br>
 #
 # vous n'avez pas `pandas` ? faites
 # ```
@@ -154,8 +130,6 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # # depuis une cellule du notebook:
 # %pip install pandas
 # ```
-#
-# <br>
 #
 # regardez la version de la librairie installée  
 # <https://pandas.pydata.org/docs/whatsnew/index.html>
@@ -171,13 +145,10 @@ pd.__version__
 # %% [markdown] tags=["framed_cell"]
 # ### lecture d'un fichier `csv`
 #
-# <br>
-#
 # on lit le fichier de format `csv` de la table de passagers du Titanic
 # ```python
 # df = pd.read_csv('titanic.csv')
 # ```
-# <br>
 #
 # la table est une instance de `pandas.DataFrame`
 #
@@ -187,8 +158,6 @@ pd.__version__
 # ```
 #
 # (`pandas.core.frame.DataFrame` est le même type que `pandas.DataFrame`)
-#
-# <br>
 #
 # la méthode `df.head()` affiche les qq premières lignes
 #
@@ -222,11 +191,7 @@ df.head(2)
 # %% [markdown] tags=["framed_cell"]
 # ## description rapide de la table des données
 #
-# <br>
-#
 # la méthode `describe()` vous donne un premier aperçu rapide de vos données
-#
-# <br>
 #
 # sur une `DataFrame`, elle vous donne  
 # pour chaque colonne **de type numérique**
@@ -237,8 +202,6 @@ df.head(2)
 # * le minimum
 # * les 3 quartiles (les valeurs à 25%, 50% et 75% de données)
 # * le maximum
-#
-# <br>
 #
 # ```python
 # df.describe()
@@ -252,7 +215,6 @@ df.head(2)
 # 75%    668.50      1.00     3.00   38.00   1.00    0.00    31.00
 # max    891.00      1.00     3.00   80.00   8.00    6.00    512.32
 # ```
-# <br>
 #
 # on remarque que `pandas.DataFrame.describe`
 #
@@ -262,14 +224,10 @@ df.head(2)
 #
 # * n'a rien fait sur les colonnes non-numériques
 #
-# <br>
-#
 # on aurait pu n'appliquer la méthode qu'à une sous-dataframe  
 # ```python
 # df[['Age', 'Fare']].describe()  
 # ```
-#
-# <br>
 #
 # ou forcer la méthode à s'appliquer à **toutes les colonnes**  
 # pour les colonnes non-numériques, seront affichés à la place
@@ -282,8 +240,6 @@ df.head(2)
 # ```python
 # df.describe(include='all')
 # ```
-#
-# <br>
 #
 # la méthode `describe()` marche aussi sur les séries (colonnes)
 #
@@ -323,15 +279,11 @@ df['Sex'].describe()
 # %% [markdown] tags=["framed_cell"]
 # ### la notion d'index
 #
-# <br>
-#
 # la clé pour comprendre `pandas`:
 #
 # * **les lignes et les colonnes ont des index**
 # * les opérations sur ces index sont **le plus efficace possible**
 # * (on verra par la suite que les lignes et les colonnes ont aussi naturellement des indices, i.e. de `0` à `n-1`)
-#
-# <br>
 #
 # **la notion d'index**
 #
@@ -354,8 +306,6 @@ df['Sex'].describe()
 #
 # * c'est la technique des **tables de hachage** (comme les `dict` ou `set` Python)
 #
-# <br>
-#
 # `pandas` indexe ses lignes et ses colonnes suivant vos indications  
 # dit autrement, c'est à vous de choisir parmi les colonnes
 # celle(s) qui peut servir d'identificateur unique pour servir d'index
@@ -366,8 +316,6 @@ df['Sex'].describe()
 # %% [markdown] tags=["framed_cell"]
 # ### index des colonnes
 #
-# <br>
-#
 # dans notre fichier du Titanic seules les colonnes ont un nom  
 # (les lignes n'en ont pas), du coup:
 #
@@ -375,8 +323,6 @@ df['Sex'].describe()
 # * les **lignes** ont été **indexées par leur indice**  
 # i.e. une *simple numérotation à partir de 0*  
 # on y reviendra
-#
-# <br>
 #
 # l'attribut `columns` permet d'accéder aux colonnes de la table
 #
@@ -386,7 +332,6 @@ df['Sex'].describe()
 #           'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'],
 #    dtype='object')
 # ```
-# <br>
 #
 # c'est un object de type `Index`; il permet d'accéder facilement aux noms des colonnes
 #
@@ -406,18 +351,12 @@ df.columns[0]
 # %% [markdown] tags=["framed_cell"]
 # ### accès aux colonnes avec `df[]`
 #
-# <br>
-#
 # les colonnes ont un traitement privilégié en `pandas`
-#
-# <br>
 #
 # une table `pandas` est un "dictionnaire"
 #
 # * où les clés sont les noms des colonnes
 # * où les valeurs sont les colonnes (**de type `Series`**)
-#
-# <br>
 #
 # accès à la colonne `Age` de la data-frame du Titanic
 #
@@ -442,8 +381,6 @@ df.columns[0]
 # Name: Age, Length: 891, dtype: float64
 # ```
 #
-# <br>
-#
 # attention `pandas` accepte que plusieurs colonnes portent le même nom  
 # en cas d'accès, il vous les donne toutes
 
@@ -462,23 +399,15 @@ df[['Age', 'Sex']].head()
 # %% [markdown] tags=["framed_cell"]
 # ### accès aux colonnes avec `df.`
 #
-# <br>
-#
 # Lorsque le nom de la colonne ne comporte pas de caractère bizarre  
 # on peut aussi accéder à une colonne au travers d'**un attribut**
-#
-# <br>
 #
 # Cette notation est **plus lisible** mais aussi **plus limitée**  
 # par exemple ne fonctionne pas si le nom de la colonne contient un espace
 #
-# <br>
-#
 # Il faut le voir uniquement comme *une commodité*  
 # **Pas forcément recommandé aux débutants**  
 # Mais c'est *très utilisé* - il faut savoir le lire
-#
-# <br>
 #
 # ```python
 # df.Age is df['Age']
@@ -497,13 +426,10 @@ df.Age is df['Age']
 # %% [markdown] tags=["framed_cell"]
 # ### type des colonnes `pandas.Series`
 #
-# <br>
-#
 # ```python
 #     type(df['Age'])
 # -> pandas.core.series.Series
 # ```
-# <br>
 #
 # le second type en `pandas` est le type des colonnes, qui sont des `Series`
 #
@@ -518,18 +444,12 @@ type(df['Age'])
 # %% [markdown] tags=["framed_cell"]
 # ### indexer les lignes
 #
-# <br>
-#
 # c'est une bonne pratique de choisir **une colonne**  
 # comme **index** (des lignes) de la table  
 # quand on le peut...
 #
-# <br>
-#
 # par exemple, dans la table du titanic, on remarque que  
 # la colonne `PassengerId` contient un **identifiant unique** pour chaque passager
-#
-# <br>
 #
 # choisissons **cette colonne comme index** (des lignes) de la table  
 # pour cela, deux options
@@ -549,7 +469,7 @@ type(df['Age'])
 #    df = df.set_index('PassengerId')
 #    ```
 #
-# <br>
+#
 # observez le changement dans la présentation de la table
 
 # %%
@@ -574,8 +494,6 @@ df.head(1)
 # %% [markdown] tags=["framed_cell"]
 # ### une série aussi possède un index
 #
-# <br>
-#
 # * accèdons à la colonne `Name`  
 #   remarquons qu'ici aussi, l'objet Series possède un index  
 #   qui en l'occurrence est `PassengerId` (provient de la `df`)
@@ -596,12 +514,8 @@ df.head(1)
 #     832                      Richards, Master. George Sibley
 #    ```
 #
-# <br>
-#
 # * toutes les colonnes de la dataframe partagent **le même index**  
 #   c'est de cette façon que les colonnes sont "alignées" entre elles
-#
-# <br>
 #
 # * accèdons à la colonne `Name` de la première ligne  
 #   son index (`PassengerId`) est `552`
@@ -639,12 +553,8 @@ df['Name'][552]
 # %% [markdown] tags=["framed_cell"]
 # ### différence entre index et indice
 #
-# <br>
-#
 # les **indices** c'est quand on compte nos éléments à partir de `0`  
 # (les colonnes comme les lignes ont aussi des indices)
-#
-# <br>
 #
 # les **index** c'est quand on utilise des valeurs fournies par l'utilisateur, comme
 #
@@ -652,8 +562,6 @@ df['Name'][552]
 # * ou les **identifiants** de lignes  
 #   par ex. plus haut `552` est l'index de la première ligne parce que  
 #  dans la colonne-index `PassengerId`, la première ligne contient `552`
-#
-# <br>
 #
 # si une table n'a **pas d'index** particulier,  
 # i.e. avant qu'on fasse un `set_index()`  
@@ -667,11 +575,7 @@ df['Name'][552]
 # %% [markdown] tags=["framed_cell"]
 # ### l'index des lignes
 #
-# <br>
-#
 # il est accessible par l'attribut `pandas.DataFrame.index`
-#
-# <br>
 #
 # lisons la data-frame du titanic sans fixer l'index de lignes
 #
@@ -682,8 +586,6 @@ df['Name'][552]
 # ```
 #
 # * l'index est alors un `RangeIndex` de `0` à `890` inclus
-#
-# <br>
 #
 # lisons la data-frame du titanic et choisissons la colonne `PassengerId` comme index de ligne
 #
@@ -697,8 +599,6 @@ df['Name'][552]
 # ```
 #
 # * les index des lignes sont les valeurs de la colonne `PassengerId`
-#
-# <br>
 #
 # faisons l'indexation précédente en deux coups  
 #
@@ -715,8 +615,6 @@ df['Name'][552]
 #               556, 236, 224, 598, 258, 463, 287, 326, 396, 832],
 #              dtype='int64', name='PassengerId', length=891)
 # ```
-#
-# <br>
 #
 # `pandas.Int64Index` et `pandas.RangeIndex` sont tout deux des `pandas.Index`
 
@@ -753,12 +651,8 @@ df.index
 # %% [markdown] tags=["framed_cell"]
 # ## dimension et forme de la table
 #
-# <br>
-#
 # `pandas` est fondé sur `numpy`  
 # cela pourrait changer dans le futur
-#
-# <br>
 #
 # la **dimension** de la table est donnée par l'attribut `pandas.DataFrame.ndim`
 #
@@ -769,8 +663,6 @@ df.index
 #
 # une `pandas.dataFrame` est une table donc a deux dimensions
 #
-# <br>
-#
 # la **forme** de la table est donnée par l'attribut `pandas.DataFrame.shape`
 #
 # ```python
@@ -780,11 +672,7 @@ df.index
 #
 # on retrouve là les attributs classiques de `numpy` `ndim`, `shape`
 #
-# <br>
-#
 # `numpy` s'occupe de stocker et manipuler le tableau de dimension 2
-#
-# <br>
 #
 # `pandas` apporte
 #

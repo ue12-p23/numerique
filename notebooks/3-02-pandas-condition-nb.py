@@ -41,12 +41,8 @@ import numpy as np
 # %% [markdown] tags=["framed_cell"]
 # ## conditions sur une dataframe
 #
-# <br>
-#
 # dans les analyses de tables de données  
 # il est fréquent de **sélectionner des données par des conditions**
-#
-# <br>
 #
 # les conditions peuvent s'appliquer, selon le contexte
 #
@@ -55,17 +51,11 @@ import numpy as np
 # * ou à toute une ligne
 # * ou à tout un sous-tableau, sous-colonne, sous-ligne
 #
-# <br>
-#
 # en `pandas`, comme en `numpy`, les fonctions sont **vectorisées**  
 # par souci de rapidité du code
 #
-# <br>
-#
 # il ne faut **jamais itérer avec un `for-python`** sur les valeurs d'une table  
 # (les itérations se font dans le code des fonctions `numpy` et `pandas`)
-#
-# <br>
 #
 # comme en numpy, une expression va s'appliquer à toute la structure
 # et retourner une structure du même type
@@ -83,8 +73,6 @@ import numpy as np
 
 # %% [markdown] slideshow={"slide_type": "slide"} tags=["framed_cell"]
 # ## conditions et masques
-#
-# <br>
 #
 # regardons cet exemple en détail:  
 # quels passagers avaient moins de 12 ans ?
@@ -105,13 +93,9 @@ import numpy as np
 #     Name: Age, Length: 891, dtype: bool
 # ```
 #
-# <br>
-#
 # cette expression retourne des **booléens** - appelée **un masque**  
 # dans une `pandas.Series` dont le type est naturellement `bool`  
 # avec, pour chaque valeur de la colonne, la réponse au test
-#
-# <br>
 #
 # en `pandas` comme en `numpy` pour combiner les conditions  
 #
@@ -134,8 +118,6 @@ import numpy as np
 #   précédences (priorités) qui sont non intuitives, et très différentes des opérateurs logiques (`and` et autres)
 #
 # </div>
-#
-# <br>
 #
 # on pourra ensuite utiliser ces tableaux de booléens  
 #
@@ -169,8 +151,6 @@ girls.sum()
 # -> 68
 # ```
 #
-# <br>
-#
 # ou utiliser la méthode `value_counts()`  
 # qui compte les occurrences dans une colonne  
 #
@@ -183,8 +163,6 @@ girls.sum()
 # ```
 #
 # la méthode vous indique la colonne `Age` et son type `int64`
-#
-# <br>
 #
 # ainsi parmi les passagers dont on connait l'âge  
 # `68` passagers,  ont moins de `12` ans  
@@ -202,20 +180,12 @@ children.value_counts()
 # %% [markdown] tags=["framed_cell"]
 # ### contexte général
 #
-# <br>
-#
 # souvent, certaines colonnes ont des valeurs manquantes...  
 # dans l'exemple du Titanic, ce sont les valeurs qui ne sont pas renseignées dans le `csv`  
 #
-# <br>
-#
 # on a souvent besoin de les trouver, les compter, et si nécessaire les éliminer
 #
-# <br>
-#
 # `NA` signifie Non-Available et `NaN` Not-a-Number
-#
-# <br>
 #
 # sur les `DataFrame` et les `Series`  
 # la méthode `isna()` construit **un masque**  
@@ -224,8 +194,6 @@ children.value_counts()
 #
 # * `True` signifie que la valeur est manquante
 # * `False` que la valeur ne l'est pas
-#
-# <br>
 #
 # il existe son contraire qui est `notna()`  
 # il existe aussi des synonymes `isnull()` et `notnull()` - **préférez** `isna`
@@ -236,8 +204,6 @@ children.value_counts()
 
 # %% [markdown] tags=["framed_cell"]
 # ### valeurs manquantes dans une colonne
-#
-# <br>
 #
 # regardons les valeurs manquantes d'une colonne
 #
@@ -255,8 +221,6 @@ children.value_counts()
 #     Name: Age, Length: 891, dtype: bool
 # ```
 #
-# <br>
-#
 # l'age du passager d'`Id` 261 est manquant  
 # on peut le vérifier dans le fichier en format `csv`:
 #
@@ -264,8 +228,6 @@ children.value_counts()
 # 261,0,3,"Smith, Mr. Thomas",male,,0,0,384461,7.75,,Q
 #                                 ^^
 # ```
-#
-# <br>
 #
 # combien d'ages sont manquants ?
 #
@@ -293,15 +255,11 @@ np.sum(df['Age'].isna()), sum(df['Age'].isna())
 # %% [markdown] tags=["framed_cell"]
 # ### valeurs manquantes sur une dataframe
 #
-# <br>
-#
 # la méthode `isna()` s'applique aussi à une dataframe  
 # et elle retourne une **dataframe de booléens** où - sans surprise :  
 #
 # * `True` signifie que la valeur est manquante
 # * `False` que la valeur ne l'est pas
-#
-# <br>
 #
 # regardons les valeurs manquantes d'une dataframe
 #
@@ -324,8 +282,6 @@ np.sum(df['Age'].isna()), sum(df['Age'].isna())
 # [891 rows x 11 columns]
 # ```
 #
-# <br>
-#
 # vous remarquez une dataframe de la **même taille** que `df`
 
 # %%
@@ -335,14 +291,10 @@ df.isna()
 # %% [markdown] tags=["framed_cell"]
 # ### compter les valeurs manquantes
 #
-# <br>
-#
 # comme en `numpy` je peux appliquer une fonction - ici `sum()` - en précisant l'`axis`  
 # `0` on applique la fonction dans l'axe des lignes (le défaut)  
 # `1` on applique la fonction dans l'axe des colonnes  
 # l'objet retourné est une série contenant le résultat de la fonction
-#
-# <br>
 #
 # exemple avec la somme (`sum`) des valeurs manquantes sur l'axe des lignes `axis=0`  
 # qui `sum` les lignes entre elles - le résultat est par colonne donc
@@ -373,14 +325,10 @@ df.isna()
 #
 # </div>
 #
-# <br>
-#
 # nous remarquons des valeurs manquantes dans les colonnes `Cabin`, `Age` et `Embarked`
 
 # %% [markdown] tags=["framed_cell"]
 # ### dans l'autre direction (axis=1)
-#
-# <br>
 #
 # exemple de la somme des valeurs manquantes sur l'axe des colonnes - par personne donc
 #
@@ -400,7 +348,6 @@ df.isna()
 #     832    1
 #     Length: 891, dtype: int64
 # ```
-# <br>
 #
 # le passager d'id `261` a deux valeurs manquantes
 
@@ -416,32 +363,22 @@ df.isna().sum(axis=1)
 # %% [markdown] tags=["framed_cell"]
 # ### utilisation des fonctions `numpy`
 #
-# <br>
-#
 # les méthodes `numpy` s'appliquent sur des `pandas.DataFrame` et des `pandas.Series`
-#
-# <br>
 #
 # on précise l'`axis`  
 # `0` pour l'axe des lignes (c'est le mode par défaut)  
 # `1` pour l'axe des colonnes  
-#
-# <br>
 #
 # différence avec `numpy`, si on appelle sans préciser `axis`
 #
 # * avec **numpy**: on obtient le résultat **global**  
 # * avec **pandas**: par défaut `axis=0`, on agrège sur l'axe des lignes (par colonne)
 #
-# <br>
-#
 # **si on désire le résultat global**
 # 1. soit on applique la fonction deux fois  
 #    e.g. `df.isna().sum().sum()`
 # 1. soit on peut passer par le sous-tableau `numpy`  
 #   et là la fonction `numpy.sum()` donnera le résultat global
-#
-# <br>
 #
 # la méthode `pandas.DataFrame.to_numpy` retourne le tableau `numpy.ndarray` de la DataFrame `pandas`
 #
@@ -453,8 +390,6 @@ df.isna().sum(axis=1)
 #           [False, False, False, ..., False,  True, False],
 #           [False, False, False, ..., False,  True, False]])
 # ```
-#
-# <br>
 #
 # on somme
 #

@@ -71,7 +71,6 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #    (`r` pour rouge et `s` pour le style de point ici square)  
 #    1. plotez avec paramètre `'b.'` et sans indiquer les abscisses, la colonne des ages
 #    1. que constatez-vous ?
-#    <br>
 #    1. si vous n'indiquez pas l'axe des abscisses de votre dessin que choisit `plt` ?
 
 # %% [markdown]

@@ -149,8 +149,6 @@ df.plot();
 # comme vous le voyez, le premier `plt.figure()` **est de trop**,  
 # il ne faut pas le mettre
 #
-# <br>
-#
 # mais par contre avec une série ça n'est pas le cas !?!
 #
 # *go figure*…

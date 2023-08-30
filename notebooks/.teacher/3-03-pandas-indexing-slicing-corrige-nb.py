@@ -40,28 +40,19 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 
 # %% [markdown] tags=["framed_cell"]
 # ## introduction
-# <br>
 #
 # manipuler des **parties** (vues) de nos données  
 # est une opération fréquente en traitement des données
-#
-# <br>
 #
 # d'où l'importance de savoir localiser dans nos tables `pandas` des sous-parties  
 # (élément, ligne, colonne, sous-séries, sous dataframes)  
 # afin de leur appliquer une fonction
 #
-# <br>
-#
 # `pandas` a mis ses efforts sur la gestion d'une indexation des lignes et des colonnes
-#
-# <br>
 #
 # ils ont privilégié le repérage des éléments d'une dataframe **par les index**  
 # (les **noms** de colonnes et les **labels** de lignes)  
 # et **pas** par les **indices** comme en Python ou en `numpy`
-#
-# <br>
 #
 # Pourquoi ?
 #
@@ -73,8 +64,6 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 #   i.e. si vos données se manipulent facilement à base d'indices  
 #   autant rester avec des tableaux 2D `numpy`  
 #   avec leurs indices de ligne et de colonne
-#
-# <br>
 #
 # <div class=note>
 #
@@ -89,16 +78,10 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # %% [markdown] tags=["framed_cell"]
 # ## copier une dataframe ou une série
 #
-# <br>
-#
 # pour dupliquer une dataframe ou une série (ligne ou colonne)  
 # toujours la méthode classique `copy` des objets `Python`
 #
-# <br>
-#
 # vous allez utiliser la méthode `pandas.DataFrame.copy` ou `pandas.Series.copy`
-#
-# <br>
 #
 # construisons une dataframe
 #
@@ -106,22 +89,17 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # df_aux = pd.read_csv('titanic.csv', index_col='PassengerId')
 # ```
 #
-# <br>
-#
 # copions la
 #
 # ```python
 # df = df_aux.copy()
 # ```
 #
-# <br>
-#
 # supprimons la
 #
 # ```python
 # del df_aux
 # ```
-# <br>
 #
 # la copie existe toujours
 #
@@ -130,8 +108,6 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # ->   Survived Pclass ...
 # PassengerId	...
 # ```
-#
-# <br>
 #
 # `df` est une nouvelle dataframe  
 # avec les mêmes valeurs que l'originale `df_aux`  
@@ -147,21 +123,13 @@ df.head(2)
 # %% [markdown] tags=["framed_cell"]
 # ## créer une nouvelle colonne
 #
-# <br>
-#
 # pour créer une nouvelle colonne  
 # on la rajoute dans le dictionnaire des colonnes
-#
-# <br>
 #
 # souvent on crée une nouvelle colonne  
 # en faisant un calcul sur des colonnes existantes
 #
-# <br>
-#
 # les opérations sur les colonnes peuvent utiliser la forme `df[nom_de_colonne]`
-#
-# <br>
 #
 # dans la dataframe du titanic  
 # créons une colonne des décédés (donc 1 - les survivants)
@@ -169,8 +137,6 @@ df.head(2)
 # ```python
 # df['Deceased'] = 1 - df['Survived']
 # ```
-#
-# <br>
 #
 # nous avons rajouté la clé `'Deceased'` dans l'index des colonnes  
 # `pandas` voit sa dataframe comme un dictionnaire des colonnes  
@@ -183,8 +149,6 @@ df.head(3)
 
 # %% [markdown] tags=["framed_cell"]
 # ## rappels `python`, `numpy`
-#
-# <br>
 #
 # pour accéder ou modifier des sous-parties de dataframe
 # nous ***pourrions être tentés***:
@@ -201,8 +165,6 @@ df.head(3)
 # -> L[1:3] = [200, 300, 500]
 # ```
 #
-# <br>
-#
 # * ou d'utiliser l'accès à un tableau par une paires d'**indices**  
 # comme vous le feriez en `numpy`
 #
@@ -218,8 +180,6 @@ df.head(3)
 #     [  6,   7,   8],
 #     [  9,  10,  11]])
 # ```
-#
-# <br>
 #
 # ***mais ATTENTION  
 # ce n'est pas comme ça que ça fonctionne en pandas!!!***
@@ -265,8 +225,6 @@ mat
 # %% [markdown] tags=["framed_cell"]
 # ### localisation avec `loc` et `iloc`
 #
-# <br>
-#
 # première chose à retenir donc, les accès dans la dataframe  
 # se font **au travers de 2 accessoires `loc`** et `iloc`  
 # qui prennent cette fois-ci leurs arguments *dans le bon sens*
@@ -274,8 +232,6 @@ mat
 # `df.loc[index_ligne, index_colonne]` **OUI**  
 # `df.iloc[indice_ligne, indice_colonne]` **OUI**  
 #
-#
-# <br>
 #
 # la différence entre les deux est que `loc` se base sur les **index**  
 # alors que `iloc` (retenir: *i* pour *integer*) se base sur les **indices**
@@ -328,21 +284,19 @@ df.iloc[-1, 2]
 # %% [markdown] tags=["framed_cell"]
 # ### sélection multiple
 #
-# <br>
-#
 # une fois ceci assimilé, `pandas` va offrir des techniques usuelles  
 # pour sélectionner plusieurs lignes (ou colonnes)  
 # 1. sélection multiple explicite
 # 1. slicing
 #
-# <br>
+#
 # commençons par la sélection multiple:  
 #
 # * si on ne précise pas les colonnes, on les obtient toutes  
 # * on peut mentionner simplement plusieurs index (ou indices)  
 #   que l'on passe dans une liste
 #
-# <br>
+#
 # quelques exemples
 #
 # ```python
@@ -404,13 +358,9 @@ df.loc[:, ['Name', 'Pclass']]
 # %% [markdown] tags=["framed_cell"]
 # ### slicing `pandas` et bornes
 #
-# <br>
-#
 # on va accéder à des sous-dataframe  
 # en étendant l'opération d'indexation `[i]` à des slices `[start:stop:step]`  
 # comme en `python` et `numpy`
-#
-# <br>
 #
 # **ATTENTION** pour le *slicing*  
 # il y a une **grande différence** entre `loc` et `iloc`  
@@ -427,12 +377,8 @@ df.loc[:, ['Name', 'Pclass']]
 # ### slicing avec `loc` par index
 #
 #
-# <br>
-#
 # on peut slicer sur les index  
 # **MAIS ATTENTION** pour les **index** `stop` est compris  
-#
-# <br>
 #
 # **exemple**  
 # regardons les index (lignes et colonnes)  
@@ -478,19 +424,13 @@ df.loc[ 638:261, 'Pclass': 'Age']
 # %% [markdown] tags=["framed_cell"]
 # ### slicing avec `iloc` par indices
 #
-# <br>
-#
 # on peut `slicer` sur les indices  
 # `df.iloc[start:stop:step, start:stop:step]`
-#
-# <br>
 #
 # ce cas est simple car il est conforme aux habitude Python/numpy  
 # la borne supérieure `stop` est exclue  
 # et donc en particulier le nombre d'items sélectionnés  
 # coincide avec `stop-start`
-#
-# <br>
 #
 # **exemple**  
 # si on prend les lignes d'indice `1` à `7`  
@@ -509,20 +449,12 @@ df.iloc[1:7, 1:4].shape
 # %% [markdown] tags=["framed_cell"]
 # ### localiser des lignes et des colonnes
 #
-# <br>
-#
 # ***ou sous-lignes et sous-colonnes***
-#
-# <br>
 #
 # avec le *slicing*, par indice et index, on peut obtenir des lignes et des colonnes  
 # ou des sous-lignes et des sous-colonnes
 #
-# <br>
-#
 # on obtient des objets de type `pandas.Series`
-#
-# <br>
 #
 # on peut slicer, par index, pour obtenir une ligne
 #
@@ -532,8 +464,6 @@ df.iloc[1:7, 1:4].shape
 # -> (11,)
 # ```
 #
-# <br>
-#
 # on peut slicer, par index,  pour obtenir une colonne
 #
 # ```python
@@ -541,8 +471,6 @@ df.iloc[1:7, 1:4].shape
 # df.loc[:, 'Survived'].shape
 # -> (891,)
 # ```
-#
-# <br>
 #
 # on peut slicer, par indice, **pour obtenir une ligne**
 #
@@ -559,8 +487,6 @@ df.iloc[1:7, 1:4].shape
 # df.iloc[0].shape
 # -> (11,)
 # ```
-#
-# <br>
 #
 # on peut slicer, par indice,  **pour obtenir une colonne**
 #
@@ -669,8 +595,6 @@ df.iloc[-10:][['Name', 'Pclass', 'Survived']]
 # %% [markdown] tags=["framed_cell"]
 # ### rappel sur les conditions
 #
-# <br>
-#
 # nous avons vu comment appliquer des conditions  
 # à une colonne ou à une data-frame  
 # et comment utiliser ce tableau de booléens pour des décomptes
@@ -681,7 +605,6 @@ df.iloc[-10:][['Name', 'Pclass', 'Survived']]
 # df_survived.sum()/len(df)
 # ->  0.3838383838383838
 # ```
-# <br>
 #
 # on a vu comment combiner ces conditions  
 # vous ne pouvez **pas** utiliser `and`, `or` et `not` python (pas vectorisés)  
@@ -710,23 +633,15 @@ print(   df_survived.shape   )
 # %% [markdown] tags=["framed_cell"]
 # ### sélection par masque booléen
 #
-# <br>
-#
 # les objets comme nous venons d'en construire  
 # e.g. `df['Sex'] == 'female'`  
 # sont des **séries à valeur booléennes**
 #
-# <br>
-#
 # une **série à valeur booléennes** s'appelle **un masque** (comme en numpy)
-#
-# <br>
 #
 # pour accéder à des sous-parties d'une dataframe  
 # on va simplement **indexer** une dataframe **par un masque**  
 # i.e. on va isoler les lignes de la dataframe où la valeur du booléen est vraie
-#
-# <br>
 #
 # et pour ça on écrit simplement  
 #
@@ -749,7 +664,6 @@ df [ df['Sex'] == 'female' ]
 
 # %% [markdown] tags=["framed_cell"]
 # ### `df[mask]` décortiqué
-# <br>
 #
 # faisons le *masque* des passagers de sexe féminin
 #
@@ -772,28 +686,20 @@ df [ df['Sex'] == 'female' ]
 #     Name: Sex, Length: 891, dtype: bool
 # ```
 #
-# <br>
-#
 # vous obtenez une `pandas.Series` de `bool`  
 # sa taille est le nombre de lignes de votre dataframe  
 # indiquant le résultat de la condition pour chaque les passagers  
 # le passager d'`Id` `499` est une femme
-#
-# <br>
 #
 # pour extraire la sous-dataframe des femmes  
 # on **indexe** notre dataframe, par cet objet de type `Series` de booléens
 #
 # seules sont conservées les lignes, dont les booléens sont vrais
 #
-# <br>
-#
 # dans l'expression `df[mask]`  
 # dans les crochets on n'a plus ni une slice, ni une liste  
 # mais un objet de type `Series`, qui s'apparente à une colonne,  
 # de booléens, que l'on appelle un **masque**
-#
-# <br>
 #
 # pour un code concis et lisible  
 # il est recommandé d'écrire directement la version abrégée
@@ -876,19 +782,13 @@ selection2
 # %% [markdown] tags=["framed_cell"]
 # ## résumé des méthodes d'indexation
 #
-# <br>
-#
 # * indexation directe par un masque `df[mask]`
 # * indexation au travers de `.loc[]`/`.iloc[]`
 #   * par un index/indice resp.
 #   * par liste explicite
 #   * par slicing -- borne **incluse avec `.loc[]`** et exclue avec `.iloc[]`
 #
-# <br>
-#
 # on peut mélanger les méthodes d'indexation
-#
-# <br>
 #
 # une liste pour les lignes et une slice pour les colonnes
 # ```python
@@ -905,8 +805,6 @@ selection2
 #          67   female  0       C.A. 29395  F33
 # ```
 #
-# <br>
-#
 # un masque booléen pour les listes et une liste pour les colonnes  
 # les colonnes `Sex` et `Survived` des passagers de plus de 71 ans
 # ```python
@@ -918,8 +816,6 @@ selection2
 #         631 male 1
 #         852 male 0
 # ```
-#
-# <br>
 #
 # le type du résultat dépend bien entendu de la dimension de la sélection
 #
@@ -945,25 +841,17 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # %% [markdown] tags=["framed_cell"]
 # ### sélections de parties de dataframe
 #
-# <br>
-#
 # une opération sur une dataframe `pandas` renvoie une **sous-partie** de la dataframe
-#
-# <br>
 #
 # **le problème**
 #
 # * savoir si cette sous-partie **réfère** la dataframe initiale ou est une **copie** de la data-frame initiale
 # * ...ça dépend du contexte
 #
-# <br>
-#
 # vous devez vous en soucier ?
 #
 # * oui, **dès que** vous essayez de modifier des sous-parties de dataframe
 # * tant que vous ne faites que lire, tout va bien
-#
-# <br>
 #
 # en effet
 #
@@ -973,13 +861,9 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # * si c'est une **référence partagée** (une vue)  
 # vos modifications dans la sélection, seront bien **répercutées** dans les données d'origine
 #
-# <br>
-#
 # **donc**  
 # savoir si une opération retourne une copie ou une référence, **c'est important !**  
 # et dépend toujours du contexte
-#
-# <br>
 #
 # **à retenir**
 #
@@ -992,8 +876,6 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #  **vous ne pouvez pas compter sur le résultat**  
 # ça fonctionne par hasard
 #
-# <br>
-#
 # (pour les avancés) ce *problème* s'appelle le *chained indexing*  
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 
@@ -1003,14 +885,11 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ### modification d'une copie
 #
-# <br>
+#
 # **par chainage d'indexations**
-# <br>
 #
 # prenons une dataframe et accèdons à une colonne  
 # en utilisant la syntaxe classique d'accès à une colonne comme à une clé d'un dictionnaire
-#
-# <br>
 #
 # la colonne des survivants `'Survived'`
 #
@@ -1018,7 +897,6 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # df = pd.read_csv('titanic.csv', index_col='PassengerId')
 # df['Survived']
 # ```
-# <br>
 #
 # on obtient une colonne de type `pandas.Series`  
 # accédons à l'élément d'index `1` de la colonne  
@@ -1029,12 +907,8 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # -> 0
 # ```
 #
-# <br>
-#
 # Pouvons-nous utiliser cette manière d'accéder pour modifier l'élément ?  
 # et ressusciter le passager d'index 1 en changeant son état de survie
-#
-# <br>
 #
 # essayons, on obtient un message d'erreur:
 #
@@ -1049,8 +923,6 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #
 # ```
 #
-# <br>
-#
 # **non**
 #
 # * `df['Survived'][1]` est clairement une indexation par chaînage, on voit les `[][]`
@@ -1058,11 +930,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # * toutes les indexations par chaînage sont des copies
 # * elle ne doivent pas être utilisées pour des modifications
 #
-# <br>
-#
 # si ça fonctionne c'est *par hasard*, vous **devez utiliser** `loc` ou `iloc` !
-#
-# <br>
 #
 # ```python
 # df.loc[1, 'Survived'] = 1
@@ -1093,19 +961,13 @@ df.loc[552, 'Survived']
 # %% [markdown] tags=["framed_cell"]
 # ### récapitulatif sur les modifications
 #
-# <br>
-#
 # vous voulez modifier une partie de votre `pandas.DataFrame`
-#
-# <br>
 #
 # lors d'accès à cette sous-dataframe
 #
 # * `pandas` peut retourner une copie de la sous data-frame
 # * sauf si vous utilisez `loc` et `iloc` (correctement i.e. sans chaînage)  
 # il retourne alors une vue vers la dataframe existante
-#
-# <br>
 #
 # Qu'est-ce-qu'un chaînage ?  
 #
@@ -1115,20 +977,14 @@ df.loc[552, 'Survived']
 # * cet accès retourne la série (`pandas.Series`) représentant la colonne `df['Age']`
 # * on accède à l'index `889` de cette série
 #
-# <br>
-#
 # donc `pandas` ne fera correctement la modification souhaitée de votre `pandas.DataFrame`  
 # que si vous utilisez `loc` ou `iloc` pour accéder à cette partie
-#
-# <br>
 #
 # sinon il vous dira *A value is trying to be set on a copy of a slice from a DataFrame*  
 # vous pouvez même avoir l'impression qu'il a fait l'affectation  
 # mais vous ne pouvez pas et ne devez **pas compter dessus**  
 # ça peut cesser de fonctionner à la prochaine release  
 # *don't program by coincidence!*
-#
-# <br>
 #
 # OUI
 # ```python
@@ -1141,15 +997,11 @@ df.loc[552, 'Survived']
 # df['Age'][889] = 28.5
 # ```
 #
-# <br>
-#
 # donc, pour modifier (écrire dans) une cellule, **il ne faut PAS faire**  
 # ~~`df.loc[889]['Age'] = 28.5`~~  
 # ~~`df['Age'][889] = 28.5`~~
 #
 # et si ça fonctionne, c'est par accident
-#
-# <br>
 #
 # La **bonne méthode**, prenez-en l'habitude, consiste à utiliser cet idiome :
 #
@@ -1168,8 +1020,6 @@ df['Age'][889] = 27.5
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ### récapitulatif indexation et modification
 #
-# <br>
-#
 # deux possibilité lors d'extractions de sous-partie d'une dataframe  
 # (obtenue par découpage de la dataframe d'origine)
 #
@@ -1182,7 +1032,6 @@ df['Age'][889] = 27.5
 #           A value is trying to be set on a copy of a slice from a DataFrame.
 #     ```
 #     (le warning apparaît une seule fois, mais il continue à être vrai ...)
-# <br>
 #
 # * c'est une référence sur la dataframe: vous pouvez la modifier  
 # mais donc vous modifiez la dataframe d'origine
@@ -1190,8 +1039,6 @@ df['Age'][889] = 27.5
 #     df1 = df.loc[ :, ['Survived', 'Pclass', 'Sex'] ]
 #     df1.loc[1, 'Survived'] = 1
 #     ```
-#
-# <br>
 #
 # vous ne voulez pas modifier la dataframe d'origine ?  
 # faites une copie **explicite** de la sous-dataframe
@@ -1203,8 +1050,6 @@ df['Age'][889] = 27.5
 # df2.loc[1, 'Survived']     # 0 maintenant
 # df.loc[1, 'Survived']      # toujours 1 dans la dataframe d'origine df
 # ```
-#
-# <br>
 #
 # si l'idée est de ne modifier qu'une copie d'une dataframe  
 # utilisez `copy` pour maîtriser ce que vous faites  

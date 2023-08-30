@@ -42,7 +42,7 @@ import matplotlib.pyplot as plt
 # %% [markdown]
 # il est très fréquent d'avoir dans ses données des grandeurs qui représentent le temps; voyons un peu ce que `pandas` peut faire pour nous aider avec ce genre de traitements
 #
-# <br>
+#
 # <div class=note>
 #
 # le sujet est **extrêmement** vaste:  

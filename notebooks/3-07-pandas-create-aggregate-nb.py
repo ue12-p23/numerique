@@ -48,12 +48,10 @@ import numpy as np
 # %% [markdown] tags=["framed_cell"]
 # ### à partir du dict Python des colonnes
 #
-# <br>
-#
 # avec la méthode `pandas.DataFrame`  
 # on peut créer un objet de type `pandas.DataFrame`
 #
-# <br>
+#
 # le dictionnaire des colonnes
 #
 # ```python
@@ -63,7 +61,7 @@ import numpy as np
 #              'lifespan' : [2, 8, 70, 1.5, 25, 12, 28], }
 # ```
 #
-# <br>
+#
 # création de la `pandas.DataFrame`
 #
 # ```python
@@ -95,11 +93,7 @@ df
 # %% [markdown] tags=["framed_cell"]
 # ### à partir du `dict` des colonnes et d'une `list` (d'index) des lignes
 #
-# <br>
-#
 # avec la méthode `pandas.DataFrame`
-#
-# <br>
 #
 # le `dictionnaire` des id des colonnes  
 # la `liste` des id des lignes
@@ -111,8 +105,6 @@ df
 # line_ids =  ['snail', 'pig', 'elephant', 'rabbit',
 #              'giraffe', 'coyote', 'horse']
 # ```
-#
-# <br>
 #
 # création de la `pandas.DataFrame`
 #
@@ -129,8 +121,6 @@ df
 # horse    88.0    28.0
 # ```
 #
-# <br>
-#
 # on peut ne pas lui passer la liste des id des lignes
 
 # %%
@@ -146,22 +136,14 @@ df.values
 # %% [markdown] tags=["framed_cell"]
 # ### à partir d'un `numpy.ndarray`
 #
-# <br>
-#
 # avec la méthode `pandas.DataFrame`
-#
-# <br>
 #
 # à partir d'un `numpy.ndarray` qui décrit la *table désirée*  
 # attention à la forme
 #
-# <br>
-#
 # et attention au `type`  
 # le type des éléments d'un `numpy.ndarray` est homogène  
 # (si vous mélangez des `float` et des `str` vous n'avez plus que des string à-la-`numpy`...)
-#
-# <br>
 #
 # le `numpy.ndarray`
 #
@@ -175,8 +157,6 @@ df.values
 #                [88. , 28. ]])
 #
 # ```
-#
-# <br>
 #
 # la `pandas.DataFrame`
 #
@@ -193,14 +173,10 @@ df.values
 # 6   88.0  28.0
 # ```
 #
-# <br>
-#
 # **remarquez**, sans index
 #
 # * les index des `2` colonnes sont leurs indices `0` à `1`
 # * les index des `7` lignes sont leurs indices `0` à `6`
-#
-# <br>
 #
 # on peut passer les index (colonnes et/ou lignes)  
 # au constructeur de la `pandas.DataFrame`
@@ -267,46 +243,37 @@ df.values
 # ```
 # 1. Affichez le type des éléments de la table  
 # Que constatez-vous ? (U = Unicode)
-# <br>
 #
 # 1. Créez une `pandas.DataFrame` à partir de la table précédente  
 # avec pour noms de colonnes `'names'`, `'speed'` et `'lifespan'`
-# <br>
 #
 # 1. affichez la valeur et le type du `'lifespan'` de l'éléphant  
 # Que constatez-vous ?  
 # (`object` signifie ici `str`)
-# <br>
 #
 # 1. affichez la valeur et le type du `'names'` de l'éléphant  
 # Que constatez-vous ?
-# <br>
 #
 # 1. avec `loc` ou `iloc`, modifiez la valeur `elephant` par `'grey elephant'`  
 # affichez la valeur et le type du `'names'` de l'éléphant  
 # un constat ?
-# <br>
 #
 # 1. affichez le type des colonnes  
 # utilisez l'attribut `dtypes` des `pandas.DataFrame`
-# <br>
 #
 # 1. avec la méthode `pandas.DataFrame.to_numpy`  
 # affichez le tableau `numpy` sous-jacent de votre data-frame  
 # affichez le type du tableau  
 # que constatez-vous ?
-# <br>
 #
 # 1. modifiez les colonnes `'speed'` et `'lifespan'` de manière à leur donner le type `float`  
 # (utilisez `pandas.Series.astype` voir les **rappels** en fin de cellule)
-# <br>
 #
 # **rappel**
 #
 # * `astype`  
 # la méthode `pandas.Series.astype`, à laquelle vous indiquez un type `float`  
 # crée (si c'est possible) une nouvelle `pandas.Series` dont les éléments sont de type `float`
-# <br>
 #
 # * rajouter ou modifier une colonne dans une `pandas.DataFrame`  
 # revient à modifier ou rajouter une clé à un `dict`
@@ -329,14 +296,12 @@ df.values
 # parfois on obtient les données par plusieurs canaux  
 # qu'il faut agréger dans une seule dataframe
 #
-# <br>
-#
 # les outils à utiliser pour cela sont multiples  
 # pour bien choisir, il est utile de se poser en priorité  
 # la question de savoir si les différentes sources à assembler  
 # concernent les **mêmes colonnes** ou au contraire les **mêmes lignes**  (*)
 #
-# <br>
+#
 # illustrations:
 #
 # * on recueille les données à propos du coronavirus, qui sont disponibles par mois  

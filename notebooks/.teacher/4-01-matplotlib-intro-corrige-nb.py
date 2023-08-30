@@ -38,41 +38,26 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## introduction
 #
-# <br>
-#
 # https://matplotlib.org/api/pyplot_summary.html
 #
-# <br>
-#
 # pour se familiariser avec des données, rien ne remplace - quand elle est possible - la **visualisation**
-# <br>
 #
 # nous allons voir quelques fonctionnalités de la librairie `matplotlib.pyplot`  
 # ou `plt` par convention
 #
-# <br>
-#
 # pourquoi `matplotlib` ?  
 # parcequ'en en 2003, des développeurs veulent une alternative à la visu sous *matlab* pour l'écosystème Python
-#
-# <br>
 #
 # elle est devenue **la** librairie la plus populaire pour le dataviz en Python avec
 #
 # * une communauté de développeurs/utilisateurs très active
 # * les autres librairies sont, le plus souvent, dérivées de `matplotlib`
 #
-# <br>
-#
 # la syntaxe se veut simple  
 # la librairie est très complète et très optimisée  
 # elle peut traiter de grandes quantités de données
 #
-# <br>
-#
 # les fonctions ont été *empaquetées* afin d'être utilisées facilement en `pandas`
-#
-# <br>
 #
 # vous allez y trouver toutes les fonctions classiques:
 #
@@ -131,12 +116,8 @@ import pandas as pd
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## tracer une courbe avec `plt.plot`
 #
-# <br>
-#
 # avec `matplotlib.pyplot.plot`  
 # (ou `plt.plot` puisqu'elle importée sous ce nom)
-#
-# <br>
 #
 # pour les abcisses, 50 nombres réels entre 0 et $2\pi$  
 # linéairement espacés
@@ -145,16 +126,12 @@ import pandas as pd
 # x = np.linspace(0, 2*np.pi, 50)
 # ```
 #
-# <br>
-#
 # pour les ordonnées, les sinus de ces points  
 # vous remarquez l'application de la fonction vectorisée `numpy.sin` au `numpy.ndarray`
 #
 # ```python
 # y = np.sin(x)
 # ```
-#
-# <br>
 #
 # la fonction `plot` trace les 50 couples de points `(abscisse, ordonnée)`
 # et relie les points entre eux
@@ -164,16 +141,10 @@ import pandas as pd
 # ```
 # <img src='./sinus.png' width=300>
 #
-# <br>
-#
 # de nombreux *réglages* ont pris leurs valeurs par défaut  
 # (taille de la figure, tailles et polices des caractères, couleurs du fond et de la courbe...)
 #
-# <br>
-#
 # par exemple
-#
-# <br>
 #
 # * pour voir les points en plus des segments les reliant  
 # utilisez le paramètre `marker`
@@ -183,15 +154,12 @@ import pandas as pd
 # plt.plot(x, y, marker='s')
 # ```
 #
-# <br>
-#
 # *  pour modifier l'épaisseur du trait  
 # utilisez le paramètre `linewidth`
 #
 # ```python
 # plt.plot(x, y, linewidth=5)
 # ```
-# <br>
 #
 # * pour changer la couleur du trait  
 # utilisez le paramètre `color`
@@ -200,8 +168,6 @@ import pandas as pd
 # plt.plot(x, y, color='red')
 # ```
 #
-# <br>
-#
 # * pour changer le style du trait  
 # utilisez le paramètre `linestyle`  
 # `dotted`, `dashed`...
@@ -209,8 +175,6 @@ import pandas as pd
 # ```python
 # plt.plot(x, y, linestyle='dashed')
 # ```  
-#
-# <br>
 #
 # une chaîne de caractères formattée permet de donner plus facilement ces paramètres:  
 #
@@ -246,8 +210,6 @@ plt.plot(x, y, 'g--'); # ligne verte pointillée
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## attention aux valeurs manquantes
 #
-# <br>
-#
 # on peut ne donner que deux points  
 # `plt.plot` les relie  
 # comme ici (10, 10) à (20, 20)
@@ -258,8 +220,6 @@ plt.plot(x, y, 'g--'); # ligne verte pointillée
 #
 # <img src='./plot-deux-points.png' width=300>
 #
-# <br>
-#
 # mais attention si on ne donne qu'un point  
 # `plt.plot` ne sait plus tracer de segment !
 #
@@ -267,11 +227,8 @@ plt.plot(x, y, 'g--'); # ligne verte pointillée
 # plt.plot([10], [10])
 # -> figure toute vide
 # ```
-# <br>
 #
 # il en est de même si des points sont manquants
-#
-# <br>
 #
 # **exercice**
 #
@@ -283,16 +240,10 @@ plt.plot(x, y, 'g--'); # ligne verte pointillée
 # affichez la en abscisse et en ordonnée  
 # que constatez-vous ?
 #
-# <br>
-#
 # `plt.plot` doit avoir des points à relier...  pour qu'on voit les segments
-#
-# <br>
 #
 # naturellement si vous utilisez le paramètre `marker`  
 # les points sont alors affichés  
-#
-# <br>
 #
 # **exercice**
 #
@@ -321,20 +272,12 @@ plt.plot(l, l, marker='v');
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## ajouter un titre `plt.title`
 #
-# <br>
-#
 # avec la fonction `plt.title` on ajoute un titre à la figure
-#
-# <br>
 #
 # avec son paramètre `fontsize` on fixe la taille des caractères
 #
-# <br>
-#
 # avec son paramètre `loc` et ses valeurs `'center'`, `'left'` et `'right'`  
 # on positionne le titre
-#
-# <br>
 #
 #
 # ```python
@@ -344,13 +287,9 @@ plt.plot(l, l, marker='v');
 # plt.title('sinus(X)', fontsize=20, loc='left')
 # ```
 #
-# <br>
-#
 # vous remarquez que `matplotlib` a la notion de **figure courante**  
 # i.e. celle sur laquelle s'appliquent les fonctions  
 # ici `plt.title` et `plt.plot` s'appliquent sur la même figure
-#
-# <br>
 #
 # pensez à utiliser le help
 #
@@ -369,22 +308,17 @@ plt.title('sinus(X)', fontsize=20, loc='left');
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## donner une taille à une figure
 #
-# <br>
-#
 # la fonction `plt.figure` permet
 #
 # * de créer une nouvelle figure ou d'en activer une existante
 # * et aussi de passer différents paramètres à la figure courante  
 # dont sa **taille**
 #
-# <br>
-#
 # ```python
 # x = np.linspace(0, 2*np.pi, 50)
 # plt.figure(figsize=(10, 2)) # 10 pour les abscisses et 2 pour les ordonnées
 # plt.plot(x, np.sin(x))
 # ```
-# <br>
 #
 # ```python
 # plt.figure?
@@ -402,22 +336,14 @@ plt.plot(x, np.sin(x));
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## ajouter des labels aux axes  `plt.xlabel` et `plt.ylabel`
 #
-# <br>
-#
 # avec la fonction `plt.xlabel` on ajoute un label aux abscisses de la figure
 #
-# <br>
-#
 # avec la fonction `plt.ylabel` on ajoute un label aux ordonnées de la figure
-#
-# <br>
 #
 # ```python
 # plt.xlabel('X')
 # plt.xlabel('Y');
 # ```
-#
-# <br>
 #
 # naturellement les paramètre `fontsize`, `loc`... s'appliquent  
 # et pour voir tous les paramètres
@@ -442,20 +368,14 @@ plt.xlabel('Y');
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## nuages de points (`plt.scatter`)
 #
-# <br>  
-#
 # `plt.scatter` permet d'afficher des points dispersés  
 # (i.e. non reliés)
-#
-# <br>
 #
 # ```python
 # x = np.linspace(0, 2*np.pi, 50)
 # z = np.cos(x)
 # plt.scatter(x, z)
 # ```
-#
-# <br>
 #
 # help pour plus d'information sur tous les paramètres
 #
@@ -472,21 +392,13 @@ plt.scatter(x, z);
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## donner une légende à plusieurs plots sur la même figure `label`
 #
-# <br>  
-#
 # vous pouvez tracer plusieurs courbes sur la même figure
 #
-# <br>
-#
 # avec le paramètre `label`, vous indiquez le nom de chaque figure
-#
-# <br>
 #
 # avec la fonction `plt.legend` vous affichez la légende  
 # constituée des étiquettes  
 # le paramètre `loc` permet de positionner la légende `'upper right'`, `'best'`, `'center'`...
-#
-# <br>
 #
 # **note** le même effet est obtenu lorsqu'on plotte directement une dataframe plutôt que des tableaux `numpy` - on y reviendra
 
@@ -499,21 +411,13 @@ plt.legend();
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## fixer la limite des axes (`plt.xlim` et `plt.ylim`)
 #
-# <br>
-#
-# avec `x = np.linspace(0, 2*np.pi, 50)`<br>
+# avec `x = np.linspace(0, 2*np.pi, 50)`  
 # `y=sin(x)` est calculé entre $0$ et $2\pi$
-#
-# <br>
 #
 # quand on demande `plt.plot(x, y)`  
 # par défaut tous les couples de points $(x_i, y_i)$ sont tracés
 #
-# <br>
-#
 # on peut n'affiche qu'une partie des points
-#
-# <br>
 #
 # par exemple ici entre $0$ et $\pi$ en abscisse  
 # et `0` et `1` en ordonnées
@@ -532,8 +436,6 @@ plt.plot(x, np.sin(x))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## préciser les *ticks* des axes (`plt.xticks` et `plt.yticks`)
 #
-# <br>
-#
 # avec `plt.xtick` et `plt.ytick` on peut donner des listes de valeurs à afficher sur les axes  
 # ici les abscisses et les ordonnées
 #
@@ -544,11 +446,7 @@ plt.plot(x, np.sin(x))
 # plt.plot(x, np.sin(x))
 # ```
 #
-# <br>
-#
 # les valeurs seront espacées régulièrement sur les axes
-#
-# <br>
 #
 # il est possible de donner des noms aux ticks indiqués  
 # et même d'utiliser `latex`
@@ -560,8 +458,6 @@ plt.plot(x, np.sin(x))
 #
 # plt.plot(x, np.sin(x), label='sinus');
 # ```
-#
-# <br>
 #
 # il est possible d'utiliser des formules `latex`  
 # en markdown entre deux `$` :
