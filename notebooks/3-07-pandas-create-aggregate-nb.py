@@ -48,6 +48,7 @@ import numpy as np
 # %% [markdown] tags=["framed_cell"]
 # ### à partir du dict Python des colonnes
 #
+# ````{admonition} →
 # avec la méthode `pandas.DataFrame`  
 # on peut créer un objet de type `pandas.DataFrame`
 #
@@ -77,6 +78,7 @@ import numpy as np
 # 5    coyote   69.0    12.0
 # 6    horse    88.0    28.0
 # ```
+# ````
 
 # %%
 # le code
@@ -93,6 +95,7 @@ df
 # %% [markdown] tags=["framed_cell"]
 # ### à partir du `dict` des colonnes et d'une `list` (d'index) des lignes
 #
+# ````{admonition} →
 # avec la méthode `pandas.DataFrame`
 #
 # le `dictionnaire` des id des colonnes  
@@ -122,6 +125,7 @@ df
 # ```
 #
 # on peut ne pas lui passer la liste des id des lignes
+# ````
 
 # %%
 cols_dict = {'speed' : [0.1, 17.5, 40, 48, 52, 69, 88],
@@ -136,6 +140,7 @@ df.values
 # %% [markdown] tags=["framed_cell"]
 # ### à partir d'un `numpy.ndarray`
 #
+# ````{admonition} →
 # avec la méthode `pandas.DataFrame`
 #
 # à partir d'un `numpy.ndarray` qui décrit la *table désirée*  
@@ -196,6 +201,7 @@ df.values
 # coyote   69.0    12.0
 # horse    88.0    28.0
 # ```
+# ````
 
 # %%
 # le code
@@ -293,6 +299,7 @@ df.values
 # %% [markdown] tags=["framed_cell"]
 # ## agrégations des données
 #
+# ````{admonition} →
 # parfois on obtient les données par plusieurs canaux  
 # qu'il faut agréger dans une seule dataframe
 #
@@ -316,10 +323,12 @@ df.values
 # <div class="note">
 #     (*) cette présentation est simpliste, elle sert uniquement à fixer les idées
 # </div>
+# ````
 
 # %% [markdown] tags=["framed_cell"]
 # ### en hauteur `pd.concat()`
 #
+# ````{admonition} →
 # pour l'accumulation de donnée référez-vous  
 # aux fonctions suivantes offertes par `pandas`
 #
@@ -328,10 +337,12 @@ df.values
 #
 # * et à la méthode `df1.append(df2)`   
 #   qui est une version simplifiée de `concat()`
+# ````
 
 # %% [markdown] tags=["framed_cell"]
 # ### en largeur `pd.merge()`
 #
+# ````{admonition} →
 # pour la réconciliation de données, voyez cette fois
 #
 # * la fonction `pd.merge(left, right)`  
@@ -339,6 +350,7 @@ df.values
 #
 # * et à la méthode `left.join(right)`
 #   une version simplifiée de `left.merge()`
+# ````
 
 # %% [markdown]
 # ### alignements

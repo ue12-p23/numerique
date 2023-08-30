@@ -44,6 +44,7 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## figures et sous-figures
 #
+# ````{admonition} →
 # nous allons construire des figures contenant plusieurs graphiques  
 # en positionnant les graphiques sur une grille
 #
@@ -79,6 +80,7 @@ import numpy as np
 #
 # si vous utilisez `matplotlib` dans un programme `python` et non dans un notebook  
 # vous devrez appeler `plt.show()` pour que votre figure s'affiche
+# ````
 
 # %%
 # le code
@@ -97,6 +99,7 @@ plt.plot(x, np.cos(x));
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## par vecteur de sous-figures (`plt.subplots`)
 #
+# ````{admonition} →
 # pour créer une figure, contenant plusieurs graphiques différents  
 # il faut positionner ces **sous-figures** dans la figure courante
 #
@@ -125,6 +128,7 @@ plt.plot(x, np.cos(x));
 # axes[0, 0].plot(x, np.sin(x))
 # axes[-1, -1].plot(x, np.cos(x))
 # ```
+# ````
 
 # %%
 # le code
@@ -138,6 +142,7 @@ axes[-1, -1].plot(x, np.cos(x));
 # %% [markdown] {"cell_style": "center", "tags": ["framed_cell"]}
 # ## par tailles/positions dans une grille (`plt.subplot`)
 #
+# ````{admonition} →
 # la fonction `plt.subplot` rajoute une sous-figure à la figure courante
 #
 # on indique 3 entiers `n`, `m` et `i` à la fonction `plt.subplot`
@@ -163,6 +168,7 @@ axes[-1, -1].plot(x, np.cos(x));
 #
 # ax2.plot(x, np.cos(x)) # affichage de la courbe cosinus
 # ```
+# ````
 
 # %%
 ax1 = plt.subplot(121) # grille 1 ligne, 2 colonnes
@@ -179,6 +185,7 @@ ax2.plot(x, np.cos(x)) # affichage de la courbe cosinus
 # %% [markdown] {"cell_style": "center", "tags": ["framed_cell"]}
 # ## sous-figure sur plusieurs lignes/colonnes
 #
+# ````{admonition} →
 # les sous-figures peuvent occuper plusieurs lignes et/ou plusieurs colonnes
 #
 # l'index est remplacé par un couple `(j, k)`  
@@ -219,6 +226,7 @@ ax2.plot(x, np.cos(x)) # affichage de la courbe cosinus
 # remarquez que ce code est assez peu lisible  
 # pour les figures composées sur une grille régulière  
 # préférez `plt.subplots` et son tableau de sous-figures
+# ````
 
 # %%
 # le code
@@ -238,6 +246,7 @@ ax4.plot(x, y, 'y'); # jaune
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## améliorer les figures composées
 #
+# ````{admonition} →
 # on peut faire un peu de cosmétique  
 # sachant que quand on commence *on ne s'arrête plus* et on perd beaucoup de temps pour améliorer *à la marge*
 #
@@ -278,6 +287,7 @@ ax4.plot(x, y, 'y'); # jaune
 # certaines fonctionnalités sont très avancées  
 # référez-vous à la documentation  https://matplotlib.org/api/axes_api.html  
 # et aux exemples sur Internet
+# ````
 
 # %% {"cell_style": "center"}
 # le code

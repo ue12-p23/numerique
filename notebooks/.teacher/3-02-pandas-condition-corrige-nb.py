@@ -41,6 +41,7 @@ import numpy as np
 # %% [markdown] tags=["framed_cell"]
 # ## conditions sur une dataframe
 #
+# ````{admonition} →
 # dans les analyses de tables de données  
 # il est fréquent de **sélectionner des données par des conditions**
 #
@@ -67,6 +68,7 @@ import numpy as np
 #
 # (voir ci-dessous)
 #
+# ````
 
 # %% [markdown]
 # ***
@@ -74,6 +76,7 @@ import numpy as np
 # %% [markdown] slideshow={"slide_type": "slide"} tags=["framed_cell"]
 # ## conditions et masques
 #
+# ````{admonition} →
 # regardons cet exemple en détail:  
 # quels passagers avaient moins de 12 ans ?
 #
@@ -125,6 +128,7 @@ import numpy as np
 # * comme des masques pour sélectionner des sous-tableaux
 #
 #
+# ````
 
 # %%
 # le code
@@ -142,6 +146,7 @@ girls.sum()
 # %% [markdown] tags=["framed_cell"] slideshow={"slide_type": "slide"}
 # ## `value_counts()`
 #
+# ````{admonition} →
 # comment calculer le nombre d'enfants ?  
 # par exemple nous pouvons sommer les `True` avec `pandas.Series.sum`
 #
@@ -167,6 +172,7 @@ girls.sum()
 # ainsi parmi les passagers dont on connait l'âge  
 # `68` passagers,  ont moins de `12` ans  
 # on reviendra tout de suite sur les données manquantes
+# ````
 
 # %%
 children.sum()
@@ -180,6 +186,7 @@ children.value_counts()
 # %% [markdown] tags=["framed_cell"]
 # ### contexte général
 #
+# ````{admonition} →
 # souvent, certaines colonnes ont des valeurs manquantes...  
 # dans l'exemple du Titanic, ce sont les valeurs qui ne sont pas renseignées dans le `csv`  
 #
@@ -198,6 +205,7 @@ children.value_counts()
 # il existe son contraire qui est `notna()`  
 # il existe aussi des synonymes `isnull()` et `notnull()` - **préférez** `isna`
 #
+# ````
 
 # %% [markdown]
 # ***
@@ -205,6 +213,7 @@ children.value_counts()
 # %% [markdown] tags=["framed_cell"]
 # ### valeurs manquantes dans une colonne
 #
+# ````{admonition} →
 # regardons les valeurs manquantes d'une colonne
 #
 # ```python
@@ -237,6 +246,7 @@ children.value_counts()
 # ```
 #
 # on y reviendra
+# ````
 
 # %% scrolled=true
 # le code
@@ -255,6 +265,7 @@ np.sum(df['Age'].isna()), sum(df['Age'].isna())
 # %% [markdown] tags=["framed_cell"]
 # ### valeurs manquantes sur une dataframe
 #
+# ````{admonition} →
 # la méthode `isna()` s'applique aussi à une dataframe  
 # et elle retourne une **dataframe de booléens** où - sans surprise :  
 #
@@ -283,6 +294,7 @@ np.sum(df['Age'].isna()), sum(df['Age'].isna())
 # ```
 #
 # vous remarquez une dataframe de la **même taille** que `df`
+# ````
 
 # %%
 # le code
@@ -291,6 +303,7 @@ df.isna()
 # %% [markdown] tags=["framed_cell"]
 # ### compter les valeurs manquantes
 #
+# ````{admonition} →
 # comme en `numpy` je peux appliquer une fonction - ici `sum()` - en précisant l'`axis`  
 # `0` on applique la fonction dans l'axe des lignes (le défaut)  
 # `1` on applique la fonction dans l'axe des colonnes  
@@ -326,10 +339,12 @@ df.isna()
 # </div>
 #
 # nous remarquons des valeurs manquantes dans les colonnes `Cabin`, `Age` et `Embarked`
+# ````
 
 # %% [markdown] tags=["framed_cell"]
 # ### dans l'autre direction (axis=1)
 #
+# ````{admonition} →
 # exemple de la somme des valeurs manquantes sur l'axe des colonnes - par personne donc
 #
 # ```python
@@ -350,6 +365,7 @@ df.isna()
 # ```
 #
 # le passager d'id `261` a deux valeurs manquantes
+# ````
 
 # %%
 # le code
@@ -363,6 +379,7 @@ df.isna().sum(axis=1)
 # %% [markdown] tags=["framed_cell"]
 # ### utilisation des fonctions `numpy`
 #
+# ````{admonition} →
 # les méthodes `numpy` s'appliquent sur des `pandas.DataFrame` et des `pandas.Series`
 #
 # on précise l'`axis`  
@@ -406,6 +423,7 @@ df.isna().sum(axis=1)
 # remarque: contrairement à ce qu'on avait vu en `numpy`, ici on ne pourrait pas faire `df.isna().sum(axis=(0, 1))`
 #
 # </div>    
+# ````
 
 # %%
 df.isna().sum().sum()

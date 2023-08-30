@@ -64,6 +64,7 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ##  introduction et contexte
 #
+# ````{admonition} →
 # les fonctions d'algèbre linéaire `numpy.linalg` sont très efficaces, parce que
 # 1. fondées sur des algorithmes efficaces
 # 1. codées dans des langages *bas niveau* très proches de la mémoire donc rapides
@@ -85,6 +86,7 @@ import numpy as np
 # pour plus d'information, regardez la documentation
 #
 # https://numpy.org/doc/stable/reference/routines.linalg.html
+# ````
 
 # %% [markdown]
 # ***
@@ -92,6 +94,7 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## terminologie
 #
+# ````{admonition} →
 # on va se mettre d'accord sur les terminologies `matrice`, `vecteur` et `produit`
 #
 # attention au type des éléments
@@ -106,6 +109,7 @@ import numpy as np
 # A ->[[ 3,  3,  3], # A[0] vaudra 3 pas np.pi
 #      [ 6, -4,  5]]
 # ```
+# ````
 
 # %%
 A = np.array([[2, 3, -7], [6, -4, 5]])
@@ -116,6 +120,7 @@ A
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les matrices et vecteurs
 #
+# ````{admonition} →
 # une **matrice** de `m` lignes et `n` colonnes
 #
 # * est un tableau `numpy.ndarray`
@@ -149,6 +154,7 @@ A
 # print(V.ndim)
 # print(V.shape)
 # ```
+# ````
 
 # %%
 # le code
@@ -168,6 +174,7 @@ print(V.shape)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le produit d'une matrice et d'un vecteur `numpy.dot`
 #
+# ````{admonition} →
 # $A\cdot V$
 #
 # * `np.dot(A, V)`
@@ -201,6 +208,7 @@ print(V.shape)
 # A.dot(V)
 # -> [ 5 14 23 32]    
 # ```
+# ````
 
 # %%
 m, n = 4, 3
@@ -214,6 +222,7 @@ print(A.dot(V))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le produit de deux matrices `numpy.dot`
 #
+# ````{admonition} →
 # $A\cdot B$
 #
 # * `np.dot(A, B)`
@@ -251,6 +260,7 @@ print(A.dot(V))
 #     [566, 604, 642]]
 # ```
 #
+# ````
 
 # %%
 # le code
@@ -265,6 +275,7 @@ A.dot(B)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ##  produit matriciel avec `@` et `numpy.matmul`
 #
+# ````{admonition} →
 # il existe une fonction `numpy.matmul`  
 # qui s'écrit aussi sous la forme `@`
 #
@@ -284,6 +295,7 @@ A.dot(B)
 # * en dimensions supérieure à 2, leur comportement diffère complètement
 #
 # **préférer utiliser `numpy.dot`**
+# ````
 
 # %%
 # le code
@@ -293,6 +305,7 @@ A @ B
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le produit scalaire
 #
+# ````{admonition} →
 # `numpy.dot` appliquée à deux vecteurs donne leur  produit scalaire
 #
 # ```python
@@ -316,6 +329,7 @@ A @ B
 # ```python
 # V1.dot(V2)
 # ```
+# ````
 
 # %%
 #le code
@@ -336,6 +350,7 @@ np.dot(V1, V2)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la norme de vecteur
 #
+# ````{admonition} →
 #
 #  prenons un vecteur $V =[v_1, ..., v_n]$
 #
@@ -372,6 +387,7 @@ np.dot(V1, V2)
 # pour les autres normes, regardez la documentation
 #
 # https://numpy.org/doc/stable/reference/routines.linalg.html
+# ````
 
 # %%
 # le code
@@ -383,6 +399,7 @@ np.sqrt(np.sum(V*V))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la transposée d'une matrice
 #
+# ````{admonition} →
 # fonction `numpy.transpose`  
 # ou `.T` pour écrire des codes plus lisibles
 #
@@ -410,6 +427,7 @@ np.sqrt(np.sum(V*V))
 # ```python
 # A.T
 # ```
+# ````
 
 # %%
 # le code
@@ -421,6 +439,7 @@ print(A.T)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les matrices identité
 #
+# ````{admonition} →
 # se construisent avec la fonction `numpy.eye`  
 # (*eye* et *I* se prononcent pareil en anglais)
 #
@@ -436,6 +455,7 @@ print(A.T)
 #        [0., 0., 0., 1., 0.],
 #        [0., 0., 0., 0., 1.]]
 # ```
+# ````
 
 # %%
 # le code
@@ -449,6 +469,7 @@ print(I.dtype)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## le déterminant d'une matrice
 #
+# ````{admonition} →
 # la fonction `numpy.linalg.det`  
 # déclenche l'exception `np.linalg.LinAlgError` si la matrice n'est pas carrée
 #
@@ -477,6 +498,7 @@ print(I.dtype)
 #     print(e)
 # -> Last 2 dimensions of the array must be square
 # ```
+# ````
 
 # %%
 # le code
@@ -494,6 +516,7 @@ except np.linalg.LinAlgError as e:
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les matrices diagonales
 #
+# ````{admonition} →
 # On peut créer une matrice diagonale à partir de la liste des éléments de sa diagonale
 #
 # `numpy.diag`
@@ -531,6 +554,7 @@ except np.linalg.LinAlgError as e:
 #     [  0, -45,   0],
 #     [  0,   0,   6]]
 # ```
+# ````
 
 # %%
 # le code
@@ -546,6 +570,7 @@ np.diag(l)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la trace d'une matrice
 #
+# ````{admonition} →
 # `numpy.trace` fait la somme des éléments de la diagonale de la matrice
 #
 # la matrice `A`
@@ -570,6 +595,7 @@ np.diag(l)
 # np.sum(np.diag(A))
 # -> 12
 # ```
+# ````
 
 # %%
 # le code
@@ -581,6 +607,7 @@ print(np.sum(np.diag(A)))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## l'inversion d'une matrice
 #
+# ````{admonition} →
 # `numpy.linalg.inv(A)` est le calcul de $A^{-1}$
 #
 #
@@ -612,6 +639,7 @@ print(np.sum(np.diag(A)))
 # cet exemple est correct mais ce n'est pas toujours le cas  
 # puisque les calculs informatiques sont approchés   
 # (un exemple dans la slide suivante)
+# ````
 
 # %% {"cell_style": "center"}
 # le code
@@ -624,6 +652,7 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## calculs approchés (avec tolérance)
 #
+# ````{admonition} →
 #
 # testons $A^{-1}A = I$ sur une matrice quelconque de floats  
 # générés aléatoirement
@@ -663,6 +692,7 @@ print(np.all(np.dot(R, IR) == np.eye(3)))
 # ```    
 #
 # ça fonctionne bien comme attendu
+# ````
 
 # %%
 A = np.random.random(size=(3, 3))
@@ -675,6 +705,7 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les valeurs propres d'une matrice (*eigen values*)
 #
+# ````{admonition} →
 # on va calculer les $v$ tels que:
 #    - $f(v) = \lambda v$
 #    - $M \cdot v = \lambda v$
@@ -726,6 +757,7 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # exercice:  
 #     parcourez les vecteurs propres et les valeurs propres  
 # et vérifiez, pour chaque couple si $M \cdot v_i \approx \lambda_i v_i$
+# ````
 
 # %% {"cell_style": "center"}
 # le code
@@ -745,6 +777,7 @@ np.all(np.isclose(np.dot(M, v0),  alpha0*v0))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## résolution d'un système linéaire
 #
+# ````{admonition} →
 # on va calculer avec la fonction `numpy.linalg.solve`  
 # les racines du système linéaire $A \cdot x = b$
 #
@@ -779,6 +812,7 @@ np.all(np.isclose(np.dot(M, v0),  alpha0*v0))
 #
 # * si elle n'est pas carrée
 # * si la matrice n'est pas inversible
+# ````
 
 # %%
 # le code

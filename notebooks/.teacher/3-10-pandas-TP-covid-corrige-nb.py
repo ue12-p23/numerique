@@ -48,6 +48,7 @@ import numpy as np
 # %% [markdown] tags=["framed_cell"]
 # ## les données de Johns Hopkins
 #
+# ````{admonition} →
 # les données sur le corona virus
 #
 # * sont publiées par le département *Center for Systems Science and Engineering* (CSSE)
@@ -55,6 +56,7 @@ import numpy as np
 # * sur le dépôt github <https://github.com/CSSEGISandData/COVID-19>
 # * dans un format brut, détaillé et touffu  
 #   (un peu trop compliqué pour l'utiliser ici)
+# ````
 
 # %%
 # le repo github
@@ -63,12 +65,14 @@ official_url = "https://github.com/CSSEGISandData/COVID-19"
 # %% [markdown] tags=["framed_cell"]
 # ## autre jeu de données intéressant
 #
+# ````{admonition} →
 # un dépôt de *seconde main* <https://github.com/pomber/covid19>
 #
 # * consolide les données du CSSE
 # * en un unique fichier `timeseries.json`
 # * mis à jour quotidiennement
 # * le fichier est en format `json`(JavaScript Object Notation)
+# ````
 
 # %%
 # le repo avec le fichier json
@@ -77,6 +81,7 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # %% [markdown] tags=["framed_cell"]
 # ## le format `json`
 #
+# ````{admonition} →
 # nous avons vu le `csv`
 #
 # * un format de données très simple décrivant une table
@@ -125,6 +130,7 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 #        "horse":28.0}
 # }
 # ```
+# ````
 
 # %% [markdown]
 # ***
@@ -132,6 +138,7 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # %% [markdown] tags=["framed_cell"]
 # ## format `json` pour le covid
 #
+# ````{admonition} →
 # le fichier https://pomber.github.io/covid19/timeseries.json contient un objet `dict` dont
 #
 # * les clés sont les pays du monde
@@ -160,6 +167,7 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 #       "recovered": 0
 #     }, ...
 # ```
+# ````
 
 # %% [markdown]
 # ## récupération des données `json` du covid
@@ -167,6 +175,7 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # %% [markdown] tags=["framed_cell"]
 # ### récupération avec `requests`
 #
+# ````{admonition} →
 # le module `requests` permet de *récupérer* des fichiers sur Internet  
 # utiliser cette approche permet de toujours avoir des **données récentes**  
 # **mais** demande une bonne connexion à Internet  
@@ -220,6 +229,7 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 #
 # si votre connexion ne vous permet pas la requête  
 # voir la prochaine cellule de cours
+# ````
 
 # %%
 # pensez à bien installer le module requests
@@ -250,6 +260,7 @@ else:
 # %% [markdown] tags=["framed_cell"]
 # ### chargement avec lib `json`
 #
+# ````{admonition} →
 # si l'accès Internet n'est pas possible, nous exposons une copie des données  
 # faite il y a quelque temps, dans le fichier `covid-frozen.json`
 #
@@ -280,6 +291,7 @@ else:
 #       {'date': '2020-1-24', 'confirmed': 0, 'deaths': 0, 'recovered': 0},
 #     ...
 # ```
+# ````
 
 # %%
 if by_country is not None:
@@ -306,6 +318,7 @@ list(by_country.keys())[:4]
 # %% [markdown] tags=["framed_cell"]
 # ### exercice (version avancé)
 #
+# ````{admonition} →
 # il s'agit de construire une **unique** dataframe contenant toutes les données covid *monde*  
 # à partir de l'objet python `by_country`
 #
@@ -338,6 +351,7 @@ list(by_country.keys())[:4]
 #
 # * les élèves avancés peuvent travailler sans indications supplémentaires
 # * pour les autres élèves, la cellule suivante vous propose une méthode pas-à-pas
+# ````
 
 # %%
 # votre code
@@ -381,6 +395,7 @@ global_df1.head()
 # %% [markdown] tags=["framed_cell"]
 # ### exercice (méthode pas-à-pas)
 #
+# ````{admonition} →
 # **exercice (méthode pas-à-pas)** de construction de la dataframe globale
 #
 # nous allons commencer par créer les dataframes de 2 pays `'France'` et `'Italy'`  
@@ -409,6 +424,7 @@ global_df1.head()
 #
 # 1. généralisez et construisez une dataframe avec tous les pays  
 # vous devez utiliser un `for` python
+# ````
 
 # %%
 # votre code
@@ -475,6 +491,7 @@ global_df.loc[0]
 # %% [markdown] tags=["framed_cell"]
 # **les index ne sont pas toujours uniques**
 #
+# ````{admonition} →
 # ce qui s'est passé c'est que :  
 # chacune de nos dataframe par pays a été construite à partir d'un index **séquentiel**  
 # i.e. un `RangeIndex` qui commence à chaque fois à 0  
@@ -491,6 +508,7 @@ global_df.loc[0]
 # pendant la phase de construction / mise au point de la dataframe  
 # quitte à adopter par la suite un index plus approprié  
 # (comme on va le faire bientôt)
+# ````
 
 # %% [markdown]
 # ***
@@ -498,9 +516,12 @@ global_df.loc[0]
 # %% [markdown] tags=["framed_cell"]
 # ## les dates
 
+# ``# ````
+``{admonition} →
 # %% [markdown] tags=["framed_cell"]
 # ### les dates en `pandas`
 #
+# ````{admonition} →
 # si les valeurs des dates sont de simples `str` - chaînes de caractères  
 # vous ne pourrez pas leur appliquer de fonctionnalités spécifiques aux dates
 #
@@ -518,6 +539,7 @@ global_df.loc[0]
 # d.month # 12
 # d.day # 22
 # ```
+# ````
 
 # %%
 # le code
@@ -529,6 +551,7 @@ print(d.year,  # 2020
 # %% [markdown] tags=["framed_cell"]
 # ### les formats de dates en `pandas`
 #
+# ````{admonition} →
 # sans indications précises, `pandas` a inféré le format de la date  
 # `'2020-1-2'` sera-il ainsi le 2 janvier  
 # et non le premier février
@@ -546,6 +569,7 @@ print(d.year,  # 2020
 # pd.to_datetime('2020-1-2', format='%Y-%d-%m').day
 #     -> 1
 # ```
+# ````
 
 # %%
 # sans indication ça peut être ambigu
@@ -566,6 +590,7 @@ pd.to_datetime('15 july 2021 08:00')
 # %% [markdown] tags=["framed_cell"]
 # ### convertissons nos dates
 #
+# ````{admonition} →
 # reprenons à partir de la dataframe globale
 #
 # 1. quel est le type des colonnes ?
@@ -584,6 +609,7 @@ pd.to_datetime('15 july 2021 08:00')
 #
 # 1. remplacez dans la dataframe globale la colonne `date` par la précédente  
 #    (le mieux est sans doute de conserver le même nom, mais ce n'est pas indispensable)
+# ````
 
 # %%
 # votre code
@@ -615,6 +641,7 @@ global_df.dtypes
 # %% [markdown] tags=["framed_cell"]
 # ## un index plus idoine
 #
+# ````{admonition} →
 # à présent on va pouvoir choisir un index un peu plus adapté à nos données
 #
 # 1. nous avons vu la notion de *MultiIndex*  
@@ -626,6 +653,7 @@ global_df.dtypes
 #    pour aboutir au même résultat
 #
 # rangez votre résultat dans une variable `clean_df`   
+# ````
 
 # %%
 # votre code
@@ -664,12 +692,14 @@ clean_df
 # %% [markdown] tags=["framed_cell"]
 # ### accéder via un *MultiIndex*
 #
+# ````{admonition} →
 # 1. extrayez de la dataframe la série des 3 mesures  
 #    faites en France le 1er Janvier 2021
 # 1. (avancé - pas vu en cours)  
 #    essayez de trouver/deviner comment extraire de
 #    cette dataframe toutes les données relatives à la France
 # 1. même question pour la France et l'Italie
+# ````
 
 # %%
 # prune-cell 1.
@@ -686,6 +716,7 @@ clean_df.loc[['France', 'Italy']]
 # %% [markdown] tags=["framed_cell", "level_intermediate"]
 # ### un exemple de slicing (très) avancé
 #
+# ````{admonition} →
 # pour illustrer la puissance de pandas, et la pertinence de notre choix d'index  
 # voyons comment utiliser du **slicing** (*très très avancé*)  
 # pour extraire cette fois les données relatives à
@@ -717,6 +748,7 @@ clean_df.loc[['France', 'Italy']]
 # ne **peut pas** se faire ici avec la notation `start:stop`  
 # (parce que pas dans des `[]`)  
 # et du coup on utilise la fonction *builtin* `slice()` pour créer `time_slice`
+# ````
 
 # %% tags=["level_intermediate", "raises-exception"]
 # ce qui nous donne le code suivant
@@ -746,6 +778,7 @@ clean_df.loc[
 # %% [markdown] tags=["framed_cell"]
 # ### plot d'une dataframe
 #
+# ````{admonition} →
 # plutôt que d'utiliser directement la mécanique de `matplotlib.pyplot`  
 # ce qui a tendance à être fastidieux  
 # il est préférable d'utiliser les méthodes comme `plot()`  
@@ -754,6 +787,7 @@ clean_df.loc[
 # la logique est alors de dessiner autant de courbes que de colonnes  
 # et de plus pandas se charge de tous les labels  
 # bref c'est recommandé
+# ````
 
 # %%
 # illustration
@@ -771,6 +805,7 @@ df.plot();
 # %% [markdown] tags=["framed_cell"]
 # ### sur un pays
 #
+# ````{admonition} →
 # du coup on a souvent seulement besoin de **mettre en forme** les données pour  
 # qu'elles puissent être directement plottées par cet algorithme simple
 #
@@ -791,6 +826,7 @@ df.plot();
 # 1. affichez sur un graphique les 3 mesures pour la France au cours du temps
 # 1. idem avec seulement 2 mesures `deaths` et `confirmed`
 #
+# ````
 
 # %%
 # votre code
@@ -810,12 +846,14 @@ clean_df.loc['France', ['deaths', 'confirmed']].plot();
 # %% [markdown] tags=["framed_cell"]
 # ### plusieurs pays
 #
+# ````{admonition} →
 # il nous reste maintenant à traiter le cas de plusieurs pays
 #
 # 1. extrayez les données pour les 2 mesures et les 3 pays (appelons là `df3`)
 # 1. essayez de plotter la dataframe (je vous signale le paramètre `rot=45`  
 #    qu'on peut passer à `df.plot()` pour améliorer la lisibilité)  
 #     qu'est ce qui ne va pas malgré cela ?
+# ````
 
 # %%
 # votre code
@@ -828,6 +866,7 @@ df3.plot(rot=45);
 # %% [markdown] tags=["framed_cell"]
 # ### mise en forme des données
 #
+# ````{admonition} →
 # quelle est la forme de `df3` ?  
 # à ce stade vous devriez avoir 2 colonnes,  
 # et en gros 3 fois plus de lignes que dans un pays
@@ -839,6 +878,7 @@ df3.plot(rot=45);
 # on veut faire un découpage qui ressemble à ceci
 #
 # <img src="media/unstacking.png" width="400px">
+# ````
 
 # %% [markdown]
 # ***
@@ -846,6 +886,7 @@ df3.plot(rot=45);
 # %% [markdown] tags=["framed_cell"]
 # ### `df.unstack()`
 #
+# ````{admonition} →
 # c'est justement le propos de la méthode `unstack()` sur la dataframe  
 # qui fonctionne en déplaçant un niveau d'index  
 # de l'index des lignes vers l'index des colonnes
@@ -868,6 +909,7 @@ df3.plot(rot=45);
 # et vous pouvez constater que nous avons à présent  
 # . **en lignes** un seul niveau d'index - les dates  
 # . **en colonnes** deux niveaux, les 2 mesures x les 3 pays
+# ````
 
 # %% tags=["raises-exception"]
 # le code
@@ -887,6 +929,7 @@ df6.plot(figsize=(12, 5));
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ### bonus
 #
+# ````{admonition} →
 # les rapides peuvent écrire une fonction `extract()` qui prend en paramètres
 #
 # * les pays concernés
@@ -894,6 +937,7 @@ df6.plot(figsize=(12, 5));
 # * et en option pour les plus forts, les dates de début et de fin
 #
 # et qui retourne une dataframe prête à être affichée comme on l'a fait plus haut
+# ````
 
 # %%
 # prune-begin

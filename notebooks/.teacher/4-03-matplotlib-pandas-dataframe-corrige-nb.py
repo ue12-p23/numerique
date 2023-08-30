@@ -44,6 +44,7 @@ import IPython
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## introduction
 #
+# ````{admonition} →
 # Les fonctionnalités de `matplotlib` ont été intégrées avec la librairie `pandas`  
 # afin de faciliter leur utilisation à partir de dataframe et de séries
 #
@@ -57,6 +58,7 @@ import IPython
 # 1. de nuages de points 2D ou 3D impliquant plusieurs colonnes
 #
 # nous allons voir quelques plots intéressants sur l'exemple des iris
+# ````
 
 # %% [markdown]
 # ***
@@ -64,6 +66,7 @@ import IPython
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la dataframe des `iris`
 #
+# ````{admonition} →
 # lisons le `csv` des `iris`  avec `pandas`  
 # affichons les 2 premières lignes
 #
@@ -98,6 +101,7 @@ import IPython
 #
 # (*dans le code ci-dessous, pour plus de lisibilité  
 # nous utilisons l'affichage `html` avec `IPython.display.display`*)
+# ````
 
 # %%
 # le code
@@ -109,6 +113,7 @@ IPython.display.display(   df.describe()   )
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## visualisation de la dataframe - `df.plot()`
 #
+# ````{admonition} →
 # la méthode `plot`  des objets de type `pandas.DataFrame` i.e. `pandas.DataFrame.plot`  
 # permet une première visualisation simple, rapide et informative **des colonnes numériques**  
 # qui apporte beaucoup d'informations sur ces données
@@ -122,6 +127,7 @@ IPython.display.display(   df.describe()   )
 # ```
 #
 # <img src='media/iris-plot.png'>
+# ````
 
 # %%
 # le code
@@ -130,6 +136,7 @@ df.plot();
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## boxplots des colonnes `df.boxplot`
 #
+# ````{admonition} →
 # un `boxplot` montre:  
 # le minimun, le maximum, la médiane, le premier et le troisième quartile  
 # les (éventuels) outliers
@@ -168,6 +175,7 @@ df.plot();
 # nous remarquons  
 # que les iris *Setosa* ont des `PetalLength` bien plus petits que ceux des autres types d'iris  
 # ce qui permet de les discriminer des deux autres types d'iris
+# ````
 
 # %%
 # le code
@@ -187,6 +195,7 @@ plt.tight_layout() # le padding
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## histogrammes `df.hist`
 #
+# ````{admonition} →
 # un histogramme donne la distribution des valeurs d'une colonne
 #
 # les valeurs de la colonne sont rangées dans des intervalles - ou *bins*  
@@ -206,6 +215,7 @@ plt.tight_layout() # le padding
 # ```python
 # df.hist('SepalLength', bins=10, color='lightblue')
 # ```
+# ````
 
 # %% {"cell_style": "center", "scrolled": true}
 # le code
@@ -216,6 +226,7 @@ plt.title('histogramme de la colonne SepalLength');
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## barchart `df.plot.bar()`
 #
+# ````{admonition} →
 # prenons un exemple pour illustrer le dessin des barres  
 # la dataframe `df_animals` des animaux, leur vitesse et leur durée de vie
 #
@@ -250,6 +261,7 @@ plt.title('histogramme de la colonne SepalLength');
 # ```
 #
 # utilisez le `help`
+# ````
 
 # %%
 # le code
@@ -267,6 +279,7 @@ df_animals.plot.bar(x='lifespan', y='speed');
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la colonne des `'Name'`
 #
+# ````{admonition} →
 # revenons à nos `iris`
 #
 # affichons la description de la colonne des types de fleurs `'Name'`
@@ -314,6 +327,7 @@ df_animals.plot.bar(x='lifespan', y='speed');
 #
 # nous allons changer le type des éléments de la série `df['Name']`  
 # par un exercice
+# ````
 
 # %%
 # le code

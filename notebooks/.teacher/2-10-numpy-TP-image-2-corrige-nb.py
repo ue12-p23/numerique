@@ -48,6 +48,7 @@ from matplotlib import pyplot as plt
 # %% [markdown] {"tags": ["framed_cell"]}
 # **notions intervenant dans ce TP**
 #
+# ````{admonition} →
 # sur les tableaux `numpy.ndarray`
 #
 # * `reshape()`, tests, masques booléens, *ufunc*, agrégation, opérations linéaires sur les `numpy.ndarray`
@@ -69,6 +70,7 @@ from matplotlib import pyplot as plt
 #   si vous la connaissez assez pour vous débrouiller (et l'installer), les images ne sont qu'un prétexte
 #
 # **n'oubliez pas d'utiliser le help en cas de problème.**
+# ````
 
 # %% [markdown]
 # ## Création d'un patchwork

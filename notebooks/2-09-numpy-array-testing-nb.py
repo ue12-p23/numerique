@@ -55,6 +55,7 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## tests sur tableaux multi-dimensionnels
 #
+# ````{admonition} →
 # l'idée est de tester en une opération **tous les éléments** d'un tableau
 #
 # **prenons un exemple**
@@ -94,6 +95,7 @@ import numpy as np
 #
 # * dans l'expression `tab%2 == 0` et `np.equal(tab % 2, 0)`
 # * le broadcast de `0` en un tableau de `0` de la même taille que `tab`
+# ````
 
 # %%
 # le code
@@ -107,6 +109,7 @@ print(res.shape)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## n'utilisez pas de for-python: utilisez les `ufunc`
 #
+# ````{admonition} →
 # les opérations de comparaison s'appliquent à tous les éléments d'un tableau en une seule fois  
 #
 # * il ne faut **jamais** utiliser de **for-python**
@@ -116,6 +119,7 @@ print(res.shape)
 # type(np.greater)
 # -> numpy.ufunc
 # ```
+# ````
 
 # %% {"cell_style": "split"}
 # > est une ufunc
@@ -130,6 +134,7 @@ np.greater(tab, 5)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## combiner les résultats
 #
+# ````{admonition} →
 #
 # **les résultats** peuvent être combinés
 #
@@ -190,6 +195,7 @@ np.greater(tab, 5)
 # np.count_nonzero(tab%2==0, axis=0)
 # -> [0, 2, 1]
 # ```
+# ````
 
 # %%
 # le code
@@ -205,6 +211,7 @@ np.count_nonzero(tab%2==0, axis=0)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les masques/filtres booléens
 #
+# ````{admonition} →
 # le tableau des résultats des tests est un **masque booléen**  
 #
 # * il a la **même forme** que le tableau initial
@@ -240,6 +247,7 @@ np.count_nonzero(tab%2==0, axis=0)
 #
 # on peut aussi construire les indices des éléments sélectionnés  
 # pour les repérer dans le tableau original
+# ````
 
 # %%
 # le code
@@ -258,6 +266,7 @@ tab
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## composition des conditions
 #
+# ````{admonition} →
 # 4 règles
 #
 # * vous ne pouvez **pas** utiliser les opérateurs logiques Python `and`, `or`, `not`  
@@ -300,6 +309,7 @@ tab
 # ```python
 # np.logical_and(tab >= 25, np.logical_and(tab < 75, np.logical_not(tab%2==0)))
 # ```
+# ````
 
 # %%
 # le code
@@ -330,6 +340,7 @@ except Exception as exc:
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### affecter une sélection
 #
+# ````{admonition} →
 # avec une expression de *sélection* de cette forme `tab[mask]`   
 # on peut **aussi modifier** (ces emplacements dans) le tableau de départ  
 # en affectant directement une valeur  
@@ -342,6 +353,7 @@ except Exception as exc:
 # [[  1 100   3]
 #  [100   5 100]]
 # ```
+# ````
 
 # %%
 # le code
@@ -352,6 +364,7 @@ print(tab)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ### c'est fragile (1)
 #
+# ````{admonition} →
 # par contre il faut être un peu prudent; certaines formes, pourtant voisines en apparence, ne vont pas fonctionner
 #
 # **1er cas**
@@ -372,6 +385,7 @@ print(tab)
 # print(view)
 # -> [100 100 100]
 # ```    
+# ````
 
 # %% {"tags": ["level_intermediate"]}
 # le code
@@ -384,6 +398,7 @@ print(view)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ### c'est fragile (2)
 #
+# ````{admonition} →
 # **2ème cas**
 #
 # imaginons que je ne veux modifier **que le premier** des éléments pair  
@@ -400,6 +415,7 @@ print(view)
 # -> ([[1, 2, 3], # et non [1, 100, 3],...
 #      [4, 5, 6]])
 # ```    
+# ````
 
 # %% {"tags": ["level_intermediate"]}
 # le code
@@ -411,12 +427,14 @@ print(tab)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ### repérer les éléments par leurs indices
 #
+# ````{admonition} →
 # dans ce genre de situation, pour modifier les éléments sélectionnés dans le tableau d'origine, on peut repèrer les éléments par leur indice dans le tableau d'origine
 #
 # et pour calculer ces indices, deux fonctions:
 #
 # * la fonction `numpy.nonzero`
 # * la fonction `numpy.argwhere` (avancé)
+# ````
 
 # %% [markdown] {"tags": ["level_intermediate"]}
 # ***
@@ -424,6 +442,7 @@ print(tab)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ### la fonction `numpy.nonzero`
 #
+# ````{admonition} →
 # `numpy.nonzero`
 #
 # * renvoie un tuple de même dimension que le tableau d'origine
@@ -466,6 +485,7 @@ print(tab)
 # -> [[1000,    2, 1000],
 #     [   4, 1000,    6]]
 # ```
+# ````
 
 # %% {"tags": ["level_intermediate"]}
 tab = np.array([[1, 2, 3], [4, 5, 6]])
@@ -478,6 +498,7 @@ print("edited tab", tab)
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ###  la fonction `numpy.argwhere`
 #
+# ````{admonition} →
 # `numpy.argwhere`
 #
 # * renvoie un tableau de dimension 2
@@ -520,6 +541,7 @@ print("edited tab", tab)
 # tab[tuple(np.argwhere(cond).T)]    
 # -> array([1, 3, 5])
 # ```
+# ````
 
 # %% {"tags": ["level_intermediate"]}
 # le code
@@ -533,6 +555,7 @@ tab[tuple(np.argwhere(cond).T)]
 # %% [markdown] {"tags": ["framed_cell", "level_advanced"]}
 # ### modifier avec `array.putmask()`
 #
+# ````{admonition} →
 # **avancés**
 #
 # la fonction `numpy.putmask(tab, cond, value)` remplace dans un `numpy.ndarray`  
@@ -547,6 +570,7 @@ tab[tuple(np.argwhere(cond).T)]
 #         [ 4,  0,  6,  0],
 #         [ 8,  0, 10,  0]])
 # ```
+# ````
 
 # %% {"tags": ["level_advanced"]}
 # le code

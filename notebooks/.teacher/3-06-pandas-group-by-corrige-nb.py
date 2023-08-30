@@ -50,6 +50,7 @@ df.head(3)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## introduction
 #
+# ````{admonition} →
 # en `pandas`, une table de données (encore appelée *dataframe*) a uniquement 2 dimensions
 #
 # mais elle peut indiquer, avec ces deux seules dimensions, des sous-divisions dans les données
@@ -69,6 +70,7 @@ df.head(3)
 # on va calculer des regroupements (partitions)  
 # en utilisant la méthode `pandas.DataFrame.groupby`  
 # à laquelle on indique un ou plusieurs critères.
+# ````
 
 # %% [markdown]
 # ***
@@ -76,6 +78,7 @@ df.head(3)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## groupement par critère unique
 #
+# ````{admonition} →
 # le groupement (la partition) se fait par la méthode `pandas.DataFrame.groupby`
 #
 # prenons le seul critère de genre des passagers  
@@ -103,6 +106,7 @@ df.head(3)
 # ```
 #
 # l'objet rendu par la méthode est de type `pandas.DataFrameGroupBy`
+# ````
 
 # %%
 # le code
@@ -116,6 +120,7 @@ by_sex
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accès aux sous-dataframes
 #
+# ````{admonition} →
 # la méthode `pandas.DataFrameGroupBy.size`  
 # donne la taille des deux partitions  
 # (dans un objet de type `pandas.Series`)
@@ -140,6 +145,7 @@ by_sex
 # ```
 #
 # vous pouvez donc facilement parcourir toutes les sous-dataframes
+# ````
 
 # %%
 # les tailles des morceaux
@@ -157,6 +163,7 @@ for group, subdf in by_sex:
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### proxying : propagation sur les sous-df
 #
+# ````{admonition} →
 # itérer est intéressant d'un point de vue pédagogique  
 # pour bien comprendre la nature d'un objet `DataFrameGroupBy`  
 # et éventuellement inspecter son contenu de visu  
@@ -185,6 +192,7 @@ for group, subdf in by_sex:
 # # les sommes des colonnes, mais par sexe
 # by_sex.sum()
 # ```
+# ````
 
 # %%
 # souvent on traite un groupby comme une dataframe
@@ -198,6 +206,7 @@ by_sex.sum()
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accéder à un groupe
 #
+# ````{admonition} →
 # on a parfois besoin d'accéder à un groupe précis dans la partition  
 # c'est possible avec la méthode `get_group()`  
 # qui retourne une dataframe
@@ -205,6 +214,7 @@ by_sex.sum()
 # ```python
 # by_sex.get_group('female')
 # ```
+# ````
 
 # %%
 by_sex.get_group('female')
@@ -212,6 +222,7 @@ by_sex.get_group('female')
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## groupement multi-critères
 #
+# ````{admonition} →
 # pour des partitions multi-critères  
 # passez à `pandas.DataFrame.groupby` une **liste des colonnes**
 #
@@ -256,6 +267,7 @@ by_sex.get_group('female')
 #
 # nous découvrons là une `pandas.Series` avec un **`index` composé**  
 # qu'en pandas on appelle **un *MultiIndex***
+# ````
 
 # %% {"scrolled": true}
 # le code
@@ -265,6 +277,7 @@ by_class_sex.size()
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### multi-index pour les multi-critères
 #
+# ````{admonition} →
 # inspectons de plus près l'index qui est en jeu ici  
 # partons du résultat de `by_class_sex.size()` qui est une `pandas.Series`
 #
@@ -300,6 +313,7 @@ by_class_sex.size()
 #  (2, 'male'),
 #  (2, 'female')}
 # ```
+# ````
 
 # %%
 # le code
@@ -321,6 +335,7 @@ computed_index == set(df.groupby(['Pclass', 'Sex']).size().index)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### les éléments de l'index sont des tuples
 #
+# ````{admonition} →
 # les éléments dans le `MultiIndex` sont des tuples Python
 #
 # par exemple, nous pouvons toujours itérer sur les sous-dataframes  
@@ -340,6 +355,7 @@ computed_index == set(df.groupby(['Pclass', 'Sex']).size().index)
 # there were 347 male in class 3
 # ```
 #
+# ````
 
 # %%
 # le code
@@ -350,6 +366,7 @@ for (class_, sex), subdf in by_class_sex:
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ### display de `head()` avec IPython
 #
+# ````{admonition} →
 # on veut afficher les 2 premières lignes de chaque dataframe de la partition
 #
 # utiliser la méthode `head()` avec `print` n'est pas aussi joli  
@@ -370,6 +387,7 @@ for (class_, sex), subdf in by_class_sex:
 #     print(group)
 #     IPython.display.display(subdf.head(1))
 # ```
+# ````
 
 # %%
 # le code : c'est moche
@@ -493,6 +511,7 @@ pd.Series(D, name="taux de survie par genre dans chaque classe")
 # %% [markdown] {"tags": ["framed_cell"]}
 # ###  introduction
 #
+# ````{admonition} →
 # parfois il y a trop de valeurs différentes dans une colonne  
 # du coup on veut faire un découpage de ces valeurs en intervalles
 #
@@ -516,6 +535,7 @@ pd.Series(D, name="taux de survie par genre dans chaque classe")
 # ```python
 # pd.cut?
 # ```
+# ````
 
 # %%
 # le code (à décommenter pour essayer)
@@ -524,6 +544,7 @@ pd.Series(D, name="taux de survie par genre dans chaque classe")
 # %% [markdown] {"tags": ["framed_cell"]}
 # ###  découpage en intervalles d'une colonne
 #
+# ````{admonition} →
 # avec `pandas.cut` nous allons créer dans notre dataframe  
 # une nouvelle colonne qui contient les intervalles d'ages  
 # `(0, 12]`, `(12, 19]`, `(19, 55]` et  `(55, 100]`
@@ -586,6 +607,7 @@ pd.Series(D, name="taux de survie par genre dans chaque classe")
 # **révision**  
 # comment feriez-vous pour vous débarrasser maintenant de la colonne `Age` dans la dataframe
 #
+# ````
 
 # %%
 # le code
@@ -615,6 +637,7 @@ print("après", df.columns)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ###  groupement avec ces intervalles
 #
+# ````{admonition} →
 # nous avons la colonne `Age-classes`
 #
 # comme c'est un type catégorie, vous pouvez utiliser cette colonne dans un `groupby`
@@ -629,6 +652,7 @@ print("après", df.columns)
 #
 # **exercice**  
 # calculez les taux de survie de chaque classe d'age par classes de cabines
+# ````
 
 # %%
 # le code
@@ -642,6 +666,7 @@ df.groupby(['Age-class', 'Pclass', 'Survived']).size()
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## `pivot_table()`
 #
+# ````{admonition} →
 # le type d'opérations que l'on a fait dans ce notebook est fréquent  
 # spécifiquement, on veut souvent afficher:
 #
@@ -680,6 +705,7 @@ df.groupby(['Age-class', 'Pclass', 'Survived']).size()
 #     columns='Sex',
 # )
 # ```
+# ````
 
 # %%
 # #df.pivot_table?
@@ -696,12 +722,14 @@ df.pivot_table(
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### `pivot_table()` et agrégation
 #
+# ````{admonition} →
 # dans le cas présent on n'a **pas précisé** la fonction d'**aggrégation**  
 # du coup c'est la moyenne qui est utilisée, sur la valeur de `Survived`  
 # qui vaut 0 ou 1 selon les cas, et donc on obtient le taux de survie  
 #
 # **exercice**
 # obtenez la même table que ci-dessus avec cette fois le nombre de survivants
+# ````
 
 # %%
 # votre code
@@ -718,6 +746,7 @@ df.pivot_table(
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### `pivot_table()` et multi-index
 #
+# ````{admonition} →
 # comme on l'a vu, il est possible de passer aux 3 paramètres  
 # `values`, `index` et `columns` des **listes** de colonnes
 #
@@ -734,6 +763,7 @@ df.pivot_table(
 #
 # et notamment que pouvez-vous dire des index (en lignes et en colonnes)  
 # du résultat produit par `pivot_table()`
+# ````
 
 # %%
 # relisons depuis le fichier pour être sûr d'avoir la colonne 'Age'
@@ -853,6 +883,7 @@ df.pivot_table(values=('color-intensity', 'flavanoids', 'magnesium'),
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ## accès au dictionnaire des groupes
 #
+# ````{admonition} →
 # l'attribut `pandas.DataFrameGroupBy.groups`  
 # est un dictionnaire qui décrit les partitions:  
 # - la clé correspondent à un groupe  
@@ -873,6 +904,7 @@ df.pivot_table(values=('color-intensity', 'flavanoids', 'magnesium'),
 # for group, indexes in by_sex.groups.items():
 #     print(group, df.loc[indexes[:3], 'Name'])
 # ```
+# ````
 
 # %% {"tags": ["level_intermediate"]}
 # on se remet dans le contexte

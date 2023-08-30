@@ -99,6 +99,7 @@ tab2[::-1, ::-1, ::-1, ::-1]
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## tableaux de formes différentes: broadcasting
 #
+# ````{admonition} →
 # vous voulez incrémenter de 1 tous les éléments d'une matrice d'entiers de forme `(100, 100)`
 # ```python
 # tab = np.arange(0, 10000).reshape(100, 100)
@@ -135,6 +136,7 @@ tab2[::-1, ::-1, ::-1, ::-1]
 # [1, 2, 3, 4, 5, 6] + [10, 20 ] # + est append
 # -> [1, 2, 3, 4, 5, 6, 10, 20]
 # ```
+# ````
 
 # %%
 # le code
@@ -154,12 +156,14 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### le broadcasting, c'est quoi ?
 #
+# ````{admonition} →
 # c'est la manière dont `numpy` traite les tableaux de formes différentes lors d'opérations
 #
 # le *plus petit tableau*, **quand c'est possible**, est considéré comme *élargi* à la taille du plus grand  
 # afin qu'ils aient des formes compatibles
 #
 # cela se fait **implicitement**
+# ````
 
 # %% [markdown]
 # ***
@@ -167,6 +171,7 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre un scalaire et un tableau par broadcasting
 #
+# ````{admonition} →
 # l'opération entre un scalaire est un tableau est toujours possible  
 # il est possible de considérer un scalaire comme un tableau de n'importe quelle forme
 #
@@ -198,6 +203,7 @@ print([1, 2, 3, 4, 5, 6] + [10, 20])
 #
 # naturellement `numpy` ne va **jamais** construire un tel objet  
 # il va juste s'arranger pour incrémenter les éléments des lignes et des colonnes de la matrice par `1`
+# ````
 
 # %% {"cell_style": "split"}
 mat = np.arange(15).reshape(3, 5)
@@ -211,6 +217,7 @@ mat + 1
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une ligne et un tableau par broadcasting
 #
+# ````{admonition} →
 # la ligne et le tableau doivent obéir à des conditions de forme (plutôt évidentes)
 #
 # --------------------------------
@@ -261,6 +268,7 @@ mat + 1
 #
 # là encore, `numpy` ne va **jamais** générer une telle matrice  
 # il va procéder par des boucles sur les lignes de la matrice
+# ````
 
 # %%
 # le code
@@ -278,6 +286,7 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une ligne et un groupes de matrices
 #
+# ````{admonition} →
 # de même, on peut ajouter une ligne à tout un groupe de matrices... si la forme des lignes coincide
 #
 #
@@ -306,6 +315,7 @@ mat + np.arange(10, 60, 10).reshape(1, 5)
 # ```
 #
 # de même pour les groupes de groupes de groupes de ... de matrices, etc.
+# ````
 
 # %%
 # le code
@@ -321,6 +331,7 @@ mat + [1000, 2000, 3000, 4000, 5000]
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une colonne et une matrice
 #
+# ````{admonition} →
 # c'est pareil...
 #
 # ```python    
@@ -357,6 +368,7 @@ mat + [1000, 2000, 3000, 4000, 5000]
 #
 #
 # et ainsi de suite
+# ````
 
 # %%
 # le code
@@ -369,6 +381,7 @@ mat+col
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### opération entre une ligne et une colonne
 #
+# ````{admonition} →
 # cela va faire ce à quoi vous vous attendez: une matrice !
 #
 # **exercice**
@@ -377,6 +390,7 @@ mat+col
 # 1. ajouter les deux
 #
 # il faut faire attention à la forme de la colonne `(n, 1)`
+# ````
 
 # %%
 # prune-cell
@@ -388,6 +402,7 @@ line + col
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ## règles de broadcasting - avancés
 #
+# ````{admonition} →
 # Les dimensions des deux tableaux, sur lesquels une opération élément-par-élément est appliquée
 #
 # * sont comparées de droite à gauche (par paire)
@@ -409,6 +424,7 @@ line + col
 # m1 * m2
 # -> ValueError: operands could not be broadcast together with shapes (2,3) (2,4)
 # ```
+# ````
 
 # %%
 # le code d'un exemple
@@ -428,6 +444,7 @@ except ValueError as e:
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ### exemple de broadcasting - avancés
 #
+# ````{admonition} →
 # * une matrice `A`$=\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix}$ de forme `(2_A, 3_A)`
 #
 #
@@ -451,6 +468,7 @@ except ValueError as e:
 #   $\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix} + \begin{pmatrix} b & b & b \\ b & b & b \end{pmatrix} = \begin{pmatrix} a_{11} + b & a_{12} + b & a_{13} + b \\ a_{21} + b & a_{22} + b & a_{23} + b \\  \end{pmatrix}$   
 #
 # les formes sont désormais compatibles, les deux tableaux peuvent être ajoutés
+# ````
 
 # %% [markdown]
 # ***
@@ -458,6 +476,7 @@ except ValueError as e:
 # %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
 # ### exemple de broadcasting - ajout ligne et colonne
 #
+# ````{admonition} →
 # on veut faire l'opération $\begin{pmatrix} a_{1} & a_{2} & a_{3} \end{pmatrix} + \begin{pmatrix} b_1 \\ b_2 \\ b_3 \\ b_4 \end{pmatrix}$
 #
 # la forme de la matrice-ligne `a` est $(1_a, 3_a)$, la forme de la matrice-colonne `b` est $(4_b, 1_b)$
@@ -481,10 +500,12 @@ except ValueError as e:
 #
 #
 # les formes sont désormais compatibles, les deux tableaux ont pu être ajoutés
+# ````
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple de broadcasting en dimension > 2
 #
+# ````{admonition} →
 #
 # deux groupes de 3 matrices
 #
@@ -544,6 +565,7 @@ except ValueError as e:
 #       [[131, 232, 333],
 #        [434, 535, 636]]]])
 # ```
+# ````
 
 # %%
 # le code

@@ -48,6 +48,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown] tags=["framed_cell"]
 # ## organisation de la mémoire
 #
+# ````{admonition} →
 # ### pourquoi comprendre comment <code>numpy</code> travaille en mémoire ?
 #
 # pour prendre des décisions en connaissance de cause  
@@ -70,6 +71,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 # * ne jamais penser que c'est magique, incompréhensible, trop compliqué...
 # * le plus souvent c'est simplement logique
+# ````
 
 # %% [markdown]
 # créons un tableau `numpy` en 2 dimensions: 4 lignes et 5 colonnes
@@ -94,6 +96,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### organisation en mémoire des tableaux
 #
+# ````{admonition} →
 # l'aide (accessible via `help(np.ndarray)`) dit
 # > *An array object represents a multidimensional, homogeneous array of fixed-size items.*
 #
@@ -126,6 +129,7 @@ mat.nbytes
 #
 # * pour que `numpy` soit le plus rapide possible dans ses manipulations de tableaux
 # * grâce à ces contraintes, passer d'une case du tableau à une autre  est très rapide
+# ````
 
 # %% [markdown]
 # ***
@@ -133,6 +137,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### rapidité des manipulations mémoire
 #
+# ````{admonition} →
 # deux **idées** pour assurer la rapidité de manipulation de tableaux en mémoire
 #
 #
@@ -140,6 +145,7 @@ mat.nbytes
 #
 #
 # * avoir la valeur de l'élément directement dans la case (pas **d'indirection** mémoire)
+# ````
 
 # %% [markdown]
 # ***
@@ -147,6 +153,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### offset
 #
+# ````{admonition} →
 # supposons que le tableau soit représenté en mémoire par un **bloc d'octets continu**  
 # (ici 9 cases sont **contiguës** et de même taille - homogène)
 #
@@ -176,6 +183,7 @@ mat.nbytes
 # ```
 #
 # </div>
+# ````
 
 # %% [markdown]
 # ***
@@ -183,6 +191,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### pas d'indirection mémoire
 #
+# ````{admonition} →
 # pour un tableau, on sait maintenant
 #
 # * que la taille des éléments est homogène  
@@ -223,6 +232,7 @@ mat.nbytes
 # si un tableau contient les adresses de ses éléments  
 # et pas directement la valeur des éléments  
 # il y aura une indirection à faire quand on arrive sur une case
+# ````
 
 # %% [markdown]
 # ### exercice: tableau de chaînes de caractères
@@ -294,6 +304,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### forme des tableaux numpy
 #
+# ````{admonition} →
 # la mémoire d'un `numpy.ndarray` est **toujours** un **segment unidimensionnel continu de cases de même taille et même type**
 #
 # <div class="memory">
@@ -306,6 +317,7 @@ mat.nbytes
 # `numpy` crée sur cette base, un système d'indexation
 #
 # * pour *considérer* le tableau sous une forme (`shape`) multi-dimensionnelle
+# ````
 
 # %% [markdown]
 # ***
@@ -313,6 +325,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### 1-dimension
 #
+# ````{admonition} →
 # créons un tableau de dimension 1 donc de `shape=(30,)`   
 # ```python
 # seg = np.ones(shape=(30,))
@@ -338,6 +351,7 @@ mat.nbytes
 #
 # voila pourquoi la plupart du temps en informatique, les **tableaux commencent à l'index 0**
 # (et pas 1, sauf pour *matlab*, *R*, *Fortran*...)
+# ````
 
 # %% [markdown]
 # ***
@@ -345,6 +359,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### 2-dimension
 #
+# ````{admonition} →
 # créons un tableau de dimension 2, par exemple de `shape=(5, 6)`   
 # ```python
 # seg = np.ones(shape=(5, 6))
@@ -371,6 +386,7 @@ mat.nbytes
 #
 # 0 <= i <= 4
 # 0 <= j <= 5
+# ````
 
 # %% [markdown]
 # ***
@@ -378,6 +394,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### 3-dimension
 #
+# ````{admonition} →
 # créons un tableau de dimension 3, par exemple de `shape=(4, 5, 6)`   
 # ```python
 # seg = np.ones(shape=(4, 5, 6))
@@ -404,6 +421,7 @@ mat.nbytes
 #
 #
 # et ainsi de suite
+# ````
 
 # %% [markdown]
 # ## changer la forme d'un tableau
@@ -411,6 +429,7 @@ mat.nbytes
 # %% [markdown] tags=["framed_cell"]
 # ### fonctions `resize` et `reshape`
 #
+# ````{admonition} →
 # on peut modifier la forme d'un `numpy.ndarray` existant  
 # tant qu'on ne modifie pas son nombre d'éléments
 #
@@ -451,6 +470,7 @@ mat.nbytes
 #
 # si aucune mémoire n'est créée, c'est que les différentes indexations prises sur un tableau  
 # **partagent l'objet sous-jacent**
+# ````
 
 # %%
 # le code
@@ -497,6 +517,7 @@ print(seg)
 # %% [markdown] tags=["framed_cell"]
 # ## les lignes et colonnes
 #
+# ````{admonition} →
 # pour les tableaux `numpy.ndarray` en dimension supérieure ou égale à 2
 #
 # * les deux dernières valeurs de leur forme  `tab.shape`   
@@ -506,6 +527,7 @@ print(seg)
 #
 # 1. faites un tableau de `ones` de forme `(1, 2, 3, 4, 5)`
 # 1. afficher son nombre de lignes et son nombre de colonnes
+# ````
 
 # %%
 # votre code ici

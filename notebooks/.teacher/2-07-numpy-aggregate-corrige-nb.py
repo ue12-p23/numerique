@@ -50,6 +50,7 @@ import numpy as np
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## introduction
 #
+# ````{admonition} →
 # nous avons vu des opérations `numpy` qui s'appliquent à un ou plusieurs tableaux  
 # et retournent un tableau de la même dimension
 #
@@ -87,6 +88,7 @@ import numpy as np
 # | .../...| .../... |
 #
 # chacune de ces fonctions est aussi une méthode des `numpy.ndarray`
+# ````
 
 # %%
 # le code
@@ -99,6 +101,7 @@ np.power(tab1, 2) + tab1
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple avec des vecteurs d'entiers
 #
+# ````{admonition} →
 # il n'y a qu'une dimension, qu'un `axe`  
 # c'est l'axe d'indice `0`     
 # il est donc optionnel
@@ -152,6 +155,7 @@ np.power(tab1, 2) + tab1
 # type(np.min(vec))
 # -> numpy.int8
 # ```
+# ````
 
 # %%
 # le code
@@ -168,6 +172,7 @@ type(np.min(vec))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple avec un vecteur de booléens
 #
+# ````{admonition} →
 # Comment tester si tous les éléments de votre tableau sont vrais ?  
 # Comment tester si l'un au moins des éléments de votre tableau est vrai ?
 #
@@ -198,6 +203,7 @@ type(np.min(vec))
 #
 # `np.all`  et `np.any` s'appliquent sur des valeurs de types autres que booléen  
 # les zéros des types seront `False` et le reste `True`
+# ````
 
 # %%
 # le code
@@ -237,6 +243,7 @@ def fake_none(tab):
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### exemple de tableau en dim 4
 #
+# ````{admonition} →
 # ```python
 # tab = np.arange(120).reshape(2, 3, 4, 5)
 # tab ->[[[[  0,   1,   2,   3,   4],
@@ -270,6 +277,7 @@ def fake_none(tab):
 #          [110, 111, 112, 113, 114],
 #          [115, 116, 117, 118, 119]]]]
 # ```
+# ````
 
 # %% [markdown]
 # ***
@@ -277,6 +285,7 @@ def fake_none(tab):
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### somme en dimension 4
 #
+# ````{admonition} →
 # par défaut `numpy` appliquera l'opération sur tous les éléments du tableau  
 # et renverra une unique valeur
 #
@@ -321,6 +330,7 @@ def fake_none(tab):
 # tab.sum(axis=3).shape
 # -> (2, 3, 4)
 # ```
+# ````
 
 # %%
 tab = np.arange(120).reshape(2, 3, 4, 5)
@@ -356,6 +366,7 @@ tab.sum(axis=(1, 2))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### min et max globaux en dimension 4
 #
+# ````{admonition} →
 # on recherche l'indice (l'emplacement, pas la valeur) du plus grand élément du tableau
 #
 # c'est la méthode `argmax` qu'il nous faut
@@ -379,6 +390,7 @@ tab.sum(axis=(1, 2))
 # tab.argmax() # 119
 # np.unravel_index(tab.argmax(), tab.shape) # (1, 2, 3, 4)
 # ```
+# ````
 
 # %%
 # le code

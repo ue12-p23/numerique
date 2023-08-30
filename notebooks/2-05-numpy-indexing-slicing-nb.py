@@ -54,6 +54,7 @@ from matplotlib import pyplot as plt
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## accès aux éléments d'un tableau    
 #
+# ````{admonition} →
 #
 # *accéder à des éléments ou à des sous-tableaux  
 # va nous permettre de leur appliquer des fonctions vectorisées*
@@ -82,6 +83,7 @@ from matplotlib import pyplot as plt
 # * dimension 1, par exemple `(12,)`
 # * dimension 2, par exemple `(1, 12)` `(6, 2)` `(3, 4)` `(4, 3)`
 # * dimension 3, par exemple `(2, 3, 2)`...
+# ````
 
 # %% [markdown]
 # ***
@@ -89,6 +91,7 @@ from matplotlib import pyplot as plt
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accès à un tableau de dimension 1
 #
+# ````{admonition} →
 # vous avez besoin d'**un seul index**
 #
 # ```python
@@ -111,6 +114,7 @@ from matplotlib import pyplot as plt
 # tab1 = tab.astype(np.float64)
 # tab1[0] = np.pi # 3.141592653589793
 # ```
+# ````
 
 # %% {"scrolled": true}
 # le code
@@ -127,6 +131,7 @@ tab1[0].dtype, tab1[0]
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accès à un tableau de dimension > à 1
 #
+# ````{admonition} →
 # l'accès à un élément du tableau dépend de la forme du tableau  
 #
 # il y aura un indice par dimension
@@ -174,6 +179,7 @@ tab1[0].dtype, tab1[0]
 #
 # * ainsi le nombre de lignes c'est `tab.shape[-2]`
 # * et de colonne`tab.shape[-1]`
+# ````
 
 # %%
 # le code
@@ -243,6 +249,7 @@ tab
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### différence slicing `python` et `numpy`
 #
+# ````{admonition} →
 #
 # le **slicing** `numpy` est *syntaxiquement équivalent* à celui des listes `Python`
 #
@@ -264,6 +271,7 @@ tab
 #
 # vous pourrez ensuite, par exemple, modifier ces éléments  
 # et donc ils seront modifiés dans le tableau initial
+# ````
 
 # %% [markdown]
 # ***
@@ -271,6 +279,7 @@ tab
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### rappel du slicing Python
 #
+# ````{admonition} →
 # **rappel du slicing Python**
 #
 #
@@ -303,6 +312,7 @@ tab
 # # ou
 # l[:]
 # ```
+# ````
 
 # %%
 # le code
@@ -315,6 +325,7 @@ print(l[:])
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### slicing en dimension 1
 #
+# ````{admonition} →
 # on crée un `numpy.ndarray` de dimension 1 de taille 10
 #
 # * on prend un élément sur 2 en partant du début de la liste  
@@ -329,6 +340,7 @@ print(l[:])
 # vec[::2] = 100
 # print(vec)          # [100, 1, 100, 3, 100, 5, 100, 7, 100, 9]
 # ```
+# ````
 
 # %%
 # le code
@@ -340,6 +352,7 @@ vec
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### slicing en dimension > à 1 (a)
 #
+# ````{admonition} →
 # on crée un `numpy.ndarray` en dimension 4, de forme `(2, 3, 4, 5)`  
 # on l'initialise avec les `120`  premiers entiers
 #
@@ -369,6 +382,7 @@ vec
 # ```python
 # tab[0, 1, :, 3] # remarquez le ':' pour indiquer toutes les lignes
 # ```
+# ````
 
 # %%
 # le code
@@ -382,6 +396,7 @@ print(    tab[0, 1, :, 3]    )
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### slicing en dimension > à 1 (b)
 #
+# ````{admonition} →
 # on crée un `numpy.ndarray` en dimension 4, de forme `(2, 3, 4, 5)`  
 # on l'initialise avec les `120`  premiers entiers
 #
@@ -416,6 +431,7 @@ print(    tab[0, 1, :, 3]    )
 # tab[:, 0, :, :]
 # tab[:, 0] # ou encore, plus simplement
 # ```
+# ````
 
 # %%
 tab = np.arange(120).reshape(2, 3, 4, 5)
@@ -456,6 +472,7 @@ tab[:, 0]
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## les sous-tableaux sont des vues, et non des copies
 #
+# ````{admonition} →
 # le slicing calcule une nouvelle indexation sur le segment mémoire du tableau existant
 #
 #
@@ -474,6 +491,7 @@ tab[:, 0]
 # ```python
 # tab1 = tab[:, 0, 1:-1, 1:-1].copy()
 # ```
+# ````
 
 # %% [markdown]
 # ***
@@ -481,6 +499,7 @@ tab[:, 0]
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
 # ## partage du segment sous-jacent ou non? - avancé    
 #
+# ````{admonition} →
 # un tableau `numpy.ndarray` peut être
 # 1. un tableau *original* (on vient de le créer éventuellement par copie)
 # 1. une vue sur un tableau (il a été créé par slicing ou indexation)  
@@ -545,6 +564,7 @@ tab[:, 0]
 #
 # `numpy` essaie de créer le moins de mémoire possible  
 # pour stocker les éléments de ses tableaux
+# ````
 
 # %%
 # le code
@@ -594,9 +614,11 @@ tab1.base
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## modification des sous-tableaux
 #
+# ````{admonition} →
 # pour modifier un sous-tableau, il faut simplement faire attention
 # 1. au type des éléments  
 # 2. et à la forme du tableau
+# ````
 
 # %% [markdown]
 # ## exercices avancés pour les rapides

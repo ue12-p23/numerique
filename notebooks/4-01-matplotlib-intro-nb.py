@@ -38,6 +38,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## introduction
 #
+# ````{admonition} →
 # https://matplotlib.org/api/pyplot_summary.html
 #
 # pour se familiariser avec des données, rien ne remplace - quand elle est possible - la **visualisation**
@@ -64,6 +65,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # * courbes, histogrammes, box-plots, nuages de points, plot3D, grilles de figures ...
 # * que vous allez pouvoir les personnaliser avec des textes, titres, étiquettes, légendes ...
 # * dont vous allez pouvoir contrôler les couleurs, styles de ligne, propriétés de police ...
+# ````
 
 # %%
 from matplotlib import pyplot as plt
@@ -80,6 +82,7 @@ import pandas as pd
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## plusieurs *drivers*
 #
+# ````{admonition} →
 # dans ce premier notebook nous allons utiliser le driver `inline` - qui est le défaut
 #
 # en fait il en existe plusieurs autres, et notamment pour les notebooks le driver notebook` - qui s'utilise en faisant
@@ -112,10 +115,12 @@ import pandas as pd
 #
 # enfin, vous noterez que `df.plot()` fait un appel à `plt.figure()` ! bref c'est un peu le bazar...
 #
+# ````
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## tracer une courbe avec `plt.plot`
 #
+# ````{admonition} →
 # avec `matplotlib.pyplot.plot`  
 # (ou `plt.plot` puisqu'elle importée sous ce nom)
 #
@@ -184,6 +189,7 @@ import pandas as pd
 # plt.plot(x, y, 'b.') # ligne bleue pointillée
 # plt.plot(x, y, 'g--') # ligne verte en traits
 # ```
+# ````
 
 # %%
 # le code
@@ -210,6 +216,7 @@ plt.plot(x, y, 'g--'); # ligne verte pointillée
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## attention aux valeurs manquantes
 #
+# ````{admonition} →
 # on peut ne donner que deux points  
 # `plt.plot` les relie  
 # comme ici (10, 10) à (20, 20)
@@ -250,6 +257,7 @@ plt.plot(x, y, 'g--'); # ligne verte pointillée
 # affichez un `marker` de points  
 # (par exemple `'v'`),  
 # dans le `plt.plot` de l'exercice ci-dessus (avec les `np.nan`)
+# ````
 
 # %%
 # le code
@@ -262,6 +270,7 @@ plt.plot([10], [10]);
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## ajouter un titre `plt.title`
 #
+# ````{admonition} →
 # avec la fonction `plt.title` on ajoute un titre à la figure
 #
 # avec son paramètre `fontsize` on fixe la taille des caractères
@@ -286,6 +295,7 @@ plt.plot([10], [10]);
 # ```python
 # plt.title?
 # ```
+# ````
 
 # %%
 # le code
@@ -298,6 +308,7 @@ plt.title('sinus(X)', fontsize=20, loc='left');
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## donner une taille à une figure
 #
+# ````{admonition} →
 # la fonction `plt.figure` permet
 #
 # * de créer une nouvelle figure ou d'en activer une existante
@@ -313,6 +324,7 @@ plt.title('sinus(X)', fontsize=20, loc='left');
 # ```python
 # plt.figure?
 # ```
+# ````
 
 # %%
 # le code
@@ -326,6 +338,7 @@ plt.plot(x, np.sin(x));
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## ajouter des labels aux axes  `plt.xlabel` et `plt.ylabel`
 #
+# ````{admonition} →
 # avec la fonction `plt.xlabel` on ajoute un label aux abscisses de la figure
 #
 # avec la fonction `plt.ylabel` on ajoute un label aux ordonnées de la figure
@@ -341,6 +354,7 @@ plt.plot(x, np.sin(x));
 # ```python
 # plt.xlabel?
 # ```
+# ````
 
 # %%
 # le code
@@ -358,6 +372,7 @@ plt.xlabel('Y');
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## nuages de points (`plt.scatter`)
 #
+# ````{admonition} →
 # `plt.scatter` permet d'afficher des points dispersés  
 # (i.e. non reliés)
 #
@@ -372,6 +387,7 @@ plt.xlabel('Y');
 # ```python
 # plt.scatter?
 # ```
+# ````
 
 # %%
 # le code
@@ -382,6 +398,7 @@ plt.scatter(x, z);
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## donner une légende à plusieurs plots sur la même figure `label`
 #
+# ````{admonition} →
 # vous pouvez tracer plusieurs courbes sur la même figure
 #
 # avec le paramètre `label`, vous indiquez le nom de chaque figure
@@ -391,6 +408,7 @@ plt.scatter(x, z);
 # le paramètre `loc` permet de positionner la légende `'upper right'`, `'best'`, `'center'`...
 #
 # **note** le même effet est obtenu lorsqu'on plotte directement une dataframe plutôt que des tableaux `numpy` - on y reviendra
+# ````
 
 # %%
 x = np.linspace(0, 2*np.pi, 50)
@@ -401,6 +419,7 @@ plt.legend();
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## fixer la limite des axes (`plt.xlim` et `plt.ylim`)
 #
+# ````{admonition} →
 # avec `x = np.linspace(0, 2*np.pi, 50)`  
 # `y=sin(x)` est calculé entre $0$ et $2\pi$
 #
@@ -416,6 +435,7 @@ plt.legend();
 # plt.ylim(0,1)
 # plt.plot(x, np.sin(x))
 # ```
+# ````
 
 # %%
 # le code
@@ -426,6 +446,7 @@ plt.plot(x, np.sin(x))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## préciser les *ticks* des axes (`plt.xticks` et `plt.yticks`)
 #
+# ````{admonition} →
 # avec `plt.xtick` et `plt.ytick` on peut donner des listes de valeurs à afficher sur les axes  
 # ici les abscisses et les ordonnées
 #
@@ -459,6 +480,7 @@ plt.plot(x, np.sin(x))
 # plt.title("$sin(x)$ entre $0$ et $2\pi$ ")
 # plt.plot(x, np.sin(x))
 # ```
+# ````
 
 # %%
 # le code
@@ -493,6 +515,7 @@ plt.plot(x, np.sin(x))
 # %% [markdown] {"tags": ["level_basic", "framed_cell"]}
 # ## **exercice** de plot
 #
+# ````{admonition} →
 # **exercice**
 #
 # en une seule figure:
@@ -507,6 +530,7 @@ plt.plot(x, np.sin(x))
 # 1. indice `np.linspace` et `np.power`
 #
 # on utilise ici le driver `matplotlib` pour s'entrainer un peu
+# ````
 
 # %%
 # %matplotlib notebook
@@ -517,6 +541,7 @@ plt.plot(x, np.sin(x))
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## **exercice** sauver une figure dans un fichier
 #
+# ````{admonition} →
 # **exercice**
 #
 # 1. faites une figure quelconque  
@@ -529,6 +554,7 @@ plt.plot(x, np.sin(x))
 #    ou encore `![](foo.ext)`  
 #    en remplaçant naturellement `foo.ext` par le bon nom de fichier
 # 1. pour voir le pdf mettez dans une cellule markdown `[ma belle figure](foo.pdf)` et cliquez dessus...
+# ````
 
 # %% [markdown]
 # ***

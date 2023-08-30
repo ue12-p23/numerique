@@ -53,6 +53,7 @@ from matplotlib import pyplot as plt
 # %% [markdown] tags=["framed_cell"]
 # ## qu'est-ce que la vectorisation ?
 #
+# ````{admonition} →
 #
 # **l'idée**  
 # pour appliquer une fonction à tous les éléments d'un tableau `numpy`
@@ -94,6 +95,7 @@ from matplotlib import pyplot as plt
 #
 # vérifiez en comparant les temps d'exécution des deux codes `%%timeit`  
 # attention c'est très long...
+# ````
 
 # %%
 # %%timeit
@@ -159,6 +161,7 @@ def scalar_function(x):
 # %% [markdown] tags=["framed_cell"]
 # ## qu'est-ce qu'une `ufunc`
 #
+# ````{admonition} →
 # Le mécanisme général qui applique une fonction à un tableau  
 # est connu sous le terme de *Universal function*  
 # ou `ufunc`
@@ -175,6 +178,7 @@ def scalar_function(x):
 #
 # * c'est juste une autre manière de penser le code  
 # * vos codes seront compacts et lisibles (élégants)
+# ````
 
 # %% [markdown]
 # ***
@@ -182,6 +186,7 @@ def scalar_function(x):
 # %% [markdown] tags=["framed_cell"]
 # ### quelles sont les fonctions vectorisées ?
 #
+# ````{admonition} →
 # **les opérateurs arithmétiques classiques**  
 # et leur contre-partie `numpy` (*Ufuncs*)
 #
@@ -207,6 +212,7 @@ def scalar_function(x):
 # |   logarithme      | `np.log`, `np.log2`, `np.log10` |
 #
 # vous allez les utiliser sans même vous en rendre compte !
+# ````
 
 # %% [markdown]
 # ***
@@ -214,6 +220,7 @@ def scalar_function(x):
 # %% [markdown] tags=["framed_cell"]
 # ### savoir si une fonction est une `ufunc`
 #
+# ````{admonition} →
 #  demandez-le lui
 #
 # ```python
@@ -222,6 +229,7 @@ def scalar_function(x):
 # ```
 #
 # `numpy.add` en est !
+# ````
 
 # %%
 # essayez !
@@ -254,6 +262,7 @@ np.power
 # %% [markdown] tags=["framed_cell"]
 # ### problème de la fonction `absolute`
 #
+# ````{admonition} →
 # ```python    
 # ----> if x >= 0:
 # ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
@@ -295,6 +304,7 @@ np.power
 # absolute_vect(tab)
 # -> array([10. , 30. , 56.5])    
 # ```
+# ````
 
 # %% tags=["raises-exception"]
 # le code
@@ -324,6 +334,7 @@ absolute_vect([-10, -20, 30])
 # %% [markdown] tags=["framed_cell"]
 # ### résultats intermédiaires lors de calculs
 #
+# ````{admonition} →
 # nous appliquons des opérations vectorisées les unes à la suite des autres à des tableaux...
 #
 # des **espaces mémoire intermédiaires** sont créés pour recevoir les résultats des calculs   
@@ -351,6 +362,7 @@ absolute_vect([-10, -20, 30])
 #
 # le calcul vectoriel crée de nombreux tableaux intermédiaires  
 # qui peuvent coûter très **cher en mémoire**
+# ````
 
 # %% [markdown]
 # ***
@@ -358,6 +370,7 @@ absolute_vect([-10, -20, 30])
 # %% [markdown] tags=["framed_cell"]
 # ### une solution aux tableaux intermédiaires
 #
+# ````{admonition} →
 # ```python
 # def trigo (x):
 #     return 4*np.exp(np.cos(x))**2
@@ -397,6 +410,7 @@ absolute_vect([-10, -20, 30])
 #
 # * vous savez que ça existe
 # * vous y penserez le jour où la création de tableaux intermédiaires prendra une place bien trop importante
+# ````
 
 # %% [markdown]
 # le code ci-dessous
