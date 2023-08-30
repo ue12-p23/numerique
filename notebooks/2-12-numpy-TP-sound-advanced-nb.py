@@ -192,7 +192,7 @@ MyAudio(sine_linear(440, 660, 3))
 #    def crescendo_sine(freq, duration, increase=True):
 #         ...
 #    ```
-# 1. avancés: 
+# 1. avancés:
 #    est-ce qu'on ne pourrait pas faire un choix un peu plus malin ?
 
 # %%
@@ -261,7 +261,7 @@ MyAudio(la_do, autoplay=True)
 # %% [markdown]
 # ### entiers signés ou non
 #
-# ce qui nous amène à une petite digression: profitons-en pour regarder un peu comment sont encodés les entiers; 
+# ce qui nous amène à une petite digression: profitons-en pour regarder un peu comment sont encodés les entiers;
 #
 # l'encodage des **entiers signés** fonctionne comme suit; on regarde ici les types `int8` et `uint8` car c'est plus simple, le principe est exactement le même pour des tailles plus grandes
 #
@@ -272,12 +272,12 @@ MyAudio(la_do, autoplay=True)
 # par contre pour les entiers **signés**, on va devoir utiliser **un bit comme bit de signe**, ce qui limite le spectre de ce qu'il est possible d'encoder; avec en tout 8 bits on peut encoder de -128 à 127 inclus.
 
 # %% [markdown]
-# | entier |    int8    |     uint8    | 
+# | entier |    int8    |     uint8    |
 # |--------|------------|--------------|
 # | -128   | `10000000` | n/a |
 # | -127   | `10000001` | n/a |
-# | -126   | `10000010` | n/a | 
-# | ...    | 
+# | -126   | `10000010` | n/a |
+# | ...    |
 # | -003   | `11111101` | n/a |
 # | -002   | `11111110` | n/a |
 # | -001   | `11111111` | n/a |
@@ -285,7 +285,7 @@ MyAudio(la_do, autoplay=True)
 # | 000    | `00000000` | `00000000` (idem) |
 # | 001    | `00000001` | `00000001` (idem) |
 # | 002    | `00000010` | `00000010` (idem) |
-# | ...    | 
+# | ...    |
 # | 125    | `01111101` | `01111101` (idem) |
 # | 126    | `01111110` | `01111110` (idem) |
 # | 127    | `01111111` | `01111111` (idem) |
@@ -326,7 +326,7 @@ trash[32_764: 32_772]
 # pour fabriquer une copie d'un tableau numpy convertie dans un autre type,
 #
 # écrivez une fonction qui transforme  
-# notre tableau de flottants dans [-1, 1]. 
+# notre tableau de flottants dans [-1, 1].
 # en un tableau d'**entiers signés 16bits**
 #
 # et pour préserver le niveau sonore, il faut que les entrés maximales  
@@ -342,11 +342,11 @@ def float_to_int16(as_float):
 
 
 # %% cell_style="split"
-# pour écouter 
+# pour écouter
 MyAudio(float_to_int16(la_do), autoplay=True)
 
 # %% cell_style="split"
-# sans conversion 
+# sans conversion
 MyAudio(la_do, autoplay=True)
 
 # %% [markdown]
@@ -389,7 +389,7 @@ Audio(filename='media/pin-pon-fa-sol.wav')
 # %% [markdown]
 # ### un intervalle = un rapport entre fréquences
 #
-# enfin, il faut savoir que ce qui caractérise un intervalle, 
+# enfin, il faut savoir que ce qui caractérise un intervalle,
 # c'est le **rapport** entre les fréquences des deux notes
 #
 # ainsi par exemple, vous pouvez constater que si on multiplie une fréquence par 2
@@ -397,7 +397,7 @@ Audio(filename='media/pin-pon-fa-sol.wav')
 # %% cell_style="center"
 # une octave de LA
 MyAudio(
-    np.concatenate((sine(LA, 0.5), 
+    np.concatenate((sine(LA, 0.5),
                     sine(2*LA, 0.5))),
     autoplay=True)
 
@@ -410,7 +410,7 @@ MyAudio(
 # %% cell_style="center"
 # même effet avec le DO naturellement
 MyAudio(
-    np.concatenate((sine(DO, 0.5), 
+    np.concatenate((sine(DO, 0.5),
                     sine(2*DO, 0.5))),
     autoplay=True)
 
@@ -426,17 +426,17 @@ MyAudio(
 # qu'on va appeler $\alpha$
 #
 # $$
-# \frac{do\sharp}{do} = 
-# \frac{ré}{do\sharp} = 
+# \frac{do\sharp}{do} =
+# \frac{ré}{do\sharp} =
 # \ldots
-# \frac{si}{la\sharp} = 
+# \frac{si}{la\sharp} =
 # \frac{do'}{si} = \alpha
 # $$
 
 # %% [markdown] cell_style="center"
-# et comme par ailleurs on sait qu'entre les deux *do* il y a une octave  
+# et comme par ailleurs on sait qu'entre les deux *do* il y a une octave 
 # donc $
-# \frac{do'}{do} = 2 
+# \frac{do'}{do} = 2
 # $
 #
 # mais c'est aussi
@@ -486,7 +486,7 @@ def freq_from_name(name):
 freq_from_name('la')
 
 # %% cell_style="split"
-# attention à la précision 
+# attention à la précision
 freq_from_name('la') == 440
 
 # %% cell_style="split"
@@ -523,7 +523,7 @@ ratios[7]
 plt.figure(figsize=(2, 6))
 
 # on veut afficher 12 points de coordonnées
-# tous avec une coordonnée X=0 
+# tous avec une coordonnée X=0
 X = np.zeros(ratios.shape)
 
 # et pour marqueur un petit trait horizontal
@@ -639,7 +639,7 @@ MyAudio(restored)
 # %% [markdown]
 # **exercice**
 #
-# 1. lire le fichier (ranger le signal dans une variable `data`) 
+# 1. lire le fichier (ranger le signal dans une variable `data`)
 # 1. afficher le samplerate utilisé dans le fichier
 # 1. afficher le nombre d'échantillons
 # 1. afficher la longueur du morceau en secondes
@@ -720,11 +720,11 @@ main_ratio, delayed_ratio = 0.7, 0.3
 # **exercice** v1
 #
 # 1. traduire `delay` en nombre d'échantillons `offset`
-# 1. produire le son avec echo, 
+# 1. produire le son avec echo,
 #    sur une durée correspondant au son de départ
 
 # %%
-# votre code pour produire 
+# votre code pour produire
 # le son de 'data' avec echo
 data_echoed = ...
 
@@ -790,9 +790,9 @@ plt.plot(data_echoed_v2, linewidth=0.05);
 # ***
 
 # %% [markdown]
-# pour élever d'une octave, il suffit d'ignorer un échantillon sur deux 
+# pour élever d'une octave, il suffit d'ignorer un échantillon sur deux
 #
-# pourquoi ? de cette façon on va artificiellement 
+# pourquoi ? de cette façon on va artificiellement
 #
 # * diminuer la durée par 2 (2 fois moins d'échantillons, toujours à la même fréquence d'échantillonage de 44.100 Hz)
 # * et du coup multiplier par 2 la fréquence des sons perçus
@@ -858,7 +858,7 @@ plt.plot(data2, linewidth=0.05);
 # 1. remplir dans `data3` les données de rang pair  
 #    qui correspondent aux multiples de 3 dans le tableau de départ
 # 1. remplir dans `data3` les données de rang impair  
-#    en implémentant l'interpolation 
+#    en implémentant l'interpolation
 #
 # **remarque**: nos data sont en `int16`, on va s'efforcer
 # de continuer à travailler dans ce format
@@ -869,7 +869,7 @@ data3 = ...
 
 # %%
 # vérification de visu
-# ces deux segments correspondent normalement 
+# ces deux segments correspondent normalement
 # au même instant dans le morceau
 
 data[12000:12007], data3[8000:8005]
@@ -885,7 +885,7 @@ MyAudio(data3)
 # on peut s'amuser à calculer, pour chaque note, la fraction la plus proche - si on se restreint à des rationnels avec un dénominateur "petit"
 
 # %% [markdown] tags=["level_intermediate"]
-# pour ça on se fixe par exemple N=7 et pour chaque note x, on veut minimiser abs(x-r) pour r étant dans l'espace 
+# pour ça on se fixe par exemple N=7 et pour chaque note x, on veut minimiser abs(x-r) pour r étant dans l'espace
 # $$r\in\{1 + p/q, q<=N, 0<=p<=q\}$$
 
 # %% [markdown] tags=["level_intermediate"]
@@ -939,11 +939,11 @@ def closest(note):
     on retourne le rationnel le plus proche
     avec l'erreur relative que ça représente
     
-    sous la forme d'un tuple 
+    sous la forme d'un tuple
     (rationnel, erreur relative)
     """
     # on va trier une liste de tuples (rational, relative_error)
-    # c'est sous-optimal d'un point de vue algorithmique 
+    # c'est sous-optimal d'un point de vue algorithmique
     # car on n'a pas vraiment besoin de trier toute la liste
     # dans ces ordres de grandeur ça n'a pas bcp d'importance
     # par contre ça donne un code un peu plus intéressant

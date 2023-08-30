@@ -88,7 +88,7 @@ df.head()
 #    1. plotez avec paramètre `'b.'` et sans indiquer les abscisses, la colonne des ages
 #    1. que constatez-vous ?
 #    <br>
-#    1. si vous n'indiquez pas l'axe des abscisses de votre dessin que choisit `plt` ? 
+#    1. si vous n'indiquez pas l'axe des abscisses de votre dessin que choisit `plt` ?
 
 # %%
 # prune-cell
@@ -102,7 +102,7 @@ df.Age.plot(style='rs');
 # %%
 # prune-cell
 plt.plot(df['Age'], 'b.');
-# par défaut, ici on lui passe une série, et on constate que 
+# par défaut, ici on lui passe une série, et on constate que
 # plt plot avec les index en abscisse et les valeurs en ordonnée
 
 # %% [markdown]
@@ -258,7 +258,7 @@ df[df.Age.notna()].sort_values(by=['Age', 'Fare'])
 #    mettez comme index (par exemple):  
 #    aux lignes  `'un'`, `'deux'`, `'trois'` et `'quatre'`  
 #    aux colonnes `'a'`, `'b'`, `'c'`, `'d'` et `'e'`  
-#    **indice**: voyez la documentation de `pd.DataFrame` 
+#    **indice**: voyez la documentation de `pd.DataFrame`
 #    pour construire une dataframe  
 #    par programme
 

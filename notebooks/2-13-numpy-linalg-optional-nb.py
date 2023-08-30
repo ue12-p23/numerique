@@ -70,7 +70,7 @@ import numpy as np
 # <br>
 #
 # les fonctions d'algèbre linéaire `numpy.linalg` sont très efficaces, parce que
-# 1. fondées sur des algorithmes efficaces 
+# 1. fondées sur des algorithmes efficaces
 # 1. codées dans des langages *bas niveau* très proches de la mémoire donc rapides
 # 1. implémentations qui tirent parti du *multithreading*  
 # (découpage d'un programme en sous-programmes s'exécutant *en même temps*)
@@ -89,7 +89,7 @@ import numpy as np
 # <br>
 #
 # la librarie `numpy` est utilisée dans vos cours de mathématiques  
-# pour les manipulations de vecteurs et de matrices 
+# pour les manipulations de vecteurs et de matrices
 #
 # <br>    
 #
@@ -152,7 +152,7 @@ A
 # print(A.ndim)   # 2
 # print(A.shape)  # (4, 3)
 # ```    
-# les objets de forme `(1, n)` et `(m, 1)` sont des matrices 
+# les objets de forme `(1, n)` et `(m, 1)` sont des matrices
 #
 # <br>
 #
@@ -378,7 +378,7 @@ np.dot(V1, V2)
 # ## la norme de vecteur
 #
 # <br>
-#  prenons un vecteur $V =[v_1, ..., v_n]$ 
+#  prenons un vecteur $V =[v_1, ..., v_n]$
 #
 # la norme `np.linalg.norm(V)`  
 # est la racine carré du produit scalaire du vecteur par lui-même  
@@ -612,7 +612,7 @@ except np.linalg.LinAlgError as e:
 # le code
 A = np.random.randint(-100, 100, size=(3, 4))
 print(A)
-np.diag(A) 
+np.diag(A)
 
 # %%
 # le code
@@ -783,7 +783,7 @@ np.all(np.isclose(np.dot(A_1, A), I))
 # <br>
 #
 # on va calculer les $v$ tels que:
-#    - $f(v) = \lambda v$ 
+#    - $f(v) = \lambda v$
 #    - $M \cdot v = \lambda v$
 #  `
 #

@@ -136,7 +136,7 @@ plt.plot(x, np.cos(x));
 # et le tableau `numpy` pour la grille s'appelle `axes`
 #
 # ```python
-# fig, axes = plt.subplots(2, 3) # une grille de 2 lignes et 3 colonnes 
+# fig, axes = plt.subplots(2, 3) # une grille de 2 lignes et 3 colonnes
 # axes.shape
 # ```
 #
@@ -146,7 +146,7 @@ plt.plot(x, np.cos(x));
 #
 # ```python
 # x = np.linspace(0, 2*np.pi, 50)
-# axes[0, 0].plot(x, np.sin(x)) 
+# axes[0, 0].plot(x, np.sin(x))
 # axes[-1, -1].plot(x, np.cos(x))
 # ```
 
@@ -156,7 +156,7 @@ fig, axes = plt.subplots(2, 3)
 axes.shape
 
 x = np.linspace(0, 2*np.pi, 50)
-axes[0, 0].plot(x, np.sin(x)) 
+axes[0, 0].plot(x, np.sin(x))
 axes[-1, -1].plot(x, np.cos(x));
 
 # %% [markdown] {"cell_style": "center", "tags": ["framed_cell"]}
@@ -175,7 +175,7 @@ axes[-1, -1].plot(x, np.cos(x));
 #
 # <br>
 #
-# `plt.subplot(n, m, i)` ou `plt.subplot(nmi)` 
+# `plt.subplot(n, m, i)` ou `plt.subplot(nmi)`
 #
 # * la sous-figure prendra la position `i`  
 #     1 est la figure en haut à gauche, 2 la suivante...

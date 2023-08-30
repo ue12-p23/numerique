@@ -50,7 +50,7 @@ df.head(3)
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## introduction
 #
-# <br> 
+# <br>
 #
 # en `pandas`, une table de données (encore appelée *dataframe*) a uniquement 2 dimensions
 #
@@ -171,7 +171,7 @@ by_sex
 #
 # <br>
 #
-# vous pouvez donc facilement parcourir toutes les sous-dataframes 
+# vous pouvez donc facilement parcourir toutes les sous-dataframes
 
 # %%
 # les tailles des morceaux
@@ -202,13 +202,13 @@ for group, subdf in by_sex:
 # nécessaire d'itérer explicitement dessus  
 # (on n'aime pas avoir à écrire un for-Python)
 #
-# <br> 
+# <br>
 #
 # dans ce cas l'objet `DataFrameGroupBy` se comporte comme un *proxy*  
 # il propage le traitement à ses différents morceaux  
 # et s'arrange pour combiner les résultats
 #
-# <br> 
+# <br>
 #
 # par exemple on peut extraire une colonne sur toutes les sous-dataframe  
 # en utilisant la syntaxe `group[colonne]`, et faire des traitements sur le résultat
@@ -222,7 +222,7 @@ for group, subdf in by_sex:
 # des colonnes de départ, mais par sexe
 #
 # ```python
-# # les sommes des colonnes, mais par sexe 
+# # les sommes des colonnes, mais par sexe
 # by_sex.sum()
 # ```
 
@@ -396,12 +396,12 @@ computed_index == set(df.groupby(['Pclass', 'Sex']).size().index)
 # for (class_, sex), subdf in by_class_sex:
 #     print(f"there were {len(subdf)} {sex} in class {class_} ")
 #
-# there were 94 female in class 1 
-# there were 122 male in class 1 
-# there were 76 female in class 2 
-# there were 108 male in class 2 
-# there were 144 female in class 3 
-# there were 347 male in class 3 
+# there were 94 female in class 1
+# there were 122 male in class 1
+# there were 76 female in class 2
+# there were 108 male in class 2
+# there were 144 female in class 3
+# there were 347 male in class 3
 # ```
 #
 
@@ -648,7 +648,7 @@ age_class_series
 df['Age-class'] = age_class_series
 
 # %%
-# le type est une catégorie, il est bien ordonné 
+# le type est une catégorie, il est bien ordonné
 age_class_series.dtype
 
 # %%
@@ -662,7 +662,7 @@ print("après", df.columns)
 #
 # <br>
 #
-# nous avons la colonne `Age-classes` 
+# nous avons la colonne `Age-classes`
 #
 # <br>
 #
@@ -699,7 +699,7 @@ df.groupby(['Age-class', 'Survived', ]).size()
 #
 # * la valeur (précisément, une aggrégation des valeurs) d'une colonne  
 # * en fonction de deux autres colonnes (catégorielles)  
-# * qui sont utilisées dans les directions horizontale et verticale 
+# * qui sont utilisées dans les directions horizontale et verticale
 #
 # <br>
 #
@@ -718,7 +718,7 @@ df.groupby(['Age-class', 'Survived', ]).size()
 #
 # <br>
 #
-# les paramètres les plus importants sont 
+# les paramètres les plus importants sont
 #
 # * `values` : la (ou les) colonne(s) qu'on veut regarder  
 #   ce seront les valeurs **dans le tableau**
@@ -854,7 +854,7 @@ df.head()
 #
 # ```python
 # by_sex.groups
-#     -> 
+#     ->
 # {'female': [499, 395, 703, 859, ...], 'male': [552, 638, 261, 811, ...]}
 # ```
 #
@@ -890,7 +890,7 @@ for group, indexes in by_sex.groups.items():
 # %% [markdown] {"tags": ["level_advanced"]}
 # ## pour en savoir plus
 #
-# on recommande la lecture de cet article dans la documentation `pandas`, qui approfondit le sujet et notamment la notion de `split-apply-combine` 
+# on recommande la lecture de cet article dans la documentation `pandas`, qui approfondit le sujet et notamment la notion de `split-apply-combine`
 #
 # (qui rappelle, de loin, la notion de *map-reduce*)
 #

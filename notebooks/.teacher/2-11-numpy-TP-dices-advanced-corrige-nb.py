@@ -75,12 +75,12 @@ S1
 #
 # |  +  | &#124; | 1 | 2 | 3 | 4 | 5 | 6 |
 # |:---:|:------:|:-:|:-:|:-:|:-:|:-:|:-:|
-# | *1* | &#124; | 2 | 3 | 4 | 5 | 6 | 7 | 
-# | *2* | &#124; | 3 | 4 | 5 | 6 | 7 | 8 | 
-# | *3* | &#124; | 4 | 5 | 6 | 7 | 8 | 9 | 
-# | *4* | &#124; | 5 | 6 | 7 | 8 | 9 |10 | 
-# | *5* | &#124; | 6 | 7 | 8 | 9 |10 |11 | 
-# | *6* | &#124; | 7 | 8 | 9 |10 |11 |12 | 
+# | *1* | &#124; | 2 | 3 | 4 | 5 | 6 | 7 |
+# | *2* | &#124; | 3 | 4 | 5 | 6 | 7 | 8 |
+# | *3* | &#124; | 4 | 5 | 6 | 7 | 8 | 9 |
+# | *4* | &#124; | 5 | 6 | 7 | 8 | 9 |10 |
+# | *5* | &#124; | 6 | 7 | 8 | 9 |10 |11 |
+# | *6* | &#124; | 7 | 8 | 9 |10 |11 |12 |
 #
 #
 # Construisez alors un `numpy.ndarray` contenant les tirages de `n=2` dès à `s=6` faces. Un indice ? Utilisez le `broadcasting`:
@@ -134,18 +134,18 @@ S3
 # #### les dès version  pour les forts
 
 # %% [markdown] {"tags": ["level_advanced"]}
-# On étudie les probabilités d'obtenir une certaine somme avec plusieurs dés. 
+# On étudie les probabilités d'obtenir une certaine somme avec plusieurs dés.
 #
 # Tout le monde connaît le cas classique avec deux dés à 6 faces, ou l'on construit mentalement la grille suivante:
 #
 # |  +  | &#124; | 1 | 2 | 3 | 4 | 5 | 6 |
 # |:---:|:------:|:-:|:-:|:-:|:-:|:-:|:-:|
-# | *1* | &#124; | 2 | 3 | 4 | 5 | 6 | 7 | 
-# | *2* | &#124; | 3 | 4 | 5 | 6 | 7 | 8 | 
-# | *3* | &#124; | 4 | 5 | 6 | 7 | 8 | 9 | 
-# | *4* | &#124; | 5 | 6 | 7 | 8 | 9 |10 | 
-# | *5* | &#124; | 6 | 7 | 8 | 9 |10 |11 | 
-# | *6* | &#124; | 7 | 8 | 9 |10 |11 |12 | 
+# | *1* | &#124; | 2 | 3 | 4 | 5 | 6 | 7 |
+# | *2* | &#124; | 3 | 4 | 5 | 6 | 7 | 8 |
+# | *3* | &#124; | 4 | 5 | 6 | 7 | 8 | 9 |
+# | *4* | &#124; | 5 | 6 | 7 | 8 | 9 |10 |
+# | *5* | &#124; | 6 | 7 | 8 | 9 |10 |11 |
+# | *6* | &#124; | 7 | 8 | 9 |10 |11 |12 |
 #
 # Imaginons que vous êtes un étudiant, vous venez de faire un exercice de maths qui vous a mené à une formule qui permet de calculer, pour un jeu à `nb_dice` dés, chacun à `sides` faces, le nombre de tirages qui donnent une certaine somme `target`.
 #

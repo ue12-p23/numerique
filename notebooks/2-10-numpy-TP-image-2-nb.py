@@ -241,7 +241,7 @@ A.shape, B.shape, C.shape
 
 # %% [markdown]
 # 1. Faites une fonction qui prend en argument une image RGB et rend une image RGB sépia  
-# la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-dessous) 
+# la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-dessous)
 
 # %%
 # votre code

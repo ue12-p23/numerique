@@ -75,7 +75,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 # pour vous familiariser avec l'informatique et comprendre
 #
-# * les mécanismes sous-jacents 
+# * les mécanismes sous-jacents
 # * les choix des concepteurs
 #
 # <br>
@@ -93,7 +93,7 @@ import numpy as np
 
 # %%
 mat =  np.array(
-    [[1, 2, 3, 4, 5], 
+    [[1, 2, 3, 4, 5],
      [6, 7, 8, 9, 10],
      [11, 12, 13, 14, 15],
      [16, 17, 18, 19, 20]])
@@ -110,7 +110,7 @@ mat.nbytes
 #
 # <br>
 #
-# l'aide (accessible via `help(np.ndarray)`) dit 
+# l'aide (accessible via `help(np.ndarray)`) dit
 # > *An array object represents a multidimensional, homogeneous array of fixed-size items.*
 #
 # <br>
@@ -135,13 +135,13 @@ mat.nbytes
 #
 #
 #
-# * si on manipule et que la taille des éléments ne suffit plus ?   
+# * si on manipule et que la taille des éléments ne suffit plus ?  
 # `numpy` convertit la valeur  
 # mais ne modifie pas la taille de ses éléments
 #
 #
 # * pour modifier la taille des éléments ?  
-# on n'a pas le choix, il faut allouer un nouveau tableau, et recopier l'ancien dedans (et c'est à éviter...) 
+# on n'a pas le choix, il faut allouer un nouveau tableau, et recopier l'ancien dedans (et c'est à éviter...)
 #
 # <br>
 #
@@ -160,7 +160,7 @@ mat.nbytes
 # deux **idées** pour assurer la rapidité de manipulation de tableaux en mémoire
 #
 #
-# * passez rapidement d'une case du tableau à une autre (**offset**) 
+# * passez rapidement d'une case du tableau à une autre (**offset**)
 #
 #
 # * avoir la valeur de l'élément directement dans la case (pas **d'indirection** mémoire)
@@ -233,7 +233,7 @@ mat.nbytes
 # l'idée de n'avoir pas d'indirection est
 #
 # * quand on arrive dans une case du tableau
-# * elle contient la valeur qu'on cherche 
+# * elle contient la valeur qu'on cherche
 # * on n'a pas besoin d'aller ailleurs en mémoire
 #
 # <br>
@@ -244,7 +244,7 @@ mat.nbytes
 #
 # si toutes les cases d'un même tableau en informatique ont la même taille, comment puis-je
 #
-# * y "*mettre*"  des élément hétérogènes ? entier, réel, string... 
+# * y "*mettre*"  des élément hétérogènes ? entier, réel, string...
 # * modifier ces éléments sans réallouer le tableau ?
 #
 # <br>
@@ -337,7 +337,7 @@ tab.dtype
 # <br>
 #
 # 1. affichez les éléments    
-# Que constatez-vous ? 
+# Que constatez-vous ?
 # <br>
 #
 # 1. quel type `numpy` a-t-il trouvé pour stocker tous ces éléments ?
@@ -494,7 +494,7 @@ tab
 #                
 # ```
 #
-# </div> 
+# </div>
 #
 #
 # et ainsi de suite

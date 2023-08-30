@@ -438,7 +438,7 @@ list(by_country.keys())[:4]
 global_df.loc[0]
 
 # %% [markdown] tags=["framed_cell"]
-# **les index ne sont pas toujours uniques** 
+# **les index ne sont pas toujours uniques**
 #
 # <br>
 #
@@ -446,7 +446,7 @@ global_df.loc[0]
 # chacune de nos dataframe par pays a été construite à partir d'un index **séquentiel**  
 # i.e. un `RangeIndex` qui commence à chaque fois à 0  
 # et lors du `concat` on a conservé ces valeurs  
-# ce qui crée une multitude de lignes indexées par 0 (un par pays) 
+# ce qui crée une multitude de lignes indexées par 0 (un par pays)
 #
 # <br>
 #
@@ -543,11 +543,11 @@ pd.to_datetime('2020-1-2').day
 pd.to_datetime('2020-1-2', format='%Y-%d-%m').day
 
 # %%
-# mais sinon c'est très flexible 
+# mais sinon c'est très flexible
 pd.to_datetime('15 july 2021'), pd.to_datetime('aug 2021'), pd.to_datetime('2021')
 
 # %%
-# mais c'est très flexible 
+# mais c'est très flexible
 pd.to_datetime('15 july 2021 08:00')
 
 # %% [markdown] tags=["framed_cell"]
@@ -634,7 +634,7 @@ clean_df = ...
 #   (bornes inclusives puisque .loc[])
 #
 # * un slice sur les colonnes  
-#   mais au fait on les veut toutes, on peut utiliser `:` 
+#   mais au fait on les veut toutes, on peut utiliser `:`
 #
 # <br>
 #
@@ -660,7 +660,7 @@ clean_df = ...
 
 # NB: si on voulait tous les pays on pourrait faire
 # countries = slice(None)
-# qui est équivalent à utiliser :: 
+# qui est équivalent à utiliser ::
 # sauf qu'à nouveau ce n'est pas possible syntaxiquement ici
 countries = ['France', 'Italy']
 time_slice = slice('july 2021', '15 aug 2021')
@@ -730,12 +730,12 @@ df.plot();
 #
 # <br>
 #
-# mais avant de réfléchir à comment faire ça, 
+# mais avant de réfléchir à comment faire ça,
 # commençons par le cas simple d'un seul pays, au moins  
 # pour valider l'idée générale
 #
 # 1. affichez sur un graphique les 3 mesures pour la France au cours du temps
-# 1. idem avec seulement 2 mesures `deaths` et `confirmed` 
+# 1. idem avec seulement 2 mesures `deaths` et `confirmed`
 #
 
 # %%
@@ -759,7 +759,7 @@ df.plot();
 # votre code
 
 # %% [markdown] tags=["framed_cell"]
-# ### mise en forme des données 
+# ### mise en forme des données
 #
 # <br>
 #
@@ -769,7 +769,7 @@ df.plot();
 #
 # <br>
 #
-# alors qu'on avait dit qu'on voulait 6 colonnes, et autant 
+# alors qu'on avait dit qu'on voulait 6 colonnes, et autant
 # de lignes que dans un pays (autant que de jours de mesure)
 #
 # <br>
@@ -835,7 +835,7 @@ df6.plot(figsize=(12, 5));
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ### bonus
 #
-# les rapides peuvent écrire une fonction `extract()` qui prend en paramètres 
+# les rapides peuvent écrire une fonction `extract()` qui prend en paramètres
 #
 # * les pays concernés
 # * les mesures concernées

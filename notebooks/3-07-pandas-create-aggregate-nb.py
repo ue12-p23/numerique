@@ -414,7 +414,7 @@ df1.merge(df2)
 
 # %%
 # exemple 2
-# cette fois il faut aligner l'index de gauche 
+# cette fois il faut aligner l'index de gauche
 # avec la colonne 'name' à droite
 
 df1 = pd.DataFrame(
@@ -449,7 +449,7 @@ df1.merge(df2, left_index=True, right_on='name')
 #    ce qui explique d'ailleurs la différence de signatures  
 #    `concat([d1, d2])` *vs* `merge(d1, d2)`
 #
-# * seule `concat()` supporte un paramètre `axis=` 
+# * seule `concat()` supporte un paramètre `axis=`
 
 # %% [markdown]
 # ### **exercice** - collage de datatables

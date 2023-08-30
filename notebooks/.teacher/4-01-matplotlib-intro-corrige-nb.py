@@ -116,13 +116,13 @@ import pandas as pd
 #
 # toutefois c'est trop de *boilerplate*, surtout quand il s'agit simplement de plotter une fonction !
 #
-# du coup il est fréquent qu'on élude tout ce qui est possible, 
+# du coup il est fréquent qu'on élude tout ce qui est possible,
 # et là ça devient potentiellement confusant, car
 #
 # * en mode `inline`, ce n'est pas nécessaire de créer les figures avec `plt.figure()`
 #   mais il faut utiliser `plt.show()` si on veut afficher plusieurs figures dans la même cellule
 #
-# * mais en mode `notebook` c'est un peu le contraire, 
+# * mais en mode `notebook` c'est un peu le contraire,
 #   on est incité/obligé d'utiliser `plt.figure()` à chaque fois, et pas vraiment besoin de `plt.show()`
 #
 # enfin, vous noterez que `df.plot()` fait un appel à `plt.figure()` ! bref c'est un peu le bazar...
@@ -148,7 +148,7 @@ import pandas as pd
 # <br>
 #
 # pour les ordonnées, les sinus de ces points  
-# vous remarquez l'application de la fonction vectorisée `numpy.sin` au `numpy.ndarray` 
+# vous remarquez l'application de la fonction vectorisée `numpy.sin` au `numpy.ndarray`
 #
 # ```python
 # y = np.sin(x)
@@ -176,7 +176,7 @@ import pandas as pd
 # <br>
 #
 # * pour voir les points en plus des segments les reliant  
-# utilisez le paramètre `marker` 
+# utilisez le paramètre `marker`
 # `'o'` ou `'^'` etc.
 #
 # ```python
@@ -273,7 +273,7 @@ plt.plot(x, y, 'g--'); # ligne verte pointillée
 #
 # <br>
 #
-# **exercice** 
+# **exercice**
 #
 # créez une liste de points en alternant entiers et `np.nan`  
 # par exemple
@@ -484,7 +484,7 @@ plt.scatter(x, z);
 #
 # avec la fonction `plt.legend` vous affichez la légende  
 # constituée des étiquettes  
-# le paramètre `loc` permet de positionner la légende `'upper right'`, `'best'`, `'center'`... 
+# le paramètre `loc` permet de positionner la légende `'upper right'`, `'best'`, `'center'`...
 #
 # <br>
 #
@@ -501,7 +501,7 @@ plt.legend();
 #
 # <br>
 #
-# avec `x = np.linspace(0, 2*np.pi, 50)`<br> 
+# avec `x = np.linspace(0, 2*np.pi, 50)`<br>
 # `y=sin(x)` est calculé entre $0$ et $2\pi$
 #
 # <br>
@@ -537,7 +537,7 @@ plt.plot(x, np.sin(x))
 # avec `plt.xtick` et `plt.ytick` on peut donner des listes de valeurs à afficher sur les axes  
 # ici les abscisses et les ordonnées
 #
-# ```python 
+# ```python
 # x = np.linspace(0, 2*np.pi, 50)
 # plt.xticks([0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi])  
 # plt.yticks([-1, -0.5, 0, 0.5, 1])
@@ -613,7 +613,7 @@ plt.plot(x, np.sin(x))
 #
 # 1. construisez un tableau de `nb` valeurs entre `x_min` et `x_max` (non compris)  
 # par exemple `x_min` à 0 et `x_max` à 10 et `nb` à 50
-# 1. afficher la courbe $x^3$ avec un label en latex genre $x^3$ 
+# 1. afficher la courbe $x^3$ avec un label en latex genre $x^3$
 # 1. afficher la courbe $3*x^2+1$ avec un label en latex  
 # 1. afficher la légende de la courbe au centre
 # 1. affichez un titre au plot à droite
@@ -652,7 +652,7 @@ plt.legend(loc='center');
 # par exemple $f(x) = x^2$ entre $-10$ et $10$
 # 1. mettez lui un titre, des labels aux abscisses et aux ordonnées, une légende, des couleurs...
 # 1. en utilisant `plt.savefig`  sauver la figure  dans un fichier  
-# dans un format au choix (*jpg*, *pdf*, *png*, *svg*...) 
+# dans un format au choix (*jpg*, *pdf*, *png*, *svg*...)
 # 1. pour voir les résultats pour `jpg`, `png`, `svg`  
 #    mettez dans une cellule markdown de votre notebook `<img src='foo.ext'>`  
 #    ou encore `![](foo.ext)`  

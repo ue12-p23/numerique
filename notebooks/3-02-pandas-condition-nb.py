@@ -188,7 +188,7 @@ girls.sum()
 #
 # ainsi parmi les passagers dont on connait l'âge  
 # `68` passagers,  ont moins de `12` ans  
-# on reviendra tout de suite sur les données manquantes 
+# on reviendra tout de suite sur les données manquantes
 
 # %%
 children.sum()
@@ -219,7 +219,7 @@ children.value_counts()
 #
 # sur les `DataFrame` et les `Series`  
 # la méthode `isna()` construit **un masque**  
-# du même type (DataFrame ou Series donc), 
+# du même type (DataFrame ou Series donc),
 # et à valeurs booléennes  où
 #
 # * `True` signifie que la valeur est manquante
@@ -348,7 +348,7 @@ df.isna()
 # qui `sum` les lignes entre elles - le résultat est par colonne donc
 #
 # ```python
-# df.isna().sum()       # les deux formes sont 
+# df.isna().sum()       # les deux formes sont
 # df.isna().sum(axis=0) # équivalentes
 #
 # Survived      0
@@ -406,7 +406,7 @@ df.isna()
 
 # %%
 # le code
-df.isna().sum()       # c'est la 
+df.isna().sum()       # c'est la
 df.isna().sum(axis=0) # même chose
 
 # %%

@@ -146,7 +146,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 
 # %% [markdown] tags=["level_intermediate"]
 # 1. utilisez-la pour créer un type catégoriel dans lequel, disons par exemple  
-# `'Iris-versicolor'` < `'Iris-setosa'` < `'Iris-virginica'` 
+# `'Iris-versicolor'` < `'Iris-setosa'` < `'Iris-virginica'`
 
 # %% tags=["level_intermediate"]
 # votre code

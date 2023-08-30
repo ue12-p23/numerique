@@ -63,7 +63,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 # <br>
 #
-# format de fichier, le plus simple, pour stocker ces tables ? 
+# format de fichier, le plus simple, pour stocker ces tables ?
 #
 # * une observation par ligne
 # * dans chaque ligne, les informations séparées par un caractère choisi au préalable  
@@ -205,7 +205,7 @@ pd.__version__
 # </div>    
 
 # %%
-# le code 
+# le code
 df = pd.read_csv('titanic.csv')
 type(df)
 
@@ -285,7 +285,7 @@ df.head(2)
 #
 # <br>
 #
-# la méthode `describe()` marche aussi sur les séries (colonnes) 
+# la méthode `describe()` marche aussi sur les séries (colonnes)
 #
 # ```python
 # df['Sex'].describe()
@@ -357,7 +357,7 @@ df['Sex'].describe()
 # <br>
 #
 # `pandas` indexe ses lignes et ses colonnes suivant vos indications  
-# dit autrement, c'est à vous de choisir parmi les colonnes 
+# dit autrement, c'est à vous de choisir parmi les colonnes
 # celle(s) qui peut servir d'identificateur unique pour servir d'index
 
 # %% [markdown]
@@ -422,7 +422,7 @@ df.columns[0]
 # accès à la colonne `Age` de la data-frame du Titanic
 #
 # * on remarque les `891` entrées
-# * on remarque les indices des lignes de `0` à `890` 
+# * on remarque les indices des lignes de `0` à `890`
 # * on constate que le type des éléments de cette colonne est `float64`
 # * on constate que l'age du passage d'indice `3` est manquant `NaN` (*Not a Number*)
 #
@@ -470,7 +470,7 @@ df[['Age', 'Sex']].head()
 # <br>
 #
 # Cette notation est **plus lisible** mais aussi **plus limitée**  
-# par exemple ne fonctionne pas si le nom de la colonne contient un espace 
+# par exemple ne fonctionne pas si le nom de la colonne contient un espace
 #
 # <br>
 #
@@ -566,7 +566,7 @@ df.head(1)
 
 # %%
 # la table après
-# remarquez que 'PassengerId' 
+# remarquez que 'PassengerId'
 # n'est plus présenté de la même manière
 df = df.set_index('PassengerId')
 df.head(1)
@@ -627,10 +627,10 @@ df['Name'][552]
 # %% [markdown]
 # <div class=note>
 #
-# ici nous avons un index de type entier; lorsqu'on a un index de type, par exemple, `str`, 
+# ici nous avons un index de type entier; lorsqu'on a un index de type, par exemple, `str`,
 # on peut alors écrire ou bien
 #
-# * `series[entier]` pour aller chercher l'indice `entier` 
+# * `series[entier]` pour aller chercher l'indice `entier`
 # * `series[chaine]` pour aller chercher l'index `chaine`
 #
 # mais avec un index de type entier, c'est l'accès **par index** qui est privilégié
@@ -676,7 +676,7 @@ df['Name'][552]
 # lisons la data-frame du titanic sans fixer l'index de lignes
 #
 # ```python
-# df = pd.read_csv('titanic.csv') 
+# df = pd.read_csv('titanic.csv')
 # df.index
 # -> RangeIndex(start=0, stop=891, step=1)
 # ```
@@ -704,7 +704,7 @@ df['Name'][552]
 #
 # * on lit la data-frame du titanic  
 # * on modifie son index par la colonne `PassengerId` avec la méthode `set_index`  
-# remarquez le `inplace` 
+# remarquez le `inplace`
 #
 # ```python
 # df = pd.read_csv('titanic.csv')
@@ -722,7 +722,7 @@ df['Name'][552]
 
 # %%
 # le code
-df = pd.read_csv('titanic.csv') 
+df = pd.read_csv('titanic.csv')
 df.index
 
 # %%
@@ -740,10 +740,10 @@ df.index
 # ## **résumé** à propos des types
 #
 # * les tables pandas sont représentées par le type `DataFrame`
-# * une dataframe a 
+# * une dataframe a
 #   * un index pour accéder aux colonnes (`df.columns`)  
 #   * et un index pour accéder aux lignes (`df.index`)  
-#   * ces deux objets sont de type `Index` 
+#   * ces deux objets sont de type `Index`
 # * une colonne, ou une ligne, sont de type `Series`  
 #   qui correspond si on veut à des données en 1 seule dimension
 
@@ -760,7 +760,7 @@ df.index
 #
 # <br>
 #
-# la **dimension** de la table est donnée par l'attribut `pandas.DataFrame.ndim` 
+# la **dimension** de la table est donnée par l'attribut `pandas.DataFrame.ndim`
 #
 # ```python
 # df.ndim
@@ -771,7 +771,7 @@ df.index
 #
 # <br>
 #
-# la **forme** de la table est donnée par l'attribut `pandas.DataFrame.shape` 
+# la **forme** de la table est donnée par l'attribut `pandas.DataFrame.shape`
 #
 # ```python
 # df.shape
@@ -828,14 +828,14 @@ df = pd.read_csv(file)
 df.head(2)
 
 # %% [markdown]
-# 2. 
+# 2.
 # voyez-vous les trois problèmes ?  
 # essayez de les résoudre en étudiant la doc. de la fonction
 # `pd.read_csv()`  
 # ou passez à la question 3 pour être aidé
 
 # %% [markdown]
-# 3. 
+# 3.
 #   1. passez le **bon séparateur** à la méthode `pandas.read_csv`  
 #   1. et indiquez lui que la première ligne  
 #      **ne contient pas** la liste des noms des colonnes  
@@ -849,8 +849,8 @@ df.head(2)
 # %%
 # prune-cell 3.a 3.b 3.c
 COLUMNS = [
-    'PassengerId', 'Survived', 'Pclass', 'Name', 
-    'Sex', 'Age', 'SibSp', 'Parch', 
+    'PassengerId', 'Survived', 'Pclass', 'Name',
+    'Sex', 'Age', 'SibSp', 'Parch',
     'Ticket', 'Fare', 'Cabin', 'Embarked',
 ]
 
@@ -880,7 +880,7 @@ df.columns, df.index
 # %% [markdown]
 # 6. modifiez l'index des colonnes par la liste
 # ```Python
-# columns = ['Identifiant', 'Survécu', 'Pclass', 
+# columns = ['Identifiant', 'Survécu', 'Pclass',
 #            'Nom', 'Genre', 'Age', 'SibSp', 'Parch',
 #            'Ticket', 'Tarif', 'Cabine', 'Embarquement']
 # ```
@@ -890,10 +890,10 @@ df.columns, df.index
 
 # %%
 # prune-cell 6
-# remarquez qu'on peut aussi changer 
-# les noms des colonnes après le chargement 
+# remarquez qu'on peut aussi changer
+# les noms des colonnes après le chargement
 # comme ceci
-columns = ['Identifiant', 'Survécu', 'Pclass', 
+columns = ['Identifiant', 'Survécu', 'Pclass',
            'Nom', 'Genre', 'Age', 'SibSp',
            'Parch', 'Ticket', 'Tarif', 'Cabine', 'Embarquement']
 df.columns = columns

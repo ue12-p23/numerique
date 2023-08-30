@@ -148,7 +148,7 @@ plt.imshow(img);
 # 1. Vérifiez si l'objet est modifiable avec `im.flags.writeable`  
 # si il ne l'est pas copiez-le
 #
-# 1. Affichez l'image 
+# 1. Affichez l'image
 #
 # 1. Quel est le type de l'objet créé ?
 #
@@ -452,7 +452,7 @@ plt.title('q6: en uint8')
 plt.show()
 
 # %% {"tags": ["raises-exception"]}
-# %%timeit 
+# %%timeit
 gr = (imf[:, :, 0] + imf[:, :, 1] + imf[:, :, 2])/3
 
 # %% {"tags": ["raises-exception"]}
@@ -540,9 +540,9 @@ plt.tight_layout()
 # Reprenez les trois images en niveau de gris que vous aviez produites ci-dessus:  
 #   1: celle obtenue avec la moyenne des rgb  
 #   2: celle obtenue avec la correction Y  
-#   3: celle obtenue avec la racine carrée 
+#   3: celle obtenue avec la racine carrée
 #
-# 1. Affichez les trois images côte à côte 
+# 1. Affichez les trois images côte à côte
 #    1 2 3
 # 1. Affichez-les en damier:  
 #    1 2 3  

@@ -46,7 +46,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # * et en ajouter d'autres `plt.figure()`  
 #   pour créer plusieurs figures depuis une seule cellule
 #
-# * **attention** à `df.plot()` qui appelle automatiquement `plt.figure()` 
+# * **attention** à `df.plot()` qui appelle automatiquement `plt.figure()`
 
 # %% [markdown]
 # ***
@@ -81,17 +81,17 @@ Y2 = np.cos(X)
 # l'apport principal de ce driver, c'est qu'on peut "naviguer" dans le graphe - zoomer et se déplacer, sauver la figure, etc... avec **la palette d'outils** située par défaut en bas; on peut cliquer sur le carré bleu en haut à droite de la figure pour la rendre 'inactive'
 
 # %% cell_style="split"
-# on peut avoir l'impression 
-# que ce n'est pas la peine 
-# de créer une figure, 
+# on peut avoir l'impression
+# que ce n'est pas la peine
+# de créer une figure,
 # car la première fois ça fonctionne
-# plt.figure()     # <-- c'est mieux de prendre 
+# plt.figure()     # <-- c'est mieux de prendre
                    # l'habitude de le faire
 plt.plot(X, Y);
 
 # %% cell_style="split"
 # mais en fait si on ne le fait pas
-# on écrit dans la dernière figure 
+# on écrit dans la dernière figure
 # ouverte
 # plt.figure()  # <-- essayez sans le mettre
 plt.plot(X, Y2);
@@ -100,8 +100,8 @@ plt.plot(X, Y2);
 # ## plusieurs courbes
 
 # %% cell_style="split"
-# du coup avec ce mode c'est important 
-# de TOUJOURS créer une figure 
+# du coup avec ce mode c'est important
+# de TOUJOURS créer une figure
 # avant d'écrire dedans
 plt.figure()
 plt.plot(X, Y)

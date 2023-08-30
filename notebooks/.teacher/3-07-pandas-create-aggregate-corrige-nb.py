@@ -466,7 +466,7 @@ df1.merge(df2)
 
 # %%
 # exemple 2
-# cette fois il faut aligner l'index de gauche 
+# cette fois il faut aligner l'index de gauche
 # avec la colonne 'name' à droite
 
 df1 = pd.DataFrame(
@@ -501,7 +501,7 @@ df1.merge(df2, left_index=True, right_on='name')
 #    ce qui explique d'ailleurs la différence de signatures  
 #    `concat([d1, d2])` *vs* `merge(d1, d2)`
 #
-# * seule `concat()` supporte un paramètre `axis=` 
+# * seule `concat()` supporte un paramètre `axis=`
 
 # %% [markdown]
 # ### **exercice** - collage de datatables
@@ -528,10 +528,10 @@ df3
 # prune-cell
 # on commence par réconcilier
 # les deux premières
-# par défaut merge() calcule 
-# l'intersection des colonnes 
+# par défaut merge() calcule
+# l'intersection des colonnes
 # ici on trouve seulement 'name'
-# et il utilise ça comme critère pour 
+# et il utilise ça comme critère pour
 # aligner les lignes à droite et à gauche
 df12 = df1.merge(df2)
 # on aurait pu faire, pour être explicite
@@ -572,8 +572,8 @@ df3i
 # %% cell_style="center" tags=["level_intermediate"]
 # prune-cell
 # cette fois on est obligés de préciser
-# sur quel(s) critère(s) (colonnes ou index) 
-# se fait l'alignement des lignes entre elles 
+# sur quel(s) critère(s) (colonnes ou index)
+# se fait l'alignement des lignes entre elles
 # ici à gauche et à droite c'est les index qui sont alignés
 # il faut chercher dans la doc pour trouver ceci
 df12i = df1i.merge(df2i, left_index=True, right_index=True)

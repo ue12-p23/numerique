@@ -247,7 +247,7 @@ mat
 # ### ligne,colonne *vs* colonne, ligne
 #
 # la première **grosse différence** entre numpy et pandas  
-# est que 
+# est que
 #
 # * un tableau numpy de dimension 2  
 #   est organisé en *ligne, colonne*  
@@ -299,7 +299,7 @@ mat
 # df.loc[552, 'Name']
 # -> 'Sharp, Mr. Percival James R'
 #
-# # attention la colonne d'index ne compte pas 
+# # attention la colonne d'index ne compte pas
 # # i.e. la colonne d'indice 0 est 'Survived'
 # df.iloc[0, 2]
 # -> 'Sharp, Mr. Percival James R'
@@ -326,7 +326,7 @@ df.iloc[0, 2]
 df.iloc[-1, 2]
 
 # %% [markdown] tags=["framed_cell"]
-# ### sélection multiple 
+# ### sélection multiple
 #
 # <br>
 #
@@ -350,10 +350,10 @@ df.iloc[-1, 2]
 # # si on ne précise pas les colonnes
 # # on les obtient toutes
 # df.loc[552]
-# -> une série qui matérialise la première ligne 
+# -> une série qui matérialise la première ligne
 #
-# # on peut passer des listes à loc/iloc 
-# # pour sélectionner explicitement 
+# # on peut passer des listes à loc/iloc
+# # pour sélectionner explicitement
 # # plusieurs lignes / colonnesa
 # df.loc[[552, 832]]
 # -> une dataframe avec deux lignes correspondant
@@ -363,7 +363,7 @@ df.iloc[-1, 2]
 # -> la même dataframe mais réduite à deux colonnes  
 #
 # # à nouveau pour les indices de colonnes
-# # la colonne d'index ne compte pas 
+# # la colonne d'index ne compte pas
 #
 # df.iloc[[0, -1], [2, 1]]
 # -> la même
@@ -381,8 +381,8 @@ df.iloc[-1, 2]
 df.loc[552]
 
 # %%
-# bien sûr les index choisis 
-# ne pas forcément contigus 
+# bien sûr les index choisis
+# ne pas forcément contigus
 df.loc[[552, 832]]
 
 # %%
@@ -608,7 +608,7 @@ df = pd.read_csv('titanic.csv', index_col='PassengerId')
 # %% [markdown]
 # 2. localisez l'élément d'index `40`  
 #   a. Quel est le type de l'élément ?  
-#   b. localisez le nom du passager d'index `40` ? 
+#   b. localisez le nom du passager d'index `40` ?
 
 # %%
 # votre code
@@ -726,7 +726,7 @@ print(   df_survived.shape   )
 # on va simplement **indexer** une dataframe **par un masque**  
 # i.e. on va isoler les lignes de la dataframe où la valeur du booléen est vraie
 #
-# <br> 
+# <br>
 #
 # et pour ça on écrit simplement  
 #
@@ -743,7 +743,7 @@ print(   df_survived.shape   )
 # </div>    
 
 # %%
-# le code 
+# le code
 # on fabrique une dataframe qui contient seulement les femmes
 df [ df['Sex'] == 'female' ]
 
@@ -751,7 +751,7 @@ df [ df['Sex'] == 'female' ]
 # ### `df[mask]` décortiqué
 # <br>
 #
-# faisons le *masque* des passagers de sexe féminin 
+# faisons le *masque* des passagers de sexe féminin
 #
 # ```python
 # # le code
@@ -817,7 +817,7 @@ mask.head() # un masque de booléens sur la colonne des index donc la colonne Pa
 df[mask].head()
 
 # %%
-# tout sur une ligne 
+# tout sur une ligne
 df[df.Sex == 'female'].head()
 
 # %% [markdown]
@@ -855,7 +855,7 @@ len(selection)
 # votre code
 
 # %%
-# prune-cell 
+# prune-cell
 selection.iloc[0].loc['Name']
 
 # %% [markdown]
@@ -894,7 +894,7 @@ selection2
 # ```python
 # df.loc[
 #     # dans la dimension des lignes: une liste
-#     [450, 3, 67], 
+#     [450, 3, 67],
 #     # dans la dimension des colonnes: une slice
 #     'Sex':'Cabin':2]
 # ->
@@ -908,7 +908,7 @@ selection2
 # <br>
 #
 # un masque booléen pour les listes et une liste pour les colonnes  
-# les colonnes `Sex` et `Survived` des passagers de plus de 71 ans 
+# les colonnes `Sex` et `Survived` des passagers de plus de 71 ans
 # ```python
 # df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # ->          Sex  Survived
@@ -931,7 +931,7 @@ selection2
 # le code
 df.loc[
     # dans la dimension des lignes: une liste
-    [450, 3, 67], 
+    [450, 3, 67],
     # dans la dimension des colonnes: une slice
     'Sex':'Cabin':2]
 
@@ -953,7 +953,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #
 # **le problème**
 #
-# * savoir si cette sous-partie **réfère** la dataframe initiale ou est une **copie** de la data-frame initiale 
+# * savoir si cette sous-partie **réfère** la dataframe initiale ou est une **copie** de la data-frame initiale
 # * ...ça dépend du contexte
 #
 # <br>
@@ -1003,7 +1003,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ### modification d'une copie
 #
-# <br> 
+# <br>
 # **par chainage d'indexations**
 # <br>
 #
@@ -1012,7 +1012,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #
 # <br>
 #
-# la colonne des survivants `'Survived'` 
+# la colonne des survivants `'Survived'`
 #
 # ```python
 # df = pd.read_csv('titanic.csv', index_col='PassengerId')
@@ -1185,7 +1185,7 @@ df['Age'][889] = 27.5
 # <br>
 #
 # * c'est une référence sur la dataframe: vous pouvez la modifier  
-# mais donc vous modifiez la dataframe d'origine 
+# mais donc vous modifiez la dataframe d'origine
 #     ```python
 #     df1 = df.loc[ :, ['Survived', 'Pclass', 'Sex'] ]
 #     df1.loc[1, 'Survived'] = 1

@@ -471,7 +471,7 @@ print('columns (2)', df.columns)
 print('shape for France', df.shape)
 country_dfs.append(df)
 
-# 4. 
+# 4.
 country = 'Italy'
 df = pd.DataFrame(by_country[country])
 df['country'] = country
@@ -513,7 +513,7 @@ np.all(global_df == global_df2) # si True, les 2 dataframes sont identiques
 global_df.loc[0]
 
 # %% [markdown] tags=["framed_cell"]
-# **les index ne sont pas toujours uniques** 
+# **les index ne sont pas toujours uniques**
 #
 # <br>
 #
@@ -521,7 +521,7 @@ global_df.loc[0]
 # chacune de nos dataframe par pays a été construite à partir d'un index **séquentiel**  
 # i.e. un `RangeIndex` qui commence à chaque fois à 0  
 # et lors du `concat` on a conservé ces valeurs  
-# ce qui crée une multitude de lignes indexées par 0 (un par pays) 
+# ce qui crée une multitude de lignes indexées par 0 (un par pays)
 #
 # <br>
 #
@@ -618,11 +618,11 @@ pd.to_datetime('2020-1-2').day
 pd.to_datetime('2020-1-2', format='%Y-%d-%m').day
 
 # %%
-# mais sinon c'est très flexible 
+# mais sinon c'est très flexible
 pd.to_datetime('15 july 2021'), pd.to_datetime('aug 2021'), pd.to_datetime('2021')
 
 # %%
-# mais c'est très flexible 
+# mais c'est très flexible
 pd.to_datetime('15 july 2021 08:00')
 
 # %% [markdown] tags=["framed_cell"]
@@ -663,7 +663,7 @@ global_df.date.dtype
 # %%
 # prune-cell
 
-# 3. 
+# 3.
 format = '%Y-%m-%d'
 
 # 4.
@@ -707,7 +707,7 @@ clean_df = ...
 # sont les 3 grandeurs qui nous intéressent:
 # confirmed, deaths et recovered
 
-# 2. 
+# 2.
 clean_df = global_df.pivot_table(
     values=['confirmed', 'deaths', 'recovered'],
     index=['country', 'date'],
@@ -774,7 +774,7 @@ clean_df.loc[['France', 'Italy']]
 #   (bornes inclusives puisque .loc[])
 #
 # * un slice sur les colonnes  
-#   mais au fait on les veut toutes, on peut utiliser `:` 
+#   mais au fait on les veut toutes, on peut utiliser `:`
 #
 # <br>
 #
@@ -800,7 +800,7 @@ clean_df.loc[['France', 'Italy']]
 
 # NB: si on voulait tous les pays on pourrait faire
 # countries = slice(None)
-# qui est équivalent à utiliser :: 
+# qui est équivalent à utiliser ::
 # sauf qu'à nouveau ce n'est pas possible syntaxiquement ici
 countries = ['France', 'Italy']
 time_slice = slice('july 2021', '15 aug 2021')
@@ -870,12 +870,12 @@ df.plot();
 #
 # <br>
 #
-# mais avant de réfléchir à comment faire ça, 
+# mais avant de réfléchir à comment faire ça,
 # commençons par le cas simple d'un seul pays, au moins  
 # pour valider l'idée générale
 #
 # 1. affichez sur un graphique les 3 mesures pour la France au cours du temps
-# 1. idem avec seulement 2 mesures `deaths` et `confirmed` 
+# 1. idem avec seulement 2 mesures `deaths` et `confirmed`
 #
 
 # %%
@@ -883,8 +883,8 @@ df.plot();
 
 # %%
 # prune-cell 1.
-# pas forcément super pertinent de comparer 
-# les 3 mesures sur un même graphique mais 
+# pas forcément super pertinent de comparer
+# les 3 mesures sur un même graphique mais
 # l'idée générale semble fonctionner
 
 clean_df.loc['France'].plot();
@@ -916,7 +916,7 @@ df3 = clean_df.loc[['France', 'Italy', 'Germany'], ['deaths', 'confirmed']]
 df3.plot(rot=45);
 
 # %% [markdown] tags=["framed_cell"]
-# ### mise en forme des données 
+# ### mise en forme des données
 #
 # <br>
 #
@@ -926,7 +926,7 @@ df3.plot(rot=45);
 #
 # <br>
 #
-# alors qu'on avait dit qu'on voulait 6 colonnes, et autant 
+# alors qu'on avait dit qu'on voulait 6 colonnes, et autant
 # de lignes que dans un pays (autant que de jours de mesure)
 #
 # <br>
@@ -993,7 +993,7 @@ df6.plot(figsize=(12, 5));
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ### bonus
 #
-# les rapides peuvent écrire une fonction `extract()` qui prend en paramètres 
+# les rapides peuvent écrire une fonction `extract()` qui prend en paramètres
 #
 # * les pays concernés
 # * les mesures concernées
@@ -1005,7 +1005,7 @@ df6.plot(figsize=(12, 5));
 # prune-begin
 
 # %%
-def extract(countries, measures, 
+def extract(countries, measures,
             begin: np.datetime64=None,
             end: np.datetime64=None):
     time_slice = slice(begin, end)
@@ -1028,7 +1028,7 @@ extract(['Italy', 'Germany'], ['deaths', 'confirmed'], begin).plot();
 # %%
 end = pd.to_datetime('2021-01-31')
 
-extract(['Italy', 'Germany'], ['deaths', 'confirmed'], 
+extract(['Italy', 'Germany'], ['deaths', 'confirmed'],
         begin, end).plot();
 plt.savefig('media/covid-example.svg')
 

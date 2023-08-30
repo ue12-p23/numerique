@@ -81,7 +81,7 @@ from matplotlib import pyplot as plt
 # <br>
 #
 # par exemple  
-# un `numpy.ndarray` de `12` éléments 
+# un `numpy.ndarray` de `12` éléments
 #
 # <div class="memory">
 #
@@ -318,7 +318,7 @@ tab
 # **rappel du slicing Python**
 #
 #
-# * `l[from:to-excluded:step]` 
+# * `l[from:to-excluded:step]`
 #
 #
 # * paramètres tous optionnels  
@@ -401,7 +401,7 @@ vec
 #
 # <br>
 #
-# * on accède au premier groupe de matrices 
+# * on accède au premier groupe de matrices
 # ```python
 # tab[0]
 # ```
@@ -688,7 +688,7 @@ tab1.base
 #
 # <br>
 #
-# pour modifier un sous-tableau, il faut simplement faire attention 
+# pour modifier un sous-tableau, il faut simplement faire attention
 # 1. au type des éléments  
 # 2. et à la forme du tableau
 
@@ -714,7 +714,7 @@ colonnes
 #
 # * `lignes[i, j] == i` pour tous les `(i, j)`,
 #
-# et dans l'autre sens bien sûr 
+# et dans l'autre sens bien sûr
 #
 # * `colonnes[i, j] == j`
 
@@ -725,7 +725,7 @@ lignes[1, 4]
 colonnes[1, 4]
 
 # %% [markdown]
-# Pourquoi est-ce qu'on parle de ça me direz-vous ? 
+# Pourquoi est-ce qu'on parle de ça me direz-vous ?
 #
 # Eh bien en guise d'indice, cela vous renvoie à la notion de programmation vectorielle.
 #
@@ -747,10 +747,10 @@ M
 # par exemple pour `n=4` on s'attend à ceci
 #
 # ```console
-# 0 1 0 1 
-# 0 1 0 1 
-# 0 1 0 1 
-# 0 1 0 1 
+# 0 1 0 1
+# 0 1 0 1
+# 0 1 0 1
+# 0 1 0 1
 # ```
 
 # %% [markdown]
@@ -767,9 +767,9 @@ M
 # %% [markdown] {"tags": ["level_advanced"]}
 # Il y a beaucoup de méthodes pour faire cet exercice de damier; elles ne vont pas toutes se généraliser pour la variante :
 #
-# **Variante** écrivez une fonction `super_checkers` qui crée 
+# **Variante** écrivez une fonction `super_checkers` qui crée
 #
-# * un damier de coté `k*n x k*n` 
+# * un damier de coté `k*n x k*n`
 # * composé de blocs de `k x k` homogènes (tous à 0 ou tous à 1)
 # * eux mêmes en damiers
 # * on décide que le premier bloc (en 0,0) vaut 0
@@ -777,18 +777,18 @@ M
 # c'est-à-dire par exemple pour `n=4` et `k=3` cela donnerait ceci :
 #
 # ```
-# 0 0 0 1 1 1 0 0 0 1 1 1 
-# 0 0 0 1 1 1 0 0 0 1 1 1 
-# 0 0 0 1 1 1 0 0 0 1 1 1 
-# 1 1 1 0 0 0 1 1 1 0 0 0 
-# 1 1 1 0 0 0 1 1 1 0 0 0 
-# 1 1 1 0 0 0 1 1 1 0 0 0 
-# 0 0 0 1 1 1 0 0 0 1 1 1 
-# 0 0 0 1 1 1 0 0 0 1 1 1 
-# 0 0 0 1 1 1 0 0 0 1 1 1 
-# 1 1 1 0 0 0 1 1 1 0 0 0 
-# 1 1 1 0 0 0 1 1 1 0 0 0 
-# 1 1 1 0 0 0 1 1 1 0 0 0 
+# 0 0 0 1 1 1 0 0 0 1 1 1
+# 0 0 0 1 1 1 0 0 0 1 1 1
+# 0 0 0 1 1 1 0 0 0 1 1 1
+# 1 1 1 0 0 0 1 1 1 0 0 0
+# 1 1 1 0 0 0 1 1 1 0 0 0
+# 1 1 1 0 0 0 1 1 1 0 0 0
+# 0 0 0 1 1 1 0 0 0 1 1 1
+# 0 0 0 1 1 1 0 0 0 1 1 1
+# 0 0 0 1 1 1 0 0 0 1 1 1
+# 1 1 1 0 0 0 1 1 1 0 0 0
+# 1 1 1 0 0 0 1 1 1 0 0 0
+# 1 1 1 0 0 0 1 1 1 0 0 0
 # ```
 
 # %% {"tags": ["level_advanced"]}

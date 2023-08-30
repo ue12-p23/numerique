@@ -127,7 +127,7 @@ for c in ['Red', 'Lime', 'Blue']:
 # %% [markdown]
 # prune-cell 3
 #
-# en version un peu brute, on pourrait utiliser juste la racine carrée; 
+# en version un peu brute, on pourrait utiliser juste la racine carrée;
 # par exemple avec 5 couleurs créer un carré 3x3 - mais 3x2 c'est quand même mieux !
 #
 #
@@ -448,7 +448,7 @@ A.shape, B.shape, C.shape
 
 # %% [markdown]
 # 1. Faites une fonction qui prend en argument une image RGB et rend une image RGB sépia  
-# la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-dessous) 
+# la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-dessous)
 
 # %%
 # votre code
@@ -490,7 +490,7 @@ def sepia(im, SEPIA=np.array([[0.393, 0.349, 0.272],
                               [0.769, 0.686, 0.534],
                               [0.189, 0.168, 0.131]])):
 # les deux marchent
-    result = np.dot(im, SEPIA) 
+    result = np.dot(im, SEPIA)
 #    result = im @ SEPIA
     result[result>255] = 255
     return result.astype(np.uint8)
@@ -506,10 +506,10 @@ plt.imshow(
 #
 # dans notre cas:
 #
-# * a.dim = 3 (`a.shape = lines, cols, 3`), et 
+# * a.dim = 3 (`a.shape = lines, cols, 3`), et
 # * b.dim = 2, (`b.shape = 3, 3`), ce qui donne
 #
-# > `dot(image, SEPIA)[i, j, canal] 
+# > `dot(image, SEPIA)[i, j, canal]
 #   = sum(image[i, j, :] * SEPIA[:, canal])`  
 #   cqfd $\diamond$
 

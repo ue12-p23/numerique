@@ -66,7 +66,7 @@ import seaborn as sns
 # ## récupération
 
 # %% [markdown]
-# on part des données publiques qui décrivent le trafic des vélos [sur 
+# on part des données publiques qui décrivent le trafic des vélos [sur
 # le pont de Fremont (à Portland - Oregon)](https://www.google.com/maps/place/Fremont+Bridge/@45.5166602,-122.7147124,12.31z/data=!4m5!3m4!1s0x0:0x9014fe26b76a82db!8m2!3d45.5379639!4d-122.6830729)
 
 # %%
@@ -129,7 +129,7 @@ data.head()
 # en fait ce qu'il se passe c'est que c'est un peu le bazar ce dataset, et que les données sont principalement présentes en deux exemplaires !
 
 # %%
-# sur une plateforme Unix (i.e. linux ou macos) on pourrait faire 
+# sur une plateforme Unix (i.e. linux ou macos) on pourrait faire
 # !grep '01/01/2014 12:00:00 AM' $local_file
 
 # %%
@@ -148,7 +148,7 @@ with open(local_file) as feed:
 # * éliminer les doublons de la dataframe
 # * afficher la taille de départ et la taille finale, vérifier que la taille finale correspond à la taille de départ moins les doublons
 #
-# **indice** le mot clé c'est `duplicate` 
+# **indice** le mot clé c'est `duplicate`
 
 # %%
 # votre code
@@ -188,7 +188,7 @@ data.dtypes
 # %% [markdown]
 # ### la bonne façon
 #
-# une façon de faire bien plus efficace, même si elles demande un peu plus de soin de la part du programmeur, 
+# une façon de faire bien plus efficace, même si elles demande un peu plus de soin de la part du programmeur,
 # consiste à indiquer le format qui a été utilisé pour stocker les dates
 #
 # pour cette étape on peut utiliser `pd.to_datetime()` qui se comporte un peu comme `pd.as_type()`
@@ -313,7 +313,7 @@ data[['East', 'West']].plot();
 # pour y voir plus clair, on va montrer seulement un point par semaine
 #
 # ici on choisit de construire un point par semaine, qui est la moyenne  
-# on aurait pu choisir la somme aussi bien sûr, qui est en général 7 fois plus importante, 
+# on aurait pu choisir la somme aussi bien sûr, qui est en général 7 fois plus importante,
 # sauf dans le cas des données manquantes (mais c'est un détail ici)
 
 # %% [markdown] tags=["level_basic"]
@@ -367,7 +367,7 @@ data.shape
 data.resample('1W').mean().shape
 
 # %%
-# on vérifie que la version resamplée a bien 
+# on vérifie que la version resamplée a bien
 # 7 * 24 = 168 fois moins d'entrées que la version brute
 # puisqu'on a une mesure par heure et qu'on ré-échatillonne sur une semaine
 
@@ -398,7 +398,7 @@ data.resample('1W').mean().plot();
 data.resample('1D').mean().rolling(365).sum().plot();
 
 # %% [markdown] tags=["level_basic"]
-# **exercice**: 
+# **exercice**:
 #
 # * cherchez la documentation de `rolling` - par défaut, la valeur d'une corbeille est affectée à quel point (début, milieu, fin ?)
 # * comparez la date du premier point dans les données, avec la date du premier point dans le graphe
@@ -447,10 +447,10 @@ data.groupby(data.index.time).mean().plot();
 # en utilisant uniquement cette information de trafic  
 # **les jours entre jour travaillé ou non**
 #
-# du coup pour y voir un peu mieux, on veut afficher les jours 
-# **individuellement** les uns des autres 
+# du coup pour y voir un peu mieux, on veut afficher les jours
+# **individuellement** les uns des autres
 #
-# on veut donc dessiner 
+# on veut donc dessiner
 #
 # * *autant de courbes que de jours*
 # * et chaque courbe va avoir, en X l'heure de la journée, et en Y le nombre total de passages  
@@ -476,7 +476,7 @@ pivoted = data.pivot_table(
 pivoted.iloc[:5, :5]
 
 # %%
-# on confirme les dimensions 
+# on confirme les dimensions
 
 pivoted.shape
 
@@ -501,7 +501,7 @@ pivoted.plot(legend=False, alpha=0.01);
 # %% [markdown]
 # ici il s'agit de classifier les jours en deux familles, qu'on voit très distinctement sur la figure
 #
-# et donc on va faire une ACP sur un tableau qui aurait 
+# et donc on va faire une ACP sur un tableau qui aurait
 #
 # * 24 colonnes correspondant aux heures de la journée
 # * autant de lignes que de jours
@@ -532,7 +532,7 @@ coords = PCA(2, svd_solver='full').fit_transform(pca_in)
 #            ^ le 2 est ici
 
 # %%
-# toujours autant de jours, mais 
+# toujours autant de jours, mais
 # on a gardé seulement 2 vecteurs propres
 coords.shape
 
@@ -563,7 +563,7 @@ labels.shape, labels
 #
 # comme on le voir sur le coté
 # label=0 correspond aux points en bleu
-# label=1 correspond aux points en rouge et 
+# label=1 correspond aux points en rouge et
 
 plt.figure()
 plt.scatter(coords[:, 0], coords[:, 1], c=labels, cmap='rainbow')
@@ -574,7 +574,7 @@ plt.colorbar();
 
 # %%
 # pour vérifier notre classification on peut redessiner
-# les jours classés label==0 
+# les jours classés label==0
 
 # on voit que ça correspond aux jours de repos
 
@@ -638,7 +638,7 @@ plt.colorbar();
 # on remarque dans le cluster rouge-orange
 # des jours d'une couleur qui jure
 
-# pour comprendre à quoi ils correspondent 
+# pour comprendre à quoi ils correspondent
 
 odd_index = (labels == 0) & (dayofweek < 5)
 odd_index.shape, odd_index

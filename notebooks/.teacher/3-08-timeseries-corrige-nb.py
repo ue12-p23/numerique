@@ -69,7 +69,7 @@ import matplotlib.pyplot as plt
 # pour rester cohérent dans le nommage des classes
 # je préfère les importer avec un nom conforme à la PEP008
 from datetime import (
-    datetime as DateTime, 
+    datetime as DateTime,
     timedelta as TimeDelta)
 
 
@@ -415,7 +415,7 @@ df[cols].plot();
 #
 # bref, c'est plus simple de fabriquer une dataframe avec seulement une colonne  
 #
-# il faut donc se souvenir que 
+# il faut donc se souvenir que
 #
 # * `df[col]` est une série
 # * `df[[col]]` est une dataframe
@@ -458,7 +458,7 @@ df.loc['2020-04-01' : '2020-06-30']
 df.loc['2020-04' : '2020-06']
 
 # %% [markdown] tags=["level_basic"]
-# 7. si bien que, comment feriez-vous pour filtrer par exemple 
+# 7. si bien que, comment feriez-vous pour filtrer par exemple
 #    à partir du 1er janvier 2019 jusqu'à la fin des données
 
 # %%
@@ -506,7 +506,7 @@ df.loc['2019':]
 # ### `rolling()`
 
 # %% [markdown]
-# la fonction `rolling()` fonctionne aussi sur le modèle de corbeilles; 
+# la fonction `rolling()` fonctionne aussi sur le modèle de corbeilles;
 # sauf que cette fois-ci, il ne s'agit plus d'une partition, mais de *fenêtre glissante*, comme illustré ci-dessous
 
 # %% [markdown]
@@ -542,7 +542,7 @@ df.loc['2019':]
 # F(02/01/2022) = \sum_{j=02/01/2021}^{01/01/2022} f(j)
 # $$
 #
-# et donc 
+# et donc
 #
 # $$
 # F(02/01/2021) - F(01/01/2021) = f(02/01/20\textbf{22}) - f(01/01/20\textbf{21})
@@ -623,7 +623,7 @@ pd.DataFrame({'points-per-bin-28': count_28}).plot();
 # %% [markdown] tags=["level_intermediate"]
 # la notion de fenêtre glissante fait du sens pour n'importe quelle donnée, même non-temporelle
 #
-# reproduisez le dessin ci-dessus, mais 
+# reproduisez le dessin ci-dessus, mais
 #
 # * en ne gardant que le rolling sur 4 semaines
 # * en indiquant une **fenêtre en nombre de points**
@@ -645,7 +645,7 @@ pd.DataFrame({
 
 # %% tags=["level_advanced"]
 # xxx perplexing !
-# ici on utilise window=Timedelta(), agrégé avec sum() 
+# ici on utilise window=Timedelta(), agrégé avec sum()
 # et donc on s'attendrait à observer
 # un comportement aux bornes franchement différent
 
@@ -711,7 +711,7 @@ df_res.plot();
 
 expected = L // 5
 
-# mais ça ça marche mal; il y a pas mal de trous 
+# mais ça ça marche mal; il y a pas mal de trous
 # supplémentaires (jours fériés) dans les données
 # et du coup L est moins élevé, notre estimation est donc inférieure
 # au résultat

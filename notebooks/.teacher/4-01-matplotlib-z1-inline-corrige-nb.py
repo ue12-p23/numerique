@@ -34,7 +34,7 @@ from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
 # %% [markdown]
-# de la bonne utilisation de `plt.figure()`, `plt.show()` en fonction du driver `%matplotlib` - épisode 1 
+# de la bonne utilisation de `plt.figure()`, `plt.show()` en fonction du driver `%matplotlib` - épisode 1
 
 # %% [markdown]
 # **take home message**
@@ -81,7 +81,7 @@ plt.plot(X, Y2);
 # ## plusieurs courbes
 
 # %% cell_style="split"
-# et plusieurs courbes finissent 
+# et plusieurs courbes finissent
 # dans la même figure
 plt.plot(X, Y)
 plt.plot(X, Y2);
@@ -98,7 +98,7 @@ plt.plot(X, Y2);
 
 # %% cell_style="split"
 # on aurait aussi pu utiliser plt.show()
-# mais ça par contre ça ne marche pas 
+# mais ça par contre ça ne marche pas
 # avec le driver notebook
 plt.plot(X, Y)
 plt.show()

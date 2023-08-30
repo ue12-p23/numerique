@@ -357,8 +357,8 @@ def fake_none(tab):
 # %%
 tab = np.arange(120).reshape(2, 3, 4, 5)
 
-(tab.sum(axis=0).shape == (3, 4, 5), 
- tab.sum(axis=1).shape == (2, 4, 5), 
+(tab.sum(axis=0).shape == (3, 4, 5),
+ tab.sum(axis=1).shape == (2, 4, 5),
  tab.sum(axis=2).shape == (2, 3, 5),
  tab.sum(axis=3).shape == (2, 3, 4))
 
@@ -390,7 +390,7 @@ tab.sum(axis=(1, 2))
 #
 # <br>
 #
-# on recherche l'indice (l'emplacement, pas la valeur) du plus grand élément du tableau 
+# on recherche l'indice (l'emplacement, pas la valeur) du plus grand élément du tableau
 #
 # c'est la méthode `argmax` qu'il nous faut
 #

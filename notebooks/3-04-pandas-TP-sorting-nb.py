@@ -72,7 +72,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #    1. plotez avec paramètre `'b.'` et sans indiquer les abscisses, la colonne des ages
 #    1. que constatez-vous ?
 #    <br>
-#    1. si vous n'indiquez pas l'axe des abscisses de votre dessin que choisit `plt` ? 
+#    1. si vous n'indiquez pas l'axe des abscisses de votre dessin que choisit `plt` ?
 
 # %% [markdown]
 # ## tri des lignes d'une dataframe
@@ -158,7 +158,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #    mettez comme index (par exemple):  
 #    aux lignes  `'un'`, `'deux'`, `'trois'` et `'quatre'`  
 #    aux colonnes `'a'`, `'b'`, `'c'`, `'d'` et `'e'`  
-#    **indice**: voyez la documentation de `pd.DataFrame` 
+#    **indice**: voyez la documentation de `pd.DataFrame`
 #    pour construire une dataframe  
 #    par programme
 

@@ -89,10 +89,10 @@ valeurs_d1[indices]
 # %% [markdown]
 # donc si on essaie de formaliser un peu, lorsque `valeurs` est de dimension 1
 #
-# `valeurs[indices]` aura un sens si 
+# `valeurs[indices]` aura un sens si
 #
 # * `valeurs` est de dimension 1
-# * `indices` ne contient que des entiers, qui sont des indices valables dans `valeurs` 
+# * `indices` ne contient que des entiers, qui sont des indices valables dans `valeurs`
 # * et alors le résultat est un tableau de la même forme que `indices`
 
 # %% [markdown]
@@ -182,7 +182,7 @@ r = valeurs_d2[indices_i]
 # * on commence par calculer un array de forme 6 x 3 qui contient les rgb des 4 couleurs  
 #   (et pour les 2 dernières couleurs on met la couleur de fond)
 #
-# * puis on fabrique un tableau qui a la forme du patchwork, 
+# * puis on fabrique un tableau qui a la forme du patchwork,
 #   et dans chaque case le rang de la couleur qu'on veut
 #
 # * et on obtient le résultat par simple indexation

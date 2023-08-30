@@ -43,7 +43,7 @@ import numpy as np
 #
 # <br>
 #
-# tests sur les tableaux multi-dimensionnels `numpy` par fonctions vectorisées `ufunc` 
+# tests sur les tableaux multi-dimensionnels `numpy` par fonctions vectorisées `ufunc`
 #
 # <br>
 #
@@ -80,7 +80,7 @@ import numpy as np
 # tab = np.random.randint(10, size=(2, 3))
 # -> tab [[1 8 5]
 #         [7 0 2]]
-# ``` 
+# ```
 #
 # <br>
 #
@@ -166,7 +166,7 @@ np.greater(tab, 5)
 # tab = np.random.randint(10, size=(2, 3))
 # -> tab [[1 8 5]
 #         [7 0 2]]
-# ``` 
+# ```
 # <br>
 #
 # regardons si il existe au moins une valeur paire dans le tableau des résultats
@@ -268,7 +268,7 @@ np.count_nonzero(tab%2==0, axis=0)
 # * ou encore
 # ```python
 # tab[np.greater(tab, 0)]
-# ``` 
+# ```
 #
 # <br>
 #
@@ -326,7 +326,7 @@ tab
 #             
 # <br>
 #
-# masque pour sélectionner les éléments entre 25 et 75 
+# masque pour sélectionner les éléments entre 25 et 75
 #
 # ```python
 # (tab >= 25) & (tab < 75)
@@ -422,7 +422,7 @@ print(tab)
 # tab = np.array([[1, 2, 3], [4, 5, 6]])
 # view = tab[tab%2==0]
 # view[...] = 100
-# print(tab) 
+# print(tab)
 # -> ([[1, 2, 3], # et non [1, 100, 3],...
 #      [4, 5, 6]])
 # print(view)
@@ -452,7 +452,7 @@ print(view)
 # ```python
 # tab = np.array([[1, 2, 3], [4, 5, 6]])
 # tab[tab%2==0][0] = 100
-# print(tab) 
+# print(tab)
 # -> ([[1, 2, 3], # et non [1, 100, 3],...
 #      [4, 5, 6]])
 # ```    
@@ -461,7 +461,7 @@ print(view)
 # le code
 tab = np.array([[1, 2, 3], [4, 5, 6]])
 tab[tab%2==0][0] = 100
-print(tab) 
+print(tab)
 
 
 # %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
