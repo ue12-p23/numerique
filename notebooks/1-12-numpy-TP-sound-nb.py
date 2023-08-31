@@ -3,7 +3,6 @@
 # jupyter:
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
-#     cell_metadata_json: true
 #     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,
 #
@@ -22,18 +21,18 @@
 #     nbconvert_exporter: python
 #     pygments_lexer: ipython3
 #   nbhosting:
-#     title: suite du TP simple avec des images
+#     title: TP - un peu de musique
 # ---
 
 # %% [markdown]
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
 # %% [markdown]
-# # TP image #2
+# # TP sons
 #
-# ````{admonition} TP image #2
+# ````{admonition} TP sons
 #
-# Voyez le TP images #1 qui se trouve ici
+# Voyez le TP sur la manipulation du son qui se trouve ici
 #
-# <https://nbhosting.inria.fr/builds/ds-exos/data-science/latest/ds-tps/images/README-images2-nb.html>
+# <https://nbhosting.inria.fr/builds/ds-exos/data-science/latest/ds-tps/sounds/README-sounds-nb.html>
 # ````
