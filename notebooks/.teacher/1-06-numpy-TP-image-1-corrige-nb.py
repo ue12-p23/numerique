@@ -29,6 +29,8 @@
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
 # %% [markdown]
+# # TP image #1
+#
 # ````{admonition} TP image #1
 #
 # Voyez le TP images #1 qui se trouve ici
