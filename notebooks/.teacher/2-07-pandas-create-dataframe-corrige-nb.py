@@ -32,15 +32,15 @@ from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
 # %% [markdown]
-# # manipulations de base
+# # création de dataframe
+#
+# *ne pas faire en cours, lire en autonomie*
 
 # %%
 import pandas as pd
 import numpy as np
 
 # %% [markdown]
-# ## création de dataframe
-#
 # de très nombreuses voies sont possibles pour créer une dataframe par programme  
 # en voici quelques-unes à titre d'illustration  
 # voyez la documentation de `pd.DataFrame?` pour les détails  
@@ -348,215 +348,7 @@ df['speed'] = df['speed'].astype(float)
 df['lifespan'] = df['lifespan'].astype(float)
 df.dtypes
 
-# %% [markdown] tags=["framed_cell"]
-# ## agrégations des données
-#
-# ````{admonition} →
-# parfois on obtient les données par plusieurs canaux  
-# qu'il faut agréger dans une seule dataframe
-#
-# les outils à utiliser pour cela sont multiples  
-# pour bien choisir, il est utile de se poser en priorité  
-# la question de savoir si les différentes sources à assembler  
-# concernent les **mêmes colonnes** ou au contraire les **mêmes lignes**  (*)
-#
-#
-# illustrations:
-#
-# * on recueille les données à propos du coronavirus, qui sont disponibles par mois  
-#   chaque fichier a la même structure - disons 2 colonnes: *deaths*, *confirmed*  
-#   l'assemblage consiste donc à agréger les dataframes **en hauteur**
-#
-# * on recueille les notes des élèves d'une classe de 20 élèves  
-#   chaque prof fournit un fichier excel avec les notes de sa matière  
-#   chaque table contient 20 lignes  
-#   il faut cette fois agréger les dataframes **en largeur**
-#
-# <div class="note">
-#     (*) cette présentation est simpliste, elle sert uniquement à fixer les idées
-# </div>
-# ````
-
-# %% [markdown] tags=["framed_cell"]
-# ### en hauteur `pd.concat()`
-#
-# ````{admonition} →
-# pour l'accumulation de donnée référez-vous  
-# aux fonctions suivantes offertes par `pandas`
-#
-# * la fonction `pd.concat([df1, df2, ..])`  
-#   qui a vocation à accumuler des données en hauteur  
-#
-# * et à la méthode `df1.append(df2)`  
-#   qui est une version simplifiée de `concat()`
-# ````
-
-# %% [markdown] tags=["framed_cell"]
-# ### en largeur `pd.merge()`
-#
-# ````{admonition} →
-# pour la réconciliation de données, voyez cette fois
-#
-# * la fonction `pd.merge(left, right)`  
-#   ou sous forme de méthode `left.merge(right)`  
-#
-# * et à la méthode `left.join(right)`
-#   une version simplifiée de `left.merge()`
-# ````
-
 # %% [markdown]
-# ### alignements
-#
-# dans les deux cas, `pandas` va *aligner* les données  
-# par exemple on peut concaténer deux tables qui ont les mêmes colonnes  
-# même si elles sont dans le désordre
-#
-# l'usage typique de `merge()`/`join()`  
-# est l'équivalent d'un JOIN en SQL  
-# pour ceux à qui ça dit quelque chose  
-# sans indication, `merge()` calcule les **colonnes communes**  
-# et se sert de ça pour aligner les lignes
-#
+# ***
 
 # %%
-# exemple 1
-# les deux dataframes ont exactement une colonne en commun
-
-df1 = pd.DataFrame(
-    data={
-        'name': ['Bob', 'Lisa', 'Sue'],
-        'group': ['Accounting', 'Engineering', 'HR']})  # une seule colonne
-
-df2 = pd.DataFrame(
-    data={
-        'name': ['Lisa', 'Bob', 'Sue'],
-        'hire_date': [2004, 2008, 2014]})
-
-# %% cell_style="split"
-df1
-
-# %% cell_style="split"
-df2
-
-# %%
-df1.merge(df2)
-
-# %%
-# exemple 2
-# cette fois il faut aligner l'index de gauche
-# avec la colonne 'name' à droite
-
-df1 = pd.DataFrame(
-    index = ['Bob', 'Lisa', 'Sue'],  # l'index
-    data={'group': ['Accounting', 'Engineering', 'HR']})  # une seule colonne
-
-df2 = pd.DataFrame(
-    data = {'name': ['Lisa', 'Bob', 'Sue'],
-            'hire_date': [2004, 2008, 2014]})
-
-# %% cell_style="split"
-df1
-
-# %% cell_style="split"
-df2
-
-# %%
-# du coup ici sans préciser de paramètres
-# ça ne fonctionnerait pas
-df1.merge(df2, left_index=True, right_on='name')
-
-# %% [markdown] tags=["level_intermediate"]
-# ### `concat()` *vs* `merge()`
-#
-# les deux fonctionnalités sont assez similaires sauf que
-#
-# * `merge` peut aligner les index ou les colonnes  
-#   alors que `concat` ne considère que les index
-#
-# * `merge` est une opération minaire  
-#    alors que `concat` est n-aire  
-#    ce qui explique d'ailleurs la différence de signatures  
-#    `concat([d1, d2])` *vs* `merge(d1, d2)`
-#
-# * seule `concat()` supporte un paramètre `axis=`
-
-# %% [markdown]
-# ### **exercice** - collage de datatables
-#
-# voici 3 jeux de données qu'on vous demande d'assembler  
-# pour décrire à la fin 4 caractéristiques à propos de 5 élèves
-
-# %% cell_style="split"
-df1 = pd.read_csv('pupils1.csv')
-df1
-
-# %% cell_style="split"
-df2 = pd.read_csv('pupils2.csv')
-df2
-
-# %%
-df3 = pd.read_csv('pupils3.csv')
-df3
-
-# %%
-# votre code
-
-# %% cell_style="center"
-# prune-cell
-# on commence par réconcilier
-# les deux premières
-# par défaut merge() calcule
-# l'intersection des colonnes
-# ici on trouve seulement 'name'
-# et il utilise ça comme critère pour
-# aligner les lignes à droite et à gauche
-df12 = df1.merge(df2)
-# on aurait pu faire, pour être explicite
-df12 = df1.merge(df2, left_on='name', right_on='name')
-df12
-
-# %% cell_style="center"
-# prune-cell
-# sans rien préciser concat var aligner les colonnes
-# des deux tables, rien de particulier à faire ici
-# puisque df12 et df3 ont les mêmes colonnes
-df123 = pd.concat([df12, df3])
-df123
-
-# %% [markdown] tags=["level_intermediate"]
-# ### **exercice** - intermédiaire
-#
-# l'énoncé est le même, sauf que cette fois on a choisi
-# d'indexer toutes les tables par la colonne `name`
-
-# %% cell_style="split" tags=["level_intermediate"]
-df1i = pd.read_csv('pupils1.csv',
-                  index_col='name')
-df1i
-
-# %% cell_style="split" tags=["level_intermediate"]
-df2i = pd.read_csv('pupils2.csv',
-                  index_col='name')
-df2i
-
-# %% tags=["level_intermediate"]
-df3i = pd.read_csv('pupils3.csv', index_col='name')
-df3i
-
-# %% tags=["level_intermediate"]
-# votre code
-
-# %% cell_style="center" tags=["level_intermediate"]
-# prune-cell
-# cette fois on est obligés de préciser
-# sur quel(s) critère(s) (colonnes ou index)
-# se fait l'alignement des lignes entre elles
-# ici à gauche et à droite c'est les index qui sont alignés
-# il faut chercher dans la doc pour trouver ceci
-df12i = df1i.merge(df2i, left_index=True, right_index=True)
-df12i
-
-# %% cell_style="center" tags=["level_intermediate"]
-# prune-cell
-df123i = pd.concat([df12i, df3i])
-df123i

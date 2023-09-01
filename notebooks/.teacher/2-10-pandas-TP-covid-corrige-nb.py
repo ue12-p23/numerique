@@ -514,11 +514,6 @@ global_df.loc[0]
 # ***
 
 # %% [markdown] tags=["framed_cell"]
-# ## les dates
-#
-# ``# ````
-# ``{admonition} →
-# %% [markdown] tags=["framed_cell"]
 # ### les dates en `pandas`
 #
 # ````{admonition} →
