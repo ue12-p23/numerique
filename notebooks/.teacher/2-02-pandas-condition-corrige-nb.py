@@ -619,3 +619,6 @@ c3 = (df['Pclass'] == 3).sum()
 
 (   ((df['Sex'] == 'female') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()/c1,
     ((df['Sex'] == 'male') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()/c1     )
+
+# %% [markdown]
+# ***

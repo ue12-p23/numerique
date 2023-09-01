@@ -186,11 +186,11 @@ for group, subdf in by_sex:
 # ```
 #
 # ou encore on peut fabriquer une dataframe qui contient les sommes
-# des colonnes de départ, mais par sexe
+# de certaines colonnes de départ, mais par sexe
 #
 # ```python
-# # les sommes des colonnes, mais par sexe
-# by_sex.sum()
+# # les sommes des colonnes 'Survived' et 'Fare', mais par sexe
+# by_sex[['Survived', 'Fare']].sum()
 # ```
 # ````
 
@@ -201,7 +201,7 @@ for group, subdf in by_sex:
 by_sex.Age.max()
 
 # %%
-by_sex.sum()
+by_sex[['Survived', 'Fare']].sum()
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accéder à un groupe

@@ -1043,4 +1043,5 @@ df2.loc[1, 'Survived'] = 0
 print(df2.loc[1, 'Survived'])
 print(df.loc[1, 'Survived'])
 
-# %%
+# %% [markdown]
+# ***

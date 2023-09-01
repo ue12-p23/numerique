@@ -49,7 +49,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # * une observation par ligne (ici les passagers du Titanic)  
 # * plusieurs informations par observation  
 # * les différentes informations forment les colonnes de la table
-# * ces colonnes se sont pas toutes du même type...
+# * ces colonnes ne sont pas toutes du même type...
 #
 # <img src='media/titanic.png' width="1000"></img>
 # ````
