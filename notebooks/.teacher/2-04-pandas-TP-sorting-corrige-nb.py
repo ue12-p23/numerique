@@ -78,7 +78,7 @@ df = pd.read_csv('titanic.csv', index_col='PassengerId', usecols=cols)
 
 # %% [markdown]
 # 4. en utilisant la méthode `pd.DataFrame.plot`  
-#    plotez la dataframe (pas la série) réduite à la colonne des ages  
+#    plottez la dataframe (pas la série) réduite à la colonne des ages  
 #    utilisez le paramètre de `style` `'rv'` (`r` pour rouge et `v` pour le style: points triangulaires)
 #    
 
@@ -110,7 +110,7 @@ df_sorted = df.sort_values(by='Age', ascending=True, axis=0)
 df_sorted.head(4)
 
 # %% [markdown]
-# 6. 1. plotez la colonne des ages de la dataframe triée  
+# 6. 1. plottez la colonne des ages de la dataframe triée  
 #       (n'oubliez pas le style 'bv' pour dire que vous voulez des points  
 #       sinon plot trace les lignes qui relient les points)
 #    1. Que constatez-vous ?

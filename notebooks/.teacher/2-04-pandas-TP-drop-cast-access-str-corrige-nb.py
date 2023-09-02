@@ -219,6 +219,9 @@ df['Mass (lb) clean'].dtype
 # prune-cell
 df['Mass (kg)'] = (df['Mass (lb) clean'] / 2.205).astype(int)
 
+# %%
+pd.Series.asty
+
 # %% [markdown]
 # 12. 1. Quels sont les pays qui ont laissé des objets sur la lune ?
 #     2. Combien en ont-ils laissé en pourcentage (pas en nombre) ?  

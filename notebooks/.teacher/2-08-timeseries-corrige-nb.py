@@ -32,109 +32,54 @@ from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
 
-# %%
-import pandas as pd
-import matplotlib.pyplot as plt
-
 # %% [markdown]
 # # timeseries en pandas
 
+# %%
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
 # %% [markdown]
+# ````{admonition} →
+#
 # il est très fréquent d'avoir dans ses données des grandeurs qui représentent le temps; voyons un peu ce que `pandas` peut faire pour nous aider avec ce genre de traitements
 #
-#
-# <div class=note>
-#
 # le sujet est **extrêmement** vaste:  
-# dualité date et heure, fuseaux horaires, formats `yy/mm/dd` vs `yy/dd/mm`, jours fériés, années bissextiles, *leap seconds*, abandon du calendrier julien en 1582 mais pas partout, …  
+# - dualité date et heure, fuseaux horaires, formats `yy/mm/dd` vs `yy/dd/mm`
+# - jours fériés, années bissextiles, *leap seconds*, abandon du calendrier julien en 1582 mais pas partout, … 
+#
 # bref on n'en donne ici qu'une version **très** édulcorée
 #
-# </div>
+#
+# ````
 
 # %% [markdown]
-# ## les types de base
-
-# %% [markdown]
-# ### `datetime`
-
-# %% [markdown]
-# pour commencer, parlons un peu des types de base; en Python pur, on trouve dans la librairie standard [(`import datetime`)](https://docs.python.org/3/library/datetime.html) deux types de données principaux
+# ### les types de base `Python`
+#
+# ````{admonition} →
+#
+# en Python pur, on trouve dans la librairie standard [(`import datetime`)](https://docs.python.org/3/library/datetime.html) deux types de données principaux
 #
 # * `datetime` qui permet de modéliser un instant (par exemple, le 10 octobre 1954 à 10h 32' 15'' - et même plus précis encore si nécessaire)
 # * `timedelta` qui permet de modéliser une durée (par exemple 2 heures 15 minutes, ou 3 ans)
 #
-# **note** on **n'utilise pas directement** ces deux types en pandas, mais c'est tout de même la fondation du modèle, donc attardons-nous un tout petit peu
+# si vous voulez les tester vous avez un exercice en annexe 1
+# ````
 
 # %%
-# pour rester cohérent dans le nommage des classes
-# je préfère les importer avec un nom conforme à la PEP008
-from datetime import (
-    datetime as DateTime,
-    timedelta as TimeDelta)
-
+# from datetime import datetime
+# pas très PEP8 la librairie datetime...
 
 # %%
-# pour modéliser un instant
-t1 = DateTime.fromisoformat('2021-12-31T22:30:00')
-t1
-
-# %%
-# et une durée
-d1 = TimeDelta(hours=4)
-d1
-
-# %% [markdown]
-# #### un peu d'arithmétique
-
-# %%
-# on peut faire de l'arithmétique
-# avec ces deux types
-
-# 4 heures après t1
-t2 = t1 + d1
-t2
-
-# %%
-# ajouter, soustraire, multiplier, diviser ...
-
-# 8 haures avant ça, i.e. 4 heures avant d1
-t2 - 2 * d1
-
-# %%
-# combien de fois 10 minutes dans 4 heures
-
-d1 // TimeDelta(minutes=10)
-
-# %% [markdown]
-# #### décomposer
-
-# %% [markdown]
-# pour accéder aux différents éléments d'une date (année, mois, ..), c'est facile
-
-# %%
-t1.year, t1.hour
-
-# %%
-d1.days, d1.seconds
-
-# %% [markdown]
-# à titre plus anecdotique, on peut aussi appliquer directement un format à un instant dans une f-string  
-
-# %%
-# # %H c'est pour extraire l'heure
-# il y a toute une série de codes de format...
-f"{t1:%H==%M}"
-
-# %% [markdown]
-# par contre ces formats sont **très utiles** lorsqu'on va vouloir traduire nos fichiers d'entrée en date/heure
-#
-# pour une liste complète des formats, voir
-# <https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes>
+# help(datetime)
 
 # %% [markdown]
 # ### la version `numpy`
 
 # %% [markdown]
+# ````{admonition} →
+#
 # ces deux types fournissent la bonne abstraction; malheureusement l'implémentation est sous-optimale pour les applications scientifiques, car notamment :
 #
 # * ils ne couvrent pas les échelles infiniment grandes (temps astronomique)  
@@ -145,40 +90,52 @@ f"{t1:%H==%M}"
 # du coup on trouve [dans numpy](https://numpy.org/doc/stable/reference/arrays.datetime.html)
 # des versions plus flexibles et plus modernes de ces deux classes, qui s'appellent `np.datetime64` et `np.timedelta64`, qui n'ont pas ces lacunes
 #
-# bref, ce sont **ces types qui seront utilisés** sous le capot, lorsqu'on aura à manipuler des grandeurs temporelles
+# bref, ce sont **ces types qui seront utilisés** sous le capot, lorsqu'on aura à manipuler des grandeurs temporelles en `pandas`
 
 # %% [markdown]
 # ### la version `pandas`
 
 # %% [markdown]
+# ````{admonition} →
+#
 # **mais** ici encore les types `numpy`, malgré leurs qualités, ont le gros défaut d'être très peu *user-friendly*, aussi `pandas` nous expose sa propre version de essentiellement les mêmes concepts, plus un:
 #
-# * `Timestamp` pour un instant (ça aurait pu/dû s'appeler `Datetime`, mais bon...)
+# * `Timestamp` pour un instant  
+# (aurait pu/dû s'appeler `datetime`, mais bon...)
 # * `Timedelta` pour une durée
 # * `Period` pour un intervalle de temps, représenté par un début **et** une durée
 #
 # ces types sont fabriqués *au dessus* des 2 types de base fournis par `numpy`, et visent donc principalement à les rendre plus faciles à utiliser
+#
+# en `pandas` la fonction [pandas.to_datetime](https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html) vous permet de traduire des objets en date   
+# nous allons l'illustrer avec des exercices
+#
+# ````
 
 # %% [markdown]
-# ## **exercice**: le cours de l'action amazon
+# ## **exercices**: le cours de l'action amazon
 
 # %% [markdown]
-# vous avez peut-être remarqué que `read_csv` propose des (tas d') options pour la gestion des instants (notamment le paramètre `parse_dates`); toutefois j'ai envie de vous conseiller de rester loin de ce genre de features, au moins pour commencer
+# vous avez peut-être remarqué que `read_csv` propose des (tas d') options pour la gestion des instants (notamment le paramètre `parse_dates`)
+#
+# dans un premier temps, nous vous conseillons de rester loin de ce genre de features  
+#
+# dans cet exercice nous allons procéder en deux temps, en combinant `pd.read_csv` et `pd.to_datetime`
 
 # %%
 # # pd.read_csv?
 
-# %% [markdown]
-# il est sans doute préférable de procéder en deux temps, en combinant `pd.read_csv` et `pd.to_datetime`, ce que vous êtes invité à faire dans cet exercice
-
 # %%
 # # pd.to_datetime?
 
+# %% [markdown]
+# ### **exercice 1**: `read_csv`
+
 # %% [markdown] tags=["level_basic"]
-# 1. lire le fichier de données `Amazon.csv` avec `read_csv()`  
+# 1. 1. lire le fichier de données `Amazon.csv` avec `read_csv()`  
 #    attention, le fichier contient 3 premières lignes de commentaires
 #    qu'il convient d'ignorer complètement  
-#    affichez les types des colonnes  
+#    1. affichez les types des colonnes  
 #    que penser du type de la colonne `Date` ?
 
 # %%
@@ -198,17 +155,36 @@ df.head()
 df.dtypes
 
 # %% [markdown]
-# ## **exercice**: `pd.to_datetime()`
+# ### **exercice 2**: `pd.to_datetime()`
 
 # %% [markdown] tags=["level_basic"]
-# 2. traduisez la colonne `Date` dans le type adéquat  
-# affichez le nouveau type de la colonne  
-# ça peut être intéressant de regarder à la fois `dtypes` sur la dataframe et `dtype` sur la série
+# #### 2. 1. traduisez la colonne `Date` dans le type adéquat  
+#    1. affichez le nouveau type de la colonne  
+#    1. ça peut être intéressant de regarder à la fois `dtypes` sur la dataframe et `dtype` sur la série$^{(1)}$  
+#    1. en option (pour les avancés): sauriez-vous passer à `to_datetime` le paramètre `format` qui va bien ?
 #
-# en option pour les forts: sauriez-vous passer à `to_datetime` le paramètre `format` qui va bien ?
+#  $^{(1)}$ plusieurs choses là pour les curieux
+#  - la première est que `pandas` utilise les types de données `numpy`  
+#     en `pandas`, quand vous demandez le type des données d'une colonne, vous pouvez obtenir un nom de type `numpy`
+#  - la seconde est que la `repr` et la `str` `numpy` de son type `np.datetime64` sont différentes  
+#    (la `repr` dépend de votre ordinateur '<' est pour little-endian, 'M' est le le code caractère du type datetime et 8 la taille mémoire en octets) 
+#     ```python
+#     dt = np.datetime64("2023-09-12 15:30:00.000000000") # nano secondes
+#     print(repr(dt.dtype))
+#     -> dtype('<M8[ns]')
+#        (M est le code caractère du type datetime)
+#     print(str(dt.dtype))
+#     -> datetime64[ns]
+#     ```
 
 # %%
 # à vous
+
+# %%
+import numpy as np
+dt = np.datetime64("2023-09-12 15:30:00.000000000") # nano secondes
+print(repr(dt.dtype))
+print(str(dt.dtype))
 
 # %%
 # prune-begin
@@ -221,9 +197,9 @@ df['Date'] = pd.to_datetime(df.Date)
 df['Date'] = pd.to_datetime(df.Date, "%Y-%m-%d")
 
 # %%
-# ici pandas nous montre que c'est un objet numpy
+# ici pandas nous montre que c'est l'objet numpy
 # np.datetime64[ns] et le [ns] indique l'unité
-# (voir le tableau en fin de notebook)
+# (voir le tableau en annexe 2 fin de notebook)
 df.dtypes
 
 # %%
@@ -231,23 +207,23 @@ df.dtypes
 # mais en version numpy
 # le M signifie datetime
 # le 8 signifie 8 octets
-# le [ns] indique l'unité su timestamp
+# le [ns] indique l'unité du timestamp
 df.Date.dtype
 
 # %% tags=["level_basic"]
 # prune-end
 
 # %% [markdown]
-# ## **exercice**: `NaT`
+# ### **exercice 3**: `NaT`
 
 # %% [markdown] tags=["level_basic"]
-# 3. comparez l'affichage de la première ligne avec celui d'avant la conversion  
+# 3. 1. comparez l'affichage de la première ligne avec celui d'avant la conversion  
 #    que remarquez-vous ?  
-#    supprimer les lignes pour lesquelles le champ `Date` est inconnu
+#    1. supprimer les lignes pour lesquelles le champ `Date` est inconnu
 #
 #   il y a au moins deux façons évidentes de s'y prendre  
-#   essayez de les trouver toutes les deux pour vérifier vos résultats  
-#   le nombre de lignes doit passer de 5852 à 5828
+#   essayez de les trouver  
+#   pour vérifier vos résultats  le nombre de lignes doit passer de 5852 à 5828
 
 # %%
 # à vous
@@ -297,27 +273,25 @@ print(f"après {df.shape=}")
 # prune-end
 
 # %% [markdown]
-# ## **exercice**: l'accessor `.dt`
-
-# %% [markdown]
-# comme on l'a déjà vu avec `.str` et `.cat`, il existe un accesseur `.dt` pour appliquer sur une série de type `Timestamp` des attributs qui lui sont spécifiques
+# ### **exercice 4**: l'accessor `.dt`
 
 # %% [markdown] tags=["level_basic"]
-# 4. en utilisant cet accesseur, ajoutez à la dataframe une colonne qui contient le jour de la semaine, codé comme:
-#
-# | jour | code |
-# |-|-|
-# | lundi | 0 |
-# | mardi | 1 |
-# | mercredi | 2 |
-# | jeudi | 3 |
-# | vendredi | 4 |
-# | samedi | 5 |
-# | dimanche | 6 |
-#
+# comme on l'a déjà vu avec `.str` et `.cat`  
+# il existe un accesseur `.dt` pour appliquer sur une série de type `Timestamp` des attributs qui lui sont spécifiques
+
+# %% [markdown] tags=["level_basic"]
+# 4. 1. en utilisant cet accesseur, ajoutez à la dataframe une colonne qui contient uniquement l'année des dates
+#    1. pour les avancés: en utilisant cet accesseur, ajoutez à la dataframe une colonne qui contient le jour de la semaine  
+#    où lundi vaut 0, mardi 1, ...
 
 # %%
 # prune-begin
+
+# %%
+df.dtypes
+
+# %%
+df['year'] = df['Date'].dt.year
 
 # %%
 # on peut utiliser dayofweek ou weekday
@@ -340,16 +314,16 @@ df.head(5)
 # prune-end
 
 # %% [markdown]
-# ## **exercice**: plotting
+# ### **exercice 5**: indexing by dates
 
 # %% [markdown] tags=["level_basic"]
-# 5. utilisez la colonne `Date` comme index  
+# 5. mettez la colonne `Date` comme index  
 #    et triez la dataframe selon cet index
 #    (ça semble être déjà le cas, mais en est-on bien sûr ?)
 #
-# question subsidiaire (pas de code):  
-# est-ce que le fait de trier va changer quelque chose à l'affichage (scatter plot) ?  
-# est-ce que ça va changer quelque chose lorsqu'on va vouloir sélectionner des plages de temps à base de slicing ?
+# pour les avancés, question subsidiaire:  
+# le fait de trier les dates va-t-il changer quelque chose à l'affichage des **points** e.g ('Date', valeur de l'action) ?  
+# va-t-il changer quelque chose lorsqu'on va vouloir sélectionner des plages de temps à base de slicing (`.loc) ?  
 
 # %%
 # à vous
@@ -364,29 +338,25 @@ df.sort_index(inplace=True)
 #
 # imaginons que les données soient toutes mélangées
 #
-# * le plotting avec scatter plot ne sera pas affecté (les points (x, y) sont élaborés à partir de l'index, qui est le bon instant)
+# * le plotting des points (scatter plot) ne sera pas affecté, les points (x, y) sont élaborés à partir de l'index, qui est le bon instant)
 # * le plotting avec un vrai 'plot' sera affecté, car en plus des points, on va tracer les traits qui joignent deux entrées successives dans la dataframe
 # * le slicing à base de `loc` bien sûr va être affecté également
 
-# %%
-# df.tail()
-
-# %% [markdown] tags=["level_basic"]
-# 6. plottez la valeur de l'action au cours du temps
-#
-# * sur un même diagramme, les deux cours `High` et `Low`
-# * ensuite sur deux diagrammes séparés
+# %% [markdown]
+# ### **exercice 6**: plotting
 
 # %% [markdown]
-# pour dessiner, en tous cas avec `jupyter notebook`, le mieux c'est de choisir le driver `notebook` (dans vs-code il y a un remplacement possible qui est `pyimpl`)
+# 6. 1. plottez la valeur de l'action au cours du temps
+#    * sur un même diagramme, les deux cours `High` et `Low`
+#    * ensuite sur deux diagrammes séparés
 #
 # **indice**
 # on pourrait bien sûr utiliser `plt.plot()`  
 # mais ici on vous invite à utiliser directement la méthode `plot` sur une DataFrame, vous verrez que c'est beaucoup plus simple !
 
 # %%
-# %matplotlib notebook
-
+# # %matplotlib ipympl
+# pip install ipympl
 # pour changer la taille des figures par défaut
 plt.rcParams["figure.figsize"] = (7, 2)
 
@@ -429,103 +399,139 @@ for col in cols:
 # prune-end
 
 # %% [markdown]
-# ## slicing
-
-# %% [markdown]
-# c'est très pratique de slicer un index qui contient des `Timestamp`
+# ### slicing avec des dates
+#
+# ````{admonition} →
+#
+# c'est très pratique de slicer un index qui contient des dates `Timestamp`
 #
 # ici par exemple nous avons une granularité de la journée (sauf accident il y a une entrée par jour de la semaine)  
-# mais on peut slicer de manière assez naturelle, voici quelques exemples:
+# mais on peut slicer de manière assez naturelle
+#
+# première commodité: on peut utiliser des chaines
+# pas besoin de mettre des objet Timestamp dans le slice
+#
+# - voici les entrées entre le 1er avril 2020 et le 30 juin 2020  
+#   (rappel: comme on utilise `.loc` c'est inclus)
+#     ```python
+#     df.loc['2020-04-01' : '2020-06-30']
+#     ```
+#    
+#
+#
+#
+# - encore plus simple laissons le calculer les jours...
+#     ```python
+#     df.loc['2020-04' : '2020-06']
+#     ```
+#
+# - et une année ?
+#     ```python
+#     df.loc['2019']
+#     ```
+#
+# comment feriez-vous pour filtrer du 1er janvier 2019 jusqu'à la fin des données ?
+#
+# ***
+#
+# si les dates de l'index ne sont pas ordonnées correctement, le slicing sera-il affecté ?  
+# non (et un peu oui)
+# - non parce que `pandas` ne sélectionnera bien sûr que les dates inclues dans l'intervalle indiqué
+# - oui parce que, dans la sous-dataframe obtenue, les dates seront ordonnées comme dans l'index
+# ````
+#
+#
 
 # %% tags=["raises-exception"]
 # on recharge pour être sûr
 df = pd.read_csv('Amazon.csv', skiprows=3)
 df['Date'] = pd.to_datetime(df.Date)
+df.dropna(subset=['Date'], inplace=True)
 df.set_index('Date', inplace=True)
-df.tail()
+df.head(3)
 
 # %% tags=["raises-exception"]
 # première commodité: on peut utiliser des chaines
 # pas besoin de mettre des objet Timestamp dans le slice
 
 # les entrées entre le 1er avril 2020 et le 30 juin 2020
-# rappel: comme on utilise .loc c'est INCLUS
-df.loc['2020-04-01' : '2020-06-30']
+# rappel: comme on utilise .loc c'est inclus
+df.loc['2020-04-01' : '2020-06-30'].head(3)
+# on coupe à 3 mais elles y sont toutes...
 
 # %% tags=["raises-exception"]
 # mais en fait c'est encore plus simple d'écrire
 # qui signifie, de avril à juin, toujours inclusivement
-df.loc['2020-04' : '2020-06']
+df.loc['2020-04' : '2020-06'].tail(3)
 
-# %% [markdown] tags=["level_basic"]
-# 7. si bien que, comment feriez-vous pour filtrer par exemple
-#    à partir du 1er janvier 2019 jusqu'à la fin des données
+# %%
+# toutes les données de l'année 2019
+df.loc['2019'].head(3)
 
 # %%
 # à vous
+# filtrer à partir du 1er janvier 2019 jusqu'à la fin des données
 
 # %%
-# prune-cell
-df.loc['2019':]
+# prune-cell 
+# filtrer à partir du 1er janvier 2019 jusqu'à la fin des données
+df.loc['2019':'2022']
 
 # %% [markdown]
-# ## aggrégations avec `resample()` et `rolling()`
-
-# %% [markdown]
-# ces deux fonctions travaillent de la même façon: elles regroupent les données dans des *bins* (des corbeilles), et toutes les données qui tombent dans une corbeille peuvent ensuite être agrégées (comme d'habitude avec `mean()`, `sum()`, `min()`,…)
-
-# %% [markdown]
+# ### aggrégations avec `resample()` et `rolling()`
+#
+# ````{admonition} →
+# ces deux fonctions travaillent de la même façon:
+# - elles regroupent les données dans des *bins* (des corbeilles)
+# - toutes les données qui tombent dans une corbeille peuvent ensuite être agrégées  
+#   (comme d'habitude avec `mean()`, `sum()`, `min()`,…)
+#
 # voyons pour commencer comment les corbeilles sont construites par ces deux fonctions
+# ```
 
 # %% [markdown]
 # ### `resample()`
-
-# %% [markdown]
+#
+# ````{admonition} →
 # l'idée ici c'est de découper le temps en une partition, chaque corbeille ayant la même durée (sauf éventuellement celles aux extrémités)
+#
 # dans ce modèle:
 #
 # * chaque donnée de départ appartient à exactement une corbeille
 # * le nombre de corbeilles dépend, aux arrondis près, du rapport entre la durée totale et la durée de chaque corbeille
-
-# %% [markdown]
+#
 # ![](media/timeseries-resample.svg)
-
-# %% [markdown]
+#
 # <div class=note>
 #
 # dans l'illustration ci-dessus, chaque point bleu illustre **la moyenne** de chaque corbeille  
 # on a choisi d'attacher chaque point bleu au moment correspondant **au début** de chaque corbeille (et bien sûr c'est réglable..)
 #
 # </div>  
-
-# %% [markdown]
+#
 # **exemple d'application**  
-# vous avez un signal échantillonné à 44.100 kHz et vous voulez le ré-échantillonner (littéralement: *resample*) à une fréquence 4 fois plus basse: il suffit de faire un resample avec un durée de corbeille égale à exactement 4 x la période de la fréquence originale
+# vous avez un signal échantillonné à 44.100 kHz et vous voulez le ré-échantillonner (littéralement: *resample*) à une fréquence 4 fois plus basse: il suffit de faire un resample avec une durée de corbeille égale à exactement 4 x la période de la fréquence originale
+# ````
 
 # %% [markdown]
 # ### `rolling()`
-
-# %% [markdown]
-# la fonction `rolling()` fonctionne aussi sur le modèle de corbeilles;
+# ````{admonition} →
+#
+# la fonction `rolling()` fonctionne aussi sur le modèle de corbeilles  
 # sauf que cette fois-ci, il ne s'agit plus d'une partition, mais de *fenêtre glissante*, comme illustré ci-dessous
-
-# %% [markdown]
+#
 # ![](media/timeseries-rolling.svg)
-
-# %% [markdown]
+#
 # donc cette fois-ci:
 #
 # * une donnée appartient en général à plusieurs corbeilles
 # * on produit un nombre de corbeilles qui est de l'ordre de grandeur  
 #   du nombre de points de départ  
-#   spécifiquement, lorsque la fenêtre est exprimée en temps, le rolling a **la même taille** que l'échantillon de départ
-#
-# <div class=note>
-#
-# note` que ce n'est pas le cas si on indique une fenêtre en nombre d'échantillons, ce qui est possible également
+#   spécifiquement, lorsque la fenêtre est exprimée en temps, le rolling a **la même taille** que l'échantillon de départ  
+#  (ce ne sera pas le cas si on indique une fenêtre en nombre d'échantillons, ce qui est possible également)
 #
 # ce point va être illustré plus bas
-# </div>
+# ````
 
 # %% [markdown]
 # **exemple 1**  
@@ -617,8 +623,6 @@ pd.DataFrame({'points-per-bin-28': count_28}).plot();
 
 # %% [markdown] tags=["level_intermediate"]
 # **exercice / digression**
-#
-#
 
 # %% [markdown] tags=["level_intermediate"]
 # la notion de fenêtre glissante fait du sens pour n'importe quelle donnée, même non-temporelle
@@ -661,11 +665,10 @@ pd.DataFrame({
 # %% tags=["level_intermediate"]
 # prune-end
 
-# %% [markdown]
-# ## **exercice** `resample` et `rolling`
-
 # %% [markdown] tags=["level_basic"]
-# 8. calculez `df2` qui se concentre sur la valeur de `High` sur la période de Juillet 2018 à fin 2019  
+# ### **exercice 7**: `resample` et `rolling`
+#
+# 7. calculez `df2` qui se concentre sur la valeur de `High` sur la période de Juillet 2018 à fin 2019  
 # plottez-la  
 # rangez dans la variable `L` le nombre de lignes
 
@@ -676,7 +679,7 @@ pd.DataFrame({
 # prune-begin
 
 # %%
-df2 = df.loc['2018-07' : '2019'][['High']]
+df2 = df.loc['2018-07' : '2019', ['High']]
 
 # %%
 df2.plot();
@@ -687,8 +690,11 @@ L = len(df2)
 # %%
 # prune-end
 
+# %% [markdown]
+# ### **exercice 8**: resample+plotting
+
 # %% [markdown] tags=["level_basic"]
-# 9. appliquez à cette série un `resample()` avec la moyenne des données sur une période d'une semaine  
+# 8. appliquez à cette série un `resample()` avec la moyenne des données sur une période d'une semaine  
 # plottez le résultat  
 # combien d'entrées on devrait y trouver (en fonction de L) si on compare les fréquences des deux séries ?  
 # pourquoi ça ne tombe pas exactement juste ?  
@@ -731,6 +737,9 @@ begin, end
 # %%
 # prune-end
 
+# %% [markdown]
+# ### **exercice 10**: rolling+plotting
+
 # %% [markdown] tags=["level_basic"]
 # 10. appliquez à cette série un `rolling()` avec une fenêtre de 1 an  
 # plottez le résultat  
@@ -757,8 +766,94 @@ expected, len(df_rol)
 # %%
 # prune-end
 
+# %% [markdown]
+# # Annexe 1
+
+# %% [markdown]
+# ### le type de base Python `datetime`
+#
+# ````{admonition} →
+#
+# en Python pur, on trouve dans la librairie standard [(`import datetime`)](https://docs.python.org/3/library/datetime.html) deux types de données principaux
+#
+# * `datetime` qui permet de modéliser un instant (par exemple, le 10 octobre 1954 à 10h 32' 15'' - et même plus précis encore si nécessaire)
+# * `timedelta` qui permet de modéliser une durée (par exemple 2 heures 15 minutes, ou 3 ans)
+#
+# **note**:  
+# on **n'utilise pas directement** ces deux types en pandas  
+# comme c'est tout de même la fondation du modèle, nous illustrons ici leur
+# ````
+
+# %%
+# pour rester cohérent dans le nommage des classes
+# je préfère les importer avec un nom conforme à la PEP008
+from datetime import (
+    datetime as DateTime,
+    timedelta as TimeDelta)
+
+
+# %%
+# pour modéliser un instant
+t1 = DateTime.fromisoformat('2021-12-31T22:30:00')
+t1
+
+# %%
+# et une durée
+d1 = TimeDelta(hours=4)
+d1
+
+# %% [markdown]
+# #### un peu d'arithmétique
+
+# %%
+# on peut faire de l'arithmétique
+# avec ces deux types
+
+# 4 heures après t1
+t2 = t1 + d1
+t2
+
+# %%
+# ajouter, soustraire, multiplier, diviser ...
+
+# 8 haures avant ça, i.e. 4 heures avant d1
+t2 - 2 * d1
+
+# %%
+# combien de fois 10 minutes dans 4 heures
+
+d1 // TimeDelta(minutes=10)
+
+# %% [markdown]
+# #### décomposer
+
+# %% [markdown]
+# pour accéder aux différents éléments d'une date (année, mois, ..), c'est facile
+
+# %%
+t1.year, t1.hour
+
+# %%
+d1.days, d1.seconds
+
+# %% [markdown]
+# à titre plus anecdotique, on peut aussi appliquer directement un format à un instant dans une f-string  
+
+# %%
+# # %H c'est pour extraire l'heure
+# il y a toute une série de codes de format...
+f"{t1:%H==%M}"
+
+# %% [markdown]
+# par contre ces formats sont **très utiles** lorsqu'on va vouloir traduire nos fichiers d'entrée en date/heure
+#
+# pour une liste complète des formats, voir
+# <https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes>
+
+# %%
+
 # %% [markdown] tags=["level_intermediate"]
-# ## annexe
+# ## Annexe 2
 
 # %% [markdown] tags=["level_intermediate"]
 # ### les échelles de précision

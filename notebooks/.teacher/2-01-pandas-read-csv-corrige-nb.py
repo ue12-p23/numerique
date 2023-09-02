@@ -198,6 +198,41 @@ pd.core.frame.DataFrame is pd.DataFrame
 df.head(2)
 
 # %% [markdown] tags=["framed_cell"]
+# ### lecture d'un fichier `excel`
+#
+# ````{admonition} →
+# les fichiers de données en format Excel sont constitués de feuilles contenant des tables en 2 dimensions comme les tables des fichiers csv (nous ne parlons pas ici de macros ou calculs)
+#
+# la fonction `pandas` `read_excel` permet de charger un fichier Excel et d'obtenir:
+# - un `dict` de DataFrame (les clés sont les noms des feuilles)
+# - directement un `csv` si il contient une unique feuille
+#
+# pour utiliser `read_excel` vous devez préalablement importer la librairie `openpyxl`
+#
+# ```python
+# %pip install openpyxl
+# ```
+# si il vous dit *Note: you may need to restart the kernel to use updated packages* faites le
+#
+# ```python
+# df1 = pd.read_excel('titanic.xlsx')
+# ```
+#
+# attention: les fonctions `read_csv` et `read_excel` sont des fonctions différentes  
+# (les *mêmes* dataframes peuvent *différer* au chargement sur des types de données)
+#
+# nous n'irons pas plus loin sur `read_excel`, vous savez maintenant qu'il existe
+# ````
+
+# %%
+# le code
+# # %pip install openpyxl
+
+# %%
+# le code
+df1 = pd.read_excel('titanic.xlsx')
+
+# %% [markdown] tags=["framed_cell"]
 # ## description rapide de la table des données
 #
 # ````{admonition} →
