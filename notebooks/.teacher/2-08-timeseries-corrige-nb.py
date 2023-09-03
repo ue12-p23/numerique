@@ -737,7 +737,7 @@ begin, end
 # %%
 # prune-end
 
-# %% [markdown] jp-MarkdownHeadingCollapsed=true
+# %% [markdown]
 # ### **exercice 9**: rolling+plotting
 
 # %% [markdown] tags=["level_basic"]
