@@ -28,7 +28,7 @@
 # %% [markdown]
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-# %%
+# %% {"scrolled": true}
 from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 
@@ -326,7 +326,6 @@ df_animals.plot.bar(x='lifespan', y='speed');
 # avec ses 3 valeurs `Iris-versicolor`, `Iris-virginica` et `Iris-setosa`
 #
 # nous allons changer le type des éléments de la série `df['Name']`  
-# par un exercice
 # ````
 
 # %%
@@ -339,52 +338,77 @@ df['Name'].value_counts()
 df['Name'].dtype
 
 # %% [markdown]
-# ## exercice: encodage la colonne des noms en catégorie
+# ## encodage des `'Names'` en codes de catégorie
 
 # %% [markdown]
-# **exercice** encodage la colonne des noms en catégorie
+# ````{admonition} →
 #
-# 1. Afficher le type de la colonne `df['Name']`  
-# (pas le type des éléments de la colonne mais de la colonne elle même)
+# la colonne `df['Name']` est de type `pandas.Series`  
 #
-# 1. utiliser la méthode `astype` des `pandas.Series` - donc la méthode `pandas.Series.astype`  
-# sur cette colonne, pour créer une nouvelle colonne avec le type `'category'`
+# avec la méthode `astype` des `pandas.Series`  
+# on crée une nouvelle colonne    
+# avec ici le type `'category'`
 #
-# 1. afficher le type des éléments de cette colonne  
-# vérifier que c'est bien un type catégorie
+# ```python
+# col = df['Name'].astype('category')
+# col.head(2)
+# ->
+# 0    Iris-setosa
+# 1    Iris-setosa
+# Name: Name, dtype: category
+# Categories (3, object): ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
+# ```
 #
-# Nous allons maintenant extraire de cette nouvelle colonne, les codes générés par `pandas` pour les trois catégories d'`iris`
+# **remarquez** l'ordre dans la liste des catégories  
+# (`'Iris-setosa'` est à l'indice 0...)
+#
+#
+#
+# Nous allons maintenant extraire de cette nouvelle colonne  
+# les **codes** générés par `pandas` pour les trois catégories d'`iris`
 #
 # **à savoir:** sur une colonne de type `category`  
-# `cat` permet d'accéder aux méthodes et attributs des objets de type catégorie  
-# (comme `str` le permet sur les colonnes d'éléments de type `str`)  
-# et l'attribut `codes` est le code donné par `pandas` aux 3 catégories
+# - `cat` permet d'accéder aux méthodes et attributs des objets de type category  
+# (comme `str` le permet sur les colonnes d'éléments de type `str`)
+# - l'attribut `codes` des colonnes category permet d'accéder aux codes numériques  
+# donné par `pandas` aux 3 catégories  
+# (dans l'ordre de la liste des catégories)
 #
-# 1. accéder aux codes de la nouvelle colonne  
-# Quels sont-ils ? Quel est leur type ?
+# - on crée une nouvelle colonne `'Name-code'` avec ces codes  
+# on regarde ce qu'elle contient
 #
-# 1. et ajouter cette colonne de codes à la dataframe, en l'appelant avec comme nom: `'Name-code'`
+# ```python
+# df['Name-code'] = col.cat.codes
+# df['Name-code'].value_counts()
+# ->
+# Name-code
+# 0    50
+# 1    50
+# 2    50
+# Name: count, dtype: int64
+# ```
 #
 # -------------------------
 #
 # À quoi cela va-t-il nous servir ?  
 # par exemple à améliorer nos visualisations  
-# ces codes peuvent servir, par exemple, de code-couleur pour afficher des points  
-# on verra cela plus tard
+# où ces codes peuvent servir de code-couleur lors d'affichage des Iris  
+# (nous y reviendrons lors de `scatter`)
+# ````
 
 # %%
-df
-
-# %%
-# on vous montre comment faire pas à pas
-
+# le code
 col = df['Name'].astype('category')
-print(col.dtype)
+col.head(2)
+
+# %%
+# le code
 df['Name-code'] = col.cat.codes
 df['Name-code'].value_counts()
 
 # %%
-# comment on pourrait faire à en une seul ligne ?
+# et en une seul ligne
+df['Name-code'] = df['Name'].astype('category').cat.codes
 
 # %% [markdown]
 # ## nuages de points `df.plot.scatter`
@@ -425,7 +449,7 @@ df['Name-code'].value_counts()
 # ```
 #
 # avec `matplotlib.pyplot.plot`  
-# mais vous n'avez alors les paramètres par défaut
+# mais vous n'avez alors que les paramètres par défaut
 #
 # ```python
 # plt.scatter(df['SepalLength'], df['SepalWidth'], c=df['Name-code'], cmap='viridis')
@@ -452,7 +476,9 @@ df.plot.scatter(x='SepalLength', y='SepalWidth');
 
 # %%
 # le code
-plt.scatter(df['SepalLength'], df['SepalWidth']);
+plt.scatter(df['SepalLength'], df['SepalWidth'])
+# plt.xlabel('SepalLength')
+# plt.ylabel('SepalWidth')
 
 # %%
 # le code
@@ -467,46 +493,44 @@ plt.colorbar();
 # le code
 plt.scatter(df['SepalLength'], df['SepalWidth'], c=df['Name-code'], s=df['PetalWidth']*50);
 
-# %% [markdown]
-# ## exercice sur des vins italiens
+# %% [markdown] {"tags": ["level_intermediate"]}
+# ## fabriquer son propre type `category`
 
-# %% [markdown]
-# le fichier `wine.csv` contient
+# %% [markdown] {"tags": ["level_intermediate"]}
+# *pour les avancés*
 #
-# * les résultats d'analyses chimiques de vins, cultivés dans une même région d'Italie  
-# (13 mesures) par trois cultivateurs différents 1, 2 et 3
+# avec la technique précédente on n'a pas de **contrôle sur l'ordre** parmi les différentes catégories
 #
-# la première ligne du `csv` contient les noms des colonnes
-
-# %% [markdown]
-# cultivator,alcohol,malic-acid,ash,alcalinity-of-ash,magnesium,total-phenols,flavanoids,nonflavanoid-phenols,proanthocyanins,color-intensity,hue,od280/od315-of-diluted wines,proline
-
-# %% [markdown]
-# **exercice de visualisatin de vins**
+# imaginez que nous avons maintenant une colonne dont les valeurs uniques sont  
+# `bad`, `average`, `good`, `excellent`  
+# cette colonne est clairement une colonne de type catégorie ordonnée
 #
-# 1. lisez le fichier en ne gardant que les colonnes suivantes
+# on peut définir *son propre type catégoriel* avec la fonction  
+# `pd.CategoricalDtype()`  
+# dont le paramètre `ordered` permet de dire si la catégorie est ordonnée ou non
+#
+# en l'appliquand à la colonne des `'Names'` je peux ensuite trier la dataframe  
+# sur cette colonne
+#
 # ```python
-# cols = ['cultivator', 'alcohol', 'malic-acid', 'ash', 'total-phenols',
-#            'flavanoids','color-intensity', 'hue' ]
+# iris_ord_cat = pd.CategoricalDtype(
+#                     categories=['Iris-versicolor', 'Iris-virginica', 'Iris-setosa'],
+#                     ordered=True)
+# df.Name = df.Name.astype(iris_ord_cat)
+# df.sort_values(by='Name')
 # ```
-# (indice: paramètre `use_cols` de `pandas.read_csv`)
-#
-# 1. afficher le header de la dataframe
-#
-# 1. afficher les types déterminés par `pandas`
-#
-# 1. afficher les statistiques simples
-#
-# 1. plottez la dataframe en lui passant le paramètre *figsize=(10, 10)*
-#
-# 1. plottez la dataframe restreinte aux deux colonnes `['flavanoids', 'cultivator']`  
-# que constatez-vous ?
-#
-# 1. visualisez les boxplots de la dataframe  
-# utilisez la fonction `plt.xticks(rotation=90)` pour mieux voir les labels des abscisses
-#
-# 1. visualisez des histogrammes avec des regroupements de 20 éléments  
-# pensez à `plt.tight_layout()` qui ajoute des paddings intéressants
-#
-# 1. afficher l'alcool en fonction de l'acide malique avec comme couleur les numéros des cultivateurs  
-# pensez à utiliser une `cmap`
+
+# %%
+iris_ord_cat = pd.CategoricalDtype(
+                    categories=['Iris-versicolor', 'Iris-virginica', 'Iris-setosa'],
+                    ordered=True)
+iris_ord_cat
+
+# %% {"tags": ["level_intermediate"]}
+df.Name = df.Name.astype(iris_ord_cat)
+
+# %% {"tags": ["level_intermediate"]}
+df.sort_values(by='Name').head(4)
+
+# %% [markdown]
+# ***

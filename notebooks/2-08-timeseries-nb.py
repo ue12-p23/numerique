@@ -494,10 +494,10 @@ pd.DataFrame({'points-per-bin-28': count_28}).plot();
 # à vous
 
 # %% [markdown]
-# ### **exercice 10**: rolling+plotting
+# ### **exercice 9**: rolling+plotting
 
 # %% [markdown] tags=["level_basic"]
-# 10. appliquez à cette série un `rolling()` avec une fenêtre de 1 an  
+# 9. appliquez à cette série un `rolling()` avec une fenêtre de 1 an  
 # plottez le résultat  
 # combien d'entrées on devrait y trouver (en fonction de L) ?
 
@@ -505,10 +505,7 @@ pd.DataFrame({'points-per-bin-28': count_28}).plot();
 # à vous
 
 # %% [markdown]
-# # Annexe 1
-
-# %% [markdown]
-# ### le type de base Python `datetime`
+# # Annexe 1 - le type de base Python `datetime`
 #
 # ````{admonition} →
 #
@@ -588,13 +585,8 @@ f"{t1:%H==%M}"
 # pour une liste complète des formats, voir
 # <https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes>
 
-# %%
-
 # %% [markdown] tags=["level_intermediate"]
-# ## Annexe 2
-
-# %% [markdown] tags=["level_intermediate"]
-# ### les échelles de précision
+# ## Annexe 2 - les échelles de précision
 
 # %% [markdown] tags=["level_intermediate"]
 # un objet `datetime64` est créé avec un paramètre *`unit`*, qui permet de choisir la précision des calculs; et l'intervalle des dates possibles varie bien entendu avec cette précision :
