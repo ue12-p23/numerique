@@ -49,7 +49,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # * une observation par ligne (ici les passagers du Titanic)  
 # * plusieurs informations par observation  
 # * les différentes informations forment les colonnes de la table
-# * ces colonnes se sont pas toutes du même type...
+# * ces colonnes ne sont pas toutes du même type...
 #
 # <img src='media/titanic.png' width="1000"></img>
 # ````
@@ -98,10 +98,6 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # pour lire, mettre en forme et manipuler des données de data-science  
 # on utilise **la librairie `pandas`** (2008)
 #
-# ```
-# import pandas as pd
-# ```
-#
 # `numpy` ne propose pas directement ces fonctions  
 #
 # `pandas` expose un type évolué de table de données: les **`pandas.DataFrame`**
@@ -112,7 +108,10 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # (parfois au détriment de la lisibilité)
 #
 # `pandas` repose entièrement sur `numpy` (aujourd'hui en tous cas)  
-# i.e. les données manipulées par `pandas` sont implémentées comme des tableaux `numpy.ndarray`  
+# i.e. les données manipulées par `pandas` sont implémentées comme des tableaux `numpy.ndarray`
+#
+# il peut vous arriver d'utiliser la librairie `numpy` dans du code `pandas`  
+# (on importe souvent les deux)
 #
 # ````
 
@@ -197,6 +196,41 @@ pd.core.frame.DataFrame is pd.DataFrame
 # pour afficher les premières lignes
 # à votre avis, comment on voit les dernières lignes ?
 df.head(2)
+
+# %% [markdown] tags=["framed_cell"]
+# ### lecture d'un fichier `excel`
+#
+# ````{admonition} →
+# les fichiers de données en format Excel sont constitués de feuilles contenant des tables en 2 dimensions comme les tables des fichiers csv (nous ne parlons pas ici de macros ou calculs)
+#
+# la fonction `pandas` `read_excel` permet de charger un fichier Excel et d'obtenir:
+# - un `dict` de DataFrame (les clés sont les noms des feuilles)
+# - directement un `csv` si il contient une unique feuille
+#
+# pour utiliser `read_excel` vous devez préalablement importer la librairie `openpyxl`
+#
+# ```python
+# %pip install openpyxl
+# ```
+# si il vous dit *Note: you may need to restart the kernel to use updated packages* faites le
+#
+# ```python
+# df1 = pd.read_excel('titanic.xlsx')
+# ```
+#
+# attention: les fonctions `read_csv` et `read_excel` sont des fonctions différentes  
+# (les *mêmes* dataframes peuvent *différer* au chargement sur des types de données)
+#
+# nous n'irons pas plus loin sur `read_excel`, vous savez maintenant qu'il existe
+# ````
+
+# %%
+# le code
+# # %pip install openpyxl
+
+# %%
+# le code
+df1 = pd.read_excel('titanic.xlsx')
 
 # %% [markdown] tags=["framed_cell"]
 # ## description rapide de la table des données
@@ -295,20 +329,24 @@ df['Sex'].describe()
 # la clé pour comprendre `pandas`:
 #
 # * **les lignes et les colonnes ont des index**
-# * les opérations sur ces index sont **le plus efficace possible**
-# * (on verra par la suite que les lignes et les colonnes ont aussi naturellement des indices, i.e. de `0` à `n-1`)
+# * les opérations sur ces index sont **le plus efficace possible**  
+#   (on verra par la suite que les lignes et les colonnes ont aussi naturellement des indices, numérotés à partir de `0`)
 #
-# **la notion d'index**
+# **Pourquoi (et comment) les opérations sur les index sont très efficaces ?**
 #
-# un constat  
+# deux constats  
 #
 # * rechercher dans une liste est très inefficace  
-# (en moyenne $n/2$ essais pour localiser un élément)
+# (en moyenne $n/2$ essais pour localiser un élément dans une liste de $n$ éléments)
+#
+# * accéder au $i^{ème}$ élément d'un tableau est très efficace  
+# (on est en *temps constant* - on ne parcourt bien sûr pas les éléments de $0$ à $i-1$)
+#
 #
 # **l'idée**
 #
 # * trouver une caractéristique qui identifie une observation de manière unique  
-# (genre *numéro de sécurité sociale* pour un individu)
+# (genre *numéro de sécurité sociale* pour un individu, ici par exemple le `PassengerId`)
 #
 # * calculer un index à partir de cette caractéristique  
 # qui soit *le plus unique* possible (pour avoir peu de collisions)
@@ -321,7 +359,8 @@ df['Sex'].describe()
 #
 # `pandas` indexe ses lignes et ses colonnes suivant vos indications  
 # dit autrement, c'est à vous de choisir parmi les colonnes
-# celle(s) qui peut servir d'identificateur unique pour servir d'index
+# celle(s) qui peut servir d'identificateur pour servir d'index  
+# (un index en `pandas` n'est pas obligatoirement unique)
 # ````
 
 # %% [markdown]
@@ -380,7 +419,8 @@ df.columns[0]
 # * on remarque les `891` entrées
 # * on remarque les indices des lignes de `0` à `890`
 # * on constate que le type des éléments de cette colonne est `float64`
-# * on constate que l'age du passage d'indice `3` est manquant `NaN` (*Not a Number*)
+# * on constate que l'age du passager d'indice `3` est manquant `NaN` (*Not a Number*)  
+# (`NaN` est un terme générique, il signifie ici que la valeur n'est simplement pas disponible)
 #
 # ```python
 # df['Age']
@@ -418,7 +458,7 @@ df[['Age', 'Sex']].head()
 # ### accès aux colonnes avec `df.`
 #
 # ````{admonition} →
-# Lorsque le nom de la colonne ne comporte pas de caractère bizarre  
+# Lorsque le nom de la colonne ne comporte pas de caractère *bizarre*  
 # on peut aussi accéder à une colonne au travers d'**un attribut**
 #
 # Cette notation est **plus lisible** mais aussi **plus limitée**  
@@ -491,7 +531,13 @@ type(df['Age'])
 #    df = pd.read_csv('titanic.csv')
 #    df = df.set_index('PassengerId')
 #    ```
+#     
+# 3. après coup sans ré-affecter df
 #
+#    ```python
+#    # option 2-bis
+#    df = pd.read_csv('titanic.csv')
+#    df.set_index('PassengerId', inplace=True)
 #
 # observez le changement dans la présentation de la table
 # ````
@@ -515,6 +561,14 @@ df.head(1)
 df = df.set_index('PassengerId')
 df.head(1)
 
+# %% tags=[]
+# le code
+# option 2-bis
+# la méthode set_index avec son paramètre inplace à True modifie directement la table sans renvoyer une nouvelle dataframe
+df = pd.read_csv('titanic.csv')
+df.set_index('PassengerId', inplace=True)
+df.head(1)
+
 # %% [markdown] tags=["framed_cell"]
 # ### une série aussi possède un index
 #
@@ -524,7 +578,7 @@ df.head(1)
 #   qui en l'occurrence est `PassengerId` (provient de la `df`)
 #
 #   ```python
-#   df['name']
+#   df['Name']
 #   ->  PassengerId
 #     552                          Sharp, Mr. Percival James R
 #     638                                  Collyer, Mr. Harvey
@@ -543,7 +597,7 @@ df.head(1)
 #   c'est de cette façon que les colonnes sont "alignées" entre elles
 #
 # * accèdons à la colonne `Name` de la première ligne  
-#   son index (`PassengerId`) est `552`
+#   puis à son index `552` (`PassengerId`)
 #
 #   ```python
 #   df['Name'][552] # passager d'id 552
@@ -557,24 +611,12 @@ df = pd.read_csv('titanic.csv', index_col='PassengerId')
 df['Name']
 
 # %%
-# ici on obtient la première ligne !
+# ici on obtient bien la première ligne !
 
 # quand on indexe une Series,
 # c'est par l'index (552)
 # et non pas par l'indice qui ici serait 0
 df['Name'][552]
-
-# %% [markdown]
-# <div class=note>
-#
-# ici nous avons un index de type entier; lorsqu'on a un index de type, par exemple, `str`,
-# on peut alors écrire ou bien
-#
-# * `series[entier]` pour aller chercher l'indice `entier`
-# * `series[chaine]` pour aller chercher l'index `chaine`
-#
-# mais avec un index de type entier, c'est l'accès **par index** qui est privilégié
-# </div>
 
 # %% [markdown] tags=["framed_cell"]
 # ### différence entre index et indice
@@ -596,9 +638,6 @@ df['Name'][552]
 # dans ce cas l'**index commence à 0**, et du coup  
 # incidemment les **indices** et les **index coincident**
 # ````
-
-# %% [markdown]
-# ***
 
 # %% [markdown] tags=["framed_cell"]
 # ### l'index des lignes
@@ -629,24 +668,7 @@ df['Name'][552]
 #
 # * les index des lignes sont les valeurs de la colonne `PassengerId`
 #
-# faisons l'indexation précédente en deux coups  
-#
-# * on lit la data-frame du titanic  
-# * on modifie son index par la colonne `PassengerId` avec la méthode `set_index`  
-# remarquez le `inplace`
-#
-# ```python
-# df = pd.read_csv('titanic.csv')
-# df.set_index('PassengerId', inplace=True)
-# df.index
-# -> Int64Index([552, 638, 499, 261, 395, 811, 758, 703, 406, 641,
-#               ...
-#               556, 236, 224, 598, 258, 463, 287, 326, 396, 832],
-#              dtype='int64', name='PassengerId', length=891)
-# ```
-#
 # `pandas.Int64Index` et `pandas.RangeIndex` sont tout deux des `pandas.Index`
-# ````
 
 # %%
 # le code
@@ -656,12 +678,6 @@ df.index
 # %%
 # le code
 df = pd.read_csv('titanic.csv').set_index('PassengerId')
-df.index
-
-# %%
-# le code
-df = pd.read_csv('titanic.csv')
-df.set_index('PassengerId', inplace=True)
 df.index
 
 # %% [markdown] tags=["framed_cell"]
@@ -705,7 +721,7 @@ df.index
 #
 # on retrouve là les attributs classiques de `numpy` `ndim`, `shape`
 #
-# `numpy` s'occupe de stocker et manipuler le tableau de dimension 2
+# `numpy` s'occupe de stocker et manipuler des tableaux de dimension 2
 #
 # `pandas` apporte
 #
@@ -738,26 +754,26 @@ print(df.shape)
 
 # %% [markdown]
 # 1. lisez le contenu de ce fichier avec les paramètres par défaut de `pandas.read_csv`  
-# affichez les premières lignes avec `pandas.DataFrame.head`  
+# affichez les 2 premières lignes avec `pandas.DataFrame.head`  
+# voyez-vous les trois problèmes ?  
+# essayez de les résoudre en lisant le help de la fonction `help(pd.read_csv)` ou `pd.read_csv?`  
+# ou passez à la question 2 pour être aidé
 
 # %%
 # votre code
 
 # %% [markdown]
-# 2.
-# voyez-vous les trois problèmes ?  
-# essayez de les résoudre en étudiant la doc. de la fonction
-# `pd.read_csv()`  
-# ou passez à la question 3 pour être aidé
+# 2. passez le **bon séparateur** à la méthode `pandas.read_csv`  
+#    indiquez lui que l'entête **ne contient pas** la liste des noms des colonnes  
+#    passez-lui la **liste des noms des colonnes** puisqu'elles ne sont pas  
+#      mentionnées dans le fichier (à récupérer plus haut)  
+#   *spoiler*: voyez les paramètres `sep`, `header` et `names`
+
+# %%
+# votre code
 
 # %% [markdown]
-# 3.
-#   1. passez le **bon séparateur** à la méthode `pandas.read_csv`  
-#   1. et indiquez lui que la première ligne  
-#      **ne contient pas** la liste des noms des colonnes  
-#   1. passez-lui le nom des colonnes puisqu'elles ne sont pas  
-#      mentionnées dans le fichier  
-#   *spoiler*: voyez les paramètres `sep`, `header` et `names`
+# 3. appliquer la méthode `describe` aux colonnes `Age` et `Fare`
 
 # %%
 # votre code

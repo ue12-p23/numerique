@@ -38,18 +38,22 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown]
 # **Notions intervenant dans ce TP**
 #
+# * affichage des données par `plot`
 # * tri de `pandas.DataFrame` par ligne, par colonne et par index
 #
 # **N'oubliez pas d'utiliser le help en cas de problème.**
 
 # %% [markdown]
-# ## import des librairies et des données
-
-# %% [markdown]
 # 1. importez les librairies `pandas`et `numpy`
 
+# %%
+# votre code
+
 # %% [markdown]
-# 2. importez la librairie `matplotlib.pyplot`  
+# 2. importez la librairie `matplotlib.pyplot` avec le nom `plt` 
+
+# %%
+# votre code
 
 # %% [markdown]
 # 3. lors de la lecture du fichier de données `titanic.csv`  
@@ -59,57 +63,52 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #    1. besoin d'aide ? faites `pd.read_csv?`
 
 # %%
-# #pd.read_csv?
+# votre code
 
 # %% [markdown]
-# 4. affichez le type des colonnes de la dataframe  
-# en utilisant l'attribut `dtypes` des objets `pandas.DataFrame`
+# 4. en utilisant la méthode `pd.DataFrame.plot`  
+#    plottez la dataframe (pas la série) réduite à la colonne des ages  
+#    utilisez le paramètre de `style` `'rv'` (`r` pour rouge et `v` pour le style: points triangulaires)
+#    
+
+# %%
+# votre code
 
 # %% [markdown]
-# 5. sur le même graphique, et en utilisant `matplotlib.pyplot.plot`
-#    1. plotez avec le paramètre `'rs'` la colonne des ages en fonctions des index  
-#    (`r` pour rouge et `s` pour le style de point ici square)  
-#    1. plotez avec paramètre `'b.'` et sans indiquer les abscisses, la colonne des ages
-#    1. que constatez-vous ?
-#    1. si vous n'indiquez pas l'axe des abscisses de votre dessin que choisit `plt` ?
-
-# %% [markdown]
-# ## tri des lignes d'une dataframe
-
-# %% [markdown]
-# le but de cet exercice est d'organiser les lignes d'une dataframe suivant l'ordre d'une ou de plusieurs colonnes.
+# 5. on va organiser les lignes d'une dataframe suivant l'ordre d'une colonne    
+#    en utilisant la méthode `df.sort_values()`:
+#    1. créez une nouvelle dataframe  dont les lignes sont triées  
+#       dans l'ordre croissant des `'Age'` des passagers
+#    2. pour constater qu'elles sont triées, affichez les 4 premières lignes de la dataframe  
+#       la colonne des `Age` est triée  
+#       les lignes ont changé de place dans la table
+#    3. remarquez que l'indexation a été naturellement conservée 
 #
-# utilisez la méthode `df.sort_values()`
+
+# %%
+# votre code
 
 # %% [markdown]
-# 0. rechargez la dataframe
+# 6. 1. plottez la colonne des ages de la dataframe triée  
+#       (n'oubliez pas le style 'bv' pour dire que vous voulez des points  
+#       sinon plot trace les lignes qui relient les points)
+#    1. Que constatez-vous ?
+
+# %%
+# votre code
 
 # %% [markdown]
-# 1. pour créer une **nouvelle** dataframe  
-# dont les lignes sont triées dans l'ordre croissant des classes des passagers  
-# on veut être sûr d'avoir une nouvelle dataframe sans considération de ce que retourne la fonction `sort_values`
+# 7. 1. les abscisses de votre plot 2D sont les index  
+#     vous tracez donc le point $(804, 0.42)$ puis le point $(756, 0.67)$ ...  
+#     alors que vous voudriez tracer le point $(0, 0.42)$ puis le point $(1, 0.67)$ ...  
+#     c'est à dire pas avec les 'PassengersId' mais avec des indices de lignes
+#    1. une solution: enlever les index de la dataframe  
+#       qui a alors des indices utilisez la méthode `reset_index`
+#       sur la dataframe restreinte à la colonne des 'Age'
+#       
 
-# %% [markdown]
-# 2. pour constater qu'elles sont triées, affichez les 3 premières lignes de la dataframe  
-# vous devez voir que la colonne des `Pclass` est triée  
-# que les lignes ont changé de place dans la table  
-# et que leur indexation a été conservée
-
-# %% [markdown]
-# 3. triez la dataframe précédente dans l'ordre des ages des passagers  
-# elle doit être modifiée sans utiliser d'affectation Python  
-# (on veut faire ce qu'on appelle en informatique un *tri en place*)
-
-# %% [markdown]
-# 4. constater que les lignes de la dataframe sont triées  
-# en affichant les 3 premières lignes de la dataframe
-
-# %% [markdown]
-# 5. plotez la colonne des ages de la  dataframe  
-# Que constatez-vous ?
-
-# %% [markdown]
-# 6. plotez la colonne dans l'ordre des ages croissants
+# %%
+# votre code
 
 # %% [markdown]
 # ## tri des lignes *égales* au sens d'un premier critère d'une dataframe
@@ -117,55 +116,46 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown]
 # 0. rechargez la dataframe
 
-# %% [markdown]
-# 1. affichez les ages des passagers d'index `673` et `746`  
-# que constatez-vous ?
+# %%
+# votre code
 
 # %% [markdown]
-# 2. utilisez le paramètre `by` de `df.sort_values()`  
-# afin d'indiquer aussi une seconde colonne - par exemple `Fare`  
-# pour trier les lignes identiques au sens de la première colonne  
-# rangez dans une nouvelle dataframe
+# 2. utilisez `df.sort_values()` pour trier la dataframe suivant la colonne (`'Pclass'`)  
+#    et trier les lignes identiques (passagers de même classe) suivant la colonne (`'Age'`)
+
+# %%
+# votre code
 
 # %% [markdown]
 # 3. sélectionnez, dans la nouvelle dataframe, la sous-dataframe dont les ages ne sont pas définis  
+#    (utiliser la méthode `isna` sur une série pour créer un masque booléens et appliquer ce masque à la dataframe   
+
+# %%
+# votre code
 
 # %% [markdown]
 # 4. combien manque-il d'ages ?
 
+# %%
+# votre code
+
 # %% [markdown]
-# 5. où sont placés ces passagers dans la data-frame triée ?  
+# 5. où sont placés ces passagers dans la data-frame globale triée ?  
 # en début (voir avec `head`) ou en fin (voir avec `tail`) de dataframe ?
+
+# %%
+# votre code
 
 # %% [markdown]
 # 6. trouvez le paramètre de `sort_values()`  
 # qui permet de mettre ces lignes en début de dataframe lors du tri
 
+# %%
+# votre code
+
 # %% [markdown]
 # 7. produire une nouvelle dataframe en ne gardant que les ages connus,
 #    et triée selon les ages, puis les prix de billet
-
-# %% [markdown] {"tags": ["level_intermediate"]}
-# ## tri (des colonnes) d'une dataframe selon une ligne
-
-# %% [markdown] {"tags": ["level_intermediate"]}
-# en utilisant `pandas.DataFrame.sort_values` il est possible de trier une dataframe  
-# dans l'axe de ses colonnes
-
-# %% [markdown] {"tags": ["level_intermediate"]}
-# 1. créez une dataframe de 4 lignes et 5 colonnes de valeurs entières aléatoires entre 0 et 100  
-#    mettez comme index (par exemple):  
-#    aux lignes  `'un'`, `'deux'`, `'trois'` et `'quatre'`  
-#    aux colonnes `'a'`, `'b'`, `'c'`, `'d'` et `'e'`  
-#    **indice**: voyez la documentation de `pd.DataFrame`
-#    pour construire une dataframe  
-#    par programme
-
-# %% [markdown] {"tags": ["level_intermediate"]}
-# 2. affichez la dataframe
-
-# %% [markdown] {"tags": ["level_intermediate"]}
-# 3. triez la dataframe en place dans l'ordre de la ligne d'index `trois`
 
 # %% [markdown] {"tags": ["level_intermediate"]}
 # ## tri d'une dataframe selon l'index
@@ -176,14 +166,11 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # utilisez le même genre de dataframe qu'à l'exercice précédent
 
 # %% [markdown] {"tags": ["level_intermediate"], "cell_style": "center"}
-# 1. créez et affichez cette dataframe  
+# 1. reprenez la dataframe du Titanic  
+#    utilisez la méthode des dataframe `sort_index` pour la trier dans l'ordre des index 
 
-# %% [markdown] {"tags": ["level_intermediate"], "cell_style": "center"}
-# 2. trier la dataframe par index de ligne croissant  
-# et affichez la dataframe
-
-# %% [markdown] {"tags": ["level_intermediate"], "cell_style": "center"}
-# 3. triez la dataframe par index de colonne croissant
+# %%
+# votre code
 
 # %% [markdown]
 # ***

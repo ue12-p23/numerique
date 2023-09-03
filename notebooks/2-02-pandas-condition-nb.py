@@ -58,8 +58,9 @@ import numpy as np
 # il ne faut **jamais itérer avec un `for-python`** sur les valeurs d'une table  
 # (les itérations se font dans le code des fonctions `numpy` et `pandas`)
 #
-# comme en numpy, une expression va s'appliquer à toute la structure
-# et retourner une structure du même type
+# comme en `numpy`, une expression conditionnelle va s'appliquer à toute la structure
+# et retourner une structure du même type  
+# où seul le type des valeurs à changé puisque les conditions retournent des booléens `True` et `False`
 #
 # exemple:
 #
@@ -83,7 +84,7 @@ import numpy as np
 # ```python
 # df = pd.read_csv('titanic.csv', index_col='PassengerId')
 #
-# children = df['Age'] < 12 # l'opérateur < est vectorisé
+# children = df['Age'] < 12 # l'opérateur < est vectorisé 
 # children
 #
 # -> PassengerId
@@ -96,7 +97,7 @@ import numpy as np
 #     Name: Age, Length: 891, dtype: bool
 # ```
 #
-# cette expression retourne des **booléens** - appelée **un masque**  
+# cette expression retourne des **booléens** - appelé **un masque**  
 # dans une `pandas.Series` dont le type est naturellement `bool`  
 # avec, pour chaque valeur de la colonne, la réponse au test
 #
@@ -124,8 +125,8 @@ import numpy as np
 #
 # on pourra ensuite utiliser ces tableaux de booléens  
 #
-# * pour leur appliquer des fonctions  
-# * comme des masques pour sélectionner des sous-tableaux
+# * pour leur appliquer des fonctions (comme `sum`)  
+# * ou comme des masques pour sélectionner des sous-tableaux
 #
 #
 # ````
@@ -167,7 +168,8 @@ girls.sum()
 #    Name: Age, dtype: int64
 # ```
 #
-# la méthode vous indique la colonne `Age` et son type `int64`
+# la méthode vous indique la colonne `Age`  
+# le type `int64` est le type des quantités
 #
 # ainsi parmi les passagers dont on connait l'âge  
 # `68` passagers,  ont moins de `12` ans  
@@ -300,7 +302,7 @@ np.sum(df['Age'].isna()), sum(df['Age'].isna())
 # le code
 df.isna()
 
-# %% [markdown] tags=["framed_cell"]
+# %% [markdown] jp-MarkdownHeadingCollapsed=true tags=["framed_cell"]
 # ### compter les valeurs manquantes
 #
 # ````{admonition} →
@@ -334,7 +336,8 @@ df.isna()
 # pour souligner une différence avec `numpy`: comparez le comportement
 #
 # * de `array.sum()`
-# * et `df.sum()`
+# * et `df.sum()`  
+# (on y revient ci-dessous)
 #
 # </div>
 #
@@ -345,7 +348,7 @@ df.isna()
 # ### dans l'autre direction (axis=1)
 #
 # ````{admonition} →
-# exemple de la somme des valeurs manquantes sur l'axe des colonnes - par personne donc
+# exemple de la somme des valeurs manquantes sur l'axe des colonnes
 #
 # ```python
 # df.isna().sum(axis=1):
@@ -376,7 +379,7 @@ df.isna().sum(axis=0) # même chose
 # le code
 df.isna().sum(axis=1)
 
-# %% [markdown] tags=["framed_cell"]
+# %% [markdown] tags=["framed_cell", "level_basic"]
 # ### utilisation des fonctions `numpy`
 #
 # ````{admonition} →
@@ -389,7 +392,7 @@ df.isna().sum(axis=1)
 # différence avec `numpy`, si on appelle sans préciser `axis`
 #
 # * avec **numpy**: on obtient le résultat **global**  
-# * avec **pandas**: par défaut `axis=0`, on agrège sur l'axe des lignes (par colonne)
+# * avec **pandas**: par défaut `axis=0`, on agrège sur l'axe des lignes
 #
 # **si on désire le résultat global**
 # 1. soit on applique la fonction deux fois  
@@ -447,36 +450,31 @@ df.isna().to_numpy().sum()
 # 1. lisez la data-frame du titanic `df`
 
 # %% slideshow={"slide_type": ""}
-# à vous
+# votre code
 
 # %% [markdown]
 # 2. utilisez la méthode `pd.Series.unique` (1) pour compter le nombre de valeurs uniques  
 # des colonnes `'Survived'`, `'Pclass'`, `'Sex'` et `'Embarked'`  
 # vous pouvez utiliser un for-python pour parcourir la liste `cols` des noms des colonnes choisies
-
-# %%
-# à vous
-
-# %% [markdown]
-# 3. utilisez l'expression `df[cols]` pour sélectionner la sous-dataframe réduite à ces 4 colonnes
-
-# %%
-# à vous
-
-# %% [markdown]
-# 4. utilisez l'attribut `dtypes` des `pandas.DataFrame` pour afficher le type de ces 4 colonnes
-
-# %%
-# à vous
-
-# %% [markdown]
-# 5. que constatez-vous ?  
-# quel type serait plus approprié pour ces colonnes ?
 #
 # (1) servez-vous du help `pd.Series.unique?`
 
 # %%
-# à vous
+# votre code
+
+# %% [markdown]
+# 3. utilisez l'expression `df[cols]` pour sélectionner la sous-dataframe réduite à ces 4 colonnes  
+#    et utilisez l'attribut `dtypes` des `pandas.DataFrame` pour afficher le type de ces 4 colonnes
+
+# %%
+# votre code
+
+# %% [markdown] tags=["level_basic"]
+# 4. que constatez-vous ?  
+# quel type serait plus approprié pour ces colonnes ?
+
+# %%
+# votre code
 
 # %% [markdown]
 # ***
@@ -488,41 +486,44 @@ df.isna().to_numpy().sum()
 # 1. lisez la data-frame des passagers du titanic
 
 # %%
-# à vous
+# votre code
 
 # %% [markdown]
 # 2. calculez les valeurs manquantes: totales, des colonnes et des lignes
 
 # %%
-# à vous
+# votre code
 
 # %% [markdown]
 # 3. calculez le nombre de classes du bateau
 
 # %%
-# à vous
+# votre code
 
 # %% [markdown]
 # 4. calculez le taux d'hommes et de femmes
 
 # %%
-# à vous
+# votre code
 
 # %% [markdown]
-# 5. calculez le taux de personnes entre 20 et 40 ans
+# 5. calculez le taux de personnes entre 20 et 40 ans (bornes comprises)
 
 # %%
-# à vous
+# votre code
 
 # %% [markdown]
 # 6. calculez le taux de survie des passagers
 
 # %%
-# à vous
+# votre code
 
 # %% [markdown]
 # 7. calculez le taux de survie des hommes et des femmes par classes  
 # on reverra ces décomptes d'une autre manière
 
 # %%
-# à vous
+# votre code
+
+# %% [markdown]
+# ***

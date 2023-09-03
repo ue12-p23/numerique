@@ -215,10 +215,10 @@ mat
 # ### ligne,colonne *vs* colonne, ligne
 #
 # ````{admonition} →
-# la première **grosse différence** entre numpy et pandas  
+# la première **grosse différence** entre `numpy` et `pandas`  
 # est que
 #
-# * un tableau numpy de dimension 2  
+# * un tableau `numpy` de dimension 2  
 #   est organisé en *ligne, colonne*  
 #   c'est-à-dire que `tab[i]` renvoie **une ligne**
 #
@@ -226,7 +226,7 @@ mat
 #   `df[truc]` renvoie **une colonne**  
 #
 # donc déjà on sait qu'on ne pourra pas écrire quelque chose comme  
-# ~~`df[ligne, colonne]`~~ **NON**
+# `df[ligne, colonne]` **NON**
 # ````
 
 # %% [markdown]
@@ -273,7 +273,7 @@ mat
 #
 # # pareil avec un indice négatif
 # df.iloc[-1, 2]
-# -> 'Sharp, Mr. Percival James R'
+# -> 'Richards, Master. George Sibley'
 # ```
 # ````
 
@@ -324,14 +324,13 @@ df.iloc[-1, 2]
 # # plusieurs lignes / colonnesa
 # df.loc[[552, 832]]
 # -> une dataframe avec deux lignes correspondant
-#    aux deux passagers d'id 552 et 832
-#
+#    aux deux passagers 552 et 832
+#    
 # df.loc[[552, 832], ['Name', 'Pclass']]
 # -> la même dataframe mais réduite à deux colonnes  
 #
 # # à nouveau pour les indices de colonnes
 # # la colonne d'index ne compte pas
-#
 # df.iloc[[0, -1], [2, 1]]
 # -> la même
 #
@@ -433,11 +432,16 @@ df.columns[:5]
 
 # %%
 # slice avec loc -> inclusif
-df.loc[ 638:261, 'Pclass': 'Age'].shape
+df.loc[ 638:261, 'Pclass': 'Age'].shape # (3, 4)
 
 # %%
 # le code
 df.loc[ 638:261, 'Pclass': 'Age']
+
+# %%
+# remarquons une méthode des Index
+# pour obtenir l'indice d'un index
+df.columns.get_loc('Pclass'), df.index.get_loc(261)
 
 # %% [markdown] tags=["framed_cell"]
 # ### slicing avec `iloc` par indices
@@ -480,8 +484,8 @@ df.iloc[1:7, 1:4].shape
 # on peut slicer, par index, pour obtenir une ligne
 #
 # ```python
-# df.loc[1, :] # première ligne (toutes les colonnes)
-# df.loc[1, :].shape
+# df.loc[552, :] # première ligne (toutes les colonnes)
+# df.loc[552, :].shape
 # -> (11,)
 # ```
 #
@@ -521,8 +525,8 @@ df.iloc[1:7, 1:4].shape
 
 # %%
 # le code
-df.loc[1, :].shape
-df.loc[1].shape
+df.loc[552, :].shape
+df.loc[552].shape
 
 # %%
 # le code
@@ -625,7 +629,7 @@ df['Cabin'].iloc[-4:]
 df = pd.read_csv('titanic.csv', index_col='PassengerId')
 
 df_survived = (df['Survived'] == 1)
-print(   df_survived.shape   )
+print(   df_survived.sum()/len(df)   )
 
 ( ((df['Sex'] == 'female') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()
   /((df['Sex'] == 'female') & (df['Pclass'] == 1)).sum()   )
@@ -638,7 +642,7 @@ print(   df_survived.shape   )
 # e.g. `df['Sex'] == 'female'`  
 # sont des **séries à valeur booléennes**
 #
-# une **série à valeur booléennes** s'appelle **un masque** (comme en numpy)
+# une **série à valeur booléennes** s'appelle **un masque** (comme en `numpy`)
 #
 # pour accéder à des sous-parties d'une dataframe  
 # on va simplement **indexer** une dataframe **par un masque**  
@@ -648,6 +652,8 @@ print(   df_survived.shape   )
 #
 # ```python
 # df [ df['Sex'] == 'female' ]
+# # ou encore
+# df.loc[ df['Sex'] == 'female' ]
 # ```
 #
 # <div class=note>
@@ -750,9 +756,6 @@ df[df.Sex == 'female'].head()
 # %%
 # votre code
 
-# %% tags=["raises-exception"]
-len(selection)
-
 # %% [markdown]
 # 3. Accédez à la valeur `Name` du premier de ces passagers
 
@@ -760,7 +763,7 @@ len(selection)
 # votre code
 
 # %% [markdown]
-# 4. Faites la même expression que la question 1  
+# 2. Faites la même expression que la question 1  
 # en utilisant les fonctions `numpy.logical_and`, `numpy.logical_not`
 
 # %%
@@ -796,7 +799,7 @@ len(selection)
 #          67   female  0       C.A. 29395  F33
 # ```
 #
-# un masque booléen pour les listes et une liste pour les colonnes  
+# un masque booléen pour les lignes et une liste pour les colonnes  
 # les colonnes `Sex` et `Survived` des passagers de plus de 71 ans
 # ```python
 # df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
@@ -849,7 +852,8 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # en effet
 #
 # * si c'est une **copie**  
-#  votre modification ne sera **pas prise en compte** sur la dataframe d'origine
+#  votre modification ne sera **pas prise en compte** sur la dataframe d'origine  
+#  (voire pire elle sera prise en compte un peu *par hasard* mais  **vous ne pouvez pas compter sur le résultat**)
 #
 # * si c'est une **référence partagée** (une vue)  
 # vos modifications dans la sélection, seront bien **répercutées** dans les données d'origine
@@ -937,7 +941,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 df = pd.read_csv('titanic.csv', index_col='PassengerId')
 df.loc[552, 'Survived']
 
-# %% tags=["level_intermediate"]
+# %% tags=["level_intermediate"] scrolled=true
 df['Survived'][552] = 1
 # possible que df['Survived'][1] soit passé à 1, par hasard
 # mais votre code est faux
@@ -954,57 +958,6 @@ df.loc[552, 'Survived']
 df.loc[552, 'Survived'] = 0
 df.loc[552, 'Survived']
 
-# %% [markdown] tags=["framed_cell"]
-# ### récapitulatif sur les modifications
-#
-# ````{admonition} →
-# vous voulez modifier une partie de votre `pandas.DataFrame`
-#
-# lors d'accès à cette sous-dataframe
-#
-# * `pandas` peut retourner une copie de la sous data-frame
-# * sauf si vous utilisez `loc` et `iloc` (correctement i.e. sans chaînage)  
-# il retourne alors une vue vers la dataframe existante
-#
-# Qu'est-ce-qu'un chaînage ?  
-#
-# l'expression `df['Age'][889]` comporte un chaînage d'index que vous remarquez par les `[][]`  
-#
-# * on accède à la colonne d'index `Age` de la DataFrame `df`
-# * cet accès retourne la série (`pandas.Series`) représentant la colonne `df['Age']`
-# * on accède à l'index `889` de cette série
-#
-# donc `pandas` ne fera correctement la modification souhaitée de votre `pandas.DataFrame`  
-# que si vous utilisez `loc` ou `iloc` pour accéder à cette partie
-#
-# sinon il vous dira *A value is trying to be set on a copy of a slice from a DataFrame*  
-# vous pouvez même avoir l'impression qu'il a fait l'affectation  
-# mais vous ne pouvez pas et ne devez **pas compter dessus**  
-# ça peut cesser de fonctionner à la prochaine release  
-# *don't program by coincidence!*
-#
-# OUI
-# ```python
-# df.loc[889, 'Age'] = 27.5
-# ```
-#
-# NON
-# ```python
-# df.loc[889]['Age'] = 28.5  
-# df['Age'][889] = 28.5
-# ```
-#
-# donc, pour modifier (écrire dans) une cellule, **il ne faut PAS faire**  
-# ~~`df.loc[889]['Age'] = 28.5`~~  
-# ~~`df['Age'][889] = 28.5`~~
-#
-# et si ça fonctionne, c'est par accident
-#
-# La **bonne méthode**, prenez-en l'habitude, consiste à utiliser cet idiome :
-#
-# * `df.loc[889, 'Age'] = 10`
-# ````
-
 # %%
 # le code
 print(df['Age'][889])
@@ -1016,29 +969,9 @@ df.loc[889, 'Age'] = 27.5
 df['Age'][889] = 27.5
 
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
-# ### récapitulatif indexation et modification
+# ### faire des copies explicites
 #
 # ````{admonition} →
-# deux possibilité lors d'extractions de sous-partie d'une dataframe  
-# (obtenue par découpage de la dataframe d'origine)
-#
-# * c'est une copie **implicite** de la dataframe: vous ne devez pas la modifier
-#
-#     ```python
-#     df1 = df[ ['Survived', 'Pclass', 'Sex'] ] # df1 est une copie implicite ...
-#     df1.loc[1, 'Survived'] = 1 # loc fait sur une copie donc le warning suivant apparaît
-#     -> SettingWithCopyWarning:
-#           A value is trying to be set on a copy of a slice from a DataFrame.
-#     ```
-#     (le warning apparaît une seule fois, mais il continue à être vrai ...)
-#
-# * c'est une référence sur la dataframe: vous pouvez la modifier  
-# mais donc vous modifiez la dataframe d'origine
-#     ```python
-#     df1 = df.loc[ :, ['Survived', 'Pclass', 'Sex'] ]
-#     df1.loc[1, 'Survived'] = 1
-#     ```
-#
 # vous ne voulez pas modifier la dataframe d'origine ?  
 # faites une copie **explicite** de la sous-dataframe
 #
@@ -1055,11 +988,6 @@ df['Age'][889] = 27.5
 # et coder ainsi explicitement et proprement
 # ````
 
-# %% tags=["level_intermediate"]
-# le code
-df1 = df[ ['Survived', 'Pclass', 'Sex'] ]
-df1.loc[1, 'Survived'] = 1
-
 # %%
 # le code
 df1 = df.loc[ :, ['Survived', 'Pclass', 'Sex'] ]
@@ -1072,3 +1000,6 @@ print(df2.loc[1, 'Survived'])
 df2.loc[1, 'Survived'] = 0
 print(df2.loc[1, 'Survived'])
 print(df.loc[1, 'Survived'])
+
+# %% [markdown]
+# ***
