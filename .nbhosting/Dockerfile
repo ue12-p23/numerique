@@ -9,5 +9,5 @@ RUN true \
  && pip install -U jupyterlab notebook jupytext jupyterlab-myst \
  && pip install -U jupyterlab-courselevels \
  && pip install -U ipythontutor nbautoeval \
- && pip install numpy pandas matplotlib scipy pillow seaborn scikit_learn \
+ && pip install numpy pandas matplotlib scipy pillow seaborn scikit_learn ipympl \
  && true
