@@ -5,6 +5,7 @@ scipy # for reading/writing wav files
 pillow
 seaborn
 scikit_learn
+openpyxl
 
 # tooling
 jupyter

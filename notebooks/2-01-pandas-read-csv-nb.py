@@ -231,6 +231,7 @@ df.head(2)
 # %%
 # le code
 df1 = pd.read_excel('titanic.xlsx')
+type(df1)
 
 # %% [markdown] tags=["framed_cell"]
 # ## description rapide de la table des données
