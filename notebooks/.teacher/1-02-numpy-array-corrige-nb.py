@@ -374,6 +374,8 @@ matrice = [
     [17, 5, 127]
 ]
 mat = np.array(matrice, dtype=np.uint8)
+# note that new version of NumPy "will stop allowing conversion of out-of-bound Python integers to integer arrays.
+# The conversion of -128 to uint8 will fail in the future."
 mat
 
 # %% [markdown]
@@ -398,8 +400,10 @@ l = [[  0,   8,  34,   8],
 print(    np.array(l, dtype=np.uint8)    )
 
 print(    np.array(l, dtype=np.int8)    )
+# note that new version of NumPy "will stop allowing conversion of out-of-bound Python integers to integer arrays.
+# The conversion of -128 to uint8 will fail in the future."
 
-# %% [markdown] tags=["framed_cell"] jp-MarkdownHeadingCollapsed=true
+# %% [markdown] tags=["framed_cell"]
 # ### modifier le type des éléments d'un tableau existant
 #
 # ````{admonition} →
@@ -509,14 +513,14 @@ print(    mat*100    )
 # ````{admonition} →
 #
 # | les méthodes | ce qu'elles font |
-# | --------------------------- | --------------------- ---------------------- |
+# | --------------------------- | ------------------------------------------- |
 # | `numpy.zeros` | renvoie un ndarray rempli de *0.* (float) |
 # | `numpy.ones` | renvoie un ndarray rempli de *1.* (float) |
 # | `numpy.empty` | renvoie un ndarray vide i.e. sans initialiser ses éléments |
-#     | | |
+# | | |
 # | `numpy.arange` | tableau de valeurs régulièrement espacées|
 # | `numpy.linspace` |  tableau de valeurs régulièrement espacées|
-#     | | |
+# | | |
 # | `numpy.random.randint` | entiers aléatoirement générés |
 # | `numpy.random.randn` | flottants aléatoirement générés |
 # ````
