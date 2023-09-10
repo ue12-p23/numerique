@@ -24,15 +24,12 @@
 # %% [markdown]
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-# %% [markdown]
-# avertissement cela dépend des versions...
-
-# %% [markdown]
-# # `%matplotlib inline`
-
 # %%
 from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+
+# %% [markdown]
+# # `%matplotlib inline`
 
 # %% [markdown]
 # de la bonne utilisation de `plt.figure()`, `plt.show()` en fonction du driver `%matplotlib` - épisode 1

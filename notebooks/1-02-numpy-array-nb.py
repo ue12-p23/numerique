@@ -638,9 +638,11 @@ Y = np.sin(X)
 plt.plot(X, Y)
 
 # %% [markdown]
-# **astuce**
+# ````{admonition} astuce
+# :class: tip
 #
 # pour éviter de voir apparaitre la ligne avec le vilain `[<matplotlib.lines.Line2D at 0x...>]`, on ajoute habituellement un `;` à la fin de la dernière ligne de la cellule
+# ````
 
 # %%
 # pour éviter l'affichage superflu, ajoutez un ;

@@ -24,15 +24,33 @@
 # %% [markdown]
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-# %% [markdown]
-# avertissement cela dépend des versions...
-
-# %% [markdown]
-# # `%matplotlib notebook`
-
 # %%
 from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+
+# %% [markdown]
+# ````{admonition} avertissement
+# :class: warning
+#
+# ce point est assez scabreux, et dépend notamment des versions de Jupyter:
+#
+# * dans la version dite "notebook classic" qui était encore très répandue jusqu'en juin 2023, on utilisait  
+#   `%matplotlib notebook`
+#
+# * mais cet idiome ne fonctionne plus et il faut maintenant, dans JupyterLab 4 ou Notebook7, on recommande d'utiliser plutôt  
+#   `%matplotlib widget`
+#
+# * de plus il se trouve que cette forme repose en fait sur un module supplémentaire qui s'appelle `ipympl`
+# et que l'expérience a montré que c'est encore mieux (lire: ça marche aussi dans vs-code) si vous utilisez à la place
+# `%matplotlib ipympl`
+#
+# et c'est donc ce qu'on a choisi d'illustrer ici
+#
+# l'invariant là dedans, c'est que ça vaut vraiment la peine de passer un peu de temps à s'assurer **que vos graphiques sont bien interactifs**
+# ````
+
+# %% [markdown]
+# # `%matplotlib ipympl`
 
 # %% [markdown]
 # de la bonne utilisation de `plt.figure()`, `plt.show()` en fonction du driver `%matplotlib` - épisode 2
@@ -40,24 +58,28 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown]
 # **take home message**
 #
+# * nécessite l'installation `pip install ipympl`
 # * plus pratique / interactif  
 #   * on peut retailler la figure
 #   * se déplacer / zoomer dans la figure
 # * il **faut** appeler `plt.figure()` pour chaque figure  
 # * et en ajouter d'autres `plt.figure()`  
 #   pour créer plusieurs figures depuis une seule cellule
-#
 # * **attention** à `df.plot()` qui appelle automatiquement `plt.figure()`
 
 # %% [markdown]
 # ***
 
 # %% [markdown]
-# c'est le mode que je vous recommande avec les notebooks  
-# **note** dans vs-code il faut utiliser plutôt `%matplotlib pyimpl` qui ressemble assez
+# ````{admonition} seulement dans un notebook
+# :class: warning
+#
+# dans la version book (la version html statique) ceci ne va pas bien fonctionner,
+# ce notebook est un support que vous devez vraiment ouvrir dans jupyterlab sur votre ordi...
+# ````
 
 # %%
-# %matplotlib notebook
+# %matplotlib ipympl
 
 # %%
 import matplotlib.pyplot as plt
@@ -79,22 +101,27 @@ Y2 = np.cos(X)
 # ## un plot = une figure
 
 # %% [markdown]
-# l'apport principal de ce driver, c'est qu'on peut "naviguer" dans le graphe - zoomer et se déplacer, sauver la figure, etc... avec **la palette d'outils** située par défaut en bas; on peut cliquer sur le carré bleu en haut à droite de la figure pour la rendre 'inactive'
+# l'apport principal de ce driver, c'est qu'on peut "naviguer" dans le graphe - zoomer et se déplacer, sauver la figure, etc... avec **la palette d'outils** située par défaut à gauche du dessin; entraînez-vous à retailler la figure, à zoomer dedans, à revenir au point de départ, etc..
 
 # %% cell_style="split"
 # on peut avoir l'impression
 # que ce n'est pas la peine
 # de créer une figure,
 # car la première fois ça fonctionne
-# plt.figure()     # <-- c'est mieux de prendre
-                   # l'habitude de le faire
+plt.figure()     # <-- mais c'est mieux de prendre
+                 # l'habitude de le faire quand meme !
+                 # pour vous en assurer enlever le commentaire
 plt.plot(X, Y);
 
 # %% cell_style="split"
 # mais en fait si on ne le fait pas
 # on écrit dans la dernière figure
 # ouverte
-# plt.figure()  # <-- essayez sans le mettre
+plt.plot(X, Y2);
+
+# %% cell_style="split"
+# donc vous voyez, il faut mettre la création de l figure
+plt.figure()
 plt.plot(X, Y2);
 
 # %% [markdown]
@@ -142,7 +169,7 @@ df = pd.DataFrame({'sin': Y, 'cos': Y2}, index=X)
 # mais regardez ce que ça donne:
 
 # %%
-plt.figure()    # parce que %matplotlib notebook
+plt.figure()    # parce que %matplotlib ipympl
                 # mais en fait il ne faut pas le mettre
 df.plot();
 
