@@ -502,12 +502,11 @@ df.loc['2019':'2022']
 #
 # ![](media/timeseries-resample.svg)
 #
-# <div class=note>
+# ```{note}
 #
 # dans l'illustration ci-dessus, chaque point bleu illustre **la moyenne** de chaque corbeille  
 # on a choisi d'attacher chaque point bleu au moment correspondant **au début** de chaque corbeille (et bien sûr c'est réglable..)
-#
-# </div>  
+# ```
 #
 # **exemple d'application**  
 # vous avez un signal échantillonné à 44.100 kHz et vous voulez le ré-échantillonner (littéralement: *resample*) à une fréquence 4 fois plus basse: il suffit de faire un resample avec une durée de corbeille égale à exactement 4 x la période de la fréquence originale
@@ -854,7 +853,8 @@ f"{t1:%H==%M}"
 # un objet `datetime64` est créé avec un paramètre *`unit`*, qui permet de choisir la précision des calculs; et l'intervalle des dates possibles varie bien entendu avec cette précision :
 
 # %% [markdown] tags=["level_intermediate"]
-# <div class=note>
+# ````{admonition} les échelles de précision
+# :class: note
 #
 # Unit Code |	Meaning |	Time span (relative) |	Time span (absolute) |
 # -----|----------|------------------------|-----------------------|
@@ -872,6 +872,5 @@ f"{t1:%H==%M}"
 # ps| 	picosecond | 	+/- 106 days | 		[ 1969 AD, 1970 AD]
 # fs| 	femtosecond | 	+/- 2.6 hours | 		[ 1969 AD, 1970 AD]
 # as| 	attosecond | 	+/- 9.2 seconds | 	[ 1969 AD, 1970 AD]
-#
-# </div>
+# ````
 

@@ -66,12 +66,11 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 #   autant rester avec des tableaux 2D `numpy`  
 #   avec leurs indices de ligne et de colonne
 #
-# <div class=note>
+# ```{note}
 #
 # bien sûr `pandas` va *aussi* vous permettre d'accéder à vos sous-tableaux  
 # par indices, c'est juste moins pertinent la plupart du temps
-#
-# </div>
+# ```
 # ````
 
 # %% [markdown]
@@ -415,11 +414,6 @@ df.loc[:, ['Name', 'Pclass']]
 #    4 colonnes ('Pclass' et 'Age' inclus)
 # ```
 #
-# <div class=note>
-#
-# la logique qui est à l'oeuvre
-#
-# </div>
 # ````
 
 # %%
@@ -680,13 +674,12 @@ print(   df_survived.sum()/len(df)   )
 # df.loc[ df['Sex'] == 'female' ]
 # ```
 #
-# <div class=note>
+# ```{note}
 #
 # ici le masque est une série qui a le même index que la dataframe  
 # et une valeur booléenne, qui va indiquer si la ligne en question  
 # doit être sélectionnée ou non
-#
-# </div>
+# ```
 # ````
 
 # %%

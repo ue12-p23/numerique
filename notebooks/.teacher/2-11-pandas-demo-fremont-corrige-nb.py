@@ -33,7 +33,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 
 
 # %% [markdown]
-# # Les vélos sur le pont de Fremont
+# # les vélos sur le pont de Fremont
 
 # %% [markdown]
 # voir la version originale de ce TP - par Jake Vanderplas - sur Youtube

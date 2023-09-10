@@ -115,13 +115,12 @@ import numpy as np
 # -> 32
 # ```
 #
-# <div class=note>
+# ```{attention}
 #
-#   c'est **très important** de bien mettre des parenthéses car les opérateurs bitwise (`&` et
-#     autres) ont des  
-#   précédences (priorités) qui sont non intuitives, et très différentes des opérateurs logiques (`and` et autres)
-#
-# </div>
+# c'est **très important** de bien mettre des parenthéses  
+# car les opérateurs bitwise (`&` et autres) ont des **précédences** (priorités)  
+# qui sont non intuitives, et très différentes des opérateurs logiques (`and` et autres)
+# ```
 #
 # on pourra ensuite utiliser ces tableaux de booléens  
 #
@@ -331,15 +330,16 @@ df.isna()
 # Embarked      2
 # dtype: int64
 # ```
-# <div class=note>
+#
+# ```{admonition} note
+# :class: attention
 #
 # pour souligner une différence avec `numpy`: comparez le comportement
 #
 # * de `array.sum()`
 # * et `df.sum()`  
 # (on y revient ci-dessous)
-#
-# </div>
+# ```
 #
 # nous remarquons des valeurs manquantes dans les colonnes `Cabin`, `Age` et `Embarked`
 # ````
@@ -421,11 +421,11 @@ df.isna().sum(axis=1)
 #
 # il y a `866` valeurs manquantes dans toute la data-frame
 #
-# <div class=note>
+# ```{admonition} note
+# :class: attention
 #
 # remarque: contrairement à ce qu'on avait vu en `numpy`, ici on ne pourrait pas faire `df.isna().sum(axis=(0, 1))`
-#
-# </div>
+# ```
 # ````
 
 # %%

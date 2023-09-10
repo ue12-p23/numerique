@@ -173,13 +173,13 @@ pd.__version__
 # df.head(2)
 # ```
 #
-# <div class=note>
+# ```{admonition} note
+# :class: attention
 #
 # quand on écrit "la méthode `df.head`", ça se lit comme:  
 # l'attribut `head` recherché à partir de l'objet `df`  
 # comme `df` est une dataframe, on trouve la méthode/fonction qui se trouve être aussi `pd.DataFrame.head`
-#
-# </div>
+# ```
 # ````
 
 # %%
@@ -231,7 +231,6 @@ df.head(2)
 # %%
 # le code
 df1 = pd.read_excel('titanic.xlsx')
-type(df1)
 
 # %% [markdown] tags=["framed_cell"]
 # ## description rapide de la table des données

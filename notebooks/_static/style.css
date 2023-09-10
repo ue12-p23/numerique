@@ -19,7 +19,8 @@ div.cell div.cell_output .output pre {
 }
 
 
-/* minimal layout tooling */
+/* minimal layout tooling
+ * no longer used since admonitions
 .column {
     display: flex;
     flex-direction: column;
@@ -31,9 +32,11 @@ div.cell div.cell_output .output pre {
     display: flex;
     flex-direction: row;
 }
+*/
 
 
-/* colors */
+/* colors
+ * no longer used since admonitions
 .grey {
     background-color: #eee;
 }
@@ -46,9 +49,11 @@ div.cell div.cell_output .output pre {
 .pink {
     background-color: pink;
 }
+*/
 
 
-/* notes and warning */
+/* notes and warning
+ * no longer used since admonitions
 .note {
     font-style: italic;
     border-left: 1px dotted #ccc;
@@ -75,17 +80,18 @@ div.cell div.cell_output .output pre {
     padding:4px;
     border-radius: 4px;
 }
+*/
 
 
 /*
  * manually add a frame - maybe look at nb-courselevels instead ?
- */
+ * no longer used since admonitions
 .frame {
     border: 1px solid blue;
     padding: 5px;
     border-radius:5px
 }
-
+*/
 
 /*
  * leveraging nb-courselevels

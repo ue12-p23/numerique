@@ -60,9 +60,9 @@ import numpy as np
 #   chaque table contient 20 lignes  
 #   il faut cette fois agréger les dataframes **en largeur**
 #
-# <div class="note">
-#     (*) cette présentation est simpliste, elle sert uniquement à fixer les idées
-# </div>
+# ```{note}
+# cette présentation est simpliste, elle sert uniquement à fixer les idées
+# ```
 # ````
 
 # %% [markdown] tags=["framed_cell"]
