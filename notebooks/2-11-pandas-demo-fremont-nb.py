@@ -40,15 +40,21 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 #
 # <https://www.youtube.com/watch?v=_ZEWDGpM-vM&list=PLYCpMb24GpOC704uO9svUrihl-HY1tTJJ>
 
-# %% [markdown]
-# ## propos - niveau avancé
+# %%
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 # %% [markdown] tags=["level_intermediate"]
+# ## propos - niveau avancé
+#
+# ````{admonition} →
 # cet exercice est destiné aux élèves rapides
 #
 # c'est une démonstration de ce qu'on peut faire comme analyse sur des **données réelles**, en partant des **données brutes**, et en allant jusqu'à une classification des jours en 'travaillé/repos' en se basant uniquement sur les données du trafic des vélos sur un pont
 #
 # on utilise brièvement des techniques classiques de **classification** (ACP et gaussian-mixture en l'occurrence), qui ne sont utilisées ici comme des **boites noires**, elle ne sont pas du tout explicitées à ce stade (vous les étudierez dans d'autres cours)
+# ````
 
 # %%
 import pandas as pd
@@ -63,20 +69,22 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # %% [markdown]
-# ## récupération
+# ## récupération des données
 
 # %% [markdown]
+# ````{admonition} →
+#
 # on part des données publiques qui décrivent le trafic des vélos [sur
 # le pont de Fremont (à Portland - Oregon)](https://www.google.com/maps/place/Fremont+Bridge/@45.5166602,-122.7147124,12.31z/data=!4m5!3m4!1s0x0:0x9014fe26b76a82db!8m2!3d45.5379639!4d-122.6830729)
-
-# %%
-URL = "https://data.seattle.gov/api/views/65db-xm6k/rows.csv?accessType=DOWNLOAD"
-
-# %% [markdown]
+#
 # le fichier de données est distribué avec le notebook
 #
 # toutefois pour votre information, voici le code qu'on a utilisé pour aller chercher la donnée  
 # l'idée est d'aller sur le réseau seulement quand le fichier n'est pas là (notion de *mise en cache*)
+# ````
+
+# %%
+URL = "https://data.seattle.gov/api/views/65db-xm6k/rows.csv?accessType=DOWNLOAD"
 
 # %%
 # où chercher/ranger le fichier en local
@@ -84,7 +92,7 @@ local_file = "fremont.csv"
 
 # %% tags=["level_intermediate"]
 # ceci nécessite alors
-# # %pip install requests
+# %pip install requests
 
 # %% tags=["level_intermediate"]
 from pathlib import Path
@@ -113,13 +121,16 @@ else:
 # ## chargement
 
 # %% [markdown]
+# ````{admonition} →
+#
 # on en fait une dataframe
+#
+# ````
 
 # %%
 # version naïve
 data = pd.read_csv(local_file); data.shape
 
-# %%
 data.head()
 
 # %% [markdown]
