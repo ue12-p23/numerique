@@ -35,15 +35,13 @@ le corpus principal porte sur:
 * un module optionnel, et assez court, qui contient des rappels essentiels sur le Python dit "de base"
 
 
-## rappels
+## mode d'emploi / rappels
 
 pour être sûr que vous avez tout ce qu'il faut pour travailler  
 on suppose [les installations faites lors du cours d'introduction](https://nbhosting.inria.fr/builds/ue12-p23-intro/handouts/latest/1-01-install-fasttrack-nb.html) (bash - vscode - conda - jupyter - jupytext - git)
 
 
-### sachez à qui vous parlez
-
-**convention**
+### convention (sachez à qui vous parlez)
 
 lorsque c'est ambigu, on préfixera :
 
@@ -59,11 +57,18 @@ parfois on préfixe la commande à taper **avec un `$`** pour indiquer que ça s
   dans ce cas **attention** à ne pas copier-coller le signe `$` !
 ````
 
-````{admonition} dans l'interpréteur `python`
+````{admonition} dans l'interpréteur python
+:class: seealso
+
 si on préfixe **avec `>>>`** c'est pour indiquer que la commande est du Python - on peut alors la copier-coller dans `python` ou `ipython` ou `jupyter` 
+
   ```python
   >>> a = 100
   ```
+
+  et pareil il ne faut pas copier le `>>>` évidemment
+
+````
 
 ça va sans dire, et mieux encore en le disant, mais si vous tapez une commande python dans le terminal - ou inversement - évidemment ça va mal se passer..
 
@@ -92,7 +97,6 @@ si tout cela est bien en place il ne vous reste plus alors que deux choses à fa
   ````
 
 
-<!-- #region cell_style="split" slideshow={"slide_type": "slide"} -->
 ### lancer Python
 
 les notebooks du cours se trouvent .. dans le dossier `notebooks`
@@ -106,13 +110,11 @@ les notebooks du cours se trouvent .. dans le dossier `notebooks`
   ou encore mieux  
   `$ ipython`
 
-<!-- #endregion -->
 
-<!-- #region cell_style="split" -->
 ### vidéo d'illustration
 
 ces usages ont été vus dans le cours d'introduction, et [dans la vidéo associée](https://youtu.be/i_ZcP7iNw-U)
-<!-- #endregion -->
+
 
 ## environnements virtuels
 
@@ -123,6 +125,8 @@ lorsqu'on travaille sur plusieurs projets, il est possible de créer un environn
 si vous voulez essayer d'utiliser ce système, [voyez cette page dans le cours d'introduction](https://nbhosting.inria.fr/builds/ue12-p23-intro/handouts/latest/3-03-optionals-nb.html#multiples-environnements-python)
 
 ````{attention}
-Comme indiqué dans cette page, il est **crucial** de s'assurer que votre "prompt" bash (ce qui est affiché avant le '$' lorsque vous avez la main dans le terminal) vous indique en permanence dans quel environnement vous vous trouvez.
+Comme indiqué dans cette page, il est **crucial** de s'assurer que votre "prompt" bash (ce qui est affiché avant le `$` lorsque vous avez la main dans le terminal) vous indique en permanence dans quel environnement vous vous trouvez.
 ````
 
+
+***
