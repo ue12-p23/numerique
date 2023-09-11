@@ -14,5 +14,5 @@ parts:
   - glob: 4-*
 - caption: rappels Python
   chapters:
-  - glob: 5-[12]*-nb
+  - glob: 5-[0-8]*-nb
 root: 0-00-intro
