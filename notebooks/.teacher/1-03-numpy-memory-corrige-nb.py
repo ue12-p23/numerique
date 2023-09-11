@@ -32,22 +32,22 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %% [markdown]
 # # la mémoire
 
-# %% [markdown]
+# %% [markdown] tags=["framed_cell"]
 # ## contenu de ce notebook (sauter si déjà acquis)
 #
 # avoir une intuition de ce qui se passe dans en mémoire pour un `numpy.ndarray`  
 #
 # > *An array object represents a multidimensional, **homogeneous** array of **fixed-size** items.*
 #
-# * indirection versus décalage (*offset*)
 # * indiçage des tableaux `numpy`
 # * modification de la taille des tableaux `numpy` avec `numpy.resize` et `numpy.reshape` (la mémoire sous-jacente est partagée)
+# * indirection versus décalage (*offset*)
 
 # %% [markdown] tags=["framed_cell"]
 # ## organisation de la mémoire
 #
 # ````{admonition} →
-# ### pourquoi comprendre comment <code>numpy</code> travaille en mémoire ?
+# ### pourquoi comprendre comment `numpy` travaille en mémoire ?
 #
 # pour prendre des décisions en connaissance de cause  
 #

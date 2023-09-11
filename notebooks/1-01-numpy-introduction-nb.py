@@ -140,6 +140,8 @@ print(f'matplotlib version {mpl.__version__}')
 # %% [markdown] tags=[]
 # ## différents formats de données
 #
+# ### plusieurs exemples
+#
 # ````{admonition} →
 #
 # 1. des **vecteurs** et **matrices** numériques classiques

@@ -634,12 +634,9 @@ print(tab) # n'importe quelles valeurs entre -128 et 127
 #
 # `numpy.arange(from, to, step)`
 #
+# * ressemble un peu au `range` de Python
 # * nombres équidistants de `step` sur l'intervalle `[from, to[`  
-# * n'utilisez pas un incrément (step) non entier
-#
-#
-#
-#
+# * en général `step` est entier (mais pas obligatoire)
 #
 # `numpy.linspace(from-included, to-included, n)`
 #
@@ -647,10 +644,14 @@ print(tab) # n'importe quelles valeurs entre -128 et 127
 # * la valeur supérieure de l'intervalle **est** incluse
 # ````
 
-# %% [markdown]
-# exemple un sinus
+# %%
+# exemple avec arange
+# comme avec le range() de Python
+# la deuxième borne est exclue
+np.arange(0, 5)
 
 # %%
+# exemple avec linspace
 from matplotlib import pyplot as plt
 
 X = np.linspace(-np.pi, np.pi, 30)
