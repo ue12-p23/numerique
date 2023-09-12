@@ -162,10 +162,13 @@ indices_i = np.array([[0, 2],
 
 # %%
 r = valeurs_d2[indices_i]
+r
 
 # %%
-#
-# r.shape
+# du coup on 'ajoute' une dimension 4 au résultat
+
+print("si on faisait une indexation complète on obtiendrait", indices_i.shape)
+print("l'indexation partielle nous donne ici", r.shape)
 
 # %% [markdown]
 # ### exemple d'application
