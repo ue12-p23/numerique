@@ -2,47 +2,22 @@
 <style>
 
 
- .rendered_html * + ol,
- .rendered_html * + ul {
+ .myst * + ol,
+ .myst * + ul {
      margin-top: initial !important;
  }
 
 
- 
+ .myst p:has(+ ol),
+ .myst p:has(+ ul) {
+    margin-bottom: initial !important;
+}
+
+
 
 div.cell div.cell_output .output pre {
     background-color: #fee;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-div.cell[data-tag-frame=true]>div.inner_cell>div.rendered_html>h1:first-child,
-div.cell[data-tag-frame=true]>div.inner_cell>div.rendered_html>h2:first-child,
-div.cell[data-tag-frame=true]>div.inner_cell>div.rendered_html>h3:first-child,
-div.cell[data-tag-frame=true]>div.inner_cell>div.rendered_html>h4:first-child {
-        color: purple;
-        text-decoration-line: underline;
-        text-decoration-color: rgb(227, 129, 227);
-        text-decoration-style: double;
-}
-
 
 
 
