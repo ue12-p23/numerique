@@ -377,11 +377,11 @@ df.isna().sum(axis=0) # même chose
 # le code
 df.isna().sum(axis=1)
 
-# %% [markdown] tags=["framed_cell", "level_basic"]
-# ### utilisation des fonctions `numpy`
+# %% [markdown] tags=["framed_cell"]
+# ### les fonctions `numpy` d'agrégation
 #
 # ````{admonition} →
-# les méthodes `numpy` s'appliquent sur des `pandas.DataFrame` et des `pandas.Series`
+# les méthodes `numpy` d'agrégation (comme `sum()` et `mean()` et `min()` etc...) s'appliquent sur des `pandas.DataFrame` et des `pandas.Series`
 #
 # on précise l'`axis`  
 # `0` pour l'axe des lignes (c'est le mode par défaut)  
@@ -467,7 +467,7 @@ df.isna().to_numpy().sum()
 # %%
 # votre code
 
-# %% [markdown] tags=["level_basic"]
+# %% [markdown] tags=[]
 # 4. que constatez-vous ?  
 # quel type serait plus approprié pour ces colonnes ?
 
@@ -499,7 +499,8 @@ df.isna().to_numpy().sum()
 # votre code
 
 # %% [markdown]
-# 4. calculez le taux d'hommes et de femmes
+# 4. calculez le taux d'hommes et de femmes  
+#    indice: voyez les paramètres optionnels de `Series.value_counts()`
 
 # %%
 # votre code

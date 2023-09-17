@@ -86,40 +86,49 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # construisons une dataframe
 #
 # ```python
-# df_aux = pd.read_csv('titanic.csv', index_col='PassengerId')
+# df = pd.read_csv('titanic.csv', index_col='PassengerId')
 # ```
 #
 # copions la
 #
 # ```python
-# df = df_aux.copy()
+# df2 = df.copy()
 # ```
 #
-# supprimons la
+# modifions la copie
 #
 # ```python
-# del df_aux
+# df2.loc[552, 'Age'] = 100
+# # vérifions
+# df2.head(1)
+#              Survived  Pclass                         Name   Sex    Age  ...
+# PassengerId
+# 552                 0       2  Sharp, Mr. Percival James R  male  100.0  ...
 # ```
 #
-# la copie existe toujours
+# l'original n'est pas modifiée
 #
 # ```python
-# df.head(2)
-# ->   Survived Pclass ...
-# PassengerId	...
+# df.head(1)
+#              Survived  Pclass                         Name   Sex   Age  ...
+# PassengerId
+# 552                 0       2  Sharp, Mr. Percival James R  male  27.0  ...
 # ```
 #
-# `df` est une nouvelle dataframe  
-# avec les mêmes valeurs que l'originale `df_aux`  
+# `df2` est une nouvelle dataframe  
+# avec les mêmes valeurs que l'originale `df`  
 # mais totalement indépendante
 # ````
 
 # %%
 # le code
-df_aux = pd.read_csv('titanic.csv', index_col='PassengerId')
-df = df_aux.copy()
-del df_aux
-df.head(2)
+df = pd.read_csv('titanic.csv', index_col='PassengerId')
+df2 = df.copy()
+df2.loc[552, 'Age'] = 100
+df2.head(1)
+
+# %%
+df.head(1)
 
 # %% [markdown] tags=["framed_cell"]
 # ## créer une nouvelle colonne
@@ -142,7 +151,6 @@ df.head(2)
 #
 # nous avons rajouté la clé `'Deceased'` dans l'index des colonnes  
 # `pandas` voit sa dataframe comme un dictionnaire des colonnes  
-# (mais avec des index non uniques)
 # ````
 
 # %%
@@ -185,6 +193,15 @@ df.head(3)
 #     [  9,  10,  11]])
 # ```
 #
+# * ou encore enfin, en passant par la colonne puis la ligne  
+#   ça fonctionne, on l'a même peut-être déjà fait  
+#   mais **ATTENTION** il ne **FAUT PAS** faire comme ça !
+#
+# ```python
+# df['Age'][552]
+# 27.0
+# ```
+#
 # ***mais ATTENTION  
 # ce n'est pas comme ça que ça fonctionne en pandas!!!***
 # ````
@@ -204,6 +221,12 @@ L
 mat = np.arange(12).reshape((4, 3))
 mat[0:2, 0:2] = 999
 mat
+
+# %%
+# le code - accéder à un élément de la df 
+# ATTENTION: ça marche mais IL NE FAUT PAS FAIRE COMME CA !
+
+df['Age'][552]
 
 # %% [markdown]
 # ## localiser en `pandas`
@@ -263,6 +286,7 @@ mat
 # df.loc[552, 'Name']
 # -> 'Sharp, Mr. Percival James R'
 #
+# # accès par indice (plus rare en pratique)
 # # attention la colonne d'index ne compte pas
 # # i.e. la colonne d'indice 0 est 'Survived'
 # df.iloc[0, 2]
@@ -304,7 +328,7 @@ df.iloc[-1, 2]
 #
 # * si on ne précise pas les colonnes, on les obtient toutes  
 # * on peut mentionner simplement plusieurs index (ou indices)  
-#   que l'on passe dans une liste
+#   que l'on passe **dans une liste**
 #
 #
 # quelques exemples
@@ -429,6 +453,11 @@ df.loc[ 638:261, 'Pclass': 'Age'].shape # (3, 4)
 # %%
 # le code
 df.loc[ 638:261, 'Pclass': 'Age']
+
+# %% [markdown]
+# ````{tip}
+# avec la méthode `get_loc()` sur un objet Index, on peut facilement obtenir l'indice d'un index
+# ````
 
 # %%
 # remarquons une méthode des Index
@@ -625,10 +654,14 @@ df.iloc[-10:][['Name', 'Pclass', 'Survived']]
 # ->  0.3838383838383838
 # ```
 #
+# ```{admonition} rappel
+# :class: seealso
+#
 # on a vu comment combiner ces conditions  
 # vous ne pouvez **pas** utiliser `and`, `or` et `not` python (pas vectorisés)  
 # et devez utiliser `&`, `|` et `~`  
 # ou `np.logical_and`, `np.logical_or` et `np.logical_not`
+# ```
 #
 # taux de survie des passagers femmes de première classe
 #
@@ -672,9 +705,10 @@ print(   df_survived.sum()/len(df)   )
 # df.loc[ df['Sex'] == 'female' ]
 # ```
 #
-# ```{note}
+# ```{admonition} note
+# :class: seealso
 #
-# ici le masque est une série qui a le même index que la dataframe  
+# ici le masque est une série qui a **le même index** que la dataframe  
 # et une valeur booléenne, qui va indiquer si la ligne en question  
 # doit être sélectionnée ou non
 # ```
@@ -776,7 +810,7 @@ selection
 # %%
 # votre code
 
-# %% tags=["raises-exception"]
+# %% tags=[] editable=true slideshow={"slide_type": ""}
 # prune-cell
 len(selection)
 
@@ -813,11 +847,13 @@ selection2
 # * indexation au travers de `.loc[]`/`.iloc[]`
 #   * par un index/indice resp.
 #   * par liste explicite
-#   * par slicing -- borne **incluse avec `.loc[]`** et exclue avec `.iloc[]`
+#   * par slicing:
+#       * borne sup **incluse avec `.loc[]`** 
+#       * et exclue avec `.iloc[]` (comme d'hab en Python)
 #
 # on peut mélanger les méthodes d'indexation
 #
-# une liste pour les lignes et une slice pour les colonnes
+# ex1: une liste pour les lignes et une slice pour les colonnes
 # ```python
 # df.loc[
 #     # dans la dimension des lignes: une liste
@@ -832,7 +868,7 @@ selection2
 #          67   female  0       C.A. 29395  F33
 # ```
 #
-# un masque booléen pour les lignes et une liste pour les colonnes  
+# ex2: un masque booléen pour les lignes et une liste pour les colonnes  
 # les colonnes `Sex` et `Survived` des passagers de plus de 71 ans
 # ```python
 # df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
@@ -851,7 +887,7 @@ selection2
 # * dimension 0: le type de la cellule sélectionnée
 # ````
 
-# %% tags=["level_advanced"]
+# %% tags=[]
 # le code
 df.loc[
     # dans la dimension des lignes: une liste
@@ -907,7 +943,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # ça fonctionne par hasard
 #
 # (pour les avancés) ce *problème* s'appelle le *chained indexing*  
-# https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+# <https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy>
 # ````
 
 # %% [markdown] tags=["level_intermediate"]
@@ -915,6 +951,10 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 
 # %% [markdown] tags=["level_intermediate", "framed_cell"]
 # ### modification d'une copie
+#
+# ````{note}
+# cette section est un peu avancée; pour les groupes de débutants, retenez simplement de toujours utiliser `.loc()` (ou `.iloc()` selon le contexte) pour créer des sélections de vos dataframes, si l'objectif est d'en modifir le contenue
+# ````
 #
 # ````{admonition} →
 #
@@ -991,7 +1031,7 @@ df.loc[552, 'Survived']
 df.loc[552, 'Survived'] = 0
 df.loc[552, 'Survived']
 
-# %%
+# %% tags=["level_intermediate"]
 # le code
 print(df['Age'][889])
 
@@ -1021,7 +1061,7 @@ df['Age'][889] = 27.5
 # et coder ainsi explicitement et proprement
 # ````
 
-# %%
+# %% tags=["level_intermediate"]
 # le code
 df1 = df.loc[ :, ['Survived', 'Pclass', 'Sex'] ]
 df1.loc[1, 'Survived'] = 1

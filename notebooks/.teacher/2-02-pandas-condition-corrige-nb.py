@@ -377,11 +377,11 @@ df.isna().sum(axis=0) # même chose
 # le code
 df.isna().sum(axis=1)
 
-# %% [markdown] tags=["framed_cell", "level_basic"]
-# ### utilisation des fonctions `numpy`
+# %% [markdown] tags=["framed_cell"]
+# ### les fonctions `numpy` d'agrégation
 #
 # ````{admonition} →
-# les méthodes `numpy` s'appliquent sur des `pandas.DataFrame` et des `pandas.Series`
+# les méthodes `numpy` d'agrégation (comme `sum()` et `mean()` et `min()` etc...) s'appliquent sur des `pandas.DataFrame` et des `pandas.Series`
 #
 # on précise l'`axis`  
 # `0` pour l'axe des lignes (c'est le mode par défaut)  
@@ -484,12 +484,12 @@ for c in cols:
 # %%
 # prune-cell 3.
 minidf = df[cols]
-minidf.dtypes
+print(f"{minidf.dtypes=}")
 # du coup on pourrait faire
 for c in minidf.columns:
     print(f"column {c:>12} has type {minidf.dtypes[c]} =?= {df[c].dtype}")
 
-# %% [markdown] tags=["level_basic"]
+# %% [markdown] tags=[]
 # 4. que constatez-vous ?  
 # quel type serait plus approprié pour ces colonnes ?
 
@@ -546,7 +546,8 @@ print(df.isna().sum().sum())
 len(df['Pclass'].unique())
 
 # %% [markdown]
-# 4. calculez le taux d'hommes et de femmes
+# 4. calculez le taux d'hommes et de femmes  
+#    indice: voyez les paramètres optionnels de `Series.value_counts()`
 
 # %%
 # votre code
@@ -575,10 +576,7 @@ df['Sex'].value_counts(normalize=True)#/len(df)
 
 # %%
 # prune-cell 6.
-print(df['Survived'].value_counts()/len(df))
-
-# le taux de survie
-(df['Survived'].value_counts()/len(df))[1]
+(df.Survived == 1).mean()
 
 # %% [markdown]
 # 7. calculez le taux de survie des hommes et des femmes par classes  
