@@ -78,17 +78,19 @@ df = pd.read_csv('titanic.csv', index_col='PassengerId', usecols=cols)
 # 4. en utilisant la méthode `pd.DataFrame.plot`  
 #    plottez la dataframe (pas la série) réduite à la colonne des ages  
 #    utilisez le paramètre de `style` `'rv'` (`r` pour rouge et `v` pour le style: points triangulaires)
-#    
+#
+#    vous allez voir les points *en vrac*; dans la suite on va s'efforcer de les trier, pour mieux
+#    voir la distribution des âges dans la population concernée
 
 # %%
 # votre code
 
 # %%
 # prune-cell
-df[['Age']].plot(style='rv')
+df[['Age']].plot(style='rv');
 
 # %% [markdown]
-# 5. on va organiser les lignes d'une dataframe suivant l'ordre d'une colonne    
+# 5. pour commencer on va trier - i.e. mettre les lignes de la  dataframe suivant l'ordre d'une colonne    
 #    en utilisant la méthode `df.sort_values()`:
 #    1. créez une nouvelle dataframe  dont les lignes sont triées  
 #       dans l'ordre croissant des `'Age'` des passagers
@@ -96,7 +98,6 @@ df[['Age']].plot(style='rv')
 #       la colonne des `Age` est triée  
 #       les lignes ont changé de place dans la table
 #    3. remarquez que l'indexation a été naturellement conservée 
-#
 
 # %%
 # votre code
@@ -109,8 +110,7 @@ df_sorted.head(4)
 
 # %% [markdown]
 # 6. 1. plottez la colonne des ages de la dataframe triée  
-#       (n'oubliez pas le style 'bv' pour dire que vous voulez des points  
-#       sinon plot trace les lignes qui relient les points)
+#       pour changer un peu on va mettre un style `'b.'`
 #    1. Que constatez-vous ?
 
 # %%
@@ -118,24 +118,27 @@ df_sorted.head(4)
 
 # %%
 # prune-cell
-df_sorted[['Age']].plot(style='b.')
+df_sorted[['Age']].plot(style='b.');
 
 # %% [markdown]
-# 7. 1. les abscisses de votre plot 2D sont les index  
+# 7. 1. la logique de `df.plot()` consiste
+#       * à **utiliser comme abscisses** l'index de la dataframe
+#       * et accessoirement à faire autant de plots que de colonnes - ici on n'en a qu'une
 #     vous tracez donc le point $(804, 0.42)$ puis le point $(756, 0.67)$ ...  
 #     alors que vous voudriez tracer le point $(0, 0.42)$ puis le point $(1, 0.67)$ ...  
-#     c'est à dire pas avec les 'PassengersId' mais avec des indices de lignes
-#    1. une solution: enlever les index de la dataframe  
-#       qui a alors des indices utilisez la méthode `reset_index`
-#       sur la dataframe restreinte à la colonne des 'Age'
-#       
+#     c'est à dire: le fait d'utiliser le 'PassengerId' n'est pas bon, on voudrait que les abscisses soient les indices de lignes
+#    1. une solution: voyez la méthode `reset_index()`
+#       qui permet de transformer l'index en une colonne normale  
+#    1. utiliser cette méthode et regardez ce que vous avex dans l'index ensuite
+#    1. plottez le résultat  
+#       normalement à ce stade vous obtenez la visualisation qu'on cherche
 
 # %%
 # votre code
 
 # %%
 # prune-cell
-df_sorted.reset_index()[['Age']].plot(style='b.')
+df_sorted.reset_index()[['Age']].plot(style='b.');
 
 # %% [markdown]
 # ## tri des lignes *égales* au sens d'un premier critère d'une dataframe
@@ -153,7 +156,8 @@ df = pd.read_csv('titanic.csv', index_col='PassengerId', usecols=cols)
 
 # %% [markdown]
 # 2. utilisez `df.sort_values()` pour trier la dataframe suivant la colonne (`'Pclass'`)  
-#    et trier les lignes identiques (passagers de même classe) suivant la colonne (`'Age'`)
+#    et trier les lignes identiques (passagers de même classe) suivant la colonne (`'Age'`)  
+#    *note*: on appelle cela un ordre lexicographique, car c'est un peu comme dans un dictionnaire
 
 # %%
 # votre code
@@ -165,7 +169,7 @@ df_sorted.head(3)
 
 # %% [markdown]
 # 3. sélectionnez, dans la nouvelle dataframe, la sous-dataframe dont les ages ne sont pas définis  
-#    (utiliser la méthode `isna` sur une série pour créer un masque booléens et appliquer ce masque à la dataframe   
+#    *hint*: utiliser la méthode `isna` sur une série, pour créer un masque booléens, et appliquer ce masque à la dataframe   
 
 # %%
 # votre code
@@ -216,20 +220,20 @@ df[df.Age.notna()].sort_values(by=['Age', 'Fare'])
 
 # %% [markdown] {"tags": ["level_intermediate"]}
 # ## tri d'une dataframe selon l'index
-
-# %% [markdown] {"tags": ["level_intermediate"], "cell_style": "center"}
-# en utilisant `pandas.DataFrame.sort_index` il est possible de trier une dataframe  
+#
+# (optionnel)
+#
+# en utilisant `df.sort_index()` il est possible de trier une dataframe  
 # dans l'axe de ses index de ligne (ou même de colonnes)  
-# utilisez le même genre de dataframe qu'à l'exercice précédent
 
 # %% [markdown] {"tags": ["level_intermediate"], "cell_style": "center"}
-# 1. reprenez la dataframe du Titanic  
+# 1. reprenez la dataframe du Titanic, en choisissant toujours comme index `PassengerId`  
 #    utilisez la méthode des dataframe `sort_index` pour la trier dans l'ordre des index 
 
-# %%
+# %% {"tags": ["level_intermediate"]}
 # votre code
 
-# %%
+# %% {"tags": ["level_intermediate"]}
 # prune-cell
 cols = ['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'Fare' ]
 df = pd.read_csv('titanic.csv', index_col='PassengerId', usecols=cols)
