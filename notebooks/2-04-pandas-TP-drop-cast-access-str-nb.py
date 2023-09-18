@@ -148,9 +148,6 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # %%
 # votre code
 
-# %%
-pd.Series.asty
-
 # %% [markdown]
 # 12. 1. Quels sont les pays qui ont laissé des objets sur la lune ?
 #     2. Combien en ont-ils laissé en pourcentage (pas en nombre) ?  

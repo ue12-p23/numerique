@@ -203,6 +203,22 @@ df['Mass (lb) clean'] = df['Mass (lb) orig'].str.replace('<', '').str.replace('>
 
 # %%
 # prune-cell
+
+# REMARQUE - pour les avancés
+# il existe en Pandas un type qui contient les entiers ET nan
+# donc si par exemple on n'avait pas nettoyé la dernière ligne ci-dessus
+# on aurait donc une valeur nan dans la colonne des masses
+# et dans ce cas-là on ne peut pas faire .astype(int)
+# MAIS on peut le faire avec ce type:
+
+# le type magique se construit comme ceci
+int_with_nan = dtype=pd.Int64Dtype()
+
+# df['Mass (lb) clean'] = 
+df['Mass (lb) orig'].str.replace('<', '').str.replace('>', '').astype(int_with_nan)
+
+# %%
+# prune-cell
 df['Mass (lb) clean'].dtype
 
 # %% [markdown]
@@ -216,9 +232,6 @@ df['Mass (lb) clean'].dtype
 # %%
 # prune-cell
 df['Mass (kg)'] = (df['Mass (lb) clean'] / 2.205).astype(int)
-
-# %%
-pd.Series.asty
 
 # %% [markdown]
 # 12. 1. Quels sont les pays qui ont laissé des objets sur la lune ?

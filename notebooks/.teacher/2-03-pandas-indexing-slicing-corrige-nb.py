@@ -844,16 +844,19 @@ selection2
 #
 # ````{admonition} →
 # * indexation directe par un masque `df[mask]`
+#   * on peut aussi utiliser un masque avec `.loc[mask, columns]`
 # * indexation au travers de `.loc[]`/`.iloc[]`
 #   * par un index/indice resp.
 #   * par liste explicite
 #   * par slicing:
 #       * borne sup **incluse avec `.loc[]`** 
 #       * et exclue avec `.iloc[]` (comme d'hab en Python)
+# ````
 #
+# ````{admonition} →
 # on peut mélanger les méthodes d'indexation
 #
-# ex1: une liste pour les lignes et une slice pour les colonnes
+# * ex1: une liste pour les lignes et une slice pour les colonnes
 # ```python
 # df.loc[
 #     # dans la dimension des lignes: une liste
@@ -868,7 +871,7 @@ selection2
 #          67   female  0       C.A. 29395  F33
 # ```
 #
-# ex2: un masque booléen pour les lignes et une liste pour les colonnes  
+# * ex2: un masque booléen pour les lignes et une liste pour les colonnes  
 # les colonnes `Sex` et `Survived` des passagers de plus de 71 ans
 # ```python
 # df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
@@ -879,7 +882,9 @@ selection2
 #         631 male 1
 #         852 male 0
 # ```
+# ````
 #
+# ````{admonition} →
 # le type du résultat dépend bien entendu de la dimension de la sélection
 #
 # * dimension 2: DataFrame
@@ -915,7 +920,7 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #
 # vous devez vous en soucier ?
 #
-# * oui, **dès que** vous essayez de modifier des sous-parties de dataframe
+# * **oui**, dès que vous **voulez modifier** des sous-parties de dataframe
 # * tant que vous ne faites que lire, tout va bien
 #
 # en effet
@@ -933,14 +938,16 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #
 # **à retenir**
 #
-# * en utilisant les méthodes `pandas.DataFrame.loc[line, column]` et `pandas.DataFrame.iloc[line, column]`  
+# * en utilisant les méthodes **`pandas.DataFrame.loc[line, column]`** et `pandas.DataFrame.iloc[line, column]`  
 # on ne **crée pas de copie** mais des **références partagées**  
+# c'est ***la bonne façon de faire***
 #
 #
 # * dès que vous utiliser un **chaînage d'indexation** pour modifier  
 # que ce soit `df[l][c]` ou `df.loc[l][c]` ou `df.iloc[l][c]`  
 #  **vous ne pouvez pas compter sur le résultat**  
-# ça fonctionne par hasard
+# ça fonctionne par hasard  
+# ***à éviter absolument***
 #
 # (pour les avancés) ce *problème* s'appelle le *chained indexing*  
 # <https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy>
