@@ -25,9 +25,9 @@
 # %% [markdown]
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-# %%
+# %% scrolled=true
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html");
 
 # %% [markdown]
 # # conditions et masques
@@ -69,10 +69,7 @@ import numpy as np
 #
 # ````
 
-# %% [markdown]
-# ***
-
-# %% [markdown] slideshow={"slide_type": "slide"} tags=["framed_cell"]
+# %% [markdown] slideshow={"slide_type": "slide"} tags=["framed_cell"] jp-MarkdownHeadingCollapsed=true
 # ## conditions et masques
 #
 # ````{admonition} →
@@ -128,14 +125,82 @@ import numpy as np
 #
 # ````
 
+# %% [markdown] editable=true slideshow={"slide_type": ""} tags=["framed_cell"]
+# ## Intérêt de la vectorization
+#
+# ````{admonition} →
+# :class: dropdown
+#
+# Calculez les temps d'exécution de ces deux codes.  
+# Quel est le plus rapide ?
+#
+# ```python
+# %%timeit
+# df['Age'] < 12
+# ```
+#
+# ou  
+# ```python
+# %%timeit
+# for i in df.index:
+#    df['Age'][i] < 12
+# ```
+#
+# ```{exercise} vectorisation d'une fonction
+#
+# 1. En utilisant une fonction de génération de nombres aléatoires  
+# *comme `np.random.randint`, `np.random.randn`...*
+#    1. créez une `pd.Series` de valeurs aléatoires, de la taille d'une colonne de la dataframe du Titanic et ayant le même index que la dataframe du Titanic
+#    2. ajoutez cette `pd.Series` aux colonnes de la dataframe du Titanic
+# 1. Implémentez la fonction `Python` `my_abs(x)` qui renvoie la valeur absolue de `x` sans utiliser la fonction `abs`
+# 1. Appliquez la fonction `my_abs` à la colonne que vous avez ajoutée dans la dataframe du Titanic  
+# 1. Que se passe-t-il ? Pourquoi ?
+# 1. La solution est créer une version vectorisée de votre fonction `my_abs`  
+#    1. faites le (en utilisant `np.vectorize`)
+#    1. remplacez (dans la dataframe) la colonne par la colonne à laquelle vous appliquez la fonction vectorisée
+# ```
+#
+# ````
 # %%
-# le code
-df = pd.read_csv('titanic.csv', index_col='PassengerId')
-children = df['Age'] < 12
-children
+# prune-cell
 
-# %%
-children.dtype
+from IPython import display
+
+# on lit la dataframe du titanic
+df_ = pd.read_csv('./titanic.csv').set_index('PassengerId')
+
+# 1.1 créez une pd.Series
+s = pd.Series(np.random.randn(len(df_)), index=df_.index)
+
+# 1.2 ajoutez cette pd.Series aux colonnes de la dataframe du Titanic
+df_['rand-col-end'] = s
+
+# 1.2-bis
+# on peut aussi l'insérer à une position donnée (ici à l'indice 0)
+df_.insert(0, 'rand-col', s)
+display.display(df_[['rand-col']].head())
+
+# 2. Implémentez la fonction Python my_abs(x) qui renvoie la valeur absolue de x
+def my_abs (x):
+    if x < 0:
+        return -x
+    return x
+
+# 3. Appliquez la fonction my_abs à la colonne que vous avez ajoutée dans la dataframe du Titanic
+# et 4. Que se passe-t-il ? Pourquoi ?
+try:
+    my_abs(df_['rand-col'])
+except ValueError as e:
+    print(f"   {e}")
+    # ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all()
+    print("on veut l'appliquer élément par élément alors qu'elle n'est pas vectorisée")
+
+# 5.1 faites le (en utilisant np.vectorize)
+my_vect_abs = np.vectorize(my_abs)
+
+# 5.2 remplacez (dans la dataframe) la colonne par la colonne à laquelle vous appliquez la fonction vectorisée
+df_['rand-col'] = my_vect_abs(df_['rand-col'])
+df_[['rand-col']].head()
 
 # %%
 girls = (df['Age'] < 12) & (df['Sex'] == 'female')
@@ -173,12 +238,6 @@ girls.sum()
 # on reviendra tout de suite sur les données manquantes
 # ````
 
-# %%
-children.sum()
-
-# %%
-children.value_counts()
-
 # %% [markdown]
 # ## valeurs manquantes
 
@@ -205,9 +264,6 @@ children.value_counts()
 # il existe aussi des synonymes `isnull()` et `notnull()` - **préférez** `isna`
 #
 # ````
-
-# %% [markdown]
-# ***
 
 # %% [markdown] tags=["framed_cell"]
 # ### valeurs manquantes dans une colonne
@@ -237,29 +293,26 @@ children.value_counts()
 #                                 ^^
 # ```
 #
-# combien d'ages sont manquants ?
+# combien d'ages sont manquants ?  
+# *on reviendra sur les valeurs manquantes*
 #
 # ```python
 # df['Age'].isna().sum()
 # -> 177
 # ```
 #
-# on y reviendra
+# on peut tout aussi bien utiliser le `sum` de `numpy` ou de `Python`
+#
+# ```python
+# np.sum(df['Age'].isna())
+# -> 177
+# ```
+# ```python
+# sum(df['Age'].isna())
+# -> 177
+# ```
+#
 # ````
-
-# %% scrolled=true
-# le code
-df['Age'].isna()
-
-# %%
-df['Age'].isna().sum()
-
-
-# %%
-# remarquez qu'on peut tout aussi bien
-# utiliser le sum() de np ou de Python
-import numpy as np
-np.sum(df['Age'].isna()), sum(df['Age'].isna())
 
 # %% [markdown] tags=["framed_cell"]
 # ### valeurs manquantes sur une dataframe
@@ -275,6 +328,7 @@ np.sum(df['Age'].isna()), sum(df['Age'].isna())
 #
 # ```python
 # df.isna()
+#
 # ->              Survived  Pclass   Name    Sex  ...  Ticket   Fare  Cabin  Embarked
 # PassengerId                                  ...
 # 552             False   False  False  False  ...   False  False   True     False
@@ -294,10 +348,6 @@ np.sum(df['Age'].isna()), sum(df['Age'].isna())
 #
 # vous remarquez une dataframe de la **même taille** que `df`
 # ````
-
-# %%
-# le code
-df.isna()
 
 # %% [markdown] jp-MarkdownHeadingCollapsed=true tags=["framed_cell"]
 # ### compter les valeurs manquantes
@@ -349,7 +399,8 @@ df.isna()
 # exemple de la somme des valeurs manquantes sur l'axe des colonnes
 #
 # ```python
-# df.isna().sum(axis=1):
+# df.isna().sum(axis=1)
+#
 # ->  PassengerId
 #     552    1
 #     638    1
@@ -368,24 +419,16 @@ df.isna()
 # le passager d'id `261` a deux valeurs manquantes
 # ````
 
-# %%
-# le code
-df.isna().sum()       # c'est la
-df.isna().sum(axis=0) # même chose
-
-# %%
-# le code
-df.isna().sum(axis=1)
-
-# %% [markdown] tags=["framed_cell"]
+# %% [markdown] tags=["framed_cell"] editable=true slideshow={"slide_type": ""}
 # ### les fonctions `numpy` d'agrégation
 #
 # ````{admonition} →
-# les méthodes `numpy` d'agrégation (comme `sum()` et `mean()` et `min()` etc...) s'appliquent sur des `pandas.DataFrame` et des `pandas.Series`
+# les méthodes `numpy` d'agrégation (comme `sum` et `mean` et `min`...)  
+# s'appliquent sur les `pandas.DataFrame` et les `pandas.Series`
 #
-# on précise l'`axis`  
-# `0` pour l'axe des lignes (c'est le mode par défaut)  
-# `1` pour l'axe des colonnes  
+# on précise l'`axis`
+# * `0` pour l'axe des lignes (le défaut)  
+# * `1` pour l'axe des colonnes  
 #
 # différence avec `numpy`, si on appelle sans préciser `axis`
 #
@@ -426,108 +469,74 @@ df.isna().sum(axis=1)
 # ```
 # ````
 
-# %%
-df.isna().sum().sum()
-
-# %%
-# le code
-df.isna().to_numpy()
-
-# %%
-# le code
-np.sum(df.isna().to_numpy())
-df.isna().to_numpy().sum()
-
-# %% [markdown]
-# ***
-
-# %% [markdown]
-# ## **exercice** valeurs uniques
-
-# %% [markdown]
+# %% [markdown] editable=true slideshow={"slide_type": ""} tags=["framed_cell"]
+# ````{exercise} valeurs uniques
+#
+#
 # 1. lisez la data-frame du titanic `df`
-
-# %% slideshow={"slide_type": ""}
-# votre code
-
-# %%
-# prune-cell 1.
-
-df = pd.read_csv("titanic.csv")
-
-
-# %% [markdown]
-# 2. utilisez la méthode `pd.Series.unique` (1) pour compter le nombre de valeurs uniques  
+#
+# 2. utilisez la méthode `pd.Series.unique` pour compter le nombre de valeurs uniques  
 # des colonnes `'Survived'`, `'Pclass'`, `'Sex'` et `'Embarked'`  
 # vous pouvez utiliser un for-python pour parcourir la liste `cols` des noms des colonnes choisies
 #
-# (1) servez-vous du help `pd.Series.unique?`
-
-# %%
-# votre code
-
-# %%
-# prune-cell 2.
-
-cols = ['Survived', 'Pclass', 'Sex', 'Embarked']
-for c in cols:
-    print(f"{c} unique values: {df[c].unique()}")
-
-
-# %% [markdown]
 # 3. utilisez l'expression `df[cols]` pour sélectionner la sous-dataframe réduite à ces 4 colonnes  
 #    et utilisez l'attribut `dtypes` des `pandas.DataFrame` pour afficher le type de ces 4 colonnes
-
-# %%
-# votre code
-
-# %%
-# prune-cell 3.
-minidf = df[cols]
-print(f"{minidf.dtypes=}")
-# du coup on pourrait faire
-for c in minidf.columns:
-    print(f"column {c:>12} has type {minidf.dtypes[c]} =?= {df[c].dtype}")
-
-# %% [markdown] tags=[]
+#
 # 4. que constatez-vous ?  
 # quel type serait plus approprié pour ces colonnes ?
-
-# %%
-# votre code
-
-# %% [markdown]
-# prune-cell 4.
 #
-# * la colonne Survived pourrait être un booléen
-# * les trois autres colonnes sont des catégories (nombre fini de valeurs possibles)
+# ````
 
-# %% [markdown]
-# ***
+# %%
+# prune-cell
 
-# %% [markdown]
-# ## **exercice** conditions
+# 1. lisez la data-frame du titanic `df`
+df = pd.read_csv("titanic.csv")
 
-# %% [markdown]
+# 2. utilisez la méthode `pd.Series.unique` pour compter le nombre de valeurs uniques  
+cols = ['Survived', 'Pclass', 'Sex', 'Embarked']
+for c in cols:
+    print(f"'{c}' unique values {df[c].unique()}")
+
+# 3. utilisez l'expression `df[cols]` pour sélectionner la sous-dataframe réduite à ces 4 colonnes  
+minidf = df[cols]
+print(f'{minidf.dtypes=}')
+
+for c in minidf.columns:
+    print(f"column {c:>12} has type {minidf.dtypes[c]}")
+
+# 4. que constatez-vous ?  
+print('la colonne Survived devrait être de type booléen')
+print('les trois autres colonnes devraient être de type catégories (nombre fini de valeurs possibles)')
+
+# %% [markdown] editable=true slideshow={"slide_type": ""} tags=["framed_cell"]
+# ````{exercise} conditions
+#
 # 1. lisez la data-frame des passagers du titanic
-
-# %%
-# votre code
-
-# %%
-# prune-cell 1.
-df = pd.read_csv('titanic.csv', index_col='PassengerId')
-# df.isna().to_numpy().sum(), df.isna().sum(axis=1), df.isna().sum(axis=0),
-
-# %% [markdown]
+#
 # 2. calculez les valeurs manquantes: totales, des colonnes et des lignes
+#
+# 3. calculez le nombre de classes du bateau
+#
+# 4. calculez le taux d'hommes et de femmes  
+#    *indice: voyez les paramètres optionnels de `Series.value_counts()`*
+#
+# 5. calculez le taux de personnes entre 20 et 40 ans (bornes comprises)
+#
+# 6. calculez le taux de survie des passagers
+#
+# 7. calculez le taux de survie des hommes et des femmes par classes  
+# on reverra ces décomptes d'une autre manière
+#
+# ````
 
 # %%
-# votre code
+# prune-cell
 
-# %%
-# prune-cell 2.
+# 1. lisez la data-frame des passagers du titanic
+df = pd.read_csv('titanic.csv', index_col='PassengerId')
 
+# 2. calculez les valeurs manquantes: totales, des colonnes et des lignes
 print(10*'-', 'par colonne')
 print(df.isna().sum())
 print(10*'-', 'par ligne')
@@ -535,60 +544,21 @@ print(df.isna().sum(axis=1))
 print(10*'-', 'total')
 print(df.isna().sum().sum())
 
-# %% [markdown]
 # 3. calculez le nombre de classes du bateau
-
-# %%
-# votre code
-
-# %%
-# prune-cell 3.
 len(df['Pclass'].unique())
 
-# %% [markdown]
-# 4. calculez le taux d'hommes et de femmes  
-#    indice: voyez les paramètres optionnels de `Series.value_counts()`
-
-# %%
-# votre code
-
-# %%
-# prune-cell 4.
+# 4. calculez le taux d'hommes et de femmes
 df['Sex'].value_counts()/len(df)
 # ou encore
 df['Sex'].value_counts(normalize=True)#/len(df)
 
-# %% [markdown]
 # 5. calculez le taux de personnes entre 20 et 40 ans (bornes comprises)
-
-# %%
-# votre code
-
-# %%
-# prune-cell 5.
 ((df['Age'] >= 20) & (df['Age'] <= 40)).sum()/len(df)
 
-# %% [markdown]
 # 6. calculez le taux de survie des passagers
-
-# %%
-# votre code
-
-# %%
-# prune-cell 6.
 (df.Survived == 1).mean()
 
-# %% [markdown]
 # 7. calculez le taux de survie des hommes et des femmes par classes  
-# on reverra ces décomptes d'une autre manière
-
-# %%
-# votre code
-
-# %%
-# prune-cell 7.
-
-# classe
 cls = 1
 
 # nb d'hommes
@@ -601,20 +571,9 @@ pass_f_cls = ((df['Sex'] == 'female') & (df['Pclass'] == cls)).sum()
 (   ((df['Sex'] == 'male') & (df['Survived'] == 1) & (df['Pclass'] == cls)).sum()/pass_h_cls,
     ((df['Sex'] == 'female') & (df['Survived'] == 1) & (df['Pclass'] == cls)).sum()/pass_f_cls )
 
-
-# %%
-# prune-cell
-
 c1 = (df['Pclass'] == 1).sum()
 c2 = (df['Pclass'] == 2).sum()
 c3 = (df['Pclass'] == 3).sum()
 
-
-# %%
-# prune-cell
-
 (   ((df['Sex'] == 'female') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()/c1,
-    ((df['Sex'] == 'male') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()/c1     )
-
-# %% [markdown]
-# ***
+    ((df['Sex'] == 'male') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()/c1     );
