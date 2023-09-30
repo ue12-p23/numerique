@@ -27,7 +27,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html");
 
 # %% [markdown]
 # # indexation et accès aux sous-tableaux
@@ -49,9 +49,9 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 #
 # `pandas` a mis ses efforts sur la gestion d'une indexation des lignes et des colonnes
 #
-# ils ont privilégié le repérage des éléments d'une dataframe **par les index**  
+# ils ont **privilégié** le repérage des éléments d'une dataframe **par les index**  `df['Age'][450]`  
 # (les **noms** de colonnes et les **labels** de lignes)  
-# et **pas** par les **indices** comme en Python ou en `numpy`
+# et **pas** par les **indices** comme en `Python` ou en `numpy`
 #
 # Pourquoi ?
 #
@@ -70,9 +70,6 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # par indices, c'est juste moins pertinent la plupart du temps
 # ```
 # ````
-
-# %% [markdown]
-# ***
 
 # %% [markdown] tags=["framed_cell"]
 # ## copier une dataframe ou une série
@@ -120,16 +117,6 @@ import numpy as np # pandas reposant sur numpy on a souvent besoin des deux libr
 # mais totalement indépendante
 # ````
 
-# %%
-# le code
-df = pd.read_csv('titanic.csv', index_col='PassengerId')
-df2 = df.copy()
-df2.loc[552, 'Age'] = 100
-df2.head(1)
-
-# %%
-df.head(1)
-
 # %% [markdown] tags=["framed_cell"]
 # ## créer une nouvelle colonne
 #
@@ -152,11 +139,6 @@ df.head(1)
 # nous avons rajouté la clé `'Deceased'` dans l'index des colonnes  
 # `pandas` voit sa dataframe comme un dictionnaire des colonnes  
 # ````
-
-# %%
-# le code
-df['Deceased'] = 1 - df['Survived']
-df.head(3)
 
 # %% [markdown] tags=["framed_cell"]
 # ## rappels `python`, `numpy`
@@ -203,30 +185,9 @@ df.head(3)
 # ```
 #
 # ***mais ATTENTION  
-# ce n'est pas comme ça que ça fonctionne en pandas!!!***
+# ce n'est pas comme ça que ça fonctionne en `pandas`***
+#
 # ````
-
-# %%
-# le code - rappels sur Python
-
-L = [10, 20, 30, 40, 60]
-L[0] = "Hello !"
-print(L)
-L[1:3] = [200, 300, 500]
-L
-
-# %%
-# le code - rappels sur numpy
-
-mat = np.arange(12).reshape((4, 3))
-mat[0:2, 0:2] = 999
-mat
-
-# %%
-# le code - accéder à un élément de la df 
-# ATTENTION: ça marche mais IL NE FAUT PAS FAIRE COMME CA !
-
-df['Age'][552]
 
 # %% [markdown]
 # ## localiser en `pandas`
@@ -248,9 +209,6 @@ df['Age'][552]
 # donc déjà on sait qu'on ne pourra pas écrire quelque chose comme  
 # `df[ligne, colonne]` **NON**
 # ````
-
-# %% [markdown]
-# ***
 
 # %% [markdown] tags=["framed_cell"]
 # ### localisation avec `loc` et `iloc`
@@ -297,22 +255,6 @@ df['Age'][552]
 # -> 'Richards, Master. George Sibley'
 # ```
 # ````
-
-# %%
-df = pd.read_csv('titanic.csv', index_col='PassengerId')
-df.head(2)
-
-# %%
-df.tail(1)
-
-# %%
-df.loc[552, 'Name']
-
-# %%
-df.iloc[0, 2]
-
-# %%
-df.iloc[-1, 2]
 
 # %% [markdown] tags=["framed_cell"]
 # ### sélection multiple
@@ -365,30 +307,6 @@ df.iloc[-1, 2]
 # ```
 # ````
 
-# %%
-df.loc[552]
-
-# %%
-# bien sûr les index choisis
-# ne pas forcément contigus
-df.loc[[552, 832]]
-
-# %%
-# choisir plusieurs lignes et plusieurs colonnes
-df.loc[[552, 832], ['Name', 'Pclass']]
-
-# %%
-# la même avec iloc
-df.iloc[[0, -1], [2, 1]]
-
-# %%
-# plusieurs colonnes : forme #1 (le plus simple)
-df[['Name', 'Pclass']]
-
-# %%
-# plusieurs colonnes : forme #2 (le plus explicite)
-df.loc[:, ['Name', 'Pclass']]
-
 # %% [markdown] tags=["framed_cell"]
 # ### slicing `pandas` et bornes
 #
@@ -405,9 +323,6 @@ df.loc[:, ['Name', 'Pclass']]
 #   comme c'est l'habitude en Python
 #
 # ````
-
-# %% [markdown]
-# ***
 
 # %% [markdown] tags=["framed_cell"]
 # ### slicing avec `loc` par index
@@ -438,32 +353,6 @@ df.loc[:, ['Name', 'Pclass']]
 #
 # ````
 
-# %%
-# les ids des 5 premières lignes
-df.index[:5]
-
-# %%
-# les noms des 5 premières colonnes
-df.columns[:5]
-
-# %%
-# slice avec loc -> inclusif
-df.loc[ 638:261, 'Pclass': 'Age'].shape # (3, 4)
-
-# %%
-# le code
-df.loc[ 638:261, 'Pclass': 'Age']
-
-# %% [markdown]
-# ````{tip}
-# avec la méthode `get_loc()` sur un objet Index, on peut facilement obtenir l'indice d'un index
-# ````
-
-# %%
-# remarquons une méthode des Index
-# pour obtenir l'indice d'un index
-df.columns.get_loc('Pclass'), df.index.get_loc(261)
-
 # %% [markdown] tags=["framed_cell"]
 # ### slicing avec `iloc` par indices
 #
@@ -485,11 +374,27 @@ df.columns.get_loc('Pclass'), df.index.get_loc(261)
 # df.iloc[1:7, 1:4].shape
 # -> (6, 3)
 # ```
+#
+# ```{tip}
+# avec la méthode `get_loc()` sur un objet Index  
+# on peut facilement obtenir l'indice d'un index (de colonne ou de ligne)  
+# ```
+#
+# ```python
+# # l'indice de la colonne 'Pclass'
+# df.columns.get_loc('Pclass')
+#
+# -> 1
+# ```
+#
+# ```python
+# # l'indice de la ligne 261
+# df.index.get_loc(261)
+#
+# -> 3
+# ```
+#
 # ````
-
-# %%
-# le code
-df.iloc[1:7, 1:4].shape
 
 # %% [markdown] tags=["framed_cell"]
 # ### localiser des lignes et des colonnes
@@ -544,96 +449,49 @@ df.iloc[1:7, 1:4].shape
 #
 # ````
 
-# %%
-# le code
-df.loc[552, :].shape
-df.loc[552].shape
-
-# %%
-# le code
-df.loc[:, 'Survived'].shape
-
-# %%
-# le code
-df.iloc[0, :].shape
-df.iloc[0].shape
-
-# %%
-# le code
-df.iloc[:, 0].shape
-
-# %% [markdown]
-# ***
-
-# %% [markdown]
-# ## **exercice** sélections multiples et slicing
-
-# %% [markdown]
+# %% [markdown] tags=["framed_cell"]
+# ````{exercise} sélections multiples et slicing
+#
 # 1. lisez le titanic et mettez les `PassengerId` comme index des lignes
-
-# %%
-# votre code
-
-# %%
-# prune-cell
-df = pd.read_csv('titanic.csv', index_col='PassengerId')
-
-# %% [markdown]
 # 2. localisez l'élément d'index `40`  
 #   a. Quel est le type de l'élément ?  
 #   b. localisez le nom du passager d'index `40` ?
-
-# %%
-# votre code
+# 3. quel est le nom de la personne qui apparaît en avant-dernier dans le fichier
+# 4. localisez les 3 derniers éléments de la ligne d'index `40`
+# 5. localisez les 4 derniers éléments de la colonne `Cabin`
+# 6. fabriquez une dataframe contenant
+#   * les infos des 10 dernières lignes du fichier
+#   * pour les colonnes `Name`, `Pclass` et `Survived`
+# ````
 
 # %%
 # prune-cell
+
+# 1. lisez le titanic et mettez les `PassengerId` comme index des lignes
+df = pd.read_csv('titanic.csv', index_col='PassengerId')
+df = pd.read_csv('titanic.csv').set_index('PassengerId')
+
+# 2. localisez l'élément d'index `40`  
+# 2.a. Quel est le type de l'élément ?  
+# 2.b. localisez le nom du passager d'index `40` ?
 
 p40 = df.loc[40]
 print(f"{p40} is of type {type(p40)}")
 print(f"their name is {p40.loc['Name']}")
 print(f"their name is also {df.loc[40, 'Name']}")
 
-# %% [markdown]
 # 3. quel est le nom de la personne qui apparaît en avant-dernier dans le fichier
-
-# %%
-# votre code
-
-# %%
-# prune-cell
 df.iloc[-2].loc['Name']
 
-# %% [markdown]
 # 4. localisez les 3 derniers éléments de la ligne d'index `40`
-
-# %%
-# votre code
-
-# %%
-# prune-cell
 df.loc[40].iloc[-3:]
 
-# %% [markdown]
 # 5. localisez les 4 derniers éléments de la colonne `Cabin`
-
-# %%
-# votre code
-
-# %%
 df['Cabin'].iloc[-4:]
 
-# %% [markdown]
 # 6. fabriquez une dataframe contenant
-#
-#   * les infos des 10 dernières lignes du fichier
-#   * pour les colonnes `Name`, `Pclass` et `Survived`
-
-# %%
-# votre code
-
-# %%
-# prune-cell
+# les infos des 10 dernières lignes du fichier
+# pour les colonnes `Name`, `Pclass` et `Survived`
 df.iloc[-10:][['Name', 'Pclass', 'Survived']]
 
 # %% [markdown]
@@ -666,22 +524,20 @@ df.iloc[-10:][['Name', 'Pclass', 'Survived']]
 # taux de survie des passagers femmes de première classe
 #
 # ```python
-#
-# ( ((df['Sex'] == 'female') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()
-#   /((df['Sex'] == 'female') & (df['Pclass'] == 1)).sum()   )
-#
+# ( 
+#     (
+#           (df['Sex'] == 'female') # les femmes
+#         & (df['Pclass'] == 1)     # de première classe
+#         & (df['Survived'] == 1)   # ayant survécu
+#     ).sum() # la somme
+#     /
+#     (
+#           (df['Sex'] == 'female') # les femmes
+#         & (df['Pclass'] == 1)     # de première classe
+#     ).sum() # la somme
+# )
 # ```
 # ````
-
-# %%
-# le code
-df = pd.read_csv('titanic.csv', index_col='PassengerId')
-
-df_survived = (df['Survived'] == 1)
-print(   df_survived.sum()/len(df)   )
-
-( ((df['Sex'] == 'female') & (df['Survived'] == 1) & (df['Pclass'] == 1)).sum()
-  /((df['Sex'] == 'female') & (df['Pclass'] == 1)).sum()   )
 
 # %% [markdown] tags=["framed_cell"]
 # ### sélection par masque booléen
@@ -703,6 +559,9 @@ print(   df_survived.sum()/len(df)   )
 # df [ df['Sex'] == 'female' ]
 # # ou encore
 # df.loc[ df['Sex'] == 'female' ]
+#
+# -> pandas retourne une nouvelle dataframe ne contenant que les femmes
+#
 # ```
 #
 # ```{admonition} note
@@ -713,11 +572,6 @@ print(   df_survived.sum()/len(df)   )
 # doit être sélectionnée ou non
 # ```
 # ````
-
-# %%
-# le code
-# on fabrique une dataframe qui contient seulement les femmes
-df [ df['Sex'] == 'female' ]
 
 # %% [markdown] tags=["framed_cell"]
 # ### `df[mask]` décortiqué
@@ -769,140 +623,41 @@ df [ df['Sex'] == 'female' ]
 # ```
 # ````
 
-# %%
-# le code
-mask = df.Sex == 'female'
-print(type(mask))   # pandas.core.series.Series
-print(mask.dtype)   # dtype('bool')
-print(mask.shape)
-mask.head() # un masque de booléens sur la colonne des index donc la colonne PassengerId
-
-# %%
-# on indexe directement la dataframe par un masque
-df[mask].head()
-
-# %%
-# tout sur une ligne
-df[df.Sex == 'female'].head()
-
-# %% [markdown]
-# ***
-
-# %% [markdown]
-# ## **exercice** combinaison d'expressions booléennes
-
-# %% [markdown]
+# %% [markdown] tags=["framed_cell"]
+# ````{exercise} combinaison d'expressions booléennes
+#
 # 1. en une seule ligne sélectionner la sous-dataframe des passagers  
 # qui ne sont pas en première classe  
 # et dont l'age est supérieur ou égal à 70 ans
+#
+# 2. Combien trouvez-vous de passagers ?
+#
+# 3. Accédez à la valeur `Name` du premier de ces passagers
+#
+# 2. Faites la même expression que la question 1  
+# en utilisant les fonctions `numpy.logical_and`, `numpy.logical_not`
+#
+#
+# ````
 
 # %%
-# votre code
 
-# %%
-# prune-cell
+# 1. en une seule ligne sélectionner la sous-dataframe des passagers  
+# qui ne sont pas en première classe  
+# et dont l'age est supérieur ou égal à 70 ans
 selection = df[ (df.Pclass != 1) & (df.Age >= 70) ]
 selection
 
-# %% [markdown]
 # 2. Combien trouvez-vous de passagers ?
-
-# %%
-# votre code
-
-# %% tags=[] editable=true slideshow={"slide_type": ""}
-# prune-cell
 len(selection)
 
-# %% [markdown]
 # 3. Accédez à la valeur `Name` du premier de ces passagers
-
-# %%
-# votre code
-
-# %%
-# prune-cell
 selection.iloc[0].loc['Name']
 
-# %% [markdown]
-# 2. Faites la même expression que la question 1  
+# 4. Faites la même expression que la question 1  
 # en utilisant les fonctions `numpy.logical_and`, `numpy.logical_not`
 
-# %%
-# votre code
-
-# %%
-# prune-cell
 selection2 = df [ np.logical_and ( np.logical_not( df.Pclass == 1), df.Age >= 70)]
-selection2
-
-# %% [markdown]
-# ***
-
-# %% [markdown] tags=["framed_cell"]
-# ## résumé des méthodes d'indexation
-#
-# ````{admonition} →
-# * indexation directe par un masque `df[mask]`
-#   * on peut aussi utiliser un masque avec `.loc[mask, columns]`
-# * indexation au travers de `.loc[]`/`.iloc[]`
-#   * par un index/indice resp.
-#   * par liste explicite
-#   * par slicing:
-#       * borne sup **incluse avec `.loc[]`** 
-#       * et exclue avec `.iloc[]` (comme d'hab en Python)
-# ````
-#
-# ````{admonition} →
-# on peut mélanger les méthodes d'indexation
-#
-# * ex1: une liste pour les lignes et une slice pour les colonnes
-# ```python
-# df.loc[
-#     # dans la dimension des lignes: une liste
-#     [450, 3, 67],
-#     # dans la dimension des colonnes: une slice
-#     'Sex':'Cabin':2]
-# ->
-#               Sex     SibSp       Ticket  Cabin
-# PassengerId
-#         450   male    0           113786  C104
-#           3   female  0 STON/O2. 3101282  NaN
-#          67   female  0       C.A. 29395  F33
-# ```
-#
-# * ex2: un masque booléen pour les lignes et une liste pour les colonnes  
-# les colonnes `Sex` et `Survived` des passagers de plus de 71 ans
-# ```python
-# df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
-# ->          Sex  Survived
-# PassengerId
-#          97 male 0
-#         494 male 0
-#         631 male 1
-#         852 male 0
-# ```
-# ````
-#
-# ````{admonition} →
-# le type du résultat dépend bien entendu de la dimension de la sélection
-#
-# * dimension 2: DataFrame
-# * dimension 1: Series
-# * dimension 0: le type de la cellule sélectionnée
-# ````
-
-# %% tags=[]
-# le code
-df.loc[
-    # dans la dimension des lignes: une liste
-    [450, 3, 67],
-    # dans la dimension des colonnes: une slice
-    'Sex':'Cabin':2]
-
-# %%
-# le code
-df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 
 # %% [markdown]
 # ## règles des modifications
@@ -943,6 +698,8 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # c'est ***la bonne façon de faire***
 #
 #
+#
+#
 # * dès que vous utiliser un **chaînage d'indexation** pour modifier  
 # que ce soit `df[l][c]` ou `df.loc[l][c]` ou `df.iloc[l][c]`  
 #  **vous ne pouvez pas compter sur le résultat**  
@@ -953,14 +710,11 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # <https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy>
 # ````
 
-# %% [markdown] tags=["level_intermediate"]
-# ***
-
-# %% [markdown] tags=["level_intermediate", "framed_cell"]
+# %% [markdown] tags=["framed_cell"]
 # ### modification d'une copie
 #
 # ````{note}
-# cette section est un peu avancée; pour les groupes de débutants, retenez simplement de toujours utiliser `.loc()` (ou `.iloc()` selon le contexte) pour créer des sélections de vos dataframes, si l'objectif est d'en modifir le contenue
+# cette section est un peu avancée; pour les groupes de débutants, retenez simplement de toujours utiliser `.loc` (ou `.iloc` selon le contexte) pour créer des sélections de vos dataframes, si l'objectif est d'en modifir le contenu
 # ````
 #
 # ````{admonition} →
@@ -1009,46 +763,18 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 # * toutes les indexations par chaînage sont des copies
 # * elle ne doivent pas être utilisées pour des modifications
 #
-# si ça fonctionne c'est *par hasard*, vous **devez utiliser** `loc` ou `iloc` !
+# il est tout à fait possible que `df['Survived'][1]` soit passé à 1, mais c'est **par hasard**  
+# et vous **devez utiliser** `loc` ou `iloc` pour modifier
+#
+# > **gros warning** $\Rightarrow$ **code faux**
+#
 #
 # ```python
 # df.loc[1, 'Survived'] = 1
 # ```
 # ````
 
-# %% tags=["level_intermediate"]
-# le code
-df = pd.read_csv('titanic.csv', index_col='PassengerId')
-df.loc[552, 'Survived']
-
-# %% tags=["level_intermediate"] scrolled=true
-df['Survived'][552] = 1
-# possible que df['Survived'][1] soit passé à 1, par hasard
-# mais votre code est faux
-# et dans tous les cas vous recevez un gros warning !
-df.loc[552, 'Survived']
-
-# %% scrolled=true tags=["level_intermediate"]
-# ça c'est la façon propre de faire
-df.loc[552, 'Survived'] = 1
-df.loc[552, 'Survived']
-
-# %% scrolled=true tags=["level_intermediate"]
-# la preuve
-df.loc[552, 'Survived'] = 0
-df.loc[552, 'Survived']
-
-# %% tags=["level_intermediate"]
-# le code
-print(df['Age'][889])
-
-# le code
-df.loc[889, 'Age'] = 27.5
-
-# le code
-df['Age'][889] = 27.5
-
-# %% [markdown] tags=["level_intermediate", "framed_cell"]
+# %% [markdown] tags=["framed_cell"]
 # ### faire des copies explicites
 #
 # ````{admonition} →
@@ -1066,20 +792,9 @@ df['Age'][889] = 27.5
 # si l'idée est de ne modifier qu'une copie d'une dataframe  
 # utilisez `copy` pour maîtriser ce que vous faites  
 # et coder ainsi explicitement et proprement
+#
+# ```{note}
+# `pandas`  développe un copy-on-write  
+# <https://pandas.pydata.org/docs/dev/user_guide/copy_on_write.html>
+# ```
 # ````
-
-# %% tags=["level_intermediate"]
-# le code
-df1 = df.loc[ :, ['Survived', 'Pclass', 'Sex'] ]
-df1.loc[1, 'Survived'] = 1
-
-# %% tags=["level_intermediate"]
-# le code
-df2 = df[ ['Survived', 'Pclass', 'Sex'] ].copy()
-print(df2.loc[1, 'Survived'])
-df2.loc[1, 'Survived'] = 0
-print(df2.loc[1, 'Survived'])
-print(df.loc[1, 'Survived'])
-
-# %% [markdown]
-# ***
