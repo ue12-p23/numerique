@@ -7,7 +7,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -28,7 +28,7 @@
 
 # %% {"scrolled": true}
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html");
 
 # %%
 import matplotlib.pyplot as plt
@@ -57,9 +57,6 @@ import IPython
 #
 # nous allons voir quelques plots intéressants sur l'exemple des iris
 # ````
-
-# %% [markdown]
-# ***
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la dataframe des `iris`
@@ -101,13 +98,6 @@ import IPython
 # nous utilisons l'affichage `html` avec `IPython.display.display`*)
 # ````
 
-# %%
-# le code
-df = pd.read_csv('iris.csv')
-IPython.display.display(   df.head(2)      )
-
-IPython.display.display(   df.describe()   )
-
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## visualisation de la dataframe - `df.plot()`
 #
@@ -125,11 +115,17 @@ IPython.display.display(   df.describe()   )
 # ```
 #
 # <img src='media/iris-plot.png'>
+#
+# ```{note}
+# vous pouvez sauver votre figure dans un `.png`  
+# (*rechargez votre notebook pour l'afficher*)
+#
+# ```python
+# df.plot()
+# plt.savefig('iris-plot.png', bbox_inches='tight')
+# ```
+#
 # ````
-
-# %%
-# le code
-df.plot();
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## boxplots des colonnes `df.boxplot`
@@ -175,21 +171,6 @@ df.plot();
 # ce qui permet de les discriminer des deux autres types d'iris
 # ````
 
-# %%
-# le code
-
-df.boxplot()
-
-plt.show() # afin de ne pas superposer les plots
-
-df.boxplot(['SepalWidth', 'PetalWidth']);
-
-plt.show()
-
-df.boxplot(['PetalLength'], by='Name')
-
-plt.tight_layout() # le padding
-
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## histogrammes `df.hist`
 #
@@ -214,12 +195,6 @@ plt.tight_layout() # le padding
 # df.hist('SepalLength', bins=10, color='lightblue')
 # ```
 # ````
-
-# %% {"cell_style": "center", "scrolled": true}
-# le code
-df.hist()
-df.hist('SepalLength', bins = 10, color='lightblue')
-plt.title('histogramme de la colonne SepalLength');
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## barchart `df.plot.bar()`
@@ -260,19 +235,6 @@ plt.title('histogramme de la colonne SepalLength');
 #
 # utilisez le `help`
 # ````
-
-# %%
-# le code
-df_animals = pd.DataFrame({'speed' : [0.1, 17.5, 40, 48, 52, 69, 88],
-                   'lifespan' : [2, 8, 70, 1.5, 25, 12, 28]},
-                  index = ['snail', 'pig', 'elephant',
-                           'rabbit', 'giraffe', 'coyote', 'horse'])
-
-df_animals.plot.bar()
-
-df_animals.plot.barh()
-
-df_animals.plot.bar(x='lifespan', y='speed');
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## la colonne des `'Name'`
@@ -323,22 +285,47 @@ df_animals.plot.bar(x='lifespan', y='speed');
 # la colonne des noms des `iris` est plutôt une colonne de type catégorie  
 # avec ses 3 valeurs `Iris-versicolor`, `Iris-virginica` et `Iris-setosa`
 #
-# nous allons changer le type des éléments de la série `df['Name']`  
+# nous allons changer le type des éléments de la série `df['Name']`
+#
+# ```{note}
+# la méthode `replace` permet de modifier les valeurs de dataframes ou de séries
+#
+# ```python
+# # exemple avec le remplacement des valeurs d'une série en utilisant un dictionnaire
+#
+# # avec une compréhension Python on crée un dictionnaire 
+# # où 'Iris-setosa' est une clé et 'setosa' sa valeur...
+# mapping = {c:c.split('-')[1] for c in df['Name'].unique()}
+#
+# df['Name'].replace(mapping)
+#
+# ->
+# 0         setosa
+# 1         setosa
+#          ...    
+# 148    virginica
+# 149    virginica
+# Name: Name, Length: 150, dtype: object
+#
+# # l'original étant
+# df['Name']
+# ->
+# 0         Iris-setosa
+# 1         Iris-setosa
+#
+#             ...      
+# 148    Iris-virginica
+# 149    Iris-virginica
+# Name: Name, Length: 150, dtype: object
+#
+#
+# ```
 # ````
-
-# %%
-# le code
-IPython.display.display(   df[['Name']].describe()   )
-df['Name'].value_counts()
-
-# %%
-#le code
-df['Name'].dtype
 
 # %% [markdown]
 # ## encodage des `'Names'` en codes de catégorie
 
-# %% [markdown]
+# %% [markdown] {"tags": ["framed_cell"]}
 # ````{admonition} →
 #
 # la colonne `df['Name']` est de type `pandas.Series`  
@@ -394,24 +381,10 @@ df['Name'].dtype
 # (nous y reviendrons lors de `scatter`)
 # ````
 
-# %%
-# le code
-col = df['Name'].astype('category')
-col.head(2)
-
-# %%
-# le code
-df['Name-code'] = col.cat.codes
-df['Name-code'].value_counts()
-
-# %%
-# et en une seul ligne
-df['Name-code'] = df['Name'].astype('category').cat.codes
-
-# %% [markdown]
+# %% [markdown] {"tags": ["framed_cell"]}
 # ## nuages de points `df.plot.scatter`
-
-# %% [markdown]
+#
+# ````{admonition} →
 #
 # pour mettre en valeur des informations sur nos données  
 # on peut dessiner en 2D les colonnes les unes par rapport aux autres  
@@ -467,35 +440,14 @@ df['Name-code'] = df['Name'].astype('category').cat.codes
 #
 # il faut travailler un peu les paramètres pour que ce soit visible  
 # (là la taille est trop peu différenciée, multipliez la)
+#
+# ````
 
-# %%
-# le code
-df.plot.scatter(x='SepalLength', y='SepalWidth');
-
-# %%
-# le code
-plt.scatter(df['SepalLength'], df['SepalWidth'])
-# plt.xlabel('SepalLength')
-# plt.ylabel('SepalWidth')
-
-# %%
-# le code
-df.plot.scatter(x='SepalLength', y='SepalWidth', c='Name-code', cmap='viridis');
-
-# %%
-# le code
-plt.scatter(df['SepalLength'], df['SepalWidth'], c=df['Name-code'], cmap='viridis')
-plt.colorbar();
-
-# %%
-# le code
-plt.scatter(df['SepalLength'], df['SepalWidth'], c=df['Name-code'], s=df['PetalWidth']*50);
-
-# %% [markdown] {"tags": ["level_intermediate"]}
+# %% [markdown] {"tags": ["framed_cell"]}
 # ## fabriquer son propre type `category`
-
-# %% [markdown] {"tags": ["level_intermediate"]}
 # *pour les avancés*
+#
+# ````{admonition} →
 #
 # avec la technique précédente on n'a pas de **contrôle sur l'ordre** parmi les différentes catégories
 #
@@ -517,18 +469,5 @@ plt.scatter(df['SepalLength'], df['SepalWidth'], c=df['Name-code'], s=df['PetalW
 # df.Name = df.Name.astype(iris_ord_cat)
 # df.sort_values(by='Name')
 # ```
-
-# %%
-iris_ord_cat = pd.CategoricalDtype(
-                    categories=['Iris-versicolor', 'Iris-virginica', 'Iris-setosa'],
-                    ordered=True)
-iris_ord_cat
-
-# %% {"tags": ["level_intermediate"]}
-df.Name = df.Name.astype(iris_ord_cat)
-
-# %% {"tags": ["level_intermediate"]}
-df.sort_values(by='Name').head(4)
-
-# %% [markdown]
-# ***
+#
+# ````
