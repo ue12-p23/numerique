@@ -7,7 +7,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -28,7 +28,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %% [markdown]
 # # regrouper par critères
@@ -70,9 +70,6 @@ df.head(3)
 # à laquelle on indique un ou plusieurs critères.
 # ````
 
-# %% [markdown]
-# ***
-
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## groupement par critère unique
 #
@@ -106,15 +103,6 @@ df.head(3)
 # l'objet rendu par la méthode est de type `pandas.DataFrameGroupBy`
 # ````
 
-# %%
-# le code
-df['Sex'].unique()
-
-# %%
-# le code
-by_sex = df.groupby(by='Sex')
-by_sex
-
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accès aux sous-dataframes
 #
@@ -136,7 +124,7 @@ by_sex
 #
 # ```python
 # for group, subdf in by_sex:
-#     print(group, subdf.shape) # v est de type pandas.DataFrame
+#     print(group, subdf.shape) # subdf est de type pandas.DataFrame
 #
 # -> female (314, 11)
 #    male (577, 11)
@@ -144,19 +132,6 @@ by_sex
 #
 # vous pouvez donc facilement parcourir toutes les sous-dataframes
 # ````
-
-# %%
-# les tailles des morceaux
-by_sex.size()
-
-# %%
-# la somme est correcte
-sum(by_sex.size()) == len(df)
-
-# %%
-# pour itérer 'à la main'
-for group, subdf in by_sex:
-    print(group, subdf.shape)
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### proxying : propagation de fonctions sur les sous-dataframes
@@ -183,6 +158,12 @@ for group, subdf in by_sex:
 # ```python
 # # quel age ont le plus vieil homme et la plus vieille femme
 # by_sex['Age'].max()
+# # ou encore
+# by_sex.Age.max()
+#
+# # on remarque qu'on peut traiter un groupby comme une dataframe
+# # ce qui a l'effet d'appliquer l'opération (ici ['Age'])
+# # à toutes les sous-dataframegroupby comme une dataframe
 # ```
 #
 # ou encore on peut fabriquer une dataframe qui contient les sommes
@@ -192,16 +173,77 @@ for group, subdf in by_sex:
 # # les sommes des colonnes 'Survived' et 'Fare', mais par sexe
 # by_sex[['Survived', 'Fare']].sum()
 # ```
+#
+# ```{note}
+# on peut spécifier plusieurs fonctions d'agrégation
+# ```python
+# # on regroupe les passagers par classe et genre (5 dataframes)
+# # et on calcule plusieurs fonctions d'agrégation
+# df.groupby('Sex')['Age'].agg(['max', 'min', 'count', 'median', 'mean'])
+# ->
+#         max    min   count   median    mean
+# Sex                   
+# female  63.0   0.75  261     27.0      27.915709
+# male    80.0   0.42  453     s9.0      30.726645
+# ```
+#
+#
 # ````
 
-# %%
-# souvent on traite un groupby comme une dataframe
-# ce qui a l'effet d'appliquer l'opération (ici ['Age'])
-# à toutes les sous-dataframe
-by_sex.Age.max()
+# %% [markdown] {"tags": ["framed_cell"]}
+# ```{exercise} imputation de valeurs manquantes - l'exercice peut se faire plus tard dans le cours ou à-la-maison
+# Nous allons remplacer dans la dataframe du Titanic, les ages manquants par la moyenne des ages des classes.
+#
+# 1. utiliser la méthode `groupby` pour calculer les moyennes des ages par classe
+# 1. utiliser la méthode `to_dict` pour en déduire le dictionnaire  
+# *qui fait correspondre à chaque classe l'age moyen des passagers de cette classe*
+# 1. construisez le masque des passagers dont l'age manque *indice `isna`*  
+# vérifiez qu'il y en a bien 117
+# 1. appliquez ce masque sur la dataframe et sélectionnez la colonne 'Pclass'  
+# vous obtenez la sous-série réduite aux classes des passagers sans age
+# 1. utiliser la méthode `replace` pour remplacer, dans cette sous-série des classes des passagers sans age  
+# la class par l'age moyen (`replace` peut prendre en argument un dictionnaire)
+# 1. localisez dans la dataframe, la colonne 'Age' pour les passagers dont l'age manque  
+# *i.e. appliquez le masque en sélectionnant la colonne 'Age'*  
+# et modifier cette sous-série avec la série des ages moyens pour ces passagers
+# 1. vérifiez que la colonne 'Age' ne contient plus de valeurs manquantes
+# ```
 
 # %%
-by_sex[['Survived', 'Fare']].sum()
+# prune-cell
+
+# on relit la dataframe
+df = pd.read_csv('titanic.csv', index_col='PassengerId')
+
+# 1. utiliser la méthode groupby pour calculer les moyennes des ages par classe
+mean_age_per_class = df.groupby(by='Pclass')['Age'].mean()
+
+# 2. utiliser la méthode to_dict pour en déduire le dictionnaire
+# qui fait correspondre à chaque classe l'age moyen des passagers de cette classe
+d = mean_age_per_class.to_dict()
+print(d)
+
+# 3. construisez le masque des passagers dont l'age manque *indice `isna`*  
+# vérifiez qu'il y en a bien 117
+mask = df['Age'].isna()
+print(mask.sum() == 177)
+
+# 4. appliquez ce masque sur la colonne 'Pclass'  
+# pour obtenir la sous-série réduite aux classes des passagers sans age  
+s = df.loc[mask, 'Pclass']
+
+# 5. utiliser replace pour remplacer, dans cette séries des cllases des passagers sans age
+# la class par l'age moyen (replace peut prendre en argument un dictionnaire)
+s.replace(d, inplace=True)
+
+# 6. localisez dans la dataframe, la colonne 'Age' pour les passagers dont l'age manque
+# i.e. appliquez le masque en sélectionnant la colonne 'Age'
+# et modifier cette sous-série avec la série des ages moyens pour ces passagers
+
+df.loc[mask, 'Age'] = s
+
+# 7.vérifiez que la colonne 'Age' ne contient plus de valeurs manquantes
+df['Age'].notna().all()
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### accéder à un groupe
@@ -215,9 +257,6 @@ by_sex[['Survived', 'Fare']].sum()
 # by_sex.get_group('female')
 # ```
 # ````
-
-# %%
-by_sex.get_group('female').head(4)
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ## groupement multi-critères
@@ -269,11 +308,6 @@ by_sex.get_group('female').head(4)
 # qu'en pandas on appelle **un *MultiIndex***
 # ````
 
-# %%
-# le code
-by_class_sex = df.groupby(['Pclass', 'Sex'])
-by_class_sex.size()
-
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### multi-index pour les multi-critères
 #
@@ -315,23 +349,6 @@ by_class_sex.size()
 # ```
 # ````
 
-# %%
-# le code
-type(by_class_sex.size())
-
-
-# %%
-df.groupby(['Pclass', 'Sex']).size().index
-
-# %%
-# le code
-computed_index = {(i, j) for i in df['Pclass'].unique() for j in df['Sex'].unique()}
-computed_index
-
-# %%
-# pour vérifier
-computed_index == set(df.groupby(['Pclass', 'Sex']).size().index)
-
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### les éléments de l'index sont des tuples
 #
@@ -357,13 +374,7 @@ computed_index == set(df.groupby(['Pclass', 'Sex']).size().index)
 #
 # ````
 
-# %%
-# le code
-for (class_, sex), subdf in by_class_sex:
-    print(f"there were {len(subdf)} {sex} in class {class_} ")
-
-
-# %% [markdown] {"tags": ["level_intermediate", "framed_cell"]}
+# %% [markdown] {"tags": ["framed_cell"]}
 # ### display de `head()` avec IPython
 #
 # ````{admonition} →
@@ -387,24 +398,116 @@ for (class_, sex), subdf in by_class_sex:
 #     print(group)
 #     IPython.display.display(subdf.head(1))
 # ```
+#
+# ```{note}
+# les lignes apparaissent dans l'ordre de l'index
+# ````
+
+# %% [markdown] {"tags": ["framed_cell"]}
+# ## accès au dictionnaire des groupes
+#
+# ````{admonition} →
+# l'attribut `pandas.DataFrameGroupBy.groups`  
+# est un dictionnaire qui décrit les partitions:  
+# - la clé correspondent à un groupe  
+# - et la valeur est une **liste des index** des lignes du groupe
+#
+# ```python
+# by_sex = df.groupby(by='Sex')
+# by_sex.groups
+#     ->
+# {'female': [499, 395, 703, 859, ...], 'male': [552, 638, 261, 811, ...]}
+# ```
+#
+# on peut utiliser cette information pour inspecter plus finement  
+# le contenu du groupby  
+#
+# par exemple pour afficher les noms des 3 premiers membres de chaque groupe
+#
+# ```python
+# for group, indexes in by_sex.groups.items():
+#     print(group, df.loc[indexes[:3], 'Name'])
+# ```
 # ````
 
 # %%
-# le code : c'est moche
-#for group, subdf in by_class_sex:
-#    print(group, subdf.head(1))
-
-# %% {"tags": ["level_intermediate"]}
-# le code
-import IPython
-for group, subdf in by_class_sex:
-    print(group)
-    IPython.display.display(subdf.head(1))
+# on se remet dans le contexte
+df = pd.read_csv('titanic.csv', index_col=0)
+by_sex = df.groupby(by='Sex')
 
 # %% [markdown]
-# ## **exercice** sur les partitions `groupby`
+# ## groupby avec apply et transform
+
+# %% [markdown] {"tags": ["framed_cell"]}
+# ````{admonition}  →
 #
-# (déplacé en fin de notebook)
+# on peut appliquer une fonction aux sous-dataframes du groupby
+#
+# par exemple, nous voulons standardiser les colonnes des ages (enlever la moyenne et diviser par l'écart type)
+#
+# ```python
+# standardization = lambda x: (x - x.mean()) / x.std()
+# ```
+#
+# et nous voulons le faire en différenciant les femmes et les hommes  
+#
+#
+# pour cela nous allons faire un `groupby` sur le genre des passagers  
+# et appliquer la standardisation aux sous-dataframes
+#
+# ensuite, on peut
+# 1. avec `apply` obtenir les résultats dans une série avec son multi-index
+#    ```python
+#    df.groupby(by='Sex')['Age'].apply(standardization)
+#    ->
+#         Sex     PassengerId
+#         female  499           -0.206639
+#                 395           -0.277510
+#                                  ...   
+#         male    396           -0.594531
+#                 832           -2.036806
+#         Name: Age, Length: 891, dtype: float64
+#    ```
+# 1. avec `transform` recombiner les résultats  en une seule colonne contenant tous les passagers  
+# (par exemple pour ajouter cette colonne à la dataframe)  
+#    ```python
+#    df.groupby(by='Sex')['Age'].transform(standardization)
+#    ->
+#           PassengerId
+#         552   -0.253890
+#         638    0.018623
+#         499   -0.206639
+#         Name: Age, Length: 891, dtype: float64
+#    ```
+#
+# ```{note}
+# 1. `apply` sur une dataframe, applique la fonction le long d'un axis
+#    ```python
+#    df.loc[df['Sex'] == 'female', ['Age']].apply(lambda x: (x - x.mean()) / x.std())
+#    # calcule mean et std sur la colonne des ages des femmes
+#    ->
+#          Age
+#      PassengerId	
+#      499   -0.206639
+#      395   -0.277510
+#      703   -0.702736
+#      ...
+#      314 rows × 1 columns
+#    
+# 1. `apply` sur une série, applique la fonction élément par élément
+#    ```python
+#    df.loc[df['Sex'] == 'female', 'Age'].apply(lambda x: x*365.25)
+#    # calcule l'age en jours élément par élément
+#    ->
+#    PassengerId
+#    499     9131.25
+#    395     8766.00
+#    703     6574.50
+#    ...
+#    Name: Age, Length: 314, dtype: float64
+#    ```
+#
+# ````
 
 # %% [markdown]
 # ## intervalles de valeurs d'une colonne
@@ -437,10 +540,6 @@ for group, subdf in by_class_sex:
 # pd.cut?
 # ```
 # ````
-
-# %%
-# le code (à décommenter pour essayer)
-# # pd.cut?
 
 # %% [markdown] {"tags": ["framed_cell"]}
 # ###  découpage en intervalles d'une colonne
@@ -511,25 +610,17 @@ for group, subdf in by_class_sex:
 # ````
 
 # %%
-# le code
-pd.cut(df['Age'], bins=[0, 12, 19, 55, 100])
+# prune-cell
+
+df['Age-class'] = pd.cut(
+    df['Age'],
+    bins=[0, 12, 19, 55, 100],
+    labels=['children', ' young', 'adult', '55+'])
+df['Age-class'].unique()
 
 # %%
-# le code
-# pareil mais avec des labels ad-hoc
-age_class_series = pd.cut(df['Age'], bins=[0, 12, 19, 55, 100],
-       labels=['children', 'young', 'adult', '55+'])
-age_class_series
+# prune-cell
 
-# %%
-# pour ranger ça dans une nouvelle colonne
-df['Age-class'] = age_class_series
-
-# %%
-# le type est une catégorie, il est bien ordonné
-age_class_series.dtype
-
-# %%
 # pour effacer la colonne 'Age'
 print("avant", df.columns)
 del df['Age']
@@ -537,10 +628,7 @@ print("après", df.columns)
 # on peut utiliser aussi df.drop
 # df.drop('Age', axis=1, inplace=True)
 
-# %%
-
 # %% [markdown] {"tags": ["framed_cell"]}
-#
 # ###  groupement avec ces intervalles
 #
 # ````{admonition} →
@@ -555,23 +643,118 @@ print("après", df.columns)
 # vous avez désormais  
 # une idée de l'utilisation de `groupby`  
 # pour des recherches multi-critères sur une table de données
-#
-# **exercice pour les élèves avancés**  
-# calculez les taux de survie de chaque classe d'age par classes de cabines
 # ````
 
-# %%
-# le code
-df.groupby(['Age-class', 'Survived']).size()
+# %% [markdown] {"tags": ["framed_cell"]}
+# ```{exercise} calculez taux de survie par classe d'age par classes de cabines
+# 1. pour les avancés faire l'exercice sans lire la cellule suivante
+# 1. pour les moins avancés, allez à la cellule suivante où l'exercice est posé pas-à-pas
+# ```
 
 # %% {"scrolled": true}
 # prune-cell
+
+# calculez taux de survie par classe d'age par classes de cabines)
+df.groupby(['Age-class', 'Pclass'])['Survived'].mean()
+
+# %% [markdown] {"tags": ["framed_cell"]}
+# ```{exercise} calcul pas-à-pas du taux de survie par classe d'age par classes de cabines
+# 1. utiliser un `groupby` pour regrouper les passagers par classe d'age et par classe de cabines  
+# *vous obtenez les 12 sous-dataframes `[('children', 1), [('children', 2)...['55+', 3)]`*   
+#  utilisez `size` pour voir comment sont répartis les passagers dans les sous-dataframes  
+#  vous voyez 4 enfants en première classe
+#
+# 1. utilisez `get_group` pour accéder à la dataframe des enfants de première classe  
+# vous voyez les lignes des 4 enfants de première classe
+# 1. sélectionnez, dans les 12 sous-dataframes, leur colonne `'Survived'`
+# 1. en faisant la moyenne de cette colonne dans chaque sous-dataframe  
+# vous avez bien le taux de survie des passagers pour les 12 sous-dataframes
+# 1. à la place de `mean` utilisez `value_counts` à laquelle vous passez le paramètre `normalize=True`  
+# les taux sont donnés pour la survie et 1-survie
+# 1. faites le en une seule ligne par classe-d'age, classe de cabine et sexe
+# ````
+
+# %%
+# prune-cell
+
+# 1. utiliser un groupby pour regrouper les passagers par classe d'age et par classe de cabines
+df.groupby(['Age-class', 'Pclass' ]).size()
+
+# 2. utilisez get_group pour accéder à la dataframe des enfants de première classe
+df.groupby(['Age-class', 'Pclass' ]).get_group(('children', 2))
+
+# 3. et 4. sélectionnez, dans les 12 sous-dataframes, leur colonne 'Survived'
+# en faisant la moyenne de cette colonne dans chaque sous-dataframe
+# vous avez bien le taux de survie des passagers pour les 12 sous-dataframes
 df.groupby(['Age-class', 'Pclass' ])['Survived'].mean()
 
-# %% [markdown] {"tags": ["framed_cell"], "jp-MarkdownHeadingCollapsed": true}
-# ## `pivot_table()`
+# 5. à la place de mean utilisez value_counts à laquelle vous passer le paramètre normalize=True
+df.groupby(['Age-class', 'Pclass' ])['Survived'].value_counts(normalize=True)
+
+# 6. avec le genre
+df.groupby(['Age-class', 'Pclass', 'Sex' ])['Survived'].mean()
+
+
+# %% [markdown] {"jp-MarkdownHeadingCollapsed": true, "tags": ["framed_cell"]}
+# ````{exercise} les partitions avec groupby
 #
-# ````{admonition} →
+# On veut calculer la partition de la dataframe du Titanic avec, dans cet ordre, la classe `Pclass`, le genre `Sex`, et l'état de survie `Survived`
+#
+# 1. sans calculer la partition, proposez une manière de calculez le nombre probable de sous parties dans la partition  
+# 1. calculez la partition avec `pandas.DataFrame.groupby` et affichez les nombres d'items par groupe
+# 1. affichez la dataframe des femmes de première classe qui n'ont pas survécu
+# 1. faites la même extraction sans utiliser un `groupby()` mais les conditions
+# 1. créez un `dict` avec les taux de survie par genre dans chaque classe
+# 1. à partir de ce `dict`, créez une `pandas.Series`  
+#    avec comme nom `'taux de survie par genre dans chaque classe'`  
+# ````
+#
+#
+
+# %%
+# prune-cell
+
+df = pd.read_csv('titanic.csv').set_index('PassengerId')
+
+# 1. sans calculer la partition proposez une manière de calculez le nombre probable de sous parties dans la partition  
+len(df['Sex'].unique()) * len(df['Pclass'].unique()) * len(df['Survived'].unique())
+
+# 2. calculez la partition avec `pandas.DataFrame.groupby`
+# et affichez les nombres d'items par groupe
+
+groups = df.groupby(['Pclass', 'Sex', 'Survived'])
+groups.size()
+
+# 3. affichez la dataframe des entrées pour les femmes qui ont péri et qui voyagaient en 1ère classe
+groups.get_group((1, 'female', 0))
+
+# 4.refaites la même extraction sans utiliser un groupby en utilisant les conditions
+mask = (df.Pclass == 1) & (df.Sex == 'female') & ~df.Survived
+df[mask]
+
+# 5. créez un dict avec les taux de survie par genre dans chaque classe
+D = df.groupby(['Sex', 'Pclass'])['Survived'].mean().to_dict()
+
+# 6. à partir de ce dict, créez une pandas.Series
+# de nom 'taux de survie par genre dans chaque classe'
+pd.Series(D, name="taux de survie par genre dans chaque classe")
+
+# %% [markdown] {"tags": ["framed_cell"]}
+# ## pour en savoir plus
+#
+# pour les avancés
+#
+# on recommande la lecture de cet article dans la documentation `pandas`, qui approfondit le sujet et notamment la notion de `split-apply-combine`
+#
+# (qui rappelle, de loin, la notion de *map-reduce*)
+#
+# <https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html>
+
+# %% [markdown]
+# ## `pivot_table`
+
+# %% [markdown] {"tags": ["framed_cell"]}
+# ````{admonition} → introduction
 # le type d'opérations que l'on a fait dans ce notebook est fréquent  
 # spécifiquement, on veut souvent afficher:
 #
@@ -617,18 +800,6 @@ df.groupby(['Age-class', 'Pclass' ])['Survived'].mean()
 # ```
 # ````
 
-# %%
-# # df.pivot_table?
-
-# %%
-# pour obtenir la table ci-dessus
-
-df.pivot_table(
-    values='Survived',
-    index='Pclass',
-    columns='Sex',
-)
-
 # %% [markdown] {"tags": ["framed_cell"]}
 # ### `pivot_table()` et agrégation
 #
@@ -637,20 +808,20 @@ df.pivot_table(
 # du coup c'est la moyenne qui est utilisée, sur la valeur de `Survived`  
 # qui vaut 0 ou 1 selon les cas, et donc on obtient le taux de survie  
 #
-# **exercice**
+# ```{exercise}
 # obtenez la même table que ci-dessus avec cette fois le nombre de survivants
+# ```
+#
 # ````
 
 # %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
 # prune-cell
+
 df.pivot_table(
     values='Survived',
     index='Pclass',
     columns='Sex',
-    aggfunc='sum', # ou aussi np.sum,
+    aggfunc='sum',
 )
 
 # %% [markdown] {"tags": ["framed_cell"]}
@@ -664,295 +835,185 @@ df.pivot_table(
 # pour en quelque sorte "ajouter une dimension"  
 # dans l'axe des x ou des y, selon les cas
 #
-# **exercice**  
-# observez les résultats obtenus par exemple  
-# en ajoutant dans chacune des dimensions
-#
-# * comme valeur supplémentaire `Age`
-# * comme critère supplémentaire `Embarked`  
-#
-# et notamment que pouvez-vous dire des index (en lignes et en colonnes)  
+# ```{exercise} ajout de dimensions  
+# dans la pivot_table avec le taux de survie pour par `'Pclass'` et `'Sex'`  
+# observez les résultats obtenus en ajoutant dans chacune des dimensions:
+# 1. comme valeur supplémentaire `Age`
+# 1. comme critère supplémentaire `Embarked`
+#    1. en index
+#    1. en colonne
+# 1. que pouvez-vous dire des index (en lignes et en colonnes)  
 # du résultat produit par `pivot_table()`
+#
+# ```
+#
 # ````
 
-# %%
+# %% {"cell_style": "center"}
+# prune-cell
+
 # relisons depuis le fichier pour être sûr d'avoir la colonne 'Age'
 df = pd.read_csv('titanic.csv')
 
-# %%
-# votre code
-# plusieurs values
-# df2 = ...
-# pensez à observer les index du résultat
-# df2.columns
-# df2.index
-
-# %% {"cell_style": "center", "tags": ["level_basic"]}
-# prune-begin
-df2 = df.pivot_table(
+# 1. comme valeur supplémentaire Age
+df1 = df.pivot_table(
     values=['Survived', 'Age'],
     index='Pclass',
     columns='Sex',
 )
-df2
 
-# %% {"cell_style": "center", "tags": ["raises-exception", "level_basic"]}
-df2.columns
+# 2. comme critère supplémentaire Embarked
+# 2.1 en index
+df2 = df.pivot_table(
+    values='Age',
+    index=['Pclass', 'Embarked'],
+    columns='Sex', 
+)
 
-# %% {"tags": ["raises-exception", "level_basic"]}
-# prune-end
-df2.index
-
-# %%
-# votre code
-# plusieurs columns
-# df3 = ...
-# pensez à observer les index du résultat
-# df3.columns
-# df3.index
-
-# %% {"cell_style": "center", "tags": ["level_basic"]}
-# prune-begin
+# 2. comme critère supplémentaire Embarked
+# 2.1 en colonne
 df3 = df.pivot_table(
     values='Age',
     index='Pclass',
     columns=['Sex', 'Embarked'],
 )
-df3
 
-# %% {"tags": ["raises-exception", "level_basic"]}
-df3.columns
-
-# %% {"tags": ["raises-exception", "level_basic"]}
-# prune-end
-df3.index
-
-# %%
-# votre code
-# plusieurs index
-# df4 = ...
-# pensez à observer les index du résultat
-# df4.columns
-# df4.index
-
-# %% {"cell_style": "center", "tags": ["level_basic"]}
-# prune-begin
-df4 = df.pivot_table(
-    values='Age',
-    index=['Pclass', 'Embarked'],
-    columns='Sex',
-)
-df4
-
-# %% {"tags": ["raises-exception", "level_basic"]}
-df4.columns
-
-# %% {"tags": ["raises-exception", "level_basic"]}
-# prune-end
-df4.index
-
-# %% [markdown]
-# ### **exercice** sur `pivot_table()`
+# %% [markdown] {"jp-MarkdownHeadingCollapsed": true, "tags": ["framed_cell"]}
+# ````{exercise} exercice avec des pivot_table
+#
+# 1. Lisez le fichier `wine.csv`
+# 1. Affichez les valeurs min, max, et moyenne, de la colonne 'magnesium'
+# 1. définissez deux catégories selon que le magnesium est en dessous ou au-dessus de la moyenne  
+# (qu'on appelle 'mag-low' et 'mag-high'); rangez le résultat dans une colonne 'mag-cat'
+# 1. calculez cette table
+#
+# <img src='media/pivot-table-expected.png' width="50">
+#
+#
+# ````
 
 # %%
-df = pd.read_csv('wine.csv')
-df.head(2)
+# prune-cell
 
-# %% [markdown]
 # 1. affichez les valeurs min, max, et moyenne, de la colonne 'magnesium'
+df = pd.read_csv('wine.csv')
+# df.head(2)
 
-# %%
-# votre code
+# 2. Affichez les valeurs min, max, et moyenne, de la colonne 'magnesium'
+summary = df['magnesium'].describe()[['min', 'max', 'mean']]
 
-# %% {"tags": ["level_basic"]}
-# prune-cell
-summary = df.magnesium.describe()
-summary
-
-# %% [markdown]
-# 2. définissez deux catégories selon que le magnesium est en dessous ou au-dessus de la moyenne (qu'on appelle 'mag-low' et 'mag-high'); rangez le résultat dans une colonne 'mag-cat'
-
-# %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
-# prune-cell
-
+# 3. définissez deux catégories selon que le magnesium est en dessous ou au-dessus de la moyenne
+# 'mag-low' et 'mag-high'
+# rangez le résultat dans une colonne 'mag-cat'
 df['mag-cat'] = pd.cut(
     df.magnesium,
     bins=[summary['min'], summary['mean'], summary['max']],
     labels=('mag-low', 'mag-high'))
-df.head()
 
-# %% [markdown]
-# 3. calculez cette table
-#
-# ![](media/pivot-table-expected.png)
-
-# %% {"tags": ["level_basic"]}
-# prune-cell
-
+# 4 calculez cette table
 df.pivot_table(values=('color-intensity', 'flavanoids', 'magnesium'),
-               index=('cultivator'),
-               columns=('mag-cat'))
+               index='cultivator',
+               columns='mag-cat',
+               # aggfunc='mean', # by default
+              )
 
-# %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
-# ## accès au dictionnaire des groupes
+# %% [markdown]
+# ## `stack` et  `unstack`
+
+# %% [markdown] {"tags": ["framed_cell"]}
+# ````{admonition}  introduction
 #
-# ````{admonition} →
-# l'attribut `pandas.DataFrameGroupBy.groups`  
-# est un dictionnaire qui décrit les partitions:  
-# - la clé correspondent à un groupe  
-# - et la valeur est une **liste des index** des lignes du groupe
+# il est parfois utile de savoir changer la structure de votre dataframe  
 #
-# ```python
-# by_sex.groups
-#     ->
-# {'female': [499, 395, 703, 859, ...], 'male': [552, 638, 261, 811, ...]}
-# ```
-#
-# on peut utiliser cette information pour inspecter plus finement  
-# le contenu du groupby  
-#
-# par exemple pour afficher les noms des 3 premiers membres de chaque groupe
+# 1. `stack` permet de faire passer un niveau de colonne en ligne
+# 1. `unstack` (opération inverse) permet de faire passer un niveau de lignes dans les colonnes
 #
 # ```python
-# for group, indexes in by_sex.groups.items():
-#     print(group, df.loc[indexes[:3], 'Name'])
+# # lisons quelques lignes et colonnes du Titanic sans valeurs manquantes et sauvons le fichier sur l'ordinateur
+# df = pd.read_csv('titanic.csv',
+#                  usecols=['PassengerId', 'Pclass', 'Sex', 'Age', 'Pclass'],
+#                  index_col='PassengerId', 
+#                  nrows=6).dropna()
+# df.sort_index().to_csv('simple-titanic.csv')
 # ```
+#
+# ```python
+# # lisons le fichier
+# df = pd.read_csv('simple-titanic.csv', index_col='PassengerId')
+# df
+# ->
+#              Pclass  Sex     Age
+# PassengerId                        
+#         395  3       female  24.0
+#         499  1       female  25.0
+#         552  2       male    27.0
+#         638  2       male    31.0
+#         811  3       male    26.0
+# ```
+#
+# ```python
+# # on peut ranger toutes les colonnes en index de ligne 
+# df.stack()
+# ->
+# PassengerId        
+# 395          Pclass         3
+#              Sex       female
+#              Age         24.0
+# 499          Pclass         1
+#              Sex       female
+#              Age         25.0
+# 552          Pclass         2
+#              Sex         male
+#              Age         27.0
+# 638          Pclass         2
+#              Sex         male
+#              Age         31.0
+# 811          Pclass         3
+#              Sex         male
+#              Age         26.0
+# dtype: object
+# ```
+#
+# ```python
+# # on remarque: i) le multi-index des lignes
+# #              ii) les deux niveaux du multi-index (0 et 1)
+# df.stack().index
+# ->
+# MultiIndex([(395, 'Pclass'),
+#             (395,    'Sex'),
+#             (395,    'Age'),
+#             (499, 'Pclass'),
+#             (499,    'Sex'),
+#             (499,    'Age'),
+#             (552, 'Pclass'),
+#             (552,    'Sex'),
+#             (552,    'Age'),
+#             (638, 'Pclass'),
+#             (638,    'Sex'),
+#             (638,    'Age'),
+#             (811, 'Pclass'),
+#             (811,    'Sex'),
+#             (811,    'Age')],
+#            names=['PassengerId', None])
+# ```
+#
+#
+# ```python
+# # l'index des PassengerId est le niveau 0
+# # on peut le faire monter dans les colonnes (le dépiler)
+# df.stack().unstack(0)
+# ->
+#       PassengerId  552   638   499     395     811
+# Survived           0     0     0       1       0
+# Pclass             2     2     1       3       3
+# Sex                male  male  female  female  male
+# Age                27.0  31.0  25.0    24.0    26.0
+# ```
+#
+# ```python
+# # si on dépile le niveau 1, on dépile les colonnes Survived Pclass Sex et Age
+# df.stack().unstack(1)
+# # c'est la dataframe de d´epart
+# ```
+#
 # ````
-
-# %% {"tags": ["level_intermediate"]}
-# on se remet dans le contexte
-df = pd.read_csv('titanic.csv', index_col=0)
-by_sex = df.groupby(by='Sex')
-
-# %% {"tags": ["level_intermediate"]}
-# le code
-by_sex.groups
-
-# %% {"tags": ["level_intermediate", "raises-exception"]}
-# le code
-for group, indexes in by_sex.groups.items():
-    print(group, df.loc[indexes[:3], 'Name'])
-
-# %% [markdown] {"tags": ["level_advanced"]}
-# ## pour en savoir plus
-#
-# on recommande la lecture de cet article dans la documentation `pandas`, qui approfondit le sujet et notamment la notion de `split-apply-combine`
-#
-# (qui rappelle, de loin, la notion de *map-reduce*)
-#
-# https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html
-
-# %% [markdown]
-# ## **exercice** sur les partitions `groupby`
-#
-# (déplacé en fin de notebook)
-
-# %% [markdown]
-# on veut calculer la partition avec, dans cet ordre, la classe `Pclass`, le genre `Sex`, et l'état de survie `Survived`
-#
-# 1. sans calculer la partition  
-# proposez une manière de calculez le nombre probable de sous parties dans la partition  
-
-# %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
-# prune-cell 1.
-len(df['Sex'].unique()) * len(df['Pclass'].unique()) * len(df['Survived'].unique())
-
-# %% [markdown]
-# 2. calculez la partition avec `pandas.DataFrame.groupby`  
-#    et affichez les nombres d'items par groupe
-
-# %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
-# prune-cell 2.
-groups = df.groupby(['Pclass', 'Sex', 'Survived'])
-groups.size()
-
-# %% [markdown]
-# 3. affichez la dataframe des entrées pour les femmes qui ont péri et qui voyagaient en 1ère classe
-
-# %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
-# prune-cell 3.
-groups.get_group((1, 'female', 0))
-
-# %% [markdown]
-# 4. **révision**  
-#    refaites la même extraction sans utiliser un `groupby()`
-#    en utilisant les conditions
-
-# %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
-# prune-cell
-mask = (df.Pclass == 1) & (df.Sex == 'female') & ~df.Survived
-df[mask]
-
-# %% [markdown]
-# 5. **pour les élèves avancés**  
-#    créez un `dict` avec les taux de survie par genre dans chaque classe
-#
-#    vous devez obtenir quelque chose de ce genre
-# ```
-# {('female', 1): 0.96,
-#  ('female', 2): 0.92,
-#  ('female', 3): 0.5,
-#  ('male', 1): 0.36,
-#  ('male', 2): 0.15,
-#  ('male', 3): 0.13}
-# ```
-
-# %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
-# prune-cell
-D = {}
-groups_sex_class = df.groupby(['Sex', 'Pclass'])
-for group, subdf in groups_sex_class:
-    survived_series = subdf.Survived
-    total = len(survived_series)
-    survived = sum(survived_series)
-    D[group] = survived / total
-
-D
-
-# %% {"tags": ["level_basic"]}
-# prune-cell
-# la même chose en plus court
-D = {}
-for group, subdf in df.groupby(['Sex', 'Pclass']):
-    D[group] = subdf.Survived.sum() / len(subdf)
-D
-
-# %% {"tags": ["level_basic"]}
-# prune-cell
-# encore plus court avec une compréhension
-# bon bien sûr, ce n'est pas forcément plus lisible...
-{group: subdf.Survived.sum() / len(subdf)
- for group, subdf in df.groupby(['Sex', 'Pclass'])}
-
-# %% [markdown]
-# 6.  **pour les élèves avancés**  
-#    créez à partir de ce `dict` une `pandas.Series`  
-#    avec comme nom `'taux de survie par genre dans chaque classe'`  
-#    **indice:** comme tous les types en Python  
-#    `pd.Series()` permet de créer des objets par programme  
-#    voyez la documentation avec `pd.Series?`  
-
-# %%
-# votre code
-
-# %% {"tags": ["level_basic"]}
-# prune-cell
-pd.Series(D, name="taux de survie par genre dans chaque classe")
