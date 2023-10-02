@@ -6,7 +6,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -111,10 +111,9 @@ pd.concat([df1.set_index('name'), df2.set_index('name')])
 # * la fonction `pd.merge(left, right)`  
 #   ou sous forme de méthode `left.merge(right)`  
 #
-# * et à la méthode `left.join(right)`
-#   une version simplifiée de `left.merge()`
+# * et la méthode `left.join(right)` - en fait une version simplifiée de `left.merge(...)`
 #
-#   il est possible d'aligner des dataframes sur les valeurs de plusieurs colonnes
+# grâce à ces outils, il est possible d'aligner des dataframes sur les valeurs de une ou plusieurs colonnes
 #
 # ````
 
@@ -155,6 +154,7 @@ df2
 df1.merge(df2)
 
 # %%
+# on peut aussi l'écrire comme ceci
 pd.merge(df1, df2)
 
 # %%
@@ -185,9 +185,10 @@ df1.merge(df2, left_index=True, right_on='name')
 # ou encore
 pd.merge(df1, df2, left_index=True, right_on='name')
 
-# %% [markdown] tags=["level_intermediate"] jp-MarkdownHeadingCollapsed=true
-# ### `concat()` *vs* `merge()`
+# %% [markdown] tags=[] jp-MarkdownHeadingCollapsed=true
+# ### concat() *vs* merge()
 #
+# ````{admonition} concat() *vs* merge()
 # les deux fonctionnalités sont assez similaires sauf que
 #
 # * `merge` peut aligner les index ou les colonnes  
@@ -199,9 +200,10 @@ pd.merge(df1, df2, left_index=True, right_on='name')
 #    `concat([d1, d2])` *vs* `merge(d1, d2)`
 #
 # * seule `concat()` supporte un paramètre `axis=`
+# ````
 
 # %% [markdown]
-# ### **exercice** - collage de datatables
+# ### exercice - collage de datatables
 #
 # voici 3 jeux de données qu'on vous demande d'assembler  
 # pour décrire à la fin 4 caractéristiques à propos de 5 élèves
@@ -237,36 +239,40 @@ df12
 
 # %% cell_style="center"
 # prune-cell
-# sans rien préciser concat var aligner les colonnes
+# sans rien préciser concat va aligner les colonnes
 # des deux tables, rien de particulier à faire ici
 # puisque df12 et df3 ont les mêmes colonnes
 df123 = pd.concat([df12, df3])
 df123
 
-# %% [markdown] tags=["level_intermediate"]
-# ### **exercice** - intermédiaire
+# %%
+# prune-cell
+df123.set_index("name").sort_index().to_csv("pupils-all.csv")
+
+# %% [markdown] tags=[]
+# ### exercice 2 - idem avec un index
 #
 # l'énoncé est le même, sauf que cette fois on a choisi
 # d'indexer toutes les tables par la colonne `name`
 
-# %% cell_style="split" tags=["level_intermediate"]
+# %% cell_style="split" tags=[]
 df1i = pd.read_csv('pupils1.csv',
                   index_col='name')
 df1i
 
-# %% cell_style="split" tags=["level_intermediate"]
+# %% cell_style="split" tags=[]
 df2i = pd.read_csv('pupils2.csv',
                   index_col='name')
 df2i
 
-# %% tags=["level_intermediate"]
+# %% tags=[]
 df3i = pd.read_csv('pupils3.csv', index_col='name')
 df3i
 
-# %% tags=["level_intermediate"]
+# %% tags=[]
 # votre code
 
-# %% cell_style="center" tags=["level_intermediate"]
+# %% cell_style="center" tags=[]
 # prune-cell
 # cette fois on est obligés de préciser
 # sur quel(s) critère(s) (colonnes ou index)
@@ -276,9 +282,63 @@ df3i
 df12i = df1i.merge(df2i, left_index=True, right_index=True)
 df12i
 
-# %% cell_style="center" tags=["level_intermediate"]
+# %% cell_style="center" tags=[]
 # prune-cell
 df123i = pd.concat([df12i, df3i])
 df123i
 
+# %% [markdown]
+# ## optionnel: plusieurs stratégies pour le merge/join
+#
+# comme en SQL, on a à notre disposition plusieurs stratégies pour le `merge` (ou `join`, donc)
+#
+# * `left`: on garde les clés qui sont dans la première dataframe
+# * `right`: on garde les clés qui sont dans la seconde dataframe
+# * `inner`: on garde les clés communes
+# * `outer`: on garde l'union des clés
+#
+# (il y a aussi `cross`, mais c'est plus particulier comme usage..)
+
 # %%
+# prune-cell
+
+pd.read_csv("pupils-all.csv", index_col="name").iloc[:-2,:2].to_csv("pupils-left.csv")
+
+# %%
+# prune-cell
+
+pd.read_csv("pupils-all.csv", index_col="name").iloc[1:-1,2:].to_csv("pupils-right.csv")
+
+# %%
+# voyons cela sur un exemple
+
+df_left = pd.read_csv("pupils-left.csv", index_col="name")
+df_left
+
+# %%
+df_right = pd.read_csv("pupils-right.csv", index_col="name")
+df_right
+
+# %% [markdown]
+# ### left
+
+# %%
+df_left.merge(df_right, how='left', left_index=True, right_index=True) # the default
+
+# %% [markdown]
+# ### right
+
+# %%
+df_left.merge(df_right, how='right', left_index=True, right_index=True) # the default
+
+# %% [markdown]
+# ### inner
+
+# %%
+df_left.merge(df_right, how='inner', left_index=True, right_index=True) # the default
+
+# %% [markdown]
+# ### outer
+
+# %%
+df_left.merge(df_right, how='outer', left_index=True, right_index=True) # the default
