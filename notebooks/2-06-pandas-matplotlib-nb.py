@@ -474,7 +474,7 @@ df.plot.scatter(x='SepalLength', y='SepalWidth');
 
 # %%
 # le code
-plt.scatter(df['SepalLength'], df['SepalWidth'])
+plt.scatter(df['SepalLength'], df['SepalWidth']);
 # plt.xlabel('SepalLength')
 # plt.ylabel('SepalWidth')
 
