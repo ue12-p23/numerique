@@ -7,7 +7,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -86,6 +86,9 @@ df.head(2)
 # %% {"scrolled": true}
 # prune-cell
 df.drop(['Unnamed: 0'], axis=1, inplace=True)
+# ou aussi
+#df.drop(columns=['Unnamed: 0'], inplace = True)
+
 df.head(2)
 
 # %% [markdown]
