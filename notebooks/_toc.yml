@@ -6,7 +6,7 @@ parts:
 - caption: pandas
   chapters:
   - glob: 2-[0-9]*-nb
-- caption: matplotlib
+- caption: visualition
   chapters:
   - glob: 3-[0-9]*-nb
 - caption: cheatsheets

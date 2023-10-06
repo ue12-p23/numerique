@@ -9,7 +9,7 @@ tracks:
         notebooks: [ "notebooks/1-[0-9]*-nb.py"]
       - name: pandas
         notebooks: [ "notebooks/2-[0-9]*-nb.py"]
-      - name: matplotlib
+      - name: visualition
         notebooks: [ "notebooks/3-[0-9]*-nb.py"]
       - name: cheatsheets
         notebooks: [ "notebooks/4-*.md" ]
