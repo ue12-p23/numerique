@@ -896,14 +896,16 @@ df.loc[df['Age'] >= 71, ['Sex', 'Survived']]
 #
 # **à retenir**
 #
-# * en utilisant les méthodes `pandas.DataFrame.loc[line, column]` et `pandas.DataFrame.iloc[line, column]`  
+# * en utilisant les méthodes **`pandas.DataFrame.loc[line, column]`** et `pandas.DataFrame.iloc[line, column]`  
 # on ne **crée pas de copie** mais des **références partagées**  
+# c'est ***la bonne façon de faire***
 #
 #
 # * dès que vous utiliser un **chaînage d'indexation** pour modifier  
 # que ce soit `df[l][c]` ou `df.loc[l][c]` ou `df.iloc[l][c]`  
 #  **vous ne pouvez pas compter sur le résultat**  
-# ça fonctionne par hasard
+# ça fonctionne par hasard  
+# ***à éviter absolument***
 #
 # (pour les avancés) ce *problème* s'appelle le *chained indexing*  
 # <https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy>
