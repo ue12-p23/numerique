@@ -271,7 +271,8 @@ sns.pairplot(
 # %% [markdown]
 # ## exercice
 #
-# ````{exercise}
+# ````{admonition} pairplot
+# :class: seealso
 #
 # à partir des données du titanic, affichez ce `pairplot`
 #
