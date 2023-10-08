@@ -27,6 +27,7 @@ builds:
     directory: notebooks
     script: |
       pip install jupyter-book
+      pip install sphinx-exercise
       jupyter-book build .
     readthedocs_url: https://ue12-p23-numerique.readthedocs.io/
 
