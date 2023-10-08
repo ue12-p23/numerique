@@ -18,3 +18,4 @@ ipympl
 # for authors only
 # nbprune
 # jupyter-book
+# sphinx-exercise
