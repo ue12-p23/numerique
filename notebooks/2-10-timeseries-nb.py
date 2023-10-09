@@ -452,10 +452,8 @@ s.plot();
 # voici l'effet du rolling avec des fenêtres de 1 semaine et 4 semaines
 
 # %%
-rolling_7 = s.rolling(window=pd.Timedelta(7, 'D'),
-                             center=True).mean()
-rolling_28 = s.rolling(window=pd.Timedelta(28, 'D'),
-                              center=True).mean()
+rolling_7 = s.rolling(window=pd.Timedelta(7, 'D'), center=True).mean()
+rolling_28 = s.rolling(window=pd.Timedelta(28, 'D'), center=True).mean()
 
 # %% [markdown]
 # ici on a choisi d'attacher le résultat (de la moyenne de la corbeille) au **centre** de la corbeille
