@@ -7,7 +7,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -753,6 +753,66 @@ by_sex.groups
 # le code
 for group, indexes in by_sex.groups.items():
     print(group, df.loc[indexes[:3], 'Name'])
+
+# %% [markdown]
+# ## `groupby.filter()` - optionnel
+#
+# pour enlever de la dataframe des lignes correspondants à des groupes qui vérifient une certaine propriété
+#
+# on récupère comme résultat **une dataframe** (et non pas un groupby comme on aurait pu le penser)
+
+# %%
+titanic = pd.read_csv("titanic.csv")
+
+df = titanic
+gb = df.groupby(by=['Sex', 'Pclass'])
+
+print(f"titanic has {len(df)} items")
+for group, subdf in gb:
+    print(f"group {group} has {len(subdf)} matches")
+
+# %% [markdown]
+# imaginons qu'on ne veuille garder que les groupes qui ont un nombre pair de membres  
+# c'est un peu tiré par les cheveux, mais il n'y a qu'un seul groupe avec un cardinal impair  
+# et donc c'est facile de vérifier qu'on fait bien le travail, on doit trouver 891 - 347 = 544 éléments
+#
+# on ferait alors tout simplement
+
+# %%
+extract = gb.filter(lambda df: len(df) %2 == 0)
+print(f"the extract has {len(extract)} items left")
+
+# %% [markdown]
+# ## `groupby.transform()` - optionnel
+#
+# pour appliquer aux différents groupes une fonction **qui prend en compte les éléments du groupe**  
+#
+# exemples d'application typiques:
+# - centrer chacun des groupes autour de la moyenne (du groupe)
+# - remplacer les NaN par la moyenne du groupe
+
+# %%
+# voyons ça avec nos 6 groupes habituels
+# et centrons la colonne des ages **groupe par groupe**
+
+# à nouveau ce n'est sans doute pas très utile en pratique, mais bon 
+
+df = titanic
+gb = df.groupby(by=['Sex', 'Pclass'])
+
+# on retire à chaque Age la moyenne d'age **du groupe**
+
+df['Age'] = gb['Age'].transform(lambda df: df-df.mean())
+df.head(3)
+
+# %%
+# pour vérifer qu'on a bien fait le job
+
+# recalculons les groupes dans cette nouvelle df
+# gb = df.groupby(by=['Sex', 'Pclass'])
+# extrayons par exemple le premier
+age_female_3 = gb.get_group(('female', 3))
+age_female_3.head()
 
 # %% [markdown] {"tags": ["level_advanced"]}
 # ## pour en savoir plus
