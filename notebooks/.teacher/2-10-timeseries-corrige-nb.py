@@ -683,21 +683,6 @@ pd.DataFrame({
 }).plot();
 
 
-# %% tags=["level_advanced"]
-# xxx perplexing !
-# ici on utilise window=Timedelta(), agrégé avec sum()
-# et donc on s'attendrait à observer
-# un comportement aux bornes franchement différent
-
-# et pourtant...
-
-pd.DataFrame({
-    'original': s,
-    '??odd ends??': s.rolling(window=pd.Timedelta(28, 'D'),
-                              center=True).sum(),
-}).plot();
-
-
 # %% tags=["level_intermediate"]
 # prune-end
 
