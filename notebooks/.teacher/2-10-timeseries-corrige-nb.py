@@ -53,7 +53,9 @@ import matplotlib.pyplot as plt
 # ````
 
 # %% [markdown]
-# ## les types de base `Python`
+# ## les types de base 
+#
+# ### la version `Python`
 #
 # ````{admonition} →
 #
@@ -74,7 +76,7 @@ from datetime import datetime
 # help(datetime)
 
 # %% [markdown]
-# ## la version `numpy`
+# ### la version `numpy`
 
 # %% [markdown]
 # ````{admonition} →
@@ -92,7 +94,7 @@ from datetime import datetime
 # bref, ce sont **ces types qui seront utilisés** sous le capot, lorsqu'on aura à manipuler des grandeurs temporelles en `pandas`
 
 # %% [markdown]
-# ## la version `pandas`
+# ### la version `pandas`
 
 # %% [markdown]
 # ````{admonition} →
@@ -112,7 +114,7 @@ from datetime import datetime
 # ````
 
 # %% [markdown]
-# ## **exercices**: le cours de l'action amazon
+# ## exercices: le cours de l'action amazon
 
 # %% [markdown]
 # vous avez peut-être remarqué que `read_csv` propose des (tas d') options pour la gestion des instants (notamment le paramètre `parse_dates`)
@@ -127,7 +129,7 @@ from datetime import datetime
 # # pd.to_datetime?
 
 # %% [markdown]
-# ### **exercice 1**: `read_csv`
+# ### exercice 1: `read_csv`
 
 # %% [markdown] tags=["level_basic"]
 # 1. 1. lire le fichier de données `Amazon.csv` avec `read_csv()`  
@@ -153,7 +155,7 @@ df.head()
 df.dtypes
 
 # %% [markdown]
-# ### **exercice 2**: `pd.to_datetime()`
+# ### exercice 2: `pd.to_datetime()`
 
 # %% [markdown] tags=["level_basic"]
 # 2. 1. traduisez la colonne `Date` dans le type adéquat  
@@ -209,7 +211,7 @@ df.Date.dtype
 # prune-end
 
 # %% [markdown]
-# ### **exercice 3**: `NaT`
+# ### exercice 3: `NaT`
 
 # %% [markdown] tags=["level_basic"]
 # 3. 1. comparez l'affichage de la première ligne avec celui d'avant la conversion  
@@ -268,7 +270,7 @@ print(f"après {df.shape=}")
 # prune-end
 
 # %% [markdown]
-# ### **exercice 4**: l'accessor `.dt`
+# ### exercice 4: l'accessor `.dt`
 
 # %% [markdown] tags=["level_basic"]
 # comme on l'a déjà vu avec `.str` et `.cat`  
@@ -312,7 +314,7 @@ df.head(5)
 # prune-end
 
 # %% [markdown]
-# ### **exercice 5**: indexing by dates
+# ### exercice 5: indexing by dates
 
 # %% [markdown] tags=["level_basic"]
 # 5. mettez la colonne `Date` comme index  
@@ -341,7 +343,7 @@ df.sort_index(inplace=True)
 # * le slicing à base de `loc` bien sûr va être affecté également
 
 # %% [markdown]
-# ### **exercice 6**: plotting
+# ### exercice 6: plotting
 
 # %% [markdown] tags=["level_basic"]
 # 6. 1. plottez la valeur de l'action au cours du temps
@@ -700,7 +702,7 @@ pd.DataFrame({
 # prune-end
 
 # %% [markdown] tags=[]
-# ### **exercice 7**: `resample` et `rolling`
+# ### exercice 7: `resample` et `rolling`
 
 # %% [markdown] tags=["level_basic"]
 # 7. calculez `df2` qui se concentre sur la valeur de `High` sur la période de Juillet 2018 à fin 2019  
@@ -726,7 +728,7 @@ L = len(df2)
 # prune-end
 
 # %% [markdown]
-# ### **exercice 8**: resample+plotting
+# ### exercice 8: resample+plotting
 
 # %% [markdown] tags=["level_basic"]
 # 8. appliquez à cette série un `resample()` avec la moyenne des données sur une période d'une semaine  
@@ -773,7 +775,7 @@ begin, end
 # prune-end
 
 # %% [markdown]
-# ### **exercice 9**: rolling+plotting
+# ### exercice 9: rolling+plotting
 
 # %% [markdown] tags=["level_basic"]
 # 9. appliquez à cette série un `rolling()` avec une fenêtre de 1 an  
