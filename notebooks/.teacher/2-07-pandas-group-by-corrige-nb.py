@@ -402,7 +402,7 @@ for group, subdf in by_class_sex:
     IPython.display.display(subdf.head(1))
 
 # %% [markdown]
-# ## **exercice** sur les partitions `groupby`
+# ## exercice sur les partitions `groupby`
 #
 # (déplacé en fin de notebook)
 
@@ -926,7 +926,7 @@ print(df.pivot_table(values="Age", index="Sex", columns="Pclass"))
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html
 
 # %% [markdown]
-# ## **exercice** sur les partitions `groupby`
+# ## exercice sur les partitions `groupby`
 #
 # (déplacé en fin de notebook)
 
