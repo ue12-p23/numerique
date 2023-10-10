@@ -537,8 +537,6 @@ print("après", df.columns)
 # on peut utiliser aussi df.drop
 # df.drop('Age', axis=1, inplace=True)
 
-# %%
-
 # %% [markdown] {"tags": ["framed_cell"]}
 #
 # ###  groupement avec ces intervalles
@@ -564,7 +562,7 @@ print("après", df.columns)
 # le code
 df.groupby(['Age-class', 'Survived']).size()
 
-# %% [markdown] {"tags": ["framed_cell"], "jp-MarkdownHeadingCollapsed": true}
+# %% [markdown] {"tags": ["framed_cell"]}
 # ## `pivot_table()`
 #
 # ````{admonition} →
@@ -714,14 +712,14 @@ df.head(2)
 #
 # ![](media/pivot-table-expected.png)
 
-# %% [markdown] {"tags": ["framed_cell", "level_intermediate"]}
-# ## accès au dictionnaire des groupes
+# %% [markdown] {"tags": ["framed_cell"]}
+# ## accès aux groupes
 #
 # ````{admonition} →
-# l'attribut `pandas.DataFrameGroupBy.groups`  
-# est un dictionnaire qui décrit les partitions:  
-# - la clé correspondent à un groupe  
-# - et la valeur est une **liste des index** des lignes du groupe
+# ce n'est pas fréquemment utile, mais on peut accéder aux différents groupes, et cela principalement de deux façons
+#
+# * en itérant directement sur l'objet groupby
+# * en utilisant la méthode `get_group()`
 #
 # ```python
 # by_sex.groups
@@ -735,24 +733,32 @@ df.head(2)
 # par exemple pour afficher les noms des 3 premiers membres de chaque groupe
 #
 # ```python
-# for group, indexes in by_sex.groups.items():
+# for group, indexes in by_sex:
 #     print(group, df.loc[indexes[:3], 'Name'])
 # ```
+#
+# et pour obtenir la dataframe des femmes
+#
+# ```python
+# by_sex.get_group('female')
 # ````
 
-# %% {"tags": ["level_intermediate"]}
+# %% {"tags": []}
 # on se remet dans le contexte
 df = pd.read_csv('titanic.csv', index_col=0)
 by_sex = df.groupby(by='Sex')
 
-# %% {"tags": ["level_intermediate"]}
+# %% {"tags": ["raises-exception"]}
 # le code
-by_sex.groups
 
-# %% {"tags": ["level_intermediate", "raises-exception"]}
+# on peut itérer directement sur le groupby
+for group, indexes in by_sex:
+    print(f"==== {group}\n{df.loc[:, 'Name'].iloc[:3]}")
+
+
+# %%
 # le code
-for group, indexes in by_sex.groups.items():
-    print(group, df.loc[indexes[:3], 'Name'])
+by_sex.get_group('female').head(3)
 
 # %% [markdown]
 # ## `groupby.filter()` - optionnel
@@ -764,7 +770,7 @@ for group, indexes in by_sex.groups.items():
 # %%
 titanic = pd.read_csv("titanic.csv")
 
-df = titanic
+df = titanic.copy()
 gb = df.groupby(by=['Sex', 'Pclass'])
 
 print(f"titanic has {len(df)} items")
@@ -779,6 +785,9 @@ for group, subdf in gb:
 # on ferait alors tout simplement
 
 # %%
+# construire une dataframe ne contenant que les groupes 
+# qui satisfont une certaine condition
+
 extract = gb.filter(lambda df: len(df) %2 == 0)
 print(f"the extract has {len(extract)} items left")
 
@@ -792,12 +801,12 @@ print(f"the extract has {len(extract)} items left")
 # - remplacer les NaN par la moyenne du groupe
 
 # %%
-# voyons ça avec nos 6 groupes habituels
-# et centrons la colonne des ages **groupe par groupe**
+# centrons la colonne des ages **groupe par groupe**
+# avec nos 6 groupes habituels
 
 # à nouveau ce n'est sans doute pas très utile en pratique, mais bon 
 
-df = titanic
+df = titanic.copy()
 gb = df.groupby(by=['Sex', 'Pclass'])
 
 # on retire à chaque Age la moyenne d'age **du groupe**
@@ -806,13 +815,24 @@ df['Age'] = gb['Age'].transform(lambda df: df-df.mean())
 df.head(3)
 
 # %%
-# pour vérifer qu'on a bien fait le job
+# utilisons la même approche pour remplir les ages manquants
+# par la moyenne de chaque groupe
 
-# recalculons les groupes dans cette nouvelle df
-# gb = df.groupby(by=['Sex', 'Pclass'])
-# extrayons par exemple le premier
-age_female_3 = gb.get_group(('female', 3))
-age_female_3.head()
+df = titanic.copy()
+gb = df.groupby(by=['Sex', 'Pclass'])
+
+# pour pouvoir vérifier qu'on a bien fait le job
+print(f"===== avant: on a {sum(df['Age'].isna())} âges indéterminés")
+print(f"et les moyennes d'âges par groupe sont de")
+print(df.pivot_table(values="Age", index="Sex", columns="Pclass"))
+
+df['Age'] = df['Age'].fillna(gb['Age'].transform('mean'))
+
+# on n'a plus de NaN et les moyennes sont inchangées
+print(f"===== après: on a {sum(df['Age'].isna())} ages indéterminés")
+print(f"et les moyennes d'âges par groupe sont de")
+print(df.pivot_table(values="Age", index="Sex", columns="Pclass"))
+
 
 # %% [markdown] {"tags": ["level_advanced"]}
 # ## pour en savoir plus
