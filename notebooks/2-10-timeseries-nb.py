@@ -382,7 +382,7 @@ df.loc['2019'].head(3)
 # un simple resample sur 1 heure, en agrégant avec la somme, fournit le résultat
 
 # %% [markdown]
-# ### exemple 2: échantillonner  d'application**  
+# ### exemple 2: ré-échantillonner un signal sonore
 #
 # vous avez un signal échantillonné à 44.100 kHz et vous voulez le ré-échantillonner (littéralement: *resample*) à une fréquence 4 fois plus basse.
 #
