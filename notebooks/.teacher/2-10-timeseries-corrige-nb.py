@@ -573,6 +573,15 @@ df.loc['2019':]
 # ````
 
 # %% [markdown]
+# ````{admonition} attention aux unités !
+# :class: dropdown
+#
+# pour exprimer la durée de la fenêtre avec `rolling()`, il apparait qu'on ne peut pas utiliser les unités `W`, `M` ou `Y` qui sont, semble-t-il, susceptibles de varier en durée en fonction du moment de référence (pour le mois et l'année, ok, mais la semaine ?!?)
+#
+# honnêtement c'est assez oiseux, notamment parce que `resample()` ne semble pas sujet à cette restriction..
+# ````
+
+# %% [markdown]
 # ### exemple 1: visualiser l'évolution sur une année
 #
 # vous voulez visualiser l'évolution d'une grandeur "d'une année sur l'autre"  
