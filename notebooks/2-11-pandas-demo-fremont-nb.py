@@ -6,7 +6,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -101,10 +101,12 @@ else:
     print(f"allons chercher le fichier {local_file}")
 
     import requests
+    # on fabrique une requête
     req = requests.get(URL)
-
     # doit afficher 200
     print(req.status_code)
+    # si c'est bien le cas alors dans req.text
+    # va se trouver le contenu qui nous intéresse
 
     # on sauve tel quel dans le fichier local
     with open(local_file, 'w') as writer:
@@ -138,15 +140,31 @@ data.head()
 # en fait ce qu'il se passe c'est que c'est un peu le bazar ce dataset, et que les données sont principalement présentes en deux exemplaires !
 
 # %%
-# sur une plateforme Unix (i.e. linux ou macos) on pourrait faire
-# !grep '01/01/2014 12:00:00 AM' $local_file
+# par exemple les mesures pour cet instant sont en double:
 
-# %%
-# si ça ne fonctionne pas vous pouvez exécuter ce code Python à la place
-with open(local_file) as feed:
-    for line in feed:
-        if '01/01/2014 12:00:00 AM' in line:
-            print(line, end="")
+data[data['Date'] == '01/01/2014 12:00:00 AM']
+
+# %% [markdown]
+# ````{admonition} d'autres méthodes...
+# :class: dropdown
+#
+# on pourrait aussi s'en apercevoir en allant regarder directement dans le fichier  
+# pour cela - au moins - 3 méthodes
+#
+# 1. avec vs-code
+# 1. avec bash (sur Unix/MacOS, et gitbash si vous avez installé la totale)
+#    ```bash
+#    $ grep '01/01/2014 12:00:00 AM' data/fremont.csv
+#    01/01/2014 12:00:00 AM,23,5,18
+#    01/01/2014 12:00:00 AM,23,5,18
+#    ```
+# 1. en Python
+#    ```python
+#    with open(local_file) as feed:
+#        for line in feed:
+#            if '01/01/2014 12:00:00 AM' in line:
+#                print(line, end="")
+#     ```
 
 # %% [markdown] tags=["level_basic"]
 # **exercice**
@@ -160,12 +178,11 @@ with open(local_file) as feed:
 # **indice** le mot clé c'est `duplicate`
 
 # %%
-# votre code
+# avec les données fournies, vous devez avoir 
+# 175200 lignes avant le nettoyage, et 
+# 87600 lignes après le nettoyage
 
-# %% [markdown]
-# ***
-# ***
-# ***
+# votre code
 
 # %% [markdown]
 # ## parser les dates
@@ -192,14 +209,14 @@ data.dtypes
 # data = pd.read_csv(local_file, index_col='Date', parse_dates=True); data.head()
 # ```
 #
-# sauf que, vous pouvez essayer, c'est effroyablement lent, car `read_csv` doit faire plein d'essais inutiles (il y a 1001 façons d'écrire une date dans un fichier)
+# sauf que, vous pouvez essayer, c'est **effroyablement lent**,
+# car `read_csv` doit faire plein d'essais inutiles (il y a 1001 façons d'écrire une date dans un fichier)
 
 # %% [markdown]
 # ### la bonne façon
 #
 # une façon de faire bien plus efficace, même si elles demande un peu plus de soin de la part du programmeur,
-# consiste à indiquer le format qui a été utilisé pour stocker les dates
-#
+# consiste à indiquer le format qui a été utilisé pour stocker les dates  
 # pour cette étape on peut utiliser `pd.to_datetime()` qui se comporte un peu comme `pd.as_type()`
 
 # %%
@@ -211,17 +228,18 @@ data.Date.head(2)
 # * premier travail, déterminez si les dates sont `jj/mm` ou `mm/jj`
 # * traduisez la colonne `Date` dans le type adéquat
 # * adoptez cette colonne comme index
+#
+# ````{admonition} indice
+# :class: dropdown
+#
+# la documentation sur les formats de date en Python se trouve ici <https://docs.python.org/3/library/datetime.html#format-codes>
+# ````
 
 # %%
 # à vous
 
 # commencez par rechercher la page web qui donne le détail des formats possibles
 # avec par exemple les mots-clé 'python datetime string format'
-
-# %% [markdown]
-# ***
-# ***
-# ***
 
 # %% [markdown]
 # ## tri
@@ -251,16 +269,17 @@ new_names = ['Total',  'East', 'West',]
 # à vous
 
 # %% [markdown]
-# ## données manquantes et extension types
+# ## données manquantes
 
 # %% [markdown]
 # de manière totalement optionnelle, mais on remarque que les nombres ont été convertis en flottants
 #
-# et ça c'est parce qu'il y a eu quelques interruptions de service, apparemment, avec le système de récolte de l'information
+# et ça c'est parce qu'il y a eu, apparemment, quelques interruptions de service avec le système de récolte de l'information
 #
-# en effet dans ces cas-là, la table contient un 'NaN'; et par défaut `pandas` choisit de représenter la colonne avec des *flottants* parce que dans le type flottant il y a une valeur `nan`
+# en effet dans ces cas-là, la table contient un `NaN`; et par défaut `pandas` choisit de représenter la colonne avec des *flottants* parce que dans le type flottant il y a une valeur `nan`
 #
-# **note** dans les versions récentes de pandas, il y a des *extension types* qui permettraient de manipuler des colonnes contenant des entiers et des *nan*, mais dans le cas présent on préfère purement et simplement ignorer ces lignes
+# ````{admonition} *extension types*
+# signalons en passant que, dans les versions récentes de pandas, il y a des *extension types* qui permettraient de manipuler des colonnes contenant ***des entiers et des `nan`***, mais dans le cas présent on préfère purement et simplement ignorer ces lignes
 
 # %% [markdown] tags=["level_basic"]
 # **exercice**
@@ -277,21 +296,22 @@ new_names = ['Total',  'East', 'West',]
 # %%
 # votre code pour enlever les données manquantes
 
+
+# %% [markdown]
+# ***
+
 # %%
-# votre code pour recharger la dataframe
-# lire, enlever les doublons, indexer par la date
+# reprenez ce qu'on a fait jusqu'ici
+# pour recharger la dataframe, enlever les doublons, indexer par la date
 # trier, renommer les colonnes
 
+# votre code
+
+# %% [markdown]
+# ***
+
 # %%
-# votre code pour remplir les données manquantes
-
-# %% [markdown]
-# ***
-# ***
-# ***
-
-# %% [markdown]
-# ***
+# votre code pour remplir les données manquantes avec des 0
 
 # %% [markdown]
 # ## à quoi ça ressemble
@@ -302,7 +322,7 @@ new_names = ['Total',  'East', 'West',]
 # on va utiliser seaborn pour faire les affichages, et on fixe une taille de figure par défaut
 
 # %%
-# %matplotlib notebook
+# %matplotlib ipympl
 
 # %%
 plt.style.use('seaborn-v0_8')
@@ -347,8 +367,7 @@ data[['East', 'West']].plot();
 data.resample('W').mean().plot();
 
 # %% [markdown]
-# juste pour être en phase (pouvoir vérifier nos résultats par rapport à ceux de la vidéo), on va s'arrêter à la fin de 2017
-#
+# juste pour être en phase (pouvoir vérifier nos résultats par rapport à ceux de la vidéo), on va s'arrêter à la fin de 2017  
 # (un détail à noter aussi, les données de la vidéo ne contenaient pas la colonne 'total' à l'époque...)
 
 # %% [markdown] tags=["level_basic"]
@@ -378,11 +397,11 @@ data.resample('1W').mean().shape
 # %%
 # on vérifie que la version resamplée a bien
 # 7 * 24 = 168 fois moins d'entrées que la version brute
-# puisqu'on a une mesure par heure et qu'on ré-échatillonne sur une semaine
+# puisqu'on a une mesure par heure et qu'on ré-échantillonne sur une semaine
 
 (full, _), (resampled, _) = data.shape, data.resample('1W').mean().shape
 
-full / resampled , 7 * 24
+full / (7*24), resampled
 
 # %% [markdown]
 # ## reprenons
@@ -537,12 +556,14 @@ from sklearn.decomposition import PCA
 # %%
 # on lance l'ACP pour obtenir les coordonnées de chaque jour
 # dans un repère réduit aux 2 vecteurs propres les plus importants
+
 coords = PCA(2, svd_solver='full').fit_transform(pca_in)
 #            ^ le 2 est ici
 
 # %%
 # toujours autant de jours, mais
 # on a gardé seulement 2 vecteurs propres
+
 coords.shape
 
 # %%
@@ -564,13 +585,19 @@ labels = gmm.fit(pca_in).predict(pca_in)
 # la sortie est une association jour -> type
 # sachant qu'on a trouvé deux types
 # logiquement repérés par 0 et 1
-labels.shape, labels
+type(labels), labels.shape, labels
+
+# %%
+# pour se convaincre que les valeurs de labels sont effectivement 0 ou 1
+# mais unique() n'existe pas sur les tableaux numpy
+
+pd.Series(labels).unique()
 
 # %%
 # on raffiche en couleurs pour bien voir
 # les deux familles trouvées par cette classification
 #
-# comme on le voir sur le coté
+# comme on le voit sur le coté
 # label=0 correspond aux points en bleu
 # label=1 correspond aux points en rouge et
 
@@ -579,23 +606,33 @@ plt.scatter(coords[:, 0], coords[:, 1], c=labels, cmap='rainbow')
 plt.colorbar();
 
 # %% [markdown]
-# ### `label==0` (en bleu): les weekends
+# ### `label==0` (en bleu)
+#
+# ````{admonition} note: rouge ou bleu
+# :class: dropdown
+#
+# au cours du temps et des versions, le mapping {week, weekend} -> {0, 1} peut changer  
+# dans la version actuelle (oct. 2023) j'observe que les weekends reçoivent un label de 1 et les jours de semaine 0, mais on a déjà observé l'inverse  
+# dans ce cas le lecteur ectifiera de lui-même...
+# ````
 
 # %%
 # pour vérifier notre classification on peut redessiner
-# les jours classés label==0
+# uniquement les jours classés label==0
 
-# on voit que ça correspond aux jours de repos
+# on voit que ça correspond aux jours de travail
 
-pivoted.T.loc[labels==0].T.plot(legend=False, alpha=0.01);
+pivoted.loc[:, labels==0].plot(legend=False, alpha=0.01);
 
 # %% [markdown]
-# ### `label==1` (en rouge) : les jours de semaine
+# ### `label==1` (en rouge)
 
 # %%
 # et les jours classés label==1
 
-pivoted.T[labels==1].T.plot(legend=False, alpha=0.01);
+# qui effectivement ont le profil "weekend"
+
+pivoted.loc[:, labels==1].plot(legend=False, alpha=0.01);
 
 # %% [markdown]
 # ### les deux clusters avec le jour de la semaine
@@ -632,7 +669,7 @@ plt.scatter(coords[:, 0], coords[:, 1], c=dayofweek, cmap='rainbow')
 plt.colorbar();
 
 # %% [markdown]
-# **CQFD**: majoritairement, les jours de la semaine (bleu/vert/jaune) sont bien dans le nuage inférieur, ils correspondent donc bien à `label==1` tel que produit par le mélange de gaussiennes
+# **CQFD**: majoritairement, les jours de la semaine (bleu/vert/jaune) sont bien dans le nuage inférieur, ils correspondent donc bien à la classification produite par le mélange de gaussiennes
 
 # %% [markdown]
 # ### les moutons noirs
@@ -649,7 +686,7 @@ plt.colorbar();
 
 # pour comprendre à quoi ils correspondent
 
-odd_index = (labels == 0) & (dayofweek < 5)
+odd_index = (labels == 1) & (dayofweek < 5)
 odd_index.shape, odd_index
 
 # %%
