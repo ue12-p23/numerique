@@ -5,5 +5,3 @@ book-clean:
 	rm -rf _build
 
 .PHONY: book book-clean
-
-
