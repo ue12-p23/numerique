@@ -15,11 +15,16 @@
     .bd-page-width {
         max-width: initial !important;
     }
+    /* but keep the upper-left logo to grow too much */
     .navbar-brand.logo>img {
         max-width: 170px
     }
 }
-/* but keep the upper-left logo to grow too much */
+
+/* make the right-hand-side index background transparent */
+#bd-toc-nav {
+    background-color: rgb(0 0 0 / 0);
+}
 
 
 /* not too much space between paragraphs */
@@ -27,7 +32,6 @@
     margin-bottom: 0.5em !important;
     margin-top: 0.5em !important;
 }
-
 .myst :where(:is(p, ul)):not(:where([class~=not-prose], [class~=not-prose] *)) {
     margin-bottom: 0.5em !important;
     margin-top: 0.5em !important;
@@ -43,10 +47,17 @@
 :is(.bd-container, .myst) p:has(+ :is(ol, ul) {
     margin-bottom: initial !important;
 }
+:is(.bd-container, .myst) li>ul {
+    margin-top: 0.1em !important;
+}
+
 
 /* execution output cells */
 div.cell div.cell_output .output pre {
     background-color: #f8fff8;
+}
+div.prompt.input_prompt, div.prompt.output_prompt {
+    opacity: 0.6;
 }
 
 
