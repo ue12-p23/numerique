@@ -7,7 +7,7 @@
         max-width: initial !important;
     }
     .navbar-brand.logo>img {
-        max-width: 170px
+        max-width: 170px;
     }
 }
 
@@ -27,7 +27,7 @@
 
 
 :is(.bd-container, .myst) *+ :is(ol, ul),
-:is(.bd-container, .myst) p:has(+ :is(ol, ul) {
+:is(.bd-container, .myst) p:has(+ :is(ol, ul)) {
     margin-bottom: initial !important;
 }
 :is(.bd-container, .myst) li>ul {
@@ -36,7 +36,8 @@
 
 
 div.cell div.cell_output .output pre {
-    background-color: #f8fff8;
+    background-color: #f8fff8 !important;
+    border: 0.3px solid blue !important;
 }
 div.prompt.input_prompt, div.prompt.output_prompt {
     opacity: 0.6;
