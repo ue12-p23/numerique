@@ -1,6 +1,8 @@
 format: jb-book
+root: 0-00-intro
 parts:
 - caption: numpy
+  # do not mention 1-99 in this output
   chapters:
   - glob: 1-[0-9]*-nb
 - caption: pandas
@@ -13,6 +15,10 @@ parts:
   chapters:
   - glob: 4-*
 - caption: rappels Python
+  # keep 5-99 out
   chapters:
   - glob: 5-[0-8]*-nb
-root: 0-00-intro
+# no longer relevant
+# - caption: petit test Python
+#   chapters:
+#   - glob: "notebooks/9-[0-9]*.py"

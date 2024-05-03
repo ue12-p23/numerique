@@ -19,3 +19,6 @@ ipympl
 # nbprune
 # jupyter-book
 # sphinx-exercise
+
+# for updating nbhosting toc from jupyter book
+ruamel.yaml

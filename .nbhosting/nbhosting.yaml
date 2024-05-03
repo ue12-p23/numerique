@@ -1,35 +1,34 @@
 # the course structure under nbhosting
 tracks:
-  - name: "Python numérique"
-    description: "calcul scientifique et data en Python"
-    id: python-num
-    sections:
-      # do not mention 1-99 in this output
-      - name: numpy
-        notebooks: [ "notebooks/1-[0-9]*-nb.py"]
-      - name: pandas
-        notebooks: [ "notebooks/2-[0-9]*-nb.py"]
-      - name: visualition
-        notebooks: [ "notebooks/3-[0-9]*-nb.py"]
-      - name: cheatsheets
-        notebooks: [ "notebooks/4-*.md" ]
-      - name: rappels Python
-        # keep 5-99 out
-        notebooks: [ "notebooks/5-[0-8]*-nb.py"]
-      # no longer relevant
-      # - name: petit test Python
-      #   notebooks: [ "notebooks/9-[0-9]*.py"]
-
+- name: Python numérique
+  description: calcul scientifique et data en Python
+  id: python-num
+  sections:
+  - name: numpy
+    notebooks:
+    - notebooks/1-[0-9]*-nb
+  - name: pandas
+    notebooks:
+    - notebooks/2-[0-9]*-nb
+  - name: visualition
+    notebooks:
+    - notebooks/3-[0-9]*-nb
+  - name: cheatsheets
+    notebooks:
+    - notebooks/4-*
+  - name: rappels Python
+    notebooks:
+    - notebooks/5-[0-8]*-nb
 builds:
-  - id: handouts
-    name: numpy, pandas, mpl
-    description: HTML statique et cherchable
-    directory: notebooks
-    script: |
-      pip install jupyter-book
-      pip install sphinx-exercise
-      jupyter-book build .
-    external_url: https://ue12-p23-numerique.readthedocs.io/
+- id: handouts
+  name: numpy, pandas, mpl
+  description: HTML statique et cherchable
+  directory: notebooks
+  script: |
+    pip install jupyter-book
+    pip install sphinx-exercise
+    jupyter-book build .
+  external_url: https://ue12-p23-numerique.readthedocs.io/
 
 # no mapping needed
 static-mappings: []

@@ -1,11 +1,11 @@
 # update the jb toc from nbhosting
-toc: _toc.yml
+toc: ../.nbhosting/nbhosting.yaml
 
 ifeq ($(TOCDIR),)
 TOCDIR = notebooks
 endif
 
-# update jupyter book toc from the nbhosting one
-# (need to remove the 'notebooks/' part from the nbhosting toc)
-_toc.yml: ../.nbhosting/nbhosting.yaml
-	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py -p '$(TOCDIR)/->' $< $@
+# update nbhosting tracks from jupyter book toc
+# need to prefix notebooks path with 'notebooks/'
+../.nbhosting/nbhosting.yaml: _toc.yml
+	$$HOME/git/nbhosting/scripts/jb-to-nbh-toc.py -p '$(TOCDIR)' $< $@
