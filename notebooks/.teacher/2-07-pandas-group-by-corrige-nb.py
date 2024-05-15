@@ -136,7 +136,7 @@ by_sex
 #
 # ```python
 # for group, subdf in by_sex:
-#     print(group, subdf.shape) # v est de type pandas.DataFrame
+#     print(group, subdf.shape) # subdf est de type pandas.DataFrame
 #
 # -> female (314, 11)
 #    male (577, 11)
@@ -490,7 +490,7 @@ for group, subdf in by_class_sex:
 # ```python
 # pd.cut(df['Age'],
 #        bins=[0, 12, 19, 55, 100],
-#        labels=['children', ' young', 'adult', '55+'])
+#        labels=['child', ' young', 'adult', '55+'])
 # ```
 #
 # souvent on va ranger cette information dans une nouvelle colonne  
@@ -499,7 +499,7 @@ for group, subdf in by_class_sex:
 # df['Age-class'] = pd.cut(
 #     df['Age'],
 #     bins=[0, 12, 19, 55, 100],
-#     labels=['children', ' young', 'adult', '55+'])
+#     labels=['child', ' young', 'adult', '55+'])
 # ```
 #
 # comment feriez-vous pour inspecter le type (des valeurs) de cette colonne ?  
@@ -518,7 +518,7 @@ pd.cut(df['Age'], bins=[0, 12, 19, 55, 100])
 # le code
 # pareil mais avec des labels ad-hoc
 age_class_series = pd.cut(df['Age'], bins=[0, 12, 19, 55, 100],
-       labels=['children', 'young', 'adult', '55+'])
+       labels=['child', 'young', 'adult', '55+'])
 age_class_series
 
 # %%
@@ -578,15 +578,13 @@ df.groupby(['Age-class', 'Pclass' ])['Survived'].mean()
 # * qui sont utilisées dans les directions horizontale et verticale  
 #   (une colonne sera en index et l'autre en columns)
 #
-# cette dataframe du titanic:  
-# <img src="media/titanic-sex-class-survived.png" width=50px>
-#
-# on voudrait la visualiser comme ceci
+# par exemple, on voudrait visualiser:
 #
 # * le taux de survie (la valeur à agréger)  
 # * par classe de cabine (l'index des lignes)
 # * et par genre (les colonnes)
-# <img src="media/pivot-titanic.png" width=200px>
+# * comme ceci:  
+#   <img src="media/pivot-titanic.png" width=200px>
 #
 # il existe une méthode `pivot_table()` qui s'avère très pratique  
 # pour faire ce genre de traitement **en un seul appel**  
@@ -768,7 +766,7 @@ summary = df.magnesium.describe()
 summary
 
 # %% [markdown]
-# 2. définissez deux catégories selon que le magnesium est en dessous ou au-dessus de la moyenne (qu'on appelle 'mag-low' et 'mag-high'); rangez le résultat dans une colonne 'mag-cat'
+# 2. définissez deux catégories selon que le magnesium est en dessous ou au-dessus de la moyenne (qu'on appelle `mag-low` et `mag-high`); rangez le résultat dans une colonne `mag-cat`
 
 # %%
 # votre code
