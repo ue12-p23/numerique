@@ -513,7 +513,7 @@ type(df['Age'])
 # la colonne `PassengerId` contient un **identifiant unique** pour chaque passager
 #
 # choisissons **cette colonne comme index** (des lignes) de la table  
-# pour cela, deux options
+# pour cela, trois options
 #
 # 1. directement à la lecture du fichier
 #
@@ -533,7 +533,7 @@ type(df['Age'])
 # 3. après coup sans ré-affecter df
 #
 #    ```python
-#    # option 2-bis
+#    # option 3
 #    df = pd.read_csv('titanic.csv')
 #    df.set_index('PassengerId', inplace=True)
 #
