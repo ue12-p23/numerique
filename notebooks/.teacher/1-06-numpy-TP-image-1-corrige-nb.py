@@ -35,5 +35,5 @@
 #
 # Voyez le TP images #1 qui se trouve ici
 #
-# <https://nbhosting.inria.fr/builds/ds-exos/data-science/latest/ds-tps/images/README-images1-nb.html>
+# <https://flotpython-exos-ds.readthedocs.io/en/main/ds-tps/images/README-images1-nb.html>
 # ````
