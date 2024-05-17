@@ -6,7 +6,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -46,9 +46,9 @@ HTML(filename="_static/style.html")
 # %% [markdown] tags=["framed_cell"]
 # ## organisation de la mémoire
 #
-# ````{admonition} →
 # ### pourquoi comprendre comment `numpy` travaille en mémoire ?
 #
+# ````{admonition} →
 # pour prendre des décisions en connaissance de cause  
 #
 # * savoir les conséquences de vos choix
