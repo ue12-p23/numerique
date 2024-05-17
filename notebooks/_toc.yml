@@ -4,10 +4,41 @@ parts:
 - caption: numpy
   # do not mention 1-99 in this output
   chapters:
-  - glob: 1-[0-9]*-nb
+  # - glob: 1-[0-9]*-nb
+  - file: 1-01-numpy-introduction-nb.py
+  - file: 1-02-numpy-array-nb.py
+  - file: 1-03-numpy-memory-nb.py
+  - file: 1-04-numpy-vectorization-nb.py
+  - file: 1-05-numpy-indexing-slicing-nb.py
+  - url: https://flotpython-exos-ds.readthedocs.io/en/main/ds-tps/images/README-images1-nb.html
+    title: TP images (1/2)
+  - file: 1-07-numpy-aggregate-nb.py
+  - file: 1-08-numpy-broadcast-nb.py
+  - file: 1-09-numpy-array-testing-nb.py
+  - url: https://flotpython-exos-ds.readthedocs.io/en/main/ds-tps/images/README-images2-nb.html
+    title: TP images (2/2)
+  - file: 1-11-numpy-TP-dices-advanced-nb.py
+  - url: https://flotpython-exos-ds.readthedocs.io/en/main/ds-tps/sounds/README-sounds-nb.html
+    title: TP sons
+  - file: 1-13-numpy-linalg-optional-nb.py
+  - file: 1-14-numpy-optional-indexing-nb.py
 - caption: pandas
   chapters:
-  - glob: 2-[0-9]*-nb
+  # - glob: 2-[0-9]*-nb
+  - file: 2-01-pandas-read-csv-nb.py
+  - file: 2-02-pandas-condition-nb.py
+  - file: 2-03-pandas-indexing-slicing-nb.py
+  - file: 2-04-pandas-TP-drop-cast-access-str-nb.py
+  - file: 2-05-pandas-TP-sorting-nb.py
+  - file: 2-06-pandas-matplotlib-nb.py
+  - file: 2-07-pandas-group-by-nb.py
+  - file: 2-08-pandas-create-dataframe-nb.py
+  - file: 2-09-pandas-merge-concat-nb.py
+  - file: 2-10-timeseries-nb.py
+  - url: https://flotpython-exos-ds.readthedocs.io/en/main/ds-howtos/fremont-bridge-howto-nb.html
+    title: les vélos sur le pont de Fremont
+  - file: 2-12-pandas-TP-covid-nb.py
+  - file: 2-13-geopandas-TP-paris-nb.py
 - caption: visualition
   chapters:
   - glob: 3-[0-9]*-nb
