@@ -8,7 +8,7 @@
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -31,11 +31,11 @@
 from IPython.display import HTML
 HTML(filename="_static/style.html")
 
-# %%
-import numpy as np
-
 # %% [markdown]
 # # indexation avancée
+
+# %%
+import numpy as np
 
 # %% [markdown]
 # ## contenu de ce notebook (notebook optionnel)
