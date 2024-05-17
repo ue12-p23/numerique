@@ -38,7 +38,7 @@ le corpus principal porte sur:
 ## mode d'emploi / rappels
 
 pour être sûr que vous avez tout ce qu'il faut pour travailler  
-on suppose [les installations faites lors du cours d'introduction](https://nbhosting.inria.fr/builds/ue12-p23-intro/handouts/latest/1-01-install-fasttrack-nb.html) (bash - vscode - conda - jupyter - jupytext - git)
+on suppose [les installations faites lors du cours d'introduction](https://ue12-p23-intro.readthedocs.io/en/main/1-01-install-fasttrack-nb.html#les-installations) (bash - vscode - conda - jupyter - jupytext - git)
 
 
 ### convention (sachez à qui vous parlez)
@@ -122,7 +122,7 @@ enfin, et pour les geeks:
 
 lorsqu'on travaille sur plusieurs projets, il est possible de créer un environnement virtuel afin d'isoler les dépendances installées: cela évitera qu'une modification apportée sur un projet impacte les autres projets par effet de bord.
 
-si vous voulez essayer d'utiliser ce système, [voyez cette page dans le cours d'introduction](https://nbhosting.inria.fr/builds/ue12-p23-intro/handouts/latest/3-03-optionals-nb.html#multiples-environnements-python)
+si vous voulez essayer d'utiliser ce système, [voyez cette page dans le cours d'introduction](https://ue12-p23-intro.readthedocs.io/en/main/3-03-optionals-nb.html#multiples-environnements-python)
 
 ````{attention}
 Comme indiqué dans cette page, il est **crucial** de s'assurer que votre "prompt" bash (ce qui est affiché avant le `$` lorsque vous avez la main dans le terminal) vous indique en permanence dans quel environnement vous vous trouvez.
