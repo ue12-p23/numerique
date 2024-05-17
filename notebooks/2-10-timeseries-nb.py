@@ -27,7 +27,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 
 # %% [markdown]
@@ -103,6 +103,7 @@ from datetime import datetime
 #
 # * `Timestamp` pour un instant  
 # (aurait pu/dû s'appeler `Datetime`, mais bon...)
+#
 # * `Timedelta` pour une durée
 # * `Period` pour un intervalle de temps, représenté par un début **et** une durée
 #
@@ -220,6 +221,7 @@ from datetime import datetime
 
 # %% [markdown] tags=["level_basic"]
 # 6. 1. plottez la valeur de l'action au cours du temps
+#
 #    * sur un même diagramme, les deux cours `High` et `Low`
 #    * ensuite sur deux diagrammes séparés
 #

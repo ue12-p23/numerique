@@ -28,7 +28,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %% [markdown]
 # # TP sur le tri d'une dataframe
@@ -97,6 +97,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 
 # %% [markdown]
 # 7. 1. la logique de `df.plot()` consiste
+#
 #       * à **utiliser comme abscisses** l'index de la dataframe
 #       * et accessoirement à faire autant de plots que de colonnes - ici on n'en a qu'une
 #     vous tracez donc le point $(804, 0.42)$ puis le point $(756, 0.67)$ ...  

@@ -4,12 +4,10 @@
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
 #     cell_metadata_json: true
-#     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version,
-#
-#       -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-#
-#       -language_info.file_extension, -language_info.mimetype, -toc'
+#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+#       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -30,14 +28,14 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
+
+# %% [markdown]
+# # indexation et *slicing*
 
 # %%
 import numpy as np
 from matplotlib import pyplot as plt
-
-# %% [markdown]
-# # indexation et *slicing*
 
 # %% [markdown]
 # ## contenu de ce notebook (sauter si déjà acquis)
@@ -377,6 +375,7 @@ vec
 # ```python
 # tab[0, 1, 2]
 # ```
+#
 # * on accède à la quatrième colonne de la deuxième matrice du premier groupe de matrices
 #
 # ```python

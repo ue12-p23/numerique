@@ -26,7 +26,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %% [markdown]
 # ````{admonition} avertissement
@@ -65,6 +65,7 @@ HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_s
 # * il **faut** appeler `plt.figure()` pour chaque figure  
 # * et en ajouter d'autres `plt.figure()`  
 #   pour créer plusieurs figures depuis une seule cellule
+#
 # * **attention** à `df.plot()` qui appelle automatiquement `plt.figure()`
 
 # %% [markdown]

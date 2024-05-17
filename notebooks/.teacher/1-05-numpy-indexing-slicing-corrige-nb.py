@@ -30,7 +30,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %%
 import numpy as np
@@ -385,6 +385,7 @@ vec
 # ```python
 # tab[0, 1, 2]
 # ```
+#
 # * on accède à la quatrième colonne de la deuxième matrice du premier groupe de matrices
 #
 # ```python

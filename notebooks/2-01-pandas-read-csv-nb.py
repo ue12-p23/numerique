@@ -27,7 +27,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %% [markdown]
 # # Python-numérique - les tables de données
@@ -571,6 +571,7 @@ df.head(1)
 # ### une série aussi possède un index
 #
 # ````{admonition} →
+#
 # * accèdons à la colonne `Name`  
 #   remarquons qu'ici aussi, l'objet Series possède un index  
 #   qui en l'occurrence est `PassengerId` (provient de la `df`)
@@ -682,6 +683,7 @@ df.index
 # ## **résumé** à propos des types
 #
 # ````{admonition} →
+#
 # * les tables pandas sont représentées par le type `DataFrame`
 # * une dataframe a
 #   * un index pour accéder aux colonnes (`df.columns`)  

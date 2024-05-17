@@ -28,7 +28,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %% [markdown]
 # # *broadcasting*
@@ -443,6 +443,7 @@ except ValueError as e:
 # ### exemple de broadcasting - avancés
 #
 # ````{admonition} →
+#
 # * une matrice `A`$=\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\  \end{pmatrix}$ de forme `(2_A, 3_A)`
 #
 #

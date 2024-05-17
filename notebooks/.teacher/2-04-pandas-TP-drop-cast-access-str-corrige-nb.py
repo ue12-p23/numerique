@@ -28,7 +28,7 @@
 
 # %% {"scrolled": true}
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %% [markdown]
 # # TP on the moon
@@ -316,5 +316,3 @@ ao
 
 # %% [markdown]
 # ***
-
-# %%

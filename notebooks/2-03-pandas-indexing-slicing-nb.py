@@ -27,7 +27,7 @@
 
 # %%
 from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+HTML(filename="_static/style.html")
 
 # %% [markdown]
 # # indexation et accès aux sous-tableaux
@@ -801,6 +801,7 @@ df[df.Sex == 'female'].head()
 # ## résumé des méthodes d'indexation
 #
 # ````{admonition} →
+#
 # * indexation directe par un masque `df[mask]`
 #   * on peut aussi utiliser un masque avec `.loc[mask, columns]`
 # * indexation au travers de `.loc[]`/`.iloc[]`
