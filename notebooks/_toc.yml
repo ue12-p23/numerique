@@ -38,7 +38,8 @@ parts:
   - url: https://flotpython-exos-ds.readthedocs.io/en/main/ds-howtos/fremont-bridge-howto-nb.html
     title: les vélos sur le pont de Fremont
   - file: 2-12-pandas-TP-covid-nb.py
-  - file: 2-13-geopandas-TP-paris-nb.py
+  - url: https://flotpython-exos-ds.readthedocs.io/en/devel/ds-geo/tp-addresses/README-addresses-nb.html
+    title: TP géoloc addresses
 - caption: visualition
   chapters:
   - glob: 3-[0-9]*-nb
