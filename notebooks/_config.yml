@@ -4,16 +4,16 @@ title: Python Numérique
 author: Valérie Roy & Thierry Parmentelat
 logo: media/logo-python-numerique.svg
 
-only_build_toc_files: true
+# only_build_toc_files: true
 
 exclude_patterns:
-  - "**/.teacher/*"
+  - "**/teacher/*"
 
 execute:
   execute_notebooks: cache
-  exclude_patterns:
-    - "**/*-corrige*"
-    - "**/.teacher/*"
+  # exclude_patterns:
+  #   - "**/*-corrige*"
+  #   - "**/.teacher/*"
 
 parse:
   myst_enable_extensions:
