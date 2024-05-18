@@ -4,17 +4,6 @@ title: Python Numérique
 author: Valérie Roy & Thierry Parmentelat
 logo: media/logo-python-numerique.svg
 
-repository:
-  url: https://github.com/ue12-p23/numerique
-  branch: main
-  path_to_book: notebooks
-
-html:
-  use_repository_button: yes
-  use_edit_page_button: yes
-  use_issues_button: yes
-  favicon: media/logo-p23.svg
-
 only_build_toc_files: true
 
 exclude_patterns:
@@ -38,8 +27,38 @@ sphinx:
       .py:
         - jupytext.reads
         - fmt: py:percent
+    html_theme_options:
+      repository_url: https://github.com/ue12-p23/numerique
+      repository_branch: main
+      path_to_book: notebooks
+      use_issues_button: yes
+      use_repository_button: yes
+      use_download_button: yes
+      home_page_in_toc: true
+      toc_title: "TOC"
+
+    html_favicon: media/flotpython-favicon.svg
     html_show_copyright: false
-    # not quite convincing but...
-    html_extra_path: ['media']
+    html_extra_path:
+      - media
+      # would  be needed if we were to expose contents to jupyterlite
+      # - lite
+    jupyterlite_dir: .
+    html_static_path:
+      - _static
+    html_js_files:
+      - my-book.js
+    # required as of 2024 May to get %matplotlib ipympl
+    # to show up (at all, not even interactive) in the book output
+    nb_ipywidgets_js:
+        # Load RequireJS, used by the IPywidgets for dependency management
+        "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js":
+            "integrity": "sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA="
+            "crossorigin": "anonymous"
+        # Load IPywidgets bundle for embedding.
+        "https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js":
+            "data-jupyter-widgets-cdn": "https://cdn.jsdelivr.net/npm/"
+            "crossorigin": "anonymous"
+
   extra_extensions:
-    sphinx_exercise
+    - sphinx_exercise

@@ -17,7 +17,8 @@
     }
     /* but keep the upper-left logo to grow too much */
     .navbar-brand.logo>img {
-        max-width: 170px;
+        max-width: 250px;
+        max-height: 170px;
     }
 }
 
@@ -97,4 +98,9 @@ div.prompt.input_prompt, div.prompt.output_prompt {
 .admonition-x-small {
     font-size: x-small;
     line-height: 1.2;
+}
+
+/* slight gradient for corriges */
+.corrige {
+    background-image: radial-gradient(#BFF6C3, #E0FBE2);
 }
