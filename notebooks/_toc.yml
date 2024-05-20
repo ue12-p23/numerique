@@ -4,7 +4,6 @@ parts:
 - caption: numpy
   # do not mention 1-99 in this output
   chapters:
-  # - glob: 1-[0-9]*-nb
   - file: 1-01-numpy-introduction-nb.py
   - file: 1-02-numpy-array-nb.py
   - file: 1-03-numpy-memory-nb.py
@@ -24,7 +23,6 @@ parts:
   - file: 1-14-numpy-optional-indexing-nb.py
 - caption: pandas
   chapters:
-  # - glob: 2-[0-9]*-nb
   - file: 2-01-pandas-read-csv-nb.py
   - file: 2-02-pandas-condition-nb.py
   - file: 2-03-pandas-indexing-slicing-nb.py
@@ -39,18 +37,19 @@ parts:
     title: les vélos sur le pont de Fremont
   - url: https://flotpython-exos-ds.readthedocs.io/en/main/ds-tps/covid/README-covid-nb.html
     title: TP Covid
+    # double check after dedup on the exos side
   - url: https://flotpython-exos-ds.readthedocs.io/en/devel/ds-geo/tp-addresses/README-addresses-nb.html
     title: TP géoloc addresses
 - caption: visualition
   chapters:
-  - glob: 3-[0-9]*-nb
+  - glob: 3-[0-9]*-nb.py
 - caption: cheatsheets
   chapters:
-  - glob: 4-*
+  - glob: 4-*.md
 - caption: rappels Python
   # keep 5-99 out
   chapters:
-  - glob: 5-[0-8]*-nb
+  - glob: 5-[0-8]*-nb.py
 # no longer relevant
 # - caption: petit test Python
 #   chapters:
