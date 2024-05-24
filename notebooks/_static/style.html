@@ -6,6 +6,7 @@
     .bd-page-width {
         max-width: initial !important;
     }
+
     .navbar-brand.logo>img {
         max-width: 250px;
         max-height: 170px;
@@ -21,6 +22,7 @@
     margin-bottom: 0.5em !important;
     margin-top: 0.5em !important;
 }
+
 .myst :where(:is(p, ul)):not(:where([class~=not-prose], [class~=not-prose] *)) {
     margin-bottom: 0.5em !important;
     margin-top: 0.5em !important;
@@ -31,6 +33,7 @@
 :is(.bd-container, .myst) p:has(+ :is(ol, ul)) {
     margin-bottom: initial !important;
 }
+
 :is(.bd-container, .myst) li>ul {
     margin-top: 0.1em !important;
 }
@@ -40,10 +43,14 @@ div.cell div.cell_output .output pre {
     background-color: #f8fff8 !important;
     border: 0.3px solid blue !important;
 }
+
+html[data-theme='dark'] div.cell div.cell_output .output pre {
+    background-color: #064b06 !important;
+}
+
 div.prompt.input_prompt, div.prompt.output_prompt {
     opacity: 0.6;
 }
-
 
 :is(.bd-container, .myst) table td {
     padding: initial !important;
@@ -58,9 +65,22 @@ div.prompt.input_prompt, div.prompt.output_prompt {
 }
 
 :is(.bd-container, .myst) table :is(thead, tfoot) tr {
-    background-color: #f8f8f8
+    background-color: #f8f8f8;
 }
 
+html[data-theme='dark'] {
+    & :is(.bd-container, .myst) table tbody tr:nth-child(odd) {
+        background-color: #020202;
+    }
+
+    & :is(.bd-container, .myst) table tbody tr:nth-child(even) {
+        background-color: #040404;
+    }
+
+    & :is(.bd-container, .myst) table :is(thead, tfoot) tr {
+        background-color: #080808;
+    }
+}
 
 :is(.bd-container, .myst) div.admonition>.admonition-title+* {
     margin-top: 0px !important;
@@ -70,18 +90,23 @@ div.prompt.input_prompt, div.prompt.output_prompt {
     font-size: smaller;
     line-height: 1.2;
 }
+
 .admonition-small {
     font-size: small;
     line-height: 1.2;
 }
+
 .admonition-x-small {
     font-size: x-small;
     line-height: 1.2;
 }
 
 .corrige {
-    background-image: radial-gradient(#BFF6C3, #E0FBE2);
+    background-image: radial-gradient(circle at top left, #d1effa, #e2f9cd);
 }
+
+html[data-theme='dark'] .corrige {
+    background-image: radial-gradient(circle at top left, #0e3852, #0c5517);
  .memory {
     font-size: 180%;
     line-height: 1.2;
